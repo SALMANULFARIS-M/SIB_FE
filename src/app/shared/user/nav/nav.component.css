@@ -14,8 +14,14 @@ nav {
 .logo-morph:hover img {
   transform: rotateY(180deg);
 }
+.active {
+  color: #d5a1ff;
 
-
+}
+/* Custom CSS for active state */
+a.active span {
+  width: 100%;
+}
 .scrolled {
   background: #180725; /* More transparent on scroll */
 }
@@ -65,3 +71,4 @@ nav {
 .scrolled .border-animation {
   border: 2px solid rgb(0, 0, 0); /* Change border color to white */
 }
+

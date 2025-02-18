@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener, OnInit } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { gsap } from 'gsap';
 
 @Component({
   selector: 'app-nav',
-  imports: [CommonModule],
+  imports: [CommonModule,RouterModule],
   templateUrl: './nav.component.html',
   styleUrl: './nav.component.css'
 })

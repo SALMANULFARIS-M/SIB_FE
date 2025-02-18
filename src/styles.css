@@ -1,6 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
 
-.body{
-background: #2D1044;
+
+.noto-serif-custom-1 {
+  font-family: "Noto Serif", serif;
+  font-optical-sizing: auto;
+  font-weight: 900;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+
+.atkinson-hyperlegible-next-custom-2 {
+  font-family: "Atkinson Hyperlegible Next", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.merienda-custom-3 {
+  font-family: "Merienda", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+.aldrich-regular {
+  font-family: "Aldrich", serif;
+  font-weight: 400;
+  font-style: normal;
 }
