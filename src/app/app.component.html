@@ -1,1 +1,33 @@
 <router-outlet></router-outlet>
+<!-- Apply Now Button -->
+<a
+  href="/apply"
+  class="fixed z-50 right-16 top-1/2 transform -translate-y-1/2 translate-x-1/2
+         bg-gradient-to-r from-violet-600 to-violet-700 hover:from-violet-700 hover:to-blue-800
+         text-white font-bold py-2 px-6 rounded-l-full shadow-xl text-base uppercase tracking-wide
+         animate-pulse border-2 border-white"
+  title="Apply Now"
+>
+  Apply Now
+</a>
+
+
+<!-- WhatsApp Floating Button -->
+<a
+  href="https://wa.me/9035514808"
+  target="_blank"
+  class="fixed z-100 bottom-24 right-8 border-2 w-12 h-12  rounded-full drop-shadow-md bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-700 text-white text-3xl flex items-center justify-center animate-bounce"
+  title="Chat on WhatsApp"
+>
+  <i class='bx bxl-whatsapp'></i>
+</a>
+
+<!-- Go To Top Button -->
+<button
+  id="to-top-button"
+  (click)="goToTop()"
+  title="Go To Top"
+  class="hidden fixed z-90 bottom-8 right-8 border-0 w-10 h-10 rounded drop-shadow-md bg-gradient-to-r from-pink-500 via-purple-500 to-pink-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-black dark:focus:ring-black  text-black text-3xl font-bold"
+>
+  <i class='bx bxs-chevrons-up bx-flashing'></i>
+</button>

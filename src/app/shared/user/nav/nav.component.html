@@ -14,17 +14,13 @@
           />
         </div>
         <div
-          class="text-white font-bold text-xl font-mono flex flex-col leading-none tracking-tight"
+          class="text-white w-36 font-bold text-xl font-mono flex flex-col leading-none tracking-tight"
         >
-          <span
-            class="aldrich-regular text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500"
-            >Study in</span
-          >
-          <span
-            class="font-mono text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500"
-          >
-            BENGALURU.IN
-          </span>
+        <img
+        src="/sib_text.png"
+        class="max-w-full max-h-full object-contain"
+        alt="Logo"
+      />
         </div>
       </div>
 
@@ -32,7 +28,7 @@
       <div class="hidden md:flex items-center space-x-8">
         <a
         *ngFor="let item of ['Home', 'Services', 'About', 'Contact']"
-        class="text-violet-100 hover:text-[#d5a1ff] px-3 py-2 rounded-md text-base font-bold merienda-custom-3 relative group transform transition-all duration-300 hover:scale-105"
+        class="text-violet-100 hover:text-[#d5a1ff] px-3 py-2 rounded-md text-base font-bold  relative group transform transition-all duration-300 hover:scale-105"
         [routerLink]="item === 'Home' ? '/' : '/' + item.toLowerCase()"
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
@@ -42,11 +38,11 @@
             class="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-purple-400 to-pink-500 transition-all duration-300 group-hover:w-full active:w-full"
         ></span>
     </a>
-        <a
+        <!-- <a
           class="text-white/90 hover:text-white px-3 py-2 rounded-md text-sm font-medium bg-gradient-to-r from-purple-500 to-pink-500 hover:from-pink-500 hover:to-purple-500 transition-all duration-300"
         >
           Login
-        </a>
+        </a> -->
       </div>
 
       <!-- Mobile Menu Button -->
@@ -91,7 +87,7 @@
       class="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-purple-400 to-pink-500 transition-all duration-300 group-hover:w-full active:w-full"
     ></span>
   </a>
-      <div class="pt-4 border-t border-[#4A2B6D]/20">
+      <!-- <div class="pt-4 border-t border-[#4A2B6D]/20">
         <a
         class="block px-3 py-2 rounded-md text-center text-base merienda-custom-3 text-black hover:bg-[#3C1C5E]/30 transform hover:scale-105 duration-300 relative group"
         routerLink="/login"
@@ -99,7 +95,7 @@
         [routerLinkActiveOptions]="{ exact: true }"
       >
         Login
-        <!-- Gradient underline for hover and active states -->
+
         <span
           class="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-purple-400 to-pink-500 transition-all duration-300 group-hover:w-full active:w-full"
         ></span>
@@ -112,13 +108,13 @@
       [routerLinkActiveOptions]="{ exact: true }"
     >
      SignUp
-      <!-- Gradient underline for hover and active states -->
+
       <span
         class="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-purple-400 to-pink-500 transition-all duration-300 group-hover:w-full active:w-full"
       ></span>
     </a>
 
-      </div>
+      </div> -->
     </div>
   </div>
   <div class="absolute inset-0 border-animation"></div>
