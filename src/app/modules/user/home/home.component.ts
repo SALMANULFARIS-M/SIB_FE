@@ -5,6 +5,7 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { GsapService } from '../../../core/services/gsap.service';
 import { faUniversity, faSchool, faBookOpen, faGlobe, faBriefcase, faLaptop, faHome, faBuilding, faCalendarAlt, faComments } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 @Component({
   selector: 'app-home',
@@ -23,8 +24,9 @@ export class HomeComponent implements AfterViewInit {
   @ViewChildren('countup') countupElements!: QueryList<ElementRef>;
   @ViewChildren('descText') descTextElements!: QueryList<ElementRef>; // Capture desc-text elements using ViewChildren
   @ViewChildren('specialText') specialTextElements!: QueryList<ElementRef>; // Capture special-text elements using ViewChildren
-
-  gsap: any;
+  private animatedElements = new Map<HTMLElement, boolean>();
+  gsap: any
+  innerText!: string;
   opportunities = [
     { label: 'Universities', icon: faUniversity },
     { label: 'Colleges', icon: faSchool },
@@ -65,7 +67,7 @@ export class HomeComponent implements AfterViewInit {
     // Add more colleges
   ];
 
-  private animateHeaders() {
+  animateHeaders() {
     this.gsap.set([this.firstHeading.nativeElement, this.secondHeading.nativeElement], {
       opacity: 0,
       y: 50,
@@ -87,7 +89,7 @@ export class HomeComponent implements AfterViewInit {
     });
   }
 
-  private animateTwo() {
+  animateTwo() {
     this.gsap.from(this.leftContent.nativeElement, {
       opacity: 0,
       x: -100,
@@ -127,8 +129,6 @@ export class HomeComponent implements AfterViewInit {
   }
 
   animateStatic() {
-    // Flag to check if the count-up animation has already run
-    let hasAnimated = false;
 
     this.countupElements.forEach((elementRef) => {
       const element = elementRef.nativeElement;
@@ -136,35 +136,38 @@ export class HomeComponent implements AfterViewInit {
       const suffix = element.textContent.replace(/^0/, ''); // Get the suffix (+/K+/%)
 
       // Create a ScrollTrigger instance
-      this.gsap.fromTo(element, {
-        color: '#2D1044', // Start with background color
-        innerText: 0
-      }, {
-        color: '#FFD700', // Animate to gold color
-        innerText: endValue,
-        duration: 4,
-        ease: 'power1.out',
-        snap: { innerText: 1 },
-        onUpdate: function () {
-          element.textContent = Math.floor(this['targets']()[0].innerText) + suffix;
+      ScrollTrigger.create({
+        trigger: element,
+        start: 'top 85%',
+        once: true, // Ensure the animation only runs once
+        onEnter: () => {
+          if (!this.animatedElements.get(element)) {
+            this.animatedElements.set(element, true); // Mark this element as animated
+
+            this.gsap.fromTo(element, {
+              color: '#2D1044', // Start with background color
+              innerText: 0
+            }, {
+              color: '#FF4D6D',
+              innerText: endValue,
+              duration: 4,
+              ease: 'power1.out',
+              snap: { innerText: 1 },
+              onUpdate: function () {
+                element.textContent = Math.floor(this['targets']()[0].innerText) + suffix;
+              },
+              onComplete: () => {
+                // Set the final value and disable further updates
+                element.textContent = endValue + suffix;
+                ScrollTrigger.refresh(); // Refresh ScrollTrigger to prevent resetting
+              }
+            });
+          }
         },
-        scrollTrigger: {
-          trigger: element,
-          start: 'top 85%',
-          toggleActions: 'play none none reset',
-          onEnter: () => {
-            if (!hasAnimated) {
-              hasAnimated = true; // Set the flag to true
-              this.gsap.to(element, { // Start the animation
-                innerText: endValue,
-                duration: 4,
-                ease: 'power1.out',
-                snap: { innerText: 1 },
-                onUpdate: function () {
-                  element.textContent = Math.floor(this['targets']()[0].innerText) + suffix;
-                }
-              });
-            }
+        onLeaveBack: () => {
+          // Prevent resetting when scrolling back up
+          if (this.animatedElements.get(element)) {
+            element.textContent = endValue + suffix;
           }
         }
       });
@@ -206,7 +209,7 @@ export class HomeComponent implements AfterViewInit {
 
   animateOpportunities() {
     const gridItems = this.gridContainer.nativeElement.children;
-    this. gsap.from(gridItems, {
+    this.gsap.from(gridItems, {
       autoAlpha: 0, // Hidden initially but still occupies space
       y: 50, // Moves elements up from below
       stagger: 0.2, // Stagger animation for each item

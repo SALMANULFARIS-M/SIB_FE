@@ -1,0 +1,91 @@
+.top-div {
+  font-family: 'Poppins', sans-serif; /* Use the imported font */
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0; /* Light background color */
+  display: flex;
+  flex-direction: column; /* Align items vertically */
+  align-items: center; /* Center horizontally */
+  min-height: 100vh; /* Ensure full viewport height */
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  padding: 20px; /* Add some padding */
+}
+
+.logo {
+  max-width: 200px; /* Adjust logo size as needed */
+  height: auto;
+}
+
+.hero {
+  text-align: center;
+  padding: 50px;
+  background-color: #fff; /* White background for the hero section */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  max-width: 600px; /* Limit width */
+  margin-top: 50px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: 700; /* Make the headings bolder */
+}
+
+.cta {
+  margin-top: 2rem;
+}
+
+.cta p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  color: #666; /* Slightly darker text color */
+}
+
+.button {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background-color: #007bff; /* Blue button */
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Responsive design (adjust as needed) */
+@media (max-width: 768px) {
+  h1 {
+      font-size: 2rem;
+  }
+
+  .cta p {
+      font-size: 1rem;
+  }
+}
+.whatsapp-ico{
+  fill: white;
+  width: 50px;
+  height: 50px;
+  padding: 3px;
+  background-color: #4dc247;
+  border-radius: 50%;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+  /* box-shadow: 2px 2px 11px rgba(0,0,0,0.7); */
+  position: fixed;
+  bottom: 20px;
+  right : 20px;
+  z-index: 10;
+}
+
+.whatsapp-ico:hover{
+  box-shadow: 2px 2px 11px rgba(0,0,0,0.7);
+}

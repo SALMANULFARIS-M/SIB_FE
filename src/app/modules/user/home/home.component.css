@@ -2,7 +2,7 @@
   filter: grayscale(40%) contrast(100%) brightness(90%);
   transition: filter 0.5s ease-in-out, box-shadow 0.3s ease-in-out;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6); /* Darker shadow with more blur */
-  color: #2D1044;
+  color: #2d1044;
 }
 
 .grayscale:hover {
@@ -10,13 +10,23 @@
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8); /* Darker and larger shadow on hover */
 }
 
-
-/* Add this to your component's CSS file */
 .grid-item {
-  transform: translateY(50px);
+  transition: border-color 0.5s ease, border-width 0.5s ease; /* Smooth border animation */
+  border: 2px solid transparent; /* Initially transparent border */
 }
 
 .grid-item:hover {
   transform: scale(1.05);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transform-origin: center;
+  border-width: 4px;
+  border-color: #ff4dea;
+  background-color: #000;
+color: aliceblue;
+}
+
+.grid-item:hover .icon {
+  color: #FF4D6D; /* Change icon color */
+  transform: scale(1.2); /* Scale up */
+  transition: all 0.4s ease;
 }
