@@ -1,5 +1,6 @@
 <app-nav></app-nav>
-<section id="about" class="bg-[#1e0a31] text-violet-100 py-20 mt-24 relative">
+<!-- heading -->
+<section id="about" class="bg-[#1e0a31] text-violet-100 py-16 mt-20 relative">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="mb-10 text-center">
       <h2
@@ -17,7 +18,94 @@
     </div>
   </div>
 </section>
+<!-- VISION AND MISSION -->
+<section>
+  <div
+    class="relative py-20 bg-gradient-to-r from-[#2D1044] to-[#6E0E6B] overflow-hidden"
+  >
+    <!-- Decorative elements -->
+    <div class="absolute top-0 left-0 w-full h-full opacity-10">
+      <div
+        class="w-40 h-40 bg-[#FF4D6D] rounded-full absolute -top-20 -left-20"
+      ></div>
+      <div
+        class="w-60 h-60 bg-[#FF4D6D] rounded-full absolute -bottom-40 -right-40"
+      ></div>
+    </div>
 
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="flex flex-col md:flex-row gap-8 justify-center">
+        <!-- Vision Section -->
+        <div
+          class="group flex-1 p-8 bg-white/10 backdrop-blur-lg rounded-3xl shadow-2xl hover:bg-white/20 transition-all duration-300 transform hover:scale-105 flex flex-col items-center"
+        >
+          <div class="inline-block p-4 bg-[#FF4D6D] rounded-full mb-6">
+            <svg
+              class="w-10 h-10 text-white"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+              ></path>
+            </svg>
+          </div>
+          <h2 class="text-4xl font-bold text-white mb-6 text-center font-seri">
+            Our Vision
+          </h2>
+          <p
+            class="text-lg text-gray-200 leading-relaxed text-justify font-serif"
+          >
+            To transform Bengaluru into Asia's premier educational destination
+            by revolutionizing admission processes, offering unparalleled career
+            guidance, and fostering collaborative partnerships with top-tier
+            institutions and industry leaders.
+          </p>
+        </div>
+
+        <!-- Mission Section -->
+        <div
+          class="group flex-1 p-8 bg-white/10 backdrop-blur-lg rounded-3xl shadow-2xl hover:bg-white/20 transition-all duration-300 transform hover:scale-105 flex flex-col items-center"
+        >
+          <div class="inline-block p-4 bg-[#2D1044] rounded-full mb-6">
+            <svg
+              class="w-10 h-10 text-white text-center"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+              ></path>
+            </svg>
+          </div>
+          <h2 class="text-4xl font-bold text-white mb-6 font-serif text-center">
+            Our Mission
+          </h2>
+          <p
+            class="text-lg text-gray-200 leading-relaxed atkinson-hyperlegible-next-custom-2 font-serif"
+          >
+            To attract and empower students worldwide by providing access to
+            world-class education in India, nurturing global talent, and
+            creating a network of future leaders who drive innovation and
+            positive change.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
 <section>
   <div class="relative py-32 bg-gray-100">
     <h2
@@ -35,7 +123,9 @@
       <div
         class="hidden md:flex absolute inset-0 m-auto w-52 md:w-64 h-52 md:h-64 bg-[#c995f4] rounded-full shadow-xl border-4 border-[#2D1044] items-center justify-center text-center"
       >
-        <h2 class="text-xl md:text-lg atkinson-hyperlegible-next-custom-2 font-bold text-[#2D1044] leading-tight">
+        <h2
+          class="text-xl md:text-lg atkinson-hyperlegible-next-custom-2 font-bold text-[#2D1044] leading-tight"
+        >
           Why Choose <br /><span class="text-[#2D1044]"
             >StudyinBengaluru.com?</span
           >
@@ -55,7 +145,7 @@
           >
             <i class="bx bxs-buildings"></i>
           </div>
-          <h3 class="text-lg font-semibold  text-[#FF4D6D] mb-2">
+          <h3 class="text-lg font-semibold text-[#FF4D6D] mb-2">
             Direct Access
           </h3>
           <p class="text-gray-300 text-sm">
@@ -123,75 +213,94 @@
       }
     }
   </style>
+</section>
 
-<div class="relative py-20 bg-gradient-to-r from-[#2D1044] to-[#6E0E6B] overflow-hidden">
-  <!-- Decorative elements -->
-  <div class="absolute top-0 left-0 w-full h-full opacity-10">
-    <div class="w-40 h-40 bg-[#FF4D6D] rounded-full absolute -top-20 -left-20"></div>
-    <div class="w-60 h-60 bg-[#FF4D6D] rounded-full absolute -bottom-40 -right-40"></div>
-  </div>
-
-  <div class="container mx-auto px-6 relative z-10">
-    <div class="flex flex-col md:flex-row gap-8 justify-center">
-      <!-- Vision Section -->
-      <div class="group flex-1 p-8 bg-white/10 backdrop-blur-lg rounded-3xl shadow-2xl hover:bg-white/20 transition-all duration-300 transform hover:scale-105 flex flex-col items-center">
+<section class="bg-gradient-to-r from-[#2D1044] to-[#6E0E6B] py-16 px-6">
+  <div class="container mx-auto text-center">
+    <h2 class="text-4xl font-bold text-white mb-12 atkinson-hyperlegible-next-custom-2">Why Bengaluru?</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Card 1: Innovation and Technology -->
+      <div class="group bg-white/10 backdrop-blur-lg rounded-2xl p-8 shadow-lg hover:bg-white/20 transition-all duration-300 transform hover:scale-105">
         <div class="inline-block p-4 bg-[#FF4D6D] rounded-full mb-6">
-            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-            </svg>
-        </div>
-        <h2 class="text-4xl font-bold text-white mb-6 text-center aldrich-regular">Our Vision</h2>
-        <p class="text-lg text-gray-200 leading-relaxed text-justify font-serif">To transform Bengaluru into Asia's premier educational destination by revolutionizing admission processes, offering unparalleled career guidance, and fostering collaborative partnerships with top-tier institutions and industry leaders.</p>
-    </div>
-
-      <!-- Mission Section -->
-      <div class="group flex-1 p-8 bg-white/10 backdrop-blur-lg rounded-3xl shadow-2xl hover:bg-white/20 transition-all duration-300 transform hover:scale-105 flex flex-col items-center">
-        <div class="inline-block p-4 bg-[#2D1044] rounded-full mb-6 ">
-          <svg class="w-10 h-10 text-white text-center" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
           </svg>
         </div>
-        <h2 class="text-4xl font-bold text-white mb-6 aldrich-regular text-center">Our Mission</h2>
-        <p class="text-lg text-gray-200 leading-relaxed atkinson-hyperlegible-next-custom-2 font-serif">To attract and empower students worldwide by providing access to world-class education in India, nurturing global talent, and creating a network of future leaders who drive innovation and positive change.</p>
+        <h3 class="text-2xl font-bold text-white mb-4 font-serif">Innovation Hub</h3>
+        <p class="text-gray-200 leading-relaxed">Bengaluru is India's Silicon Valley, a global leader in IT, biotechnology, and innovation, offering unparalleled opportunities for tech enthusiasts.</p>
+      </div>
+
+      <!-- Card 2: Global Opportunities -->
+      <div class="group bg-white/10 backdrop-blur-lg rounded-2xl p-8 shadow-lg hover:bg-white/20 transition-all duration-300 transform hover:scale-105">
+        <div class="inline-block p-4 bg-[#2D1044] rounded-full mb-6">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9"></path>
+          </svg>
+        </div>
+        <h3 class="text-2xl font-bold text-white mb-4 font-serif">Global Opportunities</h3>
+        <p class="text-gray-200 leading-relaxed">With its thriving economy and multinational companies, Bengaluru is the perfect launchpad for a global career.</p>
+      </div>
+
+      <!-- Card 3: World-Class Institutions -->
+      <div class="group bg-white/10 backdrop-blur-lg rounded-2xl p-8 shadow-lg hover:bg-white/20 transition-all duration-300 transform hover:scale-105">
+        <div class="inline-block p-4 bg-[#FF4D6D] rounded-full mb-6">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+          </svg>
+        </div>
+        <h3 class="text-2xl font-bold text-white mb-4 font-serif">Top Institutions</h3>
+        <p class="text-gray-200 leading-relaxed">Home to prestigious universities and colleges offering diverse courses, Bengaluru ensures world-class education for every student.</p>
+      </div>
+
+      <!-- Card 4: Diverse Culture -->
+      <div class="group bg-white/10 backdrop-blur-lg rounded-2xl p-8 shadow-lg hover:bg-white/20 transition-all duration-300 transform hover:scale-105">
+        <div class="inline-block p-4 bg-[#2D1044] rounded-full mb-6">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+          </svg>
+        </div>
+        <h3 class="text-2xl font-bold text-white mb-4 font-serif">Cultural Melting Pot</h3>
+        <p class="text-gray-200 leading-relaxed">Experience a vibrant mix of cultures, traditions, and communities, making Bengaluru a welcoming city for everyone.</p>
+      </div>
+
+      <!-- Card 5: Affordable Living -->
+      <div class="group bg-white/10 backdrop-blur-lg rounded-2xl p-8 shadow-lg hover:bg-white/20 transition-all duration-300 transform hover:scale-105">
+        <div class="inline-block p-4 bg-[#FF4D6D] rounded-full mb-6">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+        <h3 class="text-2xl font-bold text-white mb-4 font-serif">Affordable Living</h3>
+        <p class="text-gray-200 leading-relaxed">Enjoy a high quality of life at a reasonable cost, making Bengaluru an ideal destination for students and professionals alike.</p>
+      </div>
+
+      <!-- Card 6: Thriving Ecosystem -->
+      <div class="group bg-white/10 backdrop-blur-lg rounded-2xl p-8 shadow-lg hover:bg-white/20 transition-all duration-300 transform hover:scale-105">
+        <div class="inline-block p-4 bg-[#2D1044] rounded-full mb-6">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+        </div>
+        <h3 class="text-2xl font-bold text-white mb-4 font-serif">Thriving Ecosystem</h3>
+        <p class="text-gray-200 leading-relaxed">From startups to established giants, Bengaluru offers a dynamic ecosystem for learning, networking, and growth.</p>
       </div>
     </div>
   </div>
-</div>
+</section>
 
 
 
+<section>
   <div class="mt-12 text-center animate-fadeIn delay-300">
     <h3 class="text-xl font-bold text-white mb-2">
       Ready to Begin Your Journey?
     </h3>
-    <p class="text-violet-200 mb-4">
+    <p class="text-violet-200 mb-10">
       Explore our programs and discover your potential at Study in Bengaluru.
     </p>
-    <a
-      routerLink="/apply"
-      class="inline-block bg-gradient-to-r from-purple-500 to-pink-500 hover:from-pink-500 hover:to-purple-500 text-white font-bold py-3 px-8 rounded-md transition-all duration-300 hover:scale-105"
-    >
-      Apply Now
-    </a>
   </div>
   <div class="absolute inset-0 border-animation"></div>
 </section>
-
-
-
-<section class="bg-gray-100 py-12 px-6">
-  <h2 class="text-3xl font-bold mb-4">Why Bengaluru?</h2>
-  <ul class="list-disc list-inside space-y-2">
-    <li>Innovation and Technology: Leading center for IT and biotechnology.</li>
-    <li>Global Opportunities: Ideal for future career growth.</li>
-    <li>
-      World-Class Institutions: Diverse courses at prestigious universities.
-    </li>
-    <li>Diverse Culture: Rich blend of cultures and communities.</li>
-    <li>Affordable Living: Quality education at a reasonable cost.</li>
-  </ul>
-</section>
-
 <a
   href="/apply"
   class="fixed z-50 right-16 top-1/2 transform -translate-y-1/2 translate-x-1/2 bg-gradient-to-r from-violet-600 to-violet-700 hover:from-violet-700 hover:to-blue-800 text-white font-bold py-2 px-6 rounded-l-full shadow-xl text-base uppercase tracking-wide animate-pulse border-2 border-white"
