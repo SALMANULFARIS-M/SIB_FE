@@ -1,7 +1,7 @@
 // Apply Form Component (Angular TS)
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import {State, STATES  } from '../../constants/states';
+import { STATES  } from '../../constants/states';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../../core/services/user.service';
 @Component({

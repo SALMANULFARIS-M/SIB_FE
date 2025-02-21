@@ -7,10 +7,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-  private googleScriptUrl = 'https://script.google.com/a/macros/studyinbengaluru.com/s/AKfycbybOlbOhd6equBg2fHhWXDWh4JdGVnPSZGV_7ScQe77m86Hje2I_LYr1TtyZNrFQrRH6g/exec';
+  private googleScriptUrl = 'https://script.google.com/macros/s/AKfycbyeZD-0FNAunDuOc9nicowQ2oebm--Yvb8HbBig83sC0S7L1rw0XYrw6q8YhgVu0z5J/exec';
   constructor(private http: HttpClient) { }
 
   apply(formData: any): Observable<any> {
-    return this.http.post(this.googleScriptUrl, formData);
+    return this.http.post(this.googleScriptUrl, JSON.stringify(formData), {
+      headers: { 'Content-Type': 'application/json' }
+    });
   }
 }

@@ -10,6 +10,19 @@
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8); /* Darker and larger shadow on hover */
 }
 
+/* Add this to your global styles or component styles */
+.group:hover .group-hover\:scale-110 {
+  transform: scale(1.1);
+}
+
+.group:hover .group-hover\:opacity-80 {
+  opacity: 0.8;
+}
+
+.group:hover .group-hover\:opacity-100 {
+  opacity: 1;
+}
+
 .grid-item {
   transition: border-color 0.5s ease, border-width 0.5s ease; /* Smooth border animation */
   border: 2px solid transparent; /* Initially transparent border */
@@ -30,3 +43,16 @@ color: aliceblue;
   transform: scale(1.2); /* Scale up */
   transition: all 0.4s ease;
 }
+.headerContainer, .leftContent, .rightImage {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px); /* Offset before animation */
+  transition: all 0.5s ease-out;
+}
+
+.headerVisible, .leftContentVisible, .rightImageVisible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+

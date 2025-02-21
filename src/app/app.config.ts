@@ -6,6 +6,7 @@ import { provideClientHydration, withEventReplay } from '@angular/platform-brows
 import { authInterceptor } from './core/interceptors/auth.interceptor'
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 export const appConfig: ApplicationConfig = {
@@ -14,7 +15,7 @@ export const appConfig: ApplicationConfig = {
     useValue: authInterceptor,
     multi: true, // Allow multiple interceptors
   },
-  importProvidersFrom(FontAwesomeModule),
+  importProvidersFrom(FontAwesomeModule,BrowserAnimationsModule),
   provideZoneChangeDetection({ eventCoalescing: true }),
   provideRouter(routes),
   provideHttpClient(

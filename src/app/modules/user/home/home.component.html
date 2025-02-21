@@ -1,96 +1,47 @@
 <app-nav></app-nav>
 <!-- Hero Section -->
-<section
-  class="relative h-screen flex flex-col items-center justify-center text-center text-white"
->
-  <div
-    class="video-docker absolute top-0 left-0 w-full h-full overflow-hidden backdrop-brightness-25 backdrop-blur-lg"
-  >
+<section class="relative h-screen flex flex-col items-center justify-center text-center text-white">
+  <div class="video-docker absolute top-0 left-0 w-full h-full overflow-hidden backdrop-brightness-25 backdrop-blur-lg">
     <div class="relative w-full h-screen overflow-hidden">
-      <video
-        class="absolute top-1/2 left-1/2 min-w-full min-h-full object-cover transform -translate-x-1/2 -translate-y-1/2 grayscale"
-        autoplay
-        loop
-        muted
-        playsinline
-        preload="auto"
-      >
+      <video class="absolute top-1/2 left-1/2 min-w-full min-h-full object-cover transform -translate-x-1/2 -translate-y-1/2 grayscale" autoplay loop muted playsinline preload="auto">
         <source src="/herovideo.mp4" type="video/mp4" />
       </video>
       <div class="absolute inset-0 bg-black opacity-55"></div>
-      <!-- Overlay for opacity effect -->
     </div>
   </div>
-  <div
-    #headerContainer
-    class="my-element space-y-4 z-10 py-4 rounded-2xl w-[60vw]"
-  >
-    <h3
-      #secondHeading
-      class="text-[#F0EAF2] noto-serif-custom-1 md:text-5xl font-extrabold"
-    >
+  <div #headerContainer class="my-element space-y-4 z-10 py-4 rounded-2xl w-[60vw]" [@fadeIn]="headerVisible ? 'in' : 'out'">
+    <h3 #secondHeading class="text-[#F0EAF2] noto-serif-custom-1 md:text-5xl font-extrabold" [@slideInFromLeft]="headerVisible ? 'in' : 'out'">
       Study in India's Silicon Valley
     </h3>
-
-    <a
-      #firstHeading
-      id="firstHeading"
-      class="text-white border-2 md:w-80 border-white/30 hover:border-white/50 backdrop-blur-md px-4 py-3 text-lg atkinson-hyperlegible-next-custom-2 rounded-2xl font-medium bg-black/50 hover:bg-white/20 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 transform-gpu block mx-auto md:px-3 md:py-2 md:text-base"
-    >
-      Book Free Counselling
-    </a>
+    <app-free-consultaion #firstHeading [@slideInFromRight]="headerVisible ? 'in' : 'out'"></app-free-consultaion>
   </div>
 </section>
 
-<!-- two -->
-<div class="max-w-7xl mx-auto px-4 py-16">
-  <div class="flex flex-col md:flex-row items-center gap-8">
-    <!-- Left Content -->
-    <div
-      #leftContent
-      class="md:w-1/2 bg-gradient-to-r from-[#E6D6E8] to-[#F0EAF2] p-8 rounded-2xl shadow-2xl hover:shadow-3xl transition-shadow duration-300"
-    >
-      <p
-        class="text-[#2D1044] font-sans text-xl mb-6 leading-relaxed whitespace-normal text-justify"
-      >
-        StudyInBengaluru.in is Bengaluru's largest portal for admissions, with
-        the vision of making the city the educational hub of Asia. The focus is
-        on building trust and credibility, increasing brand awareness, and
-        attracting students from across India and abroad, alongside strategic
-        college tie-ups, franchise sales, and user engagement.
-      </p>
-      <p
-        class="text-[#FF4D6D] font-serif text-justify text-lg font-semibold mt-6"
-      >
-        "Education is the passport to the future, and StudyinBengaluru is your
-        first-class ticket."
-      </p>
-    </div>
-
-    <!-- Right Image -->
-    <div
-      #rightImage
-      class="md:w-1/2 relative overflow-hidden rounded-2xl shadow-2xl group"
-    >
-      <img
-        src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-        alt="Bengaluru Education Hub"
-        class="w-full h-auto rounded-2xl transform group-hover:scale-110 transition-transform duration-500"
-      />
-      <div
-        class="absolute inset-0 bg-gradient-to-t from-[#2D1044] via-transparent to-transparent opacity-0 group-hover:opacity-80 transition-opacity duration-500"
-      ></div>
-      <div
-        class="absolute bottom-0 left-0 p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-      >
-        <p class="text-[#FF4D6D] text-lg font-bold">
-          Explore Bengaluru's Educational Excellence
+<!-- Two-Column Section -->
+<section>
+  <div class="max-w-7xl mx-auto px-4 py-16">
+    <div class="flex flex-col md:flex-row items-center gap-8">
+      <!-- Left Content -->
+      <div #leftContent class="md:w-1/2 bg-gradient-to-r from-[#E6D6E8] to-[#F0EAF2] p-8 rounded-2xl shadow-2xl hover:shadow-3xl transition-shadow duration-300" [@staggerFadeIn]="leftContentVisible ? 'in' : 'out'">
+        <p class="text-[#2D1044] font-sans text-xl mb-6 leading-relaxed whitespace-normal text-justify">
+          StudyInBengaluru.in is Bengaluru's largest portal for admissions, with the vision of making the city the educational hub of Asia. The focus is on building trust and credibility, increasing brand awareness, and attracting students from across India and abroad, alongside strategic college tie-ups, franchise sales, and user engagement.
         </p>
+        <p class="text-[#FF4D6D] font-serif text-justify text-lg font-semibold mt-6">
+          "Education is the passport to the future, and StudyinBengaluru is your first-class ticket."
+        </p>
+      </div>
+
+      <!-- Right Image -->
+      <div #rightImage class="md:w-1/2 relative overflow-hidden rounded-2xl shadow-2xl group" [@zoomIn]="rightImageVisible ? 'in' : 'out'">
+        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Bengaluru Education Hub" class="w-full h-auto rounded-2xl transform group-hover:scale-110 transition-transform duration-500" />
+        <div class="absolute inset-0 bg-gradient-to-t from-[#2D1044] via-transparent to-transparent opacity-0 group-hover:opacity-80 transition-opacity duration-500"></div>
+        <div class="absolute bottom-0 left-0 p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+          <p class="text-[#FF4D6D] text-lg font-bold">Explore Bengaluru's Educational Excellence</p>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
+</section>
 <!-- Stats Section -->
 <div
   class="text-white py-16 bg-gradient-to-r from-gray-100 via-gray-300 to-gray-100"
