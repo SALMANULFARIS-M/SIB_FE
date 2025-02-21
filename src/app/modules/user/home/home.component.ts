@@ -6,10 +6,11 @@ import { GsapService } from '../../../core/services/gsap.service';
 import { faUniversity, faSchool, faBookOpen, faGlobe, faBriefcase, faLaptop, faHome, faBuilding, faCalendarAlt, faComments } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ApplyComponent } from '../../../shared/user/apply/apply.component';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, NavComponent, FooterComponent, FontAwesomeModule],
+  imports: [CommonModule, NavComponent, FooterComponent, FontAwesomeModule,ApplyComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

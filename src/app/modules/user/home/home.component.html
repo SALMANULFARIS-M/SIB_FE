@@ -176,13 +176,15 @@
   ></div>
 
   <!-- Decorative Circles -->
-  <div class=" flex-row absolute top-0 left-0 w-full h-full opacity-10">
+  <div class="flex-row absolute top-0 left-0 w-full h-full opacity-10">
     <div
       class="w-40 h-40 bg-[#FF4D6D] rounded-full absolute -top-20 -left-20"
     ></div>
-    <div class="absolute w-30 h-50 rounded-l-full bg-[#ff002f] overflow-hidden -bottom-10 right-0">
+    <div
+      class="absolute w-30 h-50 rounded-l-full bg-[#ff002f] overflow-hidden -bottom-10 right-0"
+    >
       <div class="w-full h-full rounded-t-full bg-[#FF4D6D]"></div>
-  </div>
+    </div>
   </div>
 
   <!-- Content Container -->
@@ -274,11 +276,12 @@
                 class="w-full h-full object-contain rounded-lg"
               />
               <div
-              class="absolute bottom-0 left-0 w-full bg-black/40 text-2xl p-4 text-center"
-            >
-              <h1 class="text-gray-300 noto-serif-custom-1 font-medium">{{ slide.text }}</h1>
-            </div>
-
+                class="absolute bottom-0 left-0 w-full bg-black/40 text-2xl p-4 text-center"
+              >
+                <h1 class="text-gray-300 noto-serif-custom-1 font-medium">
+                  {{ slide.text }}
+                </h1>
+              </div>
             </div>
           </div>
           <!-- Indicators -->
@@ -301,7 +304,7 @@
             <i class="bx bxs-left-arrow"></i>
           </button>
           <button
-            class="absolute top-1/2 right-0 -translate-y-1/2  bg-white/50 rounded-full"
+            class="absolute top-1/2 right-0 -translate-y-1/2 bg-white/50 rounded-full"
             (click)="nextSlide()"
           >
             <i class="bx bxs-right-arrow"></i>
@@ -311,7 +314,6 @@
     </div>
   </div>
 </section>
-
 
 <!-- Featured Colleges Section -->
 <!-- <div class="max-w-7xl mx-auto px-4 py-16">
@@ -351,11 +353,8 @@
     <p class="text-gray-800 mb-8">
       Get personalized guidance from our admission experts
     </p>
-
   </div>
 </div>
 
-
-
-
+<app-apply></app-apply>
 <app-footer></app-footer>
