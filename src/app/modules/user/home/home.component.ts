@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Inject, OnInit, PLATFORM_ID, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, OnInit, PLATFORM_ID, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { NavComponent } from "../../../shared/user/nav/nav.component";
 import { FooterComponent } from "../../../shared/user/footer/footer.component";
 import { CommonModule, isPlatformBrowser } from '@angular/common';
@@ -14,7 +14,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
   styleUrl: './home.component.css'
 })
 
-export class HomeComponent implements AfterViewInit {
+export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
   @ViewChild('headerContainer') headerContainer!: ElementRef;
   @ViewChild('firstHeading') firstHeading!: ElementRef;
   @ViewChild('secondHeading') secondHeading!: ElementRef;
@@ -27,6 +27,8 @@ export class HomeComponent implements AfterViewInit {
   private animatedElements = new Map<HTMLElement, boolean>();
   gsap: any
   innerText!: string;
+  intervalId: any;
+  currentSlide = 0;
   opportunities = [
     { label: 'Universities', icon: faUniversity },
     { label: 'Colleges', icon: faSchool },
@@ -39,13 +41,42 @@ export class HomeComponent implements AfterViewInit {
     { label: '1-on-1 Free Counselling', icon: faComments },
     { label: 'Internships', icon: faBuilding }
   ];
-
+  slides = [
+    { image: '/img_1.JPG', text: '', alt: 'Slide 1' },
+    { image: '/img_2.JPG', text: 'Founder of SIB', alt: 'Slide 2' },
+    { image: '/img_3.JPG', text: '', alt: 'Slide 3' },
+  ];
 
   constructor(
     private gsapService: GsapService,
     @Inject(PLATFORM_ID) private platformId: any // Inject platform ID to detect if running on the browser
   ) {
     this.gsap = this.gsapService.getGsap();
+  }
+
+  ngOnInit(): void {
+    this.startAutoSlide();
+  }
+  ngOnDestroy(): void {
+    clearInterval(this.intervalId); // Clear the interval on component destroy
+  }
+
+  startAutoSlide() {
+    this.intervalId = setInterval(() => {
+      this.nextSlide();
+    }, 2000); // Auto-slide every 2 seconds
+  }
+
+  nextSlide() {
+    this.currentSlide = (this.currentSlide + 1) % this.slides.length;
+  }
+
+  prevSlide() {
+    this.currentSlide = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
+  }
+
+  goToSlide(index: number) {
+    this.currentSlide = index;
   }
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId) && this.gsap) {

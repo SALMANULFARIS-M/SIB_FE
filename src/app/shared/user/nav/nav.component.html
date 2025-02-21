@@ -27,7 +27,7 @@
       <!-- Desktop Menu with hover underline animation -->
       <div class="hidden md:flex items-center space-x-8">
         <a
-        *ngFor="let item of ['Home', 'Services', 'About', 'Contact']"
+        *ngFor="let item of ['Home', 'About', 'Contact']"
         class="text-violet-100 hover:text-[#d5a1ff] px-3 py-2 rounded-md text-base font-bold  relative group transform transition-all duration-300 hover:scale-105"
         [routerLink]="item === 'Home' ? '/' : '/' + item.toLowerCase()"
         routerLinkActive="active"
@@ -75,7 +75,7 @@
   >
     <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 animate-slideDown">
       <a
-    *ngFor="let item of ['Home', 'Services', 'About', 'Contact']"
+    *ngFor="let item of ['Home', 'About', 'Contact']"
     class="text-black block px-3 py-2 rounded-md text-base text-center merienda-custom-3 hover:bg-[#3C1C5E]/30 transition-colors transform hover:scale-105 duration-300 relative group"
     [routerLink]="item === 'Home' ? '/' : '/' + item.toLowerCase()"
     routerLinkActive="active"

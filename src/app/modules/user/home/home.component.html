@@ -33,12 +33,12 @@
     </h3>
 
     <a
-    #firstHeading
-    id="firstHeading"
-    class="text-white border-2 md:w-80 border-white/30 hover:border-white/50 backdrop-blur-md px-4 py-3 text-lg atkinson-hyperlegible-next-custom-2 rounded-2xl font-medium bg-black/50 hover:bg-white/20 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 transform-gpu block mx-auto md:px-3 md:py-2 md:text-base"
-  >
-    Book Free Counselling
-  </a>
+      #firstHeading
+      id="firstHeading"
+      class="text-white border-2 md:w-80 border-white/30 hover:border-white/50 backdrop-blur-md px-4 py-3 text-lg atkinson-hyperlegible-next-custom-2 rounded-2xl font-medium bg-black/50 hover:bg-white/20 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 transform-gpu block mx-auto md:px-3 md:py-2 md:text-base"
+    >
+      Book Free Counselling
+    </a>
   </div>
 </section>
 
@@ -51,7 +51,7 @@
       class="md:w-1/2 bg-gradient-to-r from-[#E6D6E8] to-[#F0EAF2] p-8 rounded-2xl shadow-2xl hover:shadow-3xl transition-shadow duration-300"
     >
       <p
-        class="text-[#2D1044] font-bold text-xl mb-6 atkinson-hyperlegible-next-custom-2 leading-relaxed whitespace-normal text-justify"
+        class="text-[#2D1044] font-sans text-xl mb-6 leading-relaxed whitespace-normal text-justify"
       >
         StudyInBengaluru.in is Bengaluru's largest portal for admissions, with
         the vision of making the city the educational hub of Asia. The focus is
@@ -59,7 +59,9 @@
         attracting students from across India and abroad, alongside strategic
         college tie-ups, franchise sales, and user engagement.
       </p>
-      <p class="text-[#FF4D6D] aldrich-regular text-lg font-semibold mt-6">
+      <p
+        class="text-[#FF4D6D] font-serif text-justify text-lg font-semibold mt-6"
+      >
         "Education is the passport to the future, and StudyinBengaluru is your
         first-class ticket."
       </p>
@@ -98,22 +100,40 @@
     class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8 text-center"
   >
     <div class="p-4">
-      <div class="text-4xl font-bold mb-2 countup text-[#FF4D6D]" #countup data-value="100">
+      <div
+        class="text-4xl font-bold mb-2 countup text-[#FF4D6D]"
+        #countup
+        data-value="100"
+      >
         +
       </div>
-      <div class="text-[#2D1044] desc-text font-bold font-serif" #descText>Partner Colleges</div>
+      <div class="text-[#2D1044] desc-text font-bold font-serif" #descText>
+        Partner Colleges
+      </div>
     </div>
     <div class="p-4">
-      <div class="text-4xl font-bold mb-2 countup text-[#FF4D6D]" #countup data-value="1000">
+      <div
+        class="text-4xl font-bold mb-2 countup text-[#FF4D6D]"
+        #countup
+        data-value="1000"
+      >
         +
       </div>
-      <div class="text-[#2D1044] desc-text font-bold font-serif" #descText>Students Enrolled</div>
+      <div class="text-[#2D1044] desc-text font-bold font-serif" #descText>
+        Students Enrolled
+      </div>
     </div>
     <div class="p-4">
-      <div class="text-4xl font-bold mb-2 countup text-[#FF4D6D]" #countup data-value="95">
+      <div
+        class="text-4xl font-bold mb-2 countup text-[#FF4D6D]"
+        #countup
+        data-value="95"
+      >
         %
       </div>
-      <div class="text-[#2D1044] desc-text font-bold font-serif" #descText>Admission Success</div>
+      <div class="text-[#2D1044] desc-text font-bold font-serif" #descText>
+        Admission Success
+      </div>
     </div>
     <div class="p-4">
       <div
@@ -122,7 +142,9 @@
       >
         24/7
       </div>
-      <div class="text-[#2D1044] desc-text font-bold font-serif" #descText>Student Support</div>
+      <div class="text-[#2D1044] desc-text font-bold font-serif" #descText>
+        Student Support
+      </div>
     </div>
   </div>
 </div>
@@ -142,16 +164,156 @@
       <div class="text-[#2D1044] text-3xl icon">
         <fa-icon [icon]="item.icon"></fa-icon>
       </div>
-      <p class="font-semibold">{{ item.label }}</p>
+      <p class="font-semibold text-sm md:text-base">{{ item.label }}</p>
     </div>
   </div>
 </div>
+
+<section class="relative">
+  <!-- Background Gradient -->
+  <div
+    class="absolute inset-0 bg-gradient-to-r from-[#2D1044] to-[#6E0E6B] opacity-95"
+  ></div>
+
+  <!-- Decorative Circles -->
+  <div class="absolute top-0 left-0 w-full h-full opacity-10">
+    <div
+      class="w-40 h-40 bg-[#FF4D6D] rounded-full absolute -top-20 -left-20"
+    ></div>
+    <div
+      class="w-60 h-60 bg-[#FF4D6D] rounded-full absolute -bottom-40 -right-40"
+    ></div>
+  </div>
+
+  <!-- Content Container -->
+  <div class="container mx-auto px-6 py-20 relative z-10">
+    <div class="flex flex-col lg:flex-row gap-12 items-center">
+      <!-- Vision and Mission Section (Left Side) -->
+      <div class="flex-1 space-y-8">
+        <!-- Vision Section -->
+        <div
+          class="group p-8 bg-white/10 backdrop-blur-lg rounded-3xl shadow-2xl hover:bg-white/20 transition-all duration-300 transform hover:scale-105"
+        >
+          <div class="inline-block p-4 bg-[#FF4D6D] rounded-full mb-6">
+            <svg
+              class="w-10 h-10 text-white"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+              ></path>
+            </svg>
+          </div>
+          <h2 class="text-4xl font-bold text-white mb-6 font-serif">
+            Our Vision
+          </h2>
+          <p class="text-lg text-gray-200 leading-relaxed font-serif">
+            To transform Bengaluru into Asia's premier educational destination
+            by revolutionizing admission processes, offering unparalleled career
+            guidance, and fostering collaborative partnerships with top-tier
+            institutions and industry leaders.
+          </p>
+        </div>
+
+        <!-- Mission Section -->
+        <div
+          class="group p-8 bg-white/10 backdrop-blur-lg rounded-3xl shadow-2xl hover:bg-white/20 transition-all duration-300 transform hover:scale-105"
+        >
+          <div class="inline-block p-4 bg-[#2D1044] rounded-full mb-6">
+            <svg
+              class="w-10 h-10 text-white"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+              ></path>
+            </svg>
+          </div>
+          <h2 class="text-4xl font-bold text-white mb-6 font-serif">
+            Our Mission
+          </h2>
+          <p class="text-lg text-gray-200 leading-relaxed font-serif">
+            To attract and empower students worldwide by providing access to
+            world-class education in India, nurturing global talent, and
+            creating a network of future leaders who drive innovation and
+            positive change.
+          </p>
+        </div>
+      </div>
+
+      <!-- Image Carousel (Right Side) -->
+      <div
+        class="w-full md:w-[40vw] flex justify-center items-center md:ms-10 p-4"
+      >
+        <div class="relative w-full">
+          <div class="relative h-56 md:h-96 overflow-hidden rounded-lg">
+            <div
+              *ngFor="let slide of slides; let i = index"
+              [ngClass]="{
+                'opacity-100': i === currentSlide,
+                'opacity-0 pointer-events-none': i !== currentSlide,
+                'transition-opacity duration-700 ease-in-out': true
+              }"
+              class="carousel-item absolute inset-0 flex justify-center items-center"
+            >
+              <img
+                [src]="slide.image"
+                alt="Slide Image"
+                class="w-full h-full object-contain rounded-lg"
+              />
+              <div
+                class="absolute bottom-0 left-0 w-full bg-transparent text-2xl text-black p-4 text-center"
+              >
+                {{ slide.text }}
+              </div>
+            </div>
+          </div>
+          <!-- Indicators -->
+          <div class="absolute left-1/2 transform -translate-x-1/2 space-x-2">
+            <button
+              *ngFor="let slide of slides; let i = index"
+              [ngClass]="{
+                'bg-black': i === currentSlide,
+                'bg-gray-500': i !== currentSlide
+              }"
+              class="w-3 h-3 rounded-full"
+              (click)="goToSlide(i)"
+            ></button>
+          </div>
+          <!-- Controls -->
+          <button
+            class="absolute top-1/2 left-0 -translate-y-1/2 p-2 bg-white/50 rounded-full"
+            (click)="prevSlide()"
+          >
+            <i class="bx bxs-left-arrow"></i>
+          </button>
+          <button
+            class="absolute top-1/2 right-0 -translate-y-1/2 p-2 bg-white/50 rounded-full"
+            (click)="nextSlide()"
+          >
+            <i class="bx bxs-right-arrow"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <a
   href="/apply"
-  class="fixed z-50 right-16 top-1/2 transform -translate-y-1/2 translate-x-1/2
-         bg-gradient-to-r from-violet-600 to-violet-700 hover:from-violet-700 hover:to-blue-800
-         text-white font-bold py-2 px-6 rounded-l-full shadow-xl text-base uppercase tracking-wide
-         animate-pulse border-2 border-white"
+  class="fixed z-50 right-16 top-1/2 transform -translate-y-1/2 translate-x-1/2 bg-gradient-to-r from-violet-600 to-violet-700 hover:from-violet-700 hover:to-blue-800 text-white font-bold py-2 px-6 rounded-l-full shadow-xl text-base uppercase tracking-wide animate-pulse border-2 border-white"
   title="Apply Now"
 >
   Apply Now
