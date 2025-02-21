@@ -14,7 +14,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
   styleUrl: './home.component.css'
 })
 
-export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
+export class HomeComponent implements  OnInit,AfterViewInit {
   @ViewChild('headerContainer') headerContainer!: ElementRef;
   @ViewChild('firstHeading') firstHeading!: ElementRef;
   @ViewChild('secondHeading') secondHeading!: ElementRef;
@@ -42,9 +42,9 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
     { label: 'Internships', icon: faBuilding }
   ];
   slides = [
-    { image: '/img_1.JPG', text: '', alt: 'Slide 1' },
-    { image: '/img_2.JPG', text: 'Founder of SIB', alt: 'Slide 2' },
-    { image: '/img_3.JPG', text: '', alt: 'Slide 3' },
+    { image: '/img_1.JPG', text: 'With Chairman of Ique Ventures', alt: 'Slide 1' },
+    { image: '/img_2.JPG', text: 'Founder of Study In Bengaluru', alt: 'Slide 2' },
+    { image: '/img_3.JPG', text: 'Receiving Award for best admission consultants', alt: 'Slide 3' },
   ];
 
   constructor(
@@ -54,9 +54,10 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
     this.gsap = this.gsapService.getGsap();
   }
 
-  ngOnInit(): void {
-    this.startAutoSlide();
-  }
+
+ngOnInit(): void {
+
+}
   ngOnDestroy(): void {
     clearInterval(this.intervalId); // Clear the interval on component destroy
   }
@@ -84,8 +85,10 @@ export class HomeComponent implements AfterViewInit, OnInit, OnDestroy {
       this.animateTwo();
       this.animateStatic();
       this.animateOpportunities();
+      this.startAutoSlide();
     }
   }
+
 
   featuredColleges = [
     {

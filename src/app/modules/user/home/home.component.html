@@ -17,7 +17,7 @@
       >
         <source src="/herovideo.mp4" type="video/mp4" />
       </video>
-      <div class="absolute inset-0 bg-black opacity-30"></div>
+      <div class="absolute inset-0 bg-black opacity-55"></div>
       <!-- Overlay for opacity effect -->
     </div>
   </div>
@@ -176,13 +176,13 @@
   ></div>
 
   <!-- Decorative Circles -->
-  <div class="absolute top-0 left-0 w-full h-full opacity-10">
+  <div class=" flex-row absolute top-0 left-0 w-full h-full opacity-10">
     <div
       class="w-40 h-40 bg-[#FF4D6D] rounded-full absolute -top-20 -left-20"
     ></div>
-    <div
-      class="w-60 h-60 bg-[#FF4D6D] rounded-full absolute -bottom-40 -right-40"
-    ></div>
+    <div class="absolute w-30 h-50 rounded-l-full bg-[#ff002f] overflow-hidden -bottom-10 right-0">
+      <div class="w-full h-full rounded-t-full bg-[#FF4D6D]"></div>
+  </div>
   </div>
 
   <!-- Content Container -->
@@ -274,10 +274,11 @@
                 class="w-full h-full object-contain rounded-lg"
               />
               <div
-                class="absolute bottom-0 left-0 w-full bg-transparent text-2xl text-black p-4 text-center"
-              >
-                {{ slide.text }}
-              </div>
+              class="absolute bottom-0 left-0 w-full bg-black/40 text-2xl p-4 text-center"
+            >
+              <h1 class="text-gray-300 noto-serif-custom-1 font-medium">{{ slide.text }}</h1>
+            </div>
+
             </div>
           </div>
           <!-- Indicators -->
@@ -294,13 +295,13 @@
           </div>
           <!-- Controls -->
           <button
-            class="absolute top-1/2 left-0 -translate-y-1/2 p-2 bg-white/50 rounded-full"
+            class="absolute top-1/2 left-0 -translate-y-1/2 bg-white/50 rounded-full"
             (click)="prevSlide()"
           >
             <i class="bx bxs-left-arrow"></i>
           </button>
           <button
-            class="absolute top-1/2 right-0 -translate-y-1/2 p-2 bg-white/50 rounded-full"
+            class="absolute top-1/2 right-0 -translate-y-1/2  bg-white/50 rounded-full"
             (click)="nextSlide()"
           >
             <i class="bx bxs-right-arrow"></i>
@@ -311,13 +312,7 @@
   </div>
 </section>
 
-<a
-  href="/apply"
-  class="fixed z-50 right-16 top-1/2 transform -translate-y-1/2 translate-x-1/2 bg-gradient-to-r from-violet-600 to-violet-700 hover:from-violet-700 hover:to-blue-800 text-white font-bold py-2 px-6 rounded-l-full shadow-xl text-base uppercase tracking-wide animate-pulse border-2 border-white"
-  title="Apply Now"
->
-  Apply Now
-</a>
+
 <!-- Featured Colleges Section -->
 <!-- <div class="max-w-7xl mx-auto px-4 py-16">
   <h2 class="text-3xl font-bold text-center text-[#2D1044] mb-12">
@@ -348,7 +343,7 @@
 </div> -->
 
 <!-- CTA Section -->
-<!-- <div class="bg-gradient-to-r from-[#E6D6E8] to-[#F0EAF2] py-16">
+<div class="bg-gradient-to-r from-[#E6D6E8] to-[#F0EAF2] py-16">
   <div class="max-w-4xl mx-auto text-center px-4">
     <h2 class="text-3xl font-bold text-[#2D1044] mb-6">
       Start Your Educational Journey Today!
@@ -358,72 +353,9 @@
     </p>
 
   </div>
-</div> -->
+</div>
 
-<!-- <section
-    class="relative h-screen bg-cover bg-center text-white flex items-center justify-center"
-    style="
-      background-image: url('https://source.unsplash.com/1600x900/?university,campus');
-    "
-  >
-    <div class="text-center bg-black/50 p-8 rounded-lg">
-      <h1 class="text-5xl font-bold">Welcome to StudyInBengaluru.in</h1>
-      <p class="mt-4 text-lg">Bengaluru's Largest Portal for Admissions</p>
-      <a
-        href="#about"
-        class="mt-6 inline-block bg-yellow-400 text-black px-6 py-3 rounded-lg font-semibold shadow-md hover:bg-yellow-500 transition"
-        >Explore More</a
-      >
-    </div>
-  </section> -->
 
-<!-- Vision & Mission Section -->
-<!-- <section id="about" class="py-16 px-8 text-center">
-    <h2 class="text-4xl font-bold text-white">Our Vision & Mission</h2>
-    <p class="mt-4 text-lg text-gray-100 max-w-3xl mx-auto">
-      To establish Bengaluru as Asia's leading educational hub by providing
-      seamless admission services, career guidance, and building strong
-      partnerships with colleges and educational stakeholders.
-    </p>
-  </section> -->
 
-<!-- Key Offerings Section -->
-<!-- <section class="py-16">
-    <div class="container mx-auto px-6">
-      <h2 class="text-3xl font-bold text-center text-gray-100">
-        Key Offerings
-      </h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
-        <div class="bg-white p-6 shadow-lg rounded-lg text-center">
-          <img
-            src="https://source.unsplash.com/400x300/?career,counselling"
-            alt="Career Counselling"
-            class="w-full h-40 object-cover rounded-md"
-          />
-          <h3 class="mt-4 text-xl font-bold">Career Counselling</h3>
-        </div>
-        <div class="bg-white p-6 shadow-lg rounded-lg text-center">
-          <img
-            src="https://source.unsplash.com/400x300/?admission,college"
-            alt="Admission Program"
-            class="w-full h-40 object-cover rounded-md"
-          />
-          <h3 class="mt-4 text-xl font-bold">Admission Counsellor Program</h3>
-        </div>
-      </div>
-    </div>
-  </section> -->
 
-<!-- Call to Action -->
-<!-- <section class="bg-yellow-400 py-12 text-center text-black">
-    <h2 class="text-3xl font-bold">Ready to Start Your Journey?</h2>
-    <p class="mt-2 text-lg">
-      Join thousands of students choosing Bengaluru for their education.
-    </p>
-    <a
-      href="#"
-      class="mt-4 inline-block bg-black text-white px-6 py-3 rounded-lg font-semibold shadow-md hover:bg-gray-800 transition"
-      >Get Started</a
-    >
-  </section> -->
 <app-footer></app-footer>
