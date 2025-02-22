@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { CommonModule } from '@angular/common';
 import { STATES } from '../../../../shared/constants/states';
 import { UserService } from '../../../../core/services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-free-consultaion',
@@ -16,7 +17,7 @@ export class FreeConsultaionComponent {
   states = STATES;
   districts: string[] = [];
 
-  constructor(private fb: FormBuilder, private service: UserService) { }
+  constructor(private fb: FormBuilder, private service: UserService,private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.applyForm = this.fb.group({
@@ -47,19 +48,21 @@ export class FreeConsultaionComponent {
 
   submitForm(): void {
     if (this.applyForm.valid) {
-      this.service.freeCounsiling(this.applyForm.value).subscribe(
-        (response) => {
-          alert('Form submitted successfully!${response}',);
-          this.closeForm();
+      this.service.freeCounsiling(this.applyForm.value).subscribe({
+        next: (response) => {
+          this.toastr.success(`Form submitted successfully! Response: ${response}`, 'Success');
         },
-        (error) => {
-          alert('There was an error submitting the form.');
+        error: (error) => {
+          this.toastr.error('There was an error submitting the form.', 'Error');
+        },
+        complete: () => {
+          this.toastr.info('Form submission process completed.', 'Completed');
         }
-      );
-      alert('Form submitted successfully!');
+      });
       this.closeForm();
     } else {
       this.applyForm.markAllAsTouched();
+      this.toastr.warning('Please fill out the form correctly.', 'Validation Error');
     }
   }
 }
