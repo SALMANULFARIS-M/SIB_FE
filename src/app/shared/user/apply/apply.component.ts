@@ -51,14 +51,13 @@ applyForm!: FormGroup;
       this.service.apply(this.applyForm.value).subscribe(
         (response) => {
           alert('Form submitted successfully!${response}',);
-          this.closeForm();
+
         },
         (error) => {
           alert('There was an error submitting the form.');
         }
       );
       alert('Form submitted successfully!');
-      this.closeForm();
     } else {
       this.applyForm.markAllAsTouched();
     }

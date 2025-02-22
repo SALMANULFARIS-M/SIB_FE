@@ -6,26 +6,26 @@ import { UserService } from '../../../../core/services/user.service';
 
 @Component({
   selector: 'app-free-consultaion',
-  imports: [ReactiveFormsModule,CommonModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './free-consultaion.component.html',
   styleUrl: './free-consultaion.component.css'
 })
 export class FreeConsultaionComponent {
-applyForm!: FormGroup;
+  applyForm!: FormGroup;
   showForm = false;
   states = STATES;
   districts: string[] = [];
 
-  constructor(private fb: FormBuilder,private service:UserService) {}
+  constructor(private fb: FormBuilder, private service: UserService) { }
 
   ngOnInit(): void {
     this.applyForm = this.fb.group({
       name: ['', Validators.required],
+      course: ['', Validators.required],
       phone: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
       email: ['', [Validators.required, Validators.email]],
       state: ['', Validators.required],
       district: ['', Validators.required],
-      course: ['', Validators.required],
     });
   }
 
@@ -47,7 +47,7 @@ applyForm!: FormGroup;
 
   submitForm(): void {
     if (this.applyForm.valid) {
-      this.service.apply(this.applyForm.value).subscribe(
+      this.service.freeCounsiling(this.applyForm.value).subscribe(
         (response) => {
           alert('Form submitted successfully!${response}',);
           this.closeForm();

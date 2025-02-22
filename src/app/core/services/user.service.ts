@@ -7,11 +7,17 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-  private googleScriptUrl = 'https://script.google.com/macros/s/AKfycbyeZD-0FNAunDuOc9nicowQ2oebm--Yvb8HbBig83sC0S7L1rw0XYrw6q8YhgVu0z5J/exec';
+
   constructor(private http: HttpClient) { }
 
+
   apply(formData: any): Observable<any> {
-    return this.http.post(this.googleScriptUrl, JSON.stringify(formData), {
+    return this.http.post('http://localhost:5000/user/apply', JSON.stringify(formData), {
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+  freeCounsiling(formData: any): Observable<any> {
+    return this.http.post('http://localhost:5000/user/counceling', JSON.stringify(formData), {
       headers: { 'Content-Type': 'application/json' }
     });
   }

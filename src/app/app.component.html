@@ -1,14 +1,20 @@
+
+<ngx-spinner
+  type="square-jelly-box"
+  [bdColor]="'rgba(0, 0, 0, 0.8)'"
+  [color]="'#2D1044'"
+  [fullScreen]="true">
+</ngx-spinner>
+
+
 <router-outlet></router-outlet>
-<!-- Apply Now Button -->
-
-
 
 <!-- WhatsApp Floating Button -->
 <a
-  href="https://wa.me/9035514808"
   target="_blank"
-  class="fixed z-100 bottom-24 right-8 border-2 w-12 h-12  rounded-full drop-shadow-md bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-700 text-white text-3xl flex items-center justify-center animate-bounce"
+  class="fixed z-100 bottom-24 right-7 border-2 w-12 h-12  rounded-full drop-shadow-md bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-700 text-white text-3xl flex items-center justify-center animate-bounce"
   title="Chat on WhatsApp"
+  (click)="spinner.show()"
 >
   <i class='bx bxl-whatsapp'></i>
 </a>
@@ -22,3 +28,7 @@
 >
   <i class='bx bxs-chevrons-up bx-flashing'></i>
 </button>
+
+
+<button (click)="spinner.show()" class="flex fixed z-90 bottom-8 right-8 border-0 w-10 h-10 rounded drop-shadow-md bg-gradient-to-r from-pink-500 via-purple-500 to-pink-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-black dark:focus:ring-black  text-black text-3xl font-bold">Show Spinner</button>
+<button (click)="spinner.hide() "  class="flex fixed z-90 bottom-8 right-8 border-0 w-10 h-10 rounded drop-shadow-md bg-gradient-to-r from-pink-500 via-purple-500 to-pink-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-black dark:focus:ring-black  text-black text-3xl font-bold">Hide Spinner</button>
