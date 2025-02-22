@@ -16,9 +16,12 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(  public spinner: NgxSpinnerService,@Inject(PLATFORM_ID) private platformId: Object, private router: Router) { }
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
+      const initialSpinner = document.getElementById('initial-spinner');
+      if (initialSpinner) {
+        initialSpinner.style.display = 'none';
+      }
       this.spinner.show();
-      setTimeout(() => this.spinner.hide(), 3000);
-
+      setTimeout(() => this.spinner.hide(), 2000);
       // ✅ Only access the router in the browser
       this.router?.events.subscribe((event) => {
         if (event instanceof NavigationStart) {

@@ -6,7 +6,7 @@ import { provideClientHydration, withEventReplay } from '@angular/platform-brows
 import { authInterceptor } from './core/interceptors/auth.interceptor'
 import { HTTP_INTERCEPTORS, provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {  BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {NgxSpinnerModule  } from "ngx-spinner";
 
 export const appConfig: ApplicationConfig = {
@@ -17,7 +17,7 @@ export const appConfig: ApplicationConfig = {
   },
   provideHttpClient(withFetch(), // Enable Fetch API
   withInterceptors([authInterceptor])), // Apply interceptors), // Enable fetch API
-  importProvidersFrom(FontAwesomeModule,BrowserAnimationsModule,NgxSpinnerModule.forRoot()),
+  importProvidersFrom(FontAwesomeModule, BrowserAnimationsModule,NgxSpinnerModule.forRoot()),
   provideZoneChangeDetection({ eventCoalescing: true }),
   provideRouter(routes),
   provideHttpClient(
