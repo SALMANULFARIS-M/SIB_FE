@@ -74,30 +74,30 @@ export class HomeComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       this.setupIntersectionObserver(this.headerContainer.nativeElement, 'headerVisible');
-      this.setupIntersectionObserver(this.leftContent.nativeElement, 'leftContentVisible');
-      this.setupIntersectionObserver(this.rightImage.nativeElement, 'rightImageVisible');
+      // this.setupIntersectionObserver(this.leftContent.nativeElement, 'leftContentVisible');
+      // this.setupIntersectionObserver(this.rightImage.nativeElement, 'rightImageVisible');
       this.startAutoSlide();
     }
   }
 
-  setupIntersectionObserver(element: HTMLElement, animationState: 'headerVisible' | 'leftContentVisible' | 'rightImageVisible'): void {
+  setupIntersectionObserver(element: HTMLElement, animationState: 'headerVisible'): void {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            // Update the animation state property
-            this[animationState] = true; // TypeScript now knows this is a boolean property
-            observer.unobserve(entry.target); // Stop observing after animation
+            this[animationState] = true;
+            observer.unobserve(entry.target);
           }
         });
       },
       {
         root: null,
-        threshold: 0.2, // Trigger when 20% of the element is visible
-        rootMargin: '0px 0px -100px 0px' // Adjust as needed
+        threshold: 0.2,
+        rootMargin: '0px 0px -100px 0px'
       }
     );
 
     observer.observe(element);
   }
+
 }

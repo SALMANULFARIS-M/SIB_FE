@@ -20,8 +20,7 @@ export class AppComponent implements OnInit, OnDestroy {
       if (initialSpinner) {
         initialSpinner.style.display = 'none';
       }
-      this.spinner.show();
-      setTimeout(() => this.spinner.hide(), 2000);
+
       // ✅ Only access the router in the browser
       this.router?.events.subscribe((event) => {
         if (event instanceof NavigationStart) {

@@ -1,5 +1,5 @@
 // src/environments/environment.prod.ts
 export const environment = {
   production: true,
-  apiUrl: 'https://your-production-api-url/api', // Your backend API URL for production
+  apiUrl: 'https://sib-be.onrender.com', // Your backend API URL for production
 };

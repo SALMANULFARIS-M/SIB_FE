@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+// import { environment } from '../../../environments/environment.development';
+import { environment } from '../../../environments/environment';
 
 
 @Injectable({
@@ -9,15 +11,15 @@ import { Observable } from 'rxjs';
 export class UserService {
 
   constructor(private http: HttpClient) { }
-
+  private apiUrl = environment.apiUrl;
 
   apply(formData: any): Observable<any> {
-    return this.http.post('http://localhost:5000/user/apply', JSON.stringify(formData), {
+    return this.http.post(`${this.apiUrl}/user/apply`, JSON.stringify(formData), {
       headers: { 'Content-Type': 'application/json' }
     });
   }
   freeCounsiling(formData: any): Observable<any> {
-    return this.http.post('http://localhost:5000/user/counceling', JSON.stringify(formData), {
+    return this.http.post(`${this.apiUrl}/user/counceling`, JSON.stringify(formData), {
       headers: { 'Content-Type': 'application/json' }
     });
   }

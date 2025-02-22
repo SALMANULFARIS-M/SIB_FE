@@ -8,11 +8,12 @@ export const fadeIn = trigger('fadeIn', [
 ]);
 
 export const slideInFromLeft = trigger('slideInFromLeft', [
-  transition(':enter', [
+  transition('out => in', [  // <-- Define state transition
     style({ transform: 'translateX(-100%)', opacity: 0 }),
     animate('0.8s ease-out', style({ transform: 'translateX(0)', opacity: 1 }))
-  ])
+  ]),
 ]);
+
 
 export const slideInFromRight = trigger('slideInFromRight', [
   transition(':enter', [
