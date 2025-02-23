@@ -11,7 +11,7 @@ import { environment } from '../../../environments/environment.development';
 export class UserService {
 
   constructor(private http: HttpClient) { }
-  private apiUrl = environment.apiUrl;
+  private apiUrl ='http://localhost:5000';
 
   apply(formData: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/user/apply`, JSON.stringify(formData), {
@@ -20,6 +20,11 @@ export class UserService {
   }
   freeCounsiling(formData: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/user/counceling`, JSON.stringify(formData), {
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+  sendContactForm(formData: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/user/contact`, JSON.stringify(formData), {
       headers: { 'Content-Type': 'application/json' }
     });
   }

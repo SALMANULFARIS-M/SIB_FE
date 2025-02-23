@@ -3,34 +3,6 @@
 @import 'ngx-toastr/toastr';
 
 
-.noto-serif-custom-1 {
-  font-family: "Noto Serif", serif;
-  font-optical-sizing: auto;
-  font-weight: 900;
-  font-style: normal;
-  font-variation-settings:
-    "wdth" 100;
-}
-
-
-.atkinson-hyperlegible-next-custom-2 {
-  font-family: "Atkinson Hyperlegible Next", serif;
-  font-optical-sizing: auto;
-  font-weight: 900;
-  font-style: normal;
-}
-
-.merienda-custom-3 {
-  font-family: "Merienda", serif;
-  font-optical-sizing: auto;
-  font-weight: 500;
-  font-style: normal;
-}
-.aldrich-regular {
-  font-family: "Aldrich", serif;
-  font-weight: 400;
-  font-style: normal;
-}
 /* src/styles.css */
 .lds-square-jelly-box {
   width: 80px;
@@ -49,3 +21,8 @@
     opacity: 0.7;
   }
 }
+
+
+
+
+

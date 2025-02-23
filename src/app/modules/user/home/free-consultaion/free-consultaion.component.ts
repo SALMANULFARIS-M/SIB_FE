@@ -50,13 +50,12 @@ export class FreeConsultaionComponent {
     if (this.applyForm.valid) {
       this.service.freeCounsiling(this.applyForm.value).subscribe({
         next: (response) => {
-          this.toastr.success(`Form submitted successfully! Response: ${response}`, 'Success');
+          if (response.success) {
+            this.toastr.success(`Form submitted successfully!`, 'Success');
+          }
         },
         error: (error) => {
           this.toastr.error('There was an error submitting the form.', 'Error');
-        },
-        complete: () => {
-          this.toastr.info('Form submission process completed.', 'Completed');
         }
       });
       this.closeForm();
