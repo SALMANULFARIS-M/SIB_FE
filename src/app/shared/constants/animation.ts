@@ -14,13 +14,13 @@ export const slideInFromLeft = trigger('slideInFromLeft', [
   ]),
 ]);
 
-
 export const slideInFromRight = trigger('slideInFromRight', [
   transition(':enter', [
     style({ transform: 'translateX(100%)', opacity: 0 }),
     animate('0.8s ease-out', style({ transform: 'translateX(0)', opacity: 1 }))
   ])
 ]);
+
 export const staggerFadeIn = trigger('staggerFadeIn', [
   transition(':enter', [
     query('p', [
