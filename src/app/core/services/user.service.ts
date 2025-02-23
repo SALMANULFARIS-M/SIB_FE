@@ -11,7 +11,7 @@ import { environment } from '../../../environments/environment.development';
 export class UserService {
 
   constructor(private http: HttpClient) { }
-  private apiUrl ='http://localhost:5000';
+  private apiUrl =environment.apiUrl;
 
   apply(formData: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/user/apply`, JSON.stringify(formData), {

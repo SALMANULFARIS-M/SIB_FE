@@ -1,23 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, HostBinding, Inject, PLATFORM_ID } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { STATES } from '../../../../shared/constants/states';
 import { UserService } from '../../../../core/services/user.service';
 import { ToastrService } from 'ngx-toastr';
+import { slideInFromRight } from '../../../../shared/constants/animation';
 
 @Component({
   selector: 'app-free-consultaion',
   imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './free-consultaion.component.html',
-  styleUrl: './free-consultaion.component.css'
+  styleUrl: './free-consultaion.component.css',
+  animations: [slideInFromRight]
 })
 export class FreeConsultaionComponent {
   applyForm!: FormGroup;
   showForm = false;
   states = STATES;
   districts: string[] = [];
+  @HostBinding('@slideInFromRight') get slideIn() {
+    return true; // 🔥 Only trigger when visible
+  }
+  private observer!: IntersectionObserver;
+  isVisible = false;
 
-  constructor(private fb: FormBuilder, private service: UserService,private toastr: ToastrService) { }
+  constructor(@Inject(PLATFORM_ID) private platformId: Object,private fb: FormBuilder, private service: UserService,private toastr: ToastrService,private el: ElementRef) { }
 
   ngOnInit(): void {
     this.applyForm = this.fb.group({
@@ -28,6 +35,20 @@ export class FreeConsultaionComponent {
       state: ['', Validators.required],
       district: ['', Validators.required],
     });
+
+    if (isPlatformBrowser(this.platformId) && 'IntersectionObserver' in window) {
+
+      this.observer = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+console.log("dsf");
+
+          this.isVisible = true;
+          this.observer.disconnect();
+        }
+      }, { threshold: 0.5 });
+
+      this.observer.observe(this.el.nativeElement);
+    }
   }
 
   openForm(): void {

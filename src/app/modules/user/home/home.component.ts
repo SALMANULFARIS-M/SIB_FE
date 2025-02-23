@@ -1,21 +1,22 @@
-import { AfterViewInit, Component, ElementRef, Inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { NavComponent } from "../../../shared/user/nav/nav.component";
 import { FooterComponent } from "../../../shared/user/footer/footer.component";
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { faUniversity, faSchool, faBookOpen, faGlobe, faBriefcase, faLaptop, faHome, faBuilding, faCalendarAlt, faComments } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ApplyComponent } from '../../../shared/user/apply/apply.component';
 import { FreeConsultaionComponent } from './free-consultaion/free-consultaion.component';
 import { fadeIn, slideInFromLeft, slideInFromRight, staggerFadeIn, zoomIn } from '../../../shared/constants/animation';
+import { faUniversity, faSchool, faBookOpen, faGlobe, faBriefcase, faLaptop, faHome, faBuilding, faCalendarAlt, faComments } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-home',
+  standalone: true,
   imports: [CommonModule, NavComponent, FooterComponent, FontAwesomeModule, ApplyComponent, FreeConsultaionComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   animations: [fadeIn, slideInFromLeft, slideInFromRight, staggerFadeIn, zoomIn]
 })
-export class HomeComponent implements OnInit, AfterViewInit {
+export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('headerContainer') headerContainer!: ElementRef;
   @ViewChild('leftContent') leftContent!: ElementRef;
   @ViewChild('rightImage') rightImage!: ElementRef;
@@ -27,6 +28,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   intervalId: any;
   currentSlide = 0;
+
   opportunities = [
     { label: 'Universities', icon: faUniversity },
     { label: 'Colleges', icon: faSchool },
@@ -39,15 +41,16 @@ export class HomeComponent implements OnInit, AfterViewInit {
     { label: '1-on-1 Free Counselling', icon: faComments },
     { label: 'Internships', icon: faBuilding }
   ];
+
   slides = [
     { image: '/img_1.JPG', text: 'With Chairman of Ique Ventures', alt: 'Slide 1' },
     { image: '/img_2.JPG', text: 'Founder of Study In Bengaluru', alt: 'Slide 2' },
     { image: '/img_3.JPG', text: 'Receiving Award for best admission consultants', alt: 'Slide 3' },
   ];
 
-  constructor(@Inject(PLATFORM_ID) private platformId: any) { }
+  constructor(@Inject(PLATFORM_ID) private platformId: any) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   ngOnDestroy(): void {
     clearInterval(this.intervalId);
@@ -73,14 +76,18 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {
-      this.setupIntersectionObserver(this.headerContainer.nativeElement, 'headerVisible');
-      // this.setupIntersectionObserver(this.leftContent.nativeElement, 'leftContentVisible');
-      // this.setupIntersectionObserver(this.rightImage.nativeElement, 'rightImageVisible');
+      this.initializeObservers();
       this.startAutoSlide();
     }
   }
 
-  setupIntersectionObserver(element: HTMLElement, animationState: 'headerVisible'): void {
+  initializeObservers(): void {
+    this.setupIntersectionObserver(this.headerContainer.nativeElement, 'headerVisible');
+    this.setupIntersectionObserver(this.leftContent.nativeElement, 'leftContentVisible');
+    this.setupIntersectionObserver(this.rightImage.nativeElement, 'rightImageVisible');
+  }
+
+  setupIntersectionObserver(element: HTMLElement, animationState: 'headerVisible' | 'leftContentVisible' | 'rightImageVisible'): void {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -92,12 +99,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
       },
       {
         root: null,
-        threshold: 0.2,
+        threshold: 0.4, // Adjust this as needed
         rootMargin: '0px 0px -100px 0px'
       }
     );
 
     observer.observe(element);
   }
-
 }
