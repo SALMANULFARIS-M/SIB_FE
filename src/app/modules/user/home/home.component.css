@@ -56,3 +56,27 @@ color: aliceblue;
   transform: translateY(0);
 }
 
+
+
+/* Left Content Hover Effect */
+.left-content:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transform: scale(1.02);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Right Image Hover Effect */
+.right-image:hover img {
+  transform: scale(1.1);
+  transition: transform 0.5s ease;
+}
+
+.right-image:hover .overlay {
+  opacity: 0.8;
+  transition: opacity 0.5s ease;
+}
+
+.right-image:hover .text {
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}

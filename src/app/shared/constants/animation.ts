@@ -1,40 +1,56 @@
-import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
-
-export const fadeIn = trigger('fadeIn', [
-  transition(':enter', [
-    style({ opacity: 0 }),
-    animate('1s ease-in', style({ opacity: 1 }))
-  ])
-]);
+import { trigger, state, style, transition, animate, query, stagger } from '@angular/animations';
 
 export const slideInFromLeft = trigger('slideInFromLeft', [
-  transition('out => in', [  // <-- Define state transition
-    style({ transform: 'translateX(-100%)', opacity: 0 }),
-    animate('0.8s ease-out', style({ transform: 'translateX(0)', opacity: 1 }))
-  ]),
+  state('out', style({ opacity: 0, transform: 'translateX(-100%)' })),
+  state('in', style({ opacity: 1, transform: 'translateX(0)' })),
+  transition('out => in', animate('0.8s ease-out')),
 ]);
 
+
 export const slideInFromRight = trigger('slideInFromRight', [
-  transition(':enter', [
-    style({ transform: 'translateX(100%)', opacity: 0 }),
-    animate('0.8s ease-out', style({ transform: 'translateX(0)', opacity: 1 }))
-  ])
+  state('out', style({ opacity: 0, transform: 'translateX(100%)' })),
+  state('in', style({ opacity: 1, transform: 'translateX(0)' })),
+  transition('out => in', animate('0.8s ease-out')),
 ]);
 
 export const staggerFadeIn = trigger('staggerFadeIn', [
-  transition(':enter', [
-    query('p', [
+  state('out', style({ opacity: 0 })),
+  state('in', style({ opacity: 1 })),
+  transition('out => in', [
+    query('.stagger-item', [
       style({ opacity: 0, transform: 'translateY(20px)' }),
-      stagger('0.2s', [
+      stagger('200ms', [
         animate('0.8s ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
       ])
-    ])
+    ], { optional: true })
   ])
 ]);
 
 export const zoomIn = trigger('zoomIn', [
-  transition(':enter', [
-    style({ transform: 'scale(0.8)', opacity: 0 }),
-    animate('0.8s ease-out', style({ transform: 'scale(1)', opacity: 1 }))
+  state('out', style({ opacity: 0, transform: 'scale(0.8)' })),
+  state('in', style({ opacity: 1, transform: 'scale(1)' })),
+  transition('out => in', animate('0.8s ease-out')),
+]);
+
+export const fadeIn = trigger('fadeIn', [
+  state('hidden', style({ opacity: 0 })),
+  state('visible', style({ opacity: 1 })),
+  transition('hidden => visible', animate('0.8s ease-out')),
+]);
+
+export const slideUp = trigger('slideUp', [
+  state('hidden', style({ opacity: 0, transform: 'translateY(20px)' })),
+  state('visible', style({ opacity: 1, transform: 'translateY(0)' })),
+  transition('hidden => visible', animate('0.8s ease-out')),
+]);
+export const listAnimation = trigger('listAnimation', [
+  state('hidden', style({ opacity: 0, transform: 'translateY(-30px)' })), // Initial state
+  state('visible', style({ opacity: 1, transform: 'translateY(0)' })), // Final state
+  transition('hidden => visible', [
+    query('.grid-item', [
+      stagger('200ms', [ // Stagger delay between each item
+        animate('0.8s cubic-bezier(0.25, 1, 0.5, 1)') // Animate opacity and translateY
+      ])
+    ], { optional: true })
   ])
 ]);

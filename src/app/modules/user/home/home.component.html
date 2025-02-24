@@ -20,19 +20,18 @@
       <div class="absolute inset-0 bg-black opacity-55"></div>
     </div>
   </div>
-  <div
-    #headerContainer
-    class="my-element space-y-4 z-10 py-4 rounded-2xl w-[60vw]"
-    [@fadeIn]="headerVisible ? 'in' : 'out'"
-  >
+  <div class="my-element space-y-4 z-10 py-4 rounded-2xl w-[60vw]">
     <h3
       #secondHeading
-      class="text-[#F0EAF2] noto-serif-custom-1 md:text-5xl font-extrabold"
+      class="text-[#F0EAF2] md:text-5xl font-extrabold mb-5"
       [@slideInFromLeft]="headerVisible ? 'in' : 'out'"
     >
       Study in India's Silicon Valley
     </h3>
+
     <app-free-consultaion
+      #freeConsultation
+      [@slideInFromRight]="headerVisible ? 'in' : 'out'"
     ></app-free-consultaion>
   </div>
 </section>
@@ -44,17 +43,18 @@
       <!-- Left Content -->
       <div
         #leftContent
+        [@staggerFadeIn]="leftContentVisible ? 'in' : 'out'"
         class="md:w-1/2 bg-gradient-to-r from-[#E6D6E8] to-[#F0EAF2] p-8 rounded-2xl shadow-2xl hover:shadow-3xl transition-shadow duration-300"
-        [@staggerFadeIn]="leftContentVisible"
       >
         <p
           class="text-[#2D1044] font-sans text-xl mb-6 leading-relaxed whitespace-normal text-justify"
         >
-          StudyInBengaluru.in is Bengaluru's largest portal for admissions, with
-          the vision of making the city the educational hub of Asia. The focus
-          is on building trust and credibility, increasing brand awareness, and
-          attracting students from across India and abroad, alongside strategic
-          college tie-ups, franchise sales, and user engagement.
+          StudyInBengaluru.com is Bengaluru's largest portal for admissions,
+          with the vision of making the city the educational hub of Asia. The
+          focus is on building trust and credibility, increasing brand
+          awareness, and attracting students from across India and abroad,
+          alongside strategic college tie-ups, franchise sales, and user
+          engagement.
         </p>
         <p
           class="text-[#554067] font-serif text-justify text-lg font-semibold mt-6"
@@ -67,8 +67,8 @@
       <!-- Right Image -->
       <div
         #rightImage
+        [@zoomIn]="rightImageVisible ? 'in' : 'out'"
         class="md:w-1/2 relative overflow-hidden rounded-2xl shadow-2xl group"
-        [@zoomIn]="rightImageVisible"
       >
         <img
           src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
@@ -90,61 +90,27 @@
   </div>
 </section>
 
-
 <!-- Stats Section -->
 <section>
   <div
+    #countUp
     class="text-white py-16 bg-gradient-to-r from-gray-100 via-gray-300 to-gray-100"
-    #headerContainer
   >
     <div
-      class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8 text-center"
+      class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-5 gap-8 text-center"
     >
-      <div class="p-4">
+      <div class="p-4" *ngFor="let stat of stats; let i = index">
         <div
           class="text-4xl font-bold mb-2 countup text-[#FF4D6D]"
-          #countup
-          data-value="100"
+          [@fadeIn]="counterVisible[i] ? 'visible' : 'hidden'"
         >
-          +
+          {{ currentValues[i] }}{{ stat.prefix }}
         </div>
-        <div class="text-[#2D1044] desc-text font-bold font-serif" #descText>
-          Partner Colleges
-        </div>
-      </div>
-      <div class="p-4">
         <div
-          class="text-4xl font-bold mb-2 countup text-[#FF4D6D]"
-          #countup
-          data-value="1000"
+          class="text-[#2D1044] desc-text font-bold font-serif"
+          [@slideUp]="counterVisible[i] ? 'visible' : 'hidden'"
         >
-          +
-        </div>
-        <div class="text-[#2D1044] desc-text font-bold font-serif" #descText>
-          Students Enrolled
-        </div>
-      </div>
-      <div class="p-4">
-        <div
-          class="text-4xl font-bold mb-2 countup text-[#FF4D6D]"
-          #countup
-          data-value="95"
-        >
-          %
-        </div>
-        <div class="text-[#2D1044] desc-text font-bold font-serif" #descText>
-          Admission Success
-        </div>
-      </div>
-      <div class="p-4">
-        <div
-          class="text-4xl font-bold mb-2 text-[#FF4D6D] special-text"
-          #specialText
-        >
-          24/7
-        </div>
-        <div class="text-[#2D1044] desc-text font-bold font-serif" #descText>
-          Student Support
+          {{ stat.label }}
         </div>
       </div>
     </div>
@@ -158,8 +124,9 @@
       Explore Opportunities
     </h2>
     <div
-      class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 w-full max-w-full px-4"
       #gridContainer
+      [@listAnimation]="opportunityVisible? 'visible' : 'hidden'"
+      class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 w-full max-w-full px-4"
     >
       <div
         class="grid-item bg-[#E6D6E8] shadow-lg w-full rounded-2xl flex flex-col items-center justify-center min-h-[100px]"
