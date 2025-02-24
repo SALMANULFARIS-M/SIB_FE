@@ -11,7 +11,9 @@ export const slideInFromRight = trigger('slideInFromRight', [
   state('out', style({ opacity: 0, transform: 'translateX(100%)' })),
   state('in', style({ opacity: 1, transform: 'translateX(0)' })),
   transition('out => in', animate('0.8s ease-out')),
+
 ]);
+
 
 export const staggerFadeIn = trigger('staggerFadeIn', [
   state('out', style({ opacity: 0 })),

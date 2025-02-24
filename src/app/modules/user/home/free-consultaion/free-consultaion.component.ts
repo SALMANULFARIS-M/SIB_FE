@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, Input, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { STATES } from '../../../../shared/constants/states';
@@ -19,8 +19,7 @@ export class FreeConsultaionComponent implements OnInit, AfterViewInit {
   states = STATES;
   districts: string[] = [];
   @ViewChild('consultationContainer') consultationContainer!: ElementRef;
-  isVisible: boolean = false;
-
+  @Input() headerVisible: boolean = false;
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object, private fb: FormBuilder, private service: UserService, private toastr: ToastrService, private el: ElementRef) { }
 
@@ -36,29 +35,29 @@ export class FreeConsultaionComponent implements OnInit, AfterViewInit {
 
   }
   ngAfterViewInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      this.setupIntersectionObserver();
-    }
+    // if (isPlatformBrowser(this.platformId)) {
+    //   this.setupIntersectionObserver();
+    // }
   }
-  setupIntersectionObserver(): void {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            this.isVisible = true;
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      {
-        root: null,
-        threshold: 0.4,
-        rootMargin: '0px 0px -100px 0px',
-      }
-    );
+  // setupIntersectionObserver(): void {
+  //   const observer = new IntersectionObserver(
+  //     (entries) => {
+  //       entries.forEach((entry) => {
+  //         if (entry.isIntersecting) {
+  //           this.isVisible = true;
+  //           observer.unobserve(entry.target);
+  //         }
+  //       });
+  //     },
+  //     {
+  //       root: null,
+  //       threshold: 0.4,
+  //       rootMargin: '0px 0px -100px 0px',
+  //     }
+  //   );
 
-    observer.observe(this.consultationContainer.nativeElement);
-  }
+  //   observer.observe(this.consultationContainer.nativeElement);
+  // }
   openForm(): void {
     this.showForm = true;
   }
