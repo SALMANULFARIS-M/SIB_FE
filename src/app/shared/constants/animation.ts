@@ -56,3 +56,39 @@ export const listAnimation = trigger('listAnimation', [
     ], { optional: true })
   ])
 ]);
+
+export const fadeInSequential = trigger('fadeInSequential', [
+  state('in', style({ opacity: 1, transform: 'translateY(0)' })),
+  state('out', style({ opacity: 0, transform: 'translateY(20px)' })),
+  transition('out => in', animate('0.5s ease-out')),
+])
+
+
+
+
+// FadeInUp with proper states
+export const fadeInUp = trigger('fadeInUp', [
+  state('in', style({ opacity: 1, transform: 'translateY(0)' })),
+  state('out', style({ opacity: 0, transform: 'translateY(50px)' })),
+  transition('out => in', animate('800ms ease-out')),
+  transition('in => out', animate('500ms ease-in')),
+  // Keep the original :enter transition for compatibility
+  transition(':enter', [
+    style({ opacity: 0, transform: 'translateY(50px)' }),
+    animate('800ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+  ])
+]);
+
+// ScaleUp with proper states
+export const scaleUp = trigger('scaleUp', [
+  state('in', style({ opacity: 1, transform: 'scale(1)' })),
+  state('out', style({ opacity: 0, transform: 'scale(0.9)' })),
+  transition('out => in', animate('600ms ease-out')),
+  transition('in => out', animate('400ms ease-in')),
+  // Keep the original :enter transition for compatibility
+  transition(':enter', [
+    style({ opacity: 0, transform: 'scale(0.9)' }),
+    animate('600ms ease-out', style({ opacity: 1, transform: 'scale(1)' }))
+  ])
+]);
+

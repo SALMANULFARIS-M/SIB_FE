@@ -59,16 +59,43 @@ a.active span {
   }
 }
 
-.border-animation {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border: 2px solid rgb(255, 255, 255); /* Use your theme color */
-  border-radius: 8px;
-  animation: moveBorder 2s linear infinite;
+@keyframes border-light-horizontal {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(calc(100vw)); }
 }
-/* Border animation when scrolled */
-.scrolled .border-animation {
-  border: 2px solid rgb(0, 0, 0); /* Change border color to white */
+
+@keyframes border-light-vertical {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(calc(100vh)); }
 }
+
+@keyframes border-light-horizontal-reverse {
+  0% { transform: translateX(calc(100vw)); }
+  100% { transform: translateX(-100%); }
+}
+
+@keyframes border-light-vertical-reverse {
+  0% { transform: translateY(calc(100vh)); }
+  100% { transform: translateY(-100%); }
+}
+
+.animate-border-light-horizontal {
+  animation: border-light-horizontal 4s linear infinite;
+}
+
+.animate-border-light-vertical {
+  animation: border-light-vertical 4s linear infinite;
+  animation-delay: 1s;
+}
+
+.animate-border-light-horizontal-reverse {
+  animation: border-light-horizontal-reverse 4s linear infinite;
+  animation-delay: 2s;
+}
+
+.animate-border-light-vertical-reverse {
+  animation: border-light-vertical-reverse 4s linear infinite;
+  animation-delay: 3s;
+}
+
 

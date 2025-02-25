@@ -5,7 +5,7 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ApplyComponent } from '../../../shared/user/apply/apply.component';
 import { FreeConsultaionComponent } from './free-consultaion/free-consultaion.component';
-import { fadeIn, listAnimation, slideInFromLeft, slideInFromRight, slideUp, staggerFadeIn, zoomIn } from '../../../shared/constants/animation';
+import {  fadeIn,  fadeInSequential,  fadeInUp,  listAnimation, scaleUp, slideInFromLeft, slideInFromRight, slideUp, staggerFadeIn, zoomIn } from '../../../shared/constants/animation';
 import { faUniversity, faSchool, faBookOpen, faGlobe, faBriefcase, faLaptop, faHome, faBuilding, faCalendarAlt, faComments } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -14,7 +14,7 @@ import { faUniversity, faSchool, faBookOpen, faGlobe, faBriefcase, faLaptop, faH
   imports: [CommonModule, NavComponent, FooterComponent, FontAwesomeModule, ApplyComponent, FreeConsultaionComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  animations: [fadeIn, slideInFromLeft, slideInFromRight, staggerFadeIn, zoomIn, slideUp, listAnimation]
+  animations: [fadeIn, slideInFromLeft,fadeInUp,scaleUp, slideInFromRight, staggerFadeIn, zoomIn, slideUp, listAnimation,fadeInSequential]
 })
 
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
@@ -23,18 +23,29 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('leftContent', { static: false }) leftContent!: ElementRef;
   @ViewChild('rightImage', { static: false }) rightImage!: ElementRef;
   @ViewChild('countUp', { static: false }) countUp!: ElementRef;
-  @ViewChild('gridContainer', { static: false }) gridContainer!: ElementRef;
+  @ViewChild('opportunitySection', { static: false }) opportunitySection!: ElementRef;
+  @ViewChild('vissionAndMiissson') vissionAndMiissson!: ElementRef;
+  @ViewChild('rightCarousel') rightCarousel!: ElementRef;
+  @ViewChild('journey') journey!: ElementRef;
+
 
 
   // Animation state properties
   headerVisible = false;
   rightImageVisible = false;
   leftContentVisible = false;
-  opportunityVisible = false;
   counterVisible: boolean[] = []; // Initialize as boolean array
   currentValues: number[] = [];
+  opportunityVisible: boolean[] = [];
   intervalId: any;
   currentSlide = 0;
+  isVisionFlipped = false;
+  isMissionFlipped = false;
+  cardVisible = false
+  leftVisible = false;
+  rightVisible = false;
+  journeyVisible = false;
+
   stats = [
     { value: 100, label: 'Partner Colleges', prefix: '+' },
     { value: 1000, label: 'Students Enrolled', prefix: '+' },
@@ -73,28 +84,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     // Initialize counterVisible and currentValues arrays
     this.counterVisible = new Array(this.stats.length).fill(false);
     this.currentValues = new Array(this.stats.length).fill(0);
-  }
-
-  ngOnDestroy(): void {
-    clearInterval(this.intervalId);
-  }
-
-  startAutoSlide(): void {
-    this.intervalId = setInterval(() => {
-      this.nextSlide();
-    }, 2000);
-  }
-
-  nextSlide(): void {
-    this.currentSlide = (this.currentSlide + 1) % this.slides.length;
-  }
-
-  prevSlide(): void {
-    this.currentSlide = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
-  }
-
-  goToSlide(index: number): void {
-    this.currentSlide = index;
+    this.opportunityVisible = new Array(this.opportunities.length).fill(false);
   }
 
   ngAfterViewInit(): void {
@@ -114,12 +104,25 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         }
         if (this.countUp?.nativeElement) {
           this.setupIntersectionObserver(this.countUp.nativeElement, 'countupSectionVisible');
+        } if (this.opportunitySection?.nativeElement) {
+          this.setupIntersectionObserver(this.opportunitySection.nativeElement, 'opportunityVisible');
         }
-        if (this.gridContainer?.nativeElement) {
-          this.setupIntersectionObserver(this.gridContainer.nativeElement, 'opportunityVisible');
+        if (this.leftContent?.nativeElement) {
+          this.setupIntersectionObserver(this.leftContent.nativeElement, 'leftContentVisible');
+        }
+        if (this.rightImage?.nativeElement) {
+          this.setupIntersectionObserver(this.rightImage.nativeElement, 'rightImageVisible');
+        }
+        if (this.vissionAndMiissson?.nativeElement) {
+          this.setupIntersectionObserver(this.vissionAndMiissson.nativeElement, 'leftVisible');
+        }
+        if (this.rightCarousel?.nativeElement) {
+          this.setupIntersectionObserver(this.rightCarousel?.nativeElement, 'rightVisible');
+        }
+        if (this.journey?.nativeElement) {
+          this.setupIntersectionObserver(this.journey?.nativeElement, 'journeyVisible');
         }
       }, 500);
-
       this.startAutoSlide();
     }
   }
@@ -132,10 +135,10 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
             if (animationState === 'countupSectionVisible') {
               this.counterVisible.fill(true);
               this.stats.forEach((_, statIndex) => this.animateCounter(statIndex));
+            } else if (animationState === 'opportunityVisible') {
+              this.animateOpportunities();
             } else {
               (this as any)[animationState] = true;
-              console.log('opportunityVisible:', animationState, this.opportunityVisible);
-
             }
             observer.unobserve(entry.target);
           }
@@ -171,6 +174,42 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       this.currentValues[index] = this.stats[index].value as unknown as number;
     }
   }
+  animateOpportunities(): void {
+    this.opportunities.forEach((_, index) => {
+      setTimeout(() => {
+        this.opportunityVisible[index] = true;
+      }, index * 200);
+    });
+  }
+  ngOnDestroy(): void {
+    clearInterval(this.intervalId);
+  }
+
+  startAutoSlide(): void {
+    this.intervalId = setInterval(() => {
+      this.nextSlide();
+    }, 2000);
+  }
+
+  nextSlide(): void {
+    this.currentSlide = (this.currentSlide + 1) % this.slides.length;
+  }
+
+  prevSlide(): void {
+    this.currentSlide = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
+  }
+
+  goToSlide(index: number): void {
+    this.currentSlide = index;
+  }
+  toggleFlip(section: string): void {
+    if (section === 'vision') {
+      this.isVisionFlipped = !this.isVisionFlipped;
+    } else if (section === 'mission') {
+      this.isMissionFlipped = !this.isMissionFlipped;
+    }
+  }
+
 
 }
 

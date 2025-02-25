@@ -18,9 +18,7 @@ export class FreeConsultaionComponent implements OnInit, AfterViewInit {
   showForm = false;
   states = STATES;
   districts: string[] = [];
-  @ViewChild('consultationContainer') consultationContainer!: ElementRef;
-  @Input() headerVisible: boolean = false;
-
+ @Input() visible = false; // Control animation from parent
   constructor(@Inject(PLATFORM_ID) private platformId: Object, private fb: FormBuilder, private service: UserService, private toastr: ToastrService, private el: ElementRef) { }
 
   ngOnInit(): void {
@@ -32,6 +30,11 @@ export class FreeConsultaionComponent implements OnInit, AfterViewInit {
       state: ['', Validators.required],
       district: ['', Validators.required],
     });
+  // Example: Trigger the animation after a delay
+   // Ensure animation runs when visible is true
+   setTimeout(() => {
+    this.visible = true;
+  }, 200);
 
   }
   ngAfterViewInit(): void {
