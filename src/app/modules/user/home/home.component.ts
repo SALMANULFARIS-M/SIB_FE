@@ -5,8 +5,10 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ApplyComponent } from '../../../shared/user/apply/apply.component';
 import { FreeConsultaionComponent } from './free-consultaion/free-consultaion.component';
-import {  fadeIn,  fadeInSequential,  fadeInUp,  listAnimation, scaleUp, slideInFromLeft, slideInFromRight, slideUp, staggerFadeIn, zoomIn } from '../../../shared/constants/animation';
+import { fadeIn, fadeInSequential, fadeInUp, listAnimation, scaleUp, slideInFromLeft, slideInFromRight, slideUp, staggerFadeIn, zoomIn } from '../../../shared/constants/animation';
 import { faUniversity, faSchool, faBookOpen, faGlobe, faBriefcase, faLaptop, faHome, faBuilding, faCalendarAlt, faComments } from '@fortawesome/free-solid-svg-icons';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +16,7 @@ import { faUniversity, faSchool, faBookOpen, faGlobe, faBriefcase, faLaptop, faH
   imports: [CommonModule, NavComponent, FooterComponent, FontAwesomeModule, ApplyComponent, FreeConsultaionComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  animations: [fadeIn, slideInFromLeft,fadeInUp,scaleUp, slideInFromRight, staggerFadeIn, zoomIn, slideUp, listAnimation,fadeInSequential]
+  animations: [fadeIn, slideInFromLeft, fadeInUp, scaleUp, slideInFromRight, staggerFadeIn, zoomIn, slideUp, listAnimation, fadeInSequential]
 })
 
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
@@ -73,7 +75,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     { image: '/img_3.JPG', text: 'Receiving Award for best admission consultants', alt: 'Slide 3' },
   ];
 
-  constructor(@Inject(PLATFORM_ID) private platformId: any) { }
+  constructor(@Inject(PLATFORM_ID) private platformId: any,private router:Router) { }
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
@@ -81,6 +83,12 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         console.log('Scroll event triggered');
       });
     }
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event: any) => {
+        // Check if URL is '/apply'
+
+      });
     // Initialize counterVisible and currentValues arrays
     this.counterVisible = new Array(this.stats.length).fill(false);
     this.currentValues = new Array(this.stats.length).fill(0);

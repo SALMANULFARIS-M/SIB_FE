@@ -16,16 +16,16 @@
         <source src="/herovideo.mp4" type="video/mp4" />
       </video>
       <div
-        class="absolute inset-0 bg-gradient-to-b from-[#2D1044]/50 to-black/50"
+        class="absolute inset-0 bg-gradient-to-b from-[#2D1044]/30 to-black/40"
       ></div>
     </div>
   </div>
   <div
-    class="my-element space-y-4 z-10 py-8 px-6 rounded-2xl w-[60vw] bg-[#33154b]/30 backdrop-blur-md border border-purple-500/20 shadow-lg"
+    class="my-element  z-10 py-8 px-4 sm:px-6 lg:px-8 rounded-2xl w-[90vw] sm:w-[70vw] md:w-[60vw] max-w-4xl mx-auto bg-[#33154b]/30  border border-purple-500/20 shadow-lg"
   >
     <h3
       #secondHeading
-      class="text-[#d5a1ff] md:text-5xl font-playfair font-medium mb-5 drop-shadow-lg"
+      class="text-[#efdbff] text-3xl sm:text-4xl md:text-5xl merriweather-regular mb-5 drop-shadow-lg"
       [@slideInFromLeft]="headerVisible ? 'in' : 'out'"
     >
       Study in India's Silicon Valley
@@ -46,7 +46,7 @@
         class="md:w-1/2 bg-gradient-to-r from-[#E6D6E8] to-[#F0EAF2] p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 border border-purple-300/20"
       >
         <p
-          class="text-[#2D1044] font-sans text-xl mb-6 leading-relaxed whitespace-normal text-justify"
+          class="text-[#2D1044] poppins-regular text-xl mb-6 leading-relaxed whitespace-normal text-justify"
         >
           StudyInBengaluru.com is Bengaluru's largest portal for admissions,
           with the vision of making the city the educational hub of Asia. The
@@ -56,7 +56,7 @@
           engagement.
         </p>
         <p
-          class="text-[#554067] font-serif text-justify text-lg font-semibold mt-6 italic"
+          class="text-pink-900 playfair text-justify text-lg font-extrabold  mt-6 italic"
         >
           "Education is the passport to the future, and StudyinBengaluru is your
           first-class ticket."
@@ -109,7 +109,7 @@
           {{ currentValues[i] }}{{ stat.prefix }}
         </div>
         <div
-          class="text-[#2D1044] desc-text font-bold font-serif"
+          class="text-[#2D1044] desc-text font-bold merriweather-bold"
           [@slideUp]="counterVisible[i] ? 'visible' : 'hidden'"
         >
           {{ stat.label }}
@@ -144,7 +144,7 @@
         >
           <fa-icon [icon]="item.icon"></fa-icon>
         </div>
-        <p class="font-semibold text-sm md:text-base text-[#554067]">
+        <p class="poppins-bold font-semibold text-sm md:text-base text-[#554067]">
           {{ item.label }}
         </p>
       </div>
@@ -153,14 +153,14 @@
 </section>
 
 <!-- Vision and Mission Section -->
-<section class="container mx-auto px-6 md:px-10 py-20 relative z-10">
+<section class="container mx-auto px-6 md:px-10 py-20 relative z-10" >
   <div class="flex flex-col lg:flex-row gap-12 items-center">
     <!-- Vision and Mission Section (Left Side) -->
-    <div class="flex-1">
+    <div class="flex-1" #vissionAndMiissson>
       <!-- Vision Section -->
       <div
         class="group p-8 bg-white/10 backdrop-blur-lg rounded-3xl shadow-xl hover:bg-white/20 transition-all duration-300 transform hover:scale-105"
-      >
+        [@scaleUp]="leftVisible? 'in' : 'out'" >
         <div class="flex justify-center items-center mb-6">
           <div class="inline-block p-4 bg-[#FF4D6D] rounded-full">
             <svg
@@ -178,11 +178,12 @@
             </svg>
           </div>
         </div>
-        <h2 class="text-4xl font-bold text-white mb-6 text-center font-serif">
+        <h2
+        class="text-4xl font-bold text-white mb-6 text-center montserrat">
           Our Vision
         </h2>
         <p
-          class="text-lg text-gray-200 leading-relaxed text-justify font-serif"
+          class="text-lg text-gray-200 leading-relaxed text-justify poppins-light"
         >
           To transform Bengaluru into Asia's premier educational destination by
           revolutionizing admission processes, offering unparalleled career
@@ -194,7 +195,7 @@
       <!-- Mission Section -->
       <div
         class="group p-8 mt-5 bg-white/10 backdrop-blur-lg rounded-3xl shadow-xl hover:bg-white/20 transition-all duration-300 transform hover:scale-105"
-      >
+        [@scaleUp]="leftVisible? 'in' : 'out'">
         <div class="flex justify-center items-center mb-6">
           <div class="inline-block p-4 bg-[#2D1044] rounded-full">
             <svg
@@ -212,11 +213,11 @@
             </svg>
           </div>
         </div>
-        <h2 class="text-4xl font-bold text-white text-center mb-6 font-serif">
+        <h2 class="text-4xl font-bold text-white text-center mb-6 montserrat">
           Our Mission
         </h2>
         <p
-          class="text-lg text-gray-200 leading-relaxed text-justify font-serif"
+          class="text-lg text-gray-200 leading-relaxed text-justify poppins-light "
         >
           To attract and empower students worldwide by providing access to
           world-class education in India, nurturing global talent, and creating
@@ -226,7 +227,8 @@
     </div>
 
     <!-- Image Carousel (Right Side) -->
-    <div class="w-full md:w-[40vw] flex justify-center items-center p-4">
+    <div class="w-full md:w-[40vw] flex justify-center items-center p-4" #rightCarousel
+    [@fadeInUp]="rightVisible? 'in' : 'out'">
       <div class="relative w-full">
         <div class="relative h-56 md:h-96 overflow-hidden rounded-lg">
           <div
@@ -291,24 +293,24 @@
       class="bg-[#33154b]/30 backdrop-blur-md border border-purple-500/20 shadow-lg rounded-2xl p-8 space-y-6"
     >
       <h2
-        class="text-[#2D1044] text-4xl font-extrabold mb-4 drop-shadow-lg"
+        class="text-[#2D1044] text-4xl merriweather-bold mb-4 drop-shadow-lg"
         [@staggerFadeIn]="journeyVisible ? 'in' : 'out'"
       >
         Start Your Educational Journey Today!
       </h2>
       <p
-        class="text-gray-900 text-lg font-medium"
+        class="text-gray-900 text-lg pt-serif-regular"
         [@staggerFadeIn]="journeyVisible ? 'in' : 'out'"
       >
-        Get personalized guidance from our admission experts
+        Get personalized guidance from our admission experts.
       </p>
     </div>
   </div>
 </div>
-  <app-apply></app-apply>
-  <app-footer></app-footer>
-  <!-- Featured Colleges Section -->
-  <!-- <div class="max-w-7xl mx-auto px-4 py-16">
+<app-apply></app-apply>
+<app-footer></app-footer>
+<!-- Featured Colleges Section -->
+<!-- <div class="max-w-7xl mx-auto px-4 py-16">
   <h2 class="text-3xl font-bold text-center text-[#2D1044] mb-12">
     Featured Institutions
   </h2>
@@ -335,4 +337,3 @@
     </div>
   </div>
 </div> -->
-

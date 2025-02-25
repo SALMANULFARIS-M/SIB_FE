@@ -8,23 +8,25 @@
 
 <router-outlet></router-outlet>
 
-<!-- WhatsApp Floating Button -->
+<!-- WhatsApp Floating Button - Fixed to bottom right -->
 <a
   href="https://wa.me/9946953953"
   target="_blank"
-  class="fixed z-100 bottom-24 right-7 border-2 w-12 h-12  rounded-full drop-shadow-md bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-700 text-white text-3xl flex items-center justify-center animate-bounce"
+  class="fixed z-50 bottom-24 right-4 md:right-7 border-2 border-white w-12 h-12 rounded-full drop-shadow-md bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-700 text-white text-3xl flex items-center justify-center transition-transform duration-300 hover:scale-110"
   title="Chat on WhatsApp"
 >
   <i class='bx bxl-whatsapp'></i>
+  <!-- Subtle ping animation to draw attention -->
+  <span class="absolute w-full h-full rounded-full bg-green-400 opacity-20 animate-ping"></span>
 </a>
 
-<!-- Go To Top Button -->
+<!-- Go To Top Button - Hidden by default, appears on scroll -->
 <button
   id="to-top-button"
   (click)="goToTop()"
   title="Go To Top"
-  class="hidden fixed z-90 bottom-8 right-8 border-0 w-10 h-10 rounded drop-shadow-md bg-gradient-to-r from-pink-500 via-purple-500 to-pink-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-black dark:focus:ring-black  text-black text-3xl font-bold"
+  class="hidden border-2 border-[#2D1044] fixed z-50 bottom-8 right-4 md:right-8 w-10 h-10 rounded-full drop-shadow-md bg-gradient-to-r from-pink-500 via-purple-500 to-pink-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-800 text-white text-xl font-bold transform transition-transform duration-300 hover:scale-110"
 >
-  <i class='bx bxs-chevrons-up bx-flashing'></i>
+  <i class='bx bxs-chevrons-up'></i>
 </button>
 

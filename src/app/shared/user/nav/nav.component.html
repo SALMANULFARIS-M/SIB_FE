@@ -35,7 +35,7 @@
       <div class="hidden md:flex items-center gap-6">
         <a
           *ngFor="let item of ['Home', 'About', 'Contact']"
-          class="text-violet-100 hover:text-white px-4 py-2 font-montserrat rounded-full text-base font-bold relative group transform transition-all duration-300 hover:scale-105 hover:bg-purple-700/40"
+          class="text-violet-100 hover:text-white px-4 py-2 montserrat rounded-full text-base font-medium relative group transform transition-all duration-300 hover:scale-105 hover:bg-purple-700/40"
           [routerLink]="item === 'Home' ? '/' : '/' + item.toLowerCase()"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
@@ -94,7 +94,4 @@
   </div>
 </nav>
 
-<!-- Add these styles to your global CSS or component styles -->
-<style>
 
-</style>

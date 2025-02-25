@@ -1,11 +1,337 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
 @import 'ngx-toastr/toastr';
-/* Import Google Fonts Locally */
 
 
+.open-sans {
+  font-family: "Open Sans", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
 
 
+.roboto {
+  font-family: "Roboto", serif;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+.playfair {
+  font-family: "Playfair", serif;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+.montserrat {
+  font-family: "Montserrat", serif;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
+}
+.montserrat-normal{
+  font-family: "Montserrat", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+.merriweather-light {
+  font-family: "Merriweather", serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.merriweather-regular {
+  font-family: "Merriweather", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.merriweather-bold {
+  font-family: "Merriweather", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.merriweather-black {
+  font-family: "Merriweather", serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.merriweather-light-italic {
+  font-family: "Merriweather", serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.merriweather-regular-italic {
+  font-family: "Merriweather", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.merriweather-bold-italic {
+  font-family: "Merriweather", serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.merriweather-black-italic {
+  font-family: "Merriweather", serif;
+  font-weight: 900;
+  font-style: italic;
+}
+.pt-serif-regular {
+  font-family: "PT Serif", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.pt-serif-bold {
+  font-family: "PT Serif", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.pt-serif-regular-italic {
+  font-family: "PT Serif", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.pt-serif-bold-italic {
+  font-family: "PT Serif", serif;
+  font-weight: 700;
+  font-style: italic;
+}
+.poppins-thin {
+  font-family: "Poppins", serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.poppins-extralight {
+  font-family: "Poppins", serif;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.poppins-light {
+  font-family: "Poppins", serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.poppins-regular {
+  font-family: "Poppins", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.poppins-medium {
+  font-family: "Poppins", serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.poppins-semibold {
+  font-family: "Poppins", serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.poppins-bold {
+  font-family: "Poppins", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.poppins-extrabold {
+  font-family: "Poppins", serif;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.poppins-black {
+  font-family: "Poppins", serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.poppins-thin-italic {
+  font-family: "Poppins", serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.poppins-extralight-italic {
+  font-family: "Poppins", serif;
+  font-weight: 200;
+  font-style: italic;
+}
+
+.poppins-light-italic {
+  font-family: "Poppins", serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.poppins-regular-italic {
+  font-family: "Poppins", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.poppins-medium-italic {
+  font-family: "Poppins", serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.poppins-semibold-italic {
+  font-family: "Poppins", serif;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.poppins-bold-italic {
+  font-family: "Poppins", serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.poppins-extrabold-italic {
+  font-family: "Poppins", serif;
+  font-weight: 800;
+  font-style: italic;
+}
+
+.poppins-black-italic {
+  font-family: "Poppins", serif;
+  font-weight: 900;
+  font-style: italic;
+}
+
+/* Webkit Scrollbar */
+::-webkit-scrollbar {
+  width: 16px;  /* Vertical scrollbar width */
+  height: 16px; /* Horizontal scrollbar height */
+}
+
+/* Track - Thin Line */
+::-webkit-scrollbar-track {
+  background: transparent;
+  position: relative;
+}
+
+/* Thin Line (Custom) */
+::-webkit-scrollbar-track-piece {
+  background: #d5a1ff; /* Line color */
+  width: 2px; /* Thin line width */
+  margin: 8px auto; /* Center the line */
+  border-radius: 2px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Scroll Button - Floating Circle */
+::-webkit-scrollbar-thumb {
+  background: #431f60;
+  border: 3px solid white;
+  border-radius: 50%;
+  height: 24px; /* Circle size */
+  width: 24px; /* Circle size */
+  position: relative;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #d5a1ff;
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Buttons at Ends (Optional) */
+::-webkit-scrollbar-button:single-button {
+  background: #431f60;
+  border-radius: 50%;
+  border: 2px solid #d5a1ff;
+  height: 16px;
+  width: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease, border-color 0.3s ease;
+  margin: 2px;
+}
+
+::-webkit-scrollbar-button:single-button:hover {
+  background: #d5a1ff;
+  border: 2px solid #431f60;
+  cursor: pointer;
+}
+
+/* Button Arrows (Optional) */
+::-webkit-scrollbar-button:single-button:vertical:decrement::before {
+  content: '▲';
+  color: white;
+  font-size: 10px;
+}
+
+::-webkit-scrollbar-button:single-button:vertical:increment::before {
+  content: '▼';
+  color: white;
+  font-size: 10px;
+}
+
+::-webkit-scrollbar-button:single-button:horizontal:decrement::before {
+  content: '◀';
+  color: white;
+  font-size: 10px;
+}
+
+::-webkit-scrollbar-button:single-button:horizontal:increment::before {
+  content: '▶';
+  color: white;
+  font-size: 10px;
+}
+
+/* Firefox Scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #431f60 transparent;
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  ::-webkit-scrollbar-track-piece {
+    background: #431f60; /* Dark mode line color */
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #d5a1ff; /* Dark mode button color */
+    border: 3px solid #431f60; /* Dark mode border */
+  }
+  ::-webkit-scrollbar-button:single-button {
+    background: #d5a1ff; /* Dark mode button color */
+    border: 2px solid #431f60; /* Dark mode border */
+  }
+  * {
+    scrollbar-color: #d5a1ff transparent; /* Dark mode Firefox */
+  }
+}
 
 
 /* src/styles.css */

@@ -5,19 +5,23 @@ import { STATES } from '../../constants/states';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../../core/services/user.service';
 import { ToastrService } from 'ngx-toastr';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
+
 @Component({
   selector: 'app-apply',
   imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './apply.component.html',
   styleUrl: './apply.component.css'
 })
+
 export class ApplyComponent {
   applyForm!: FormGroup;
   showForm = false;
   states = STATES;
   districts: string[] = [];
 
-  constructor(private fb: FormBuilder, private service: UserService, private toastr: ToastrService) { }
+  constructor(private fb: FormBuilder, private service: UserService, private toastr: ToastrService, private router: Router,) { }
 
   ngOnInit(): void {
     this.applyForm = this.fb.group({
@@ -28,6 +32,12 @@ export class ApplyComponent {
       district: ['', Validators.required],
       course: ['', Validators.required],
       college: ['', Validators.required]
+    });
+    this.router.events
+    .pipe(filter(event => event instanceof NavigationEnd))
+    .subscribe((event: any) => {
+      // Check if URL is '/apply'
+      this.showForm = event.url === '/apply';
     });
   }
 

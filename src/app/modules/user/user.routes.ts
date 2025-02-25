@@ -8,4 +8,5 @@ export const USER_ROUTES: Routes = [
   { path: '', component: HomeComponent },
   { path: 'about', component: AboutComponent },
   { path: 'contact', component: ContactComponent },
+  { path: 'apply', component: HomeComponent },
 ];
