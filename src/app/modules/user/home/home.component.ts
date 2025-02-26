@@ -41,6 +41,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   opportunityVisible: boolean[] = [];
   intervalId: any;
   currentSlide = 0;
+  showApplyComponent = false;
   isVisionFlipped = false;
   isMissionFlipped = false;
   cardVisible = false
@@ -75,20 +76,22 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     { image: '/img_3.JPG', text: 'Receiving Award for best admission consultants', alt: 'Slide 3' },
   ];
 
-  constructor(@Inject(PLATFORM_ID) private platformId: any,private router:Router) { }
+  constructor(@Inject(PLATFORM_ID) private platformId: any, private router: Router) { }
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
-      window.addEventListener('scroll', () => {
-        console.log('Scroll event triggered');
+
+      // ✅ Step 1: Check URL on initial load
+      const currentUrl = this.router.url.split('?')[0]; // Normalize URL (Remove query params)
+      this.showApplyComponent = currentUrl === '/apply';
+
+      // ✅ Step 2: Detect URL changes
+      this.router.events.pipe(
+        filter(event => event instanceof NavigationEnd)
+      ).subscribe((event: NavigationEnd) => {
+        this.showApplyComponent = event.urlAfterRedirects.split('?')[0] === '/apply';
       });
     }
-    this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe((event: any) => {
-        // Check if URL is '/apply'
-
-      });
     // Initialize counterVisible and currentValues arrays
     this.counterVisible = new Array(this.stats.length).fill(false);
     this.currentValues = new Array(this.stats.length).fill(0);

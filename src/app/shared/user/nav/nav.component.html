@@ -71,7 +71,7 @@
 
   <!-- Mobile Menu -->
   <div
-    class="md:hidden overflow-hidden transition-all duration-500 bg-gradient-to-b from-purple-400 to-pink-300 rounded-b-2xl"
+    class="md:hidden overflow-hidden transition-all duration-500 bg-gradient-to-b from-purple-600 to-purple-400 rounded-b-2xl"
     [class.max-h-0]="!isMenuOpen"
     [class.max-h-96]="isMenuOpen"
   >
@@ -79,7 +79,7 @@
       <a
         *ngFor="let item of ['Home', 'About', 'Contact']"
         class="text-purple-900 block px-4 py-3 rounded-xl text-base text-center font-bold hover:bg-white/30 transition-colors transform hover:scale-105 duration-300 relative group"
-        [routerLink]="item === 'Home' ? '/' : '/' + item.toLowerCase()"
+        [routerLink]="item === 'Hom e' ? '/' : '/' + item.toLowerCase()"
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
       >

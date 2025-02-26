@@ -80,7 +80,7 @@
         <div
           class="absolute bottom-0 left-0 p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
         >
-          <p class="text-[#d5a1ff] text-lg font-bold">
+          <p class="text-[#d5a1ff] text-lg font-bold merriweather-bold">
             Explore Bengaluru's Educational Excellence
           </p>
         </div>
@@ -103,13 +103,13 @@
         *ngFor="let stat of stats; let i = index"
       >
         <div
-          class="text-4xl font-bold mb-2 countup bg-gradient-to-r from-[#FF4D6D] to-[#F655A0] bg-clip-text text-transparent"
+          class="text-4xl font-bold mb-2 montserrat-normal countup bg-gradient-to-r from-[#FF4D6D] to-[#F655A0] bg-clip-text text-transparent"
           [@fadeIn]="counterVisible[i] ? 'visible' : 'hidden'"
         >
           {{ currentValues[i] }}{{ stat.prefix }}
         </div>
         <div
-          class="text-[#2D1044] desc-text font-bold merriweather-bold"
+          class="text-[#2D1044] desc-text font-bold poppins-semibold-italic"
           [@slideUp]="counterVisible[i] ? 'visible' : 'hidden'"
         >
           {{ stat.label }}
@@ -125,7 +125,7 @@
   class="bg-gradient-to-b from-[#33154b]/5 to-[#2D1044]"
 >
   <div class="text-center p-10 overflow-hidden relative">
-    <h2 class="text-3xl text-[#d5a1ff] mb-8 font-bold relative inline-block">
+    <h2 class="text-3xl text-[#d5a1ff] mb-8 font-bold relative inline-block playfair">
       Explore Opportunities
       <span
         class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full"
@@ -307,7 +307,8 @@
     </div>
   </div>
 </div>
-<app-apply></app-apply>
+<!-- Apply Component (Visible only when URL is '/apply') -->
+<app-apply [showApply]="showApplyComponent"></app-apply>
 <app-footer></app-footer>
 <!-- Featured Colleges Section -->
 <!-- <div class="max-w-7xl mx-auto px-4 py-16">

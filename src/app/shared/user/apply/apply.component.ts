@@ -1,5 +1,5 @@
 // Apply Form Component (Angular TS)
-import { Component } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { STATES } from '../../constants/states';
 import { CommonModule } from '@angular/common';
@@ -15,13 +15,14 @@ import { filter } from 'rxjs/operators';
   styleUrl: './apply.component.css'
 })
 
-export class ApplyComponent {
+export class ApplyComponent implements OnInit {
+  @Input() showApply: boolean = false; // Receive visibility status
   applyForm!: FormGroup;
   showForm = false;
   states = STATES;
   districts: string[] = [];
 
-  constructor(private fb: FormBuilder, private service: UserService, private toastr: ToastrService, private router: Router,) { }
+  constructor(private fb: FormBuilder, private service: UserService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.applyForm = this.fb.group({
@@ -33,12 +34,9 @@ export class ApplyComponent {
       course: ['', Validators.required],
       college: ['', Validators.required]
     });
-    this.router.events
-    .pipe(filter(event => event instanceof NavigationEnd))
-    .subscribe((event: any) => {
-      // Check if URL is '/apply'
-      this.showForm = event.url === '/apply';
-    });
+    if (this.showApply) {
+      this.showForm = true;
+    }
   }
 
   openForm(): void {

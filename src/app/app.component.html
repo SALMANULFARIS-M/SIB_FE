@@ -20,13 +20,23 @@
   <span class="absolute w-full h-full rounded-full bg-green-400 opacity-20 animate-ping"></span>
 </a>
 
-<!-- Go To Top Button - Hidden by default, appears on scroll -->
+<!-- Go To Top Button - Appears on Scroll -->
 <button
   id="to-top-button"
   (click)="goToTop()"
   title="Go To Top"
-  class="hidden border-2 border-[#2D1044] fixed z-50 bottom-8 right-4 md:right-8 w-10 h-10 rounded-full drop-shadow-md bg-gradient-to-r from-pink-500 via-purple-500 to-pink-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-800 text-white text-xl font-bold transform transition-transform duration-300 hover:scale-110"
+  class="hidden fixed z-50 bottom-8 right-4 md:right-8 w-10 h-10 rounded-md drop-shadow-md
+         bg-gradient-to-r from-pink-500 via-purple-500 to-pink-500 hover:bg-gradient-to-br
+         focus:ring-4 focus:outline-none focus:ring-purple-800 border-2 border-pink-900
+         text-white text-xl font-bold transform transition-transform duration-300 hover:scale-110"
 >
   <i class='bx bxs-chevrons-up'></i>
+
+  <!-- ✅ Improved Pulsing Effect -->
+  <span
+    class="absolute inset-0 w-full h-full rounded-md bg-pink-500 opacity-30
+           animate-[ping_1.5s_ease-out_infinite]"
+  ></span>
 </button>
+
 

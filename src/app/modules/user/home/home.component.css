@@ -23,11 +23,6 @@
   opacity: 1;
 }
 
-.grid-item {
-  transition: border-color 0.5s ease, border-width 0.5s ease; /* Smooth border animation */
-  border: 2px solid transparent; /* Initially transparent border */
-}
-
 .grid-item:hover {
   transform: scale(1.05);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
@@ -35,28 +30,30 @@
   border-width: 4px;
   border-color: #ff4dea;
   background-color: #000;
-color: aliceblue;
+  color: aliceblue;
 }
 
 .grid-item:hover .icon {
-  color: #FF4D6D; /* Change icon color */
+  color: #ff4d6d; /* Change icon color */
   transform: scale(1.2); /* Scale up */
   transition: all 0.4s ease;
 }
-.headerContainer, .leftContent, .rightImage {
+.headerContainer,
+.leftContent,
+.rightImage {
   opacity: 0;
   visibility: hidden;
   transform: translateY(20px); /* Offset before animation */
   transition: all 0.5s ease-out;
 }
 
-.headerVisible, .leftContentVisible, .rightImageVisible {
+.headerVisible,
+.leftContentVisible,
+.rightImageVisible {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
 }
-
-
 
 /* Left Content Hover Effect */
 .left-content:hover {
