@@ -21,11 +21,11 @@
     </div>
   </div>
   <div
-    class="my-element  z-10 py-8 px-4 sm:px-6 lg:px-8 rounded-2xl w-[90vw] sm:w-[70vw] md:w-[60vw] max-w-4xl mx-auto bg-[#33154b]/30  border border-purple-500/20 shadow-lg"
+    class="my-element z-10 py-8 px-4 sm:px-6 lg:px-8 rounded-2xl w-[90vw] sm:w-[70vw] md:w-[60vw] max-w-4xl mx-auto bg-[#33154b]/30 border border-purple-500/20 shadow-lg"
   >
     <h3
       #secondHeading
-      class="text-[#efdbff] text-3xl sm:text-4xl md:text-5xl merriweather-regular mb-5 drop-shadow-lg"
+      class="text-[#efdbff] text-3xl md:text-5xl merriweather-regular mb-5 drop-shadow-lg"
       [@slideInFromLeft]="headerVisible ? 'in' : 'out'"
     >
       Study in India's Silicon Valley
@@ -56,7 +56,7 @@
           engagement.
         </p>
         <p
-          class="text-pink-900 playfair text-justify text-lg font-extrabold  mt-6 italic"
+          class="text-pink-900 playfair text-justify text-lg font-extrabold mt-6 italic"
         >
           "Education is the passport to the future, and StudyinBengaluru is your
           first-class ticket."
@@ -125,7 +125,9 @@
   class="bg-gradient-to-b from-[#33154b]/5 to-[#2D1044]"
 >
   <div class="text-center p-10 overflow-hidden relative">
-    <h2 class="text-3xl text-[#d5a1ff] mb-8 font-bold relative inline-block playfair">
+    <h2
+      class="text-3xl text-[#d5a1ff] mb-8 font-bold relative inline-block playfair"
+    >
       Explore Opportunities
       <span
         class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full"
@@ -144,7 +146,7 @@
         >
           <fa-icon [icon]="item.icon"></fa-icon>
         </div>
-        <p class="poppins-bold font-semibold text-sm md:text-base text-[#554067]">
+        <p class="pt-serif-bold text-sm md:text-base text-[#554067]">
           {{ item.label }}
         </p>
       </div>
@@ -153,14 +155,15 @@
 </section>
 
 <!-- Vision and Mission Section -->
-<section class="container mx-auto px-6 md:px-10 py-20 relative z-10" >
+<section class="container mx-auto px-6 md:px-10 py-20 relative z-10">
   <div class="flex flex-col lg:flex-row gap-12 items-center">
     <!-- Vision and Mission Section (Left Side) -->
     <div class="flex-1" #vissionAndMiissson>
       <!-- Vision Section -->
       <div
         class="group p-8 bg-white/10 backdrop-blur-lg rounded-3xl shadow-xl hover:bg-white/20 transition-all duration-300 transform hover:scale-105"
-        [@scaleUp]="leftVisible? 'in' : 'out'" >
+        [@scaleUp]="leftVisible ? 'in' : 'out'"
+      >
         <div class="flex justify-center items-center mb-6">
           <div class="inline-block p-4 bg-[#FF4D6D] rounded-full">
             <svg
@@ -178,8 +181,7 @@
             </svg>
           </div>
         </div>
-        <h2
-        class="text-4xl font-bold text-white mb-6 text-center montserrat">
+        <h2 class="text-4xl font-bold text-white mb-6 text-center montserrat">
           Our Vision
         </h2>
         <p
@@ -195,7 +197,8 @@
       <!-- Mission Section -->
       <div
         class="group p-8 mt-5 bg-white/10 backdrop-blur-lg rounded-3xl shadow-xl hover:bg-white/20 transition-all duration-300 transform hover:scale-105"
-        [@scaleUp]="leftVisible? 'in' : 'out'">
+        [@scaleUp]="leftVisible ? 'in' : 'out'"
+      >
         <div class="flex justify-center items-center mb-6">
           <div class="inline-block p-4 bg-[#2D1044] rounded-full">
             <svg
@@ -217,7 +220,7 @@
           Our Mission
         </h2>
         <p
-          class="text-lg text-gray-200 leading-relaxed text-justify poppins-light "
+          class="text-lg text-gray-200 leading-relaxed text-justify poppins-light"
         >
           To attract and empower students worldwide by providing access to
           world-class education in India, nurturing global talent, and creating
@@ -227,8 +230,11 @@
     </div>
 
     <!-- Image Carousel (Right Side) -->
-    <div class="w-full md:w-[40vw] flex justify-center items-center p-4" #rightCarousel
-    [@fadeInUp]="rightVisible? 'in' : 'out'">
+    <div
+      class="w-full md:w-[40vw] flex justify-center items-center p-4"
+      #rightCarousel
+      [@fadeInUp]="rightVisible ? 'in' : 'out'"
+    >
       <div class="relative w-full">
         <div class="relative h-56 md:h-96 overflow-hidden rounded-lg">
           <div
@@ -248,7 +254,7 @@
             <div
               class="absolute bottom-0 left-0 w-full bg-black/40 text-2xl p-4 text-center"
             >
-              <h1 class="text-gray-300 font-medium font-serif">
+              <h1 class="text-gray-300 font-medium merriweather-bold">
                 {{ slide.text }}
               </h1>
             </div>
@@ -282,6 +288,67 @@
     </div>
   </div>
 </section>
+
+<!-- blog section-->
+<section>
+  <div class="w-full bg-gradient-to-b from-[#2D1044]/5 to-white/80 pb-10">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-8">
+      <div class="mx-auto max-w-2xl text-center">
+        <h2 class="text-3xl relative inline-block tracking-tight text-white sm:text-4xl playfair">
+          Recent Blogs
+          <span class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full"></span>
+        </h2>
+        <p class="mt-2 text-lg leading-8 text-gray-600 dark:text-gray-300">
+          Dive into the latest in Education with our insightful blog posts.
+        </p>
+      </div>
+
+      <!-- Grid Layout for Blog Cards -->
+      <div class="mx-auto mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Blog Post Component -->
+        <article class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-gray-900 dark:bg-gray-700 px-6 py-6 pb-8 pt-80 sm:pt-56 lg:pt-72 hover:transform-3d hover:-translate-1.5 transition duration-700 ease-out">
+          <img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080"
+            alt="AI Future" class="absolute inset-0 -z-10 h-full w-full object-cover" />
+          <div class="absolute inset-0 -z-10 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
+          <div class="flex flex-wrap items-center text-sm text-gray-300">
+            <time datetime="2023-10-11" class="mr-4">Oct 11, 2023</time>
+
+          </div>
+          <h3 class="mt-3 text-lg font-semibold text-white">
+            <a href="/tech-blog/post1" class="hover:underline">The Future of AI: Trends and Challenges</a>
+          </h3>
+        </article>
+
+        <!-- Second Blog Post -->
+        <article class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-gray-900 dark:bg-gray-700 px-6 py-6 pb-8 pt-80 sm:pt-56 lg:pt-72">
+          <img src="https://images.unsplash.com/photo-1639322537228-f710d846310a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080"
+            alt="Blockchain" class="absolute inset-0 -z-10 h-full w-full object-cover" />
+          <div class="absolute inset-0 -z-10 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
+          <div class="flex flex-wrap items-center text-sm text-gray-300">
+            <time datetime="2023-09-25" class="mr-4">Sept 25, 2023</time>
+          </div>
+          <h3 class="mt-3 text-lg font-semibold text-white">
+            <a href="/tech-blog/post2" class="hover:underline">The Rise of Blockchain Technology</a>
+          </h3>
+        </article>
+
+        <!-- Third Blog Post -->
+        <article class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-gray-900 dark:bg-gray-700 px-6 py-6 pb-8 pt-80 sm:pt-56 lg:pt-72">
+          <img src="https://images.unsplash.com/photo-1666112835156-c65bb806ac73?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080"
+            alt="Quantum Computing" class="absolute inset-0 -z-10 h-full w-full object-cover" />
+          <div class="absolute inset-0 -z-10 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
+          <div class="flex flex-wrap items-center text-sm text-gray-300">
+            <time datetime="2023-09-24" class="mr-4">Sept 24, 2023</time>
+          </div>
+          <h3 class="mt-3 text-lg font-semibold text-white">
+            <a href="/tech-blog/post3" class="hover:underline">Quantum Computing & Data Security</a>
+          </h3>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <!-- CTA Section -->
 <div

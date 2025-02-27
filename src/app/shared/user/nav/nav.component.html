@@ -34,7 +34,7 @@
       <!-- Desktop Menu -->
       <div class="hidden md:flex items-center gap-6">
         <a
-          *ngFor="let item of ['Home', 'About', 'Contact']"
+          *ngFor="let item of ['Home', 'About', 'Contact','blogs']"
           class="text-violet-100 hover:text-white px-4 py-2 montserrat rounded-full text-base font-medium relative group transform transition-all duration-300 hover:scale-105 hover:bg-purple-700/40"
           [routerLink]="item === 'Home' ? '/' : '/' + item.toLowerCase()"
           routerLinkActive="active"
@@ -77,7 +77,7 @@
   >
     <div class="px-2 pt-2 pb-3 space-y-3 sm:px-3 animate-slideDown">
       <a
-        *ngFor="let item of ['Home', 'About', 'Contact']"
+        *ngFor="let item of ['Home', 'About', 'Contact','blogs']"
         class="text-purple-900 block px-4 py-3 rounded-xl text-base text-center font-bold hover:bg-white/30 transition-colors transform hover:scale-105 duration-300 relative group"
         [routerLink]="item === 'Hom e' ? '/' : '/' + item.toLowerCase()"
         routerLinkActive="active"
