@@ -31,10 +31,17 @@
   font-variation-settings:
     "wdth" 100;
 }
+
 .montserrat {
   font-family: "Montserrat", serif;
   font-optical-sizing: auto;
   font-weight: 200;
+  font-style: normal;
+}
+.montserrat-normal {
+  font-family: "Montserrat", serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
   font-style: normal;
 }
 .montserrat-normal{

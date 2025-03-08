@@ -28,4 +28,10 @@ export class UserService {
       headers: { 'Content-Type': 'application/json' }
     });
   }
+  getBlogs(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/user/getBlogs` );
+  }
+  getBlogById(id:any): Observable<any> {
+    return this.http.get(`${this.apiUrl}/user/blogs-${id}` );
+  }
 }

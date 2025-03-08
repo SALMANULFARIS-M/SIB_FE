@@ -5,7 +5,7 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ApplyComponent } from '../../../shared/user/apply/apply.component';
 import { FreeConsultaionComponent } from './free-consultaion/free-consultaion.component';
-import { fadeIn, fadeInSequential, fadeInUp, listAnimation, scaleUp, slideInFromLeft, slideInFromRight, slideUp, staggerFadeIn, zoomIn } from '../../../shared/constants/animation';
+import { fadeIn, fadeInSequential, fadeInUp, flipText, listAnimation, scaleUp, slideInFromLeft, slideInFromRight, slideUp, staggerFadeIn, zoomIn } from '../../../shared/constants/animation';
 import { faUniversity, faSchool, faBookOpen, faGlobe, faBriefcase, faLaptop, faHome, faBuilding, faCalendarAlt, faComments } from '@fortawesome/free-solid-svg-icons';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
@@ -16,7 +16,8 @@ import { filter } from 'rxjs/operators';
   imports: [CommonModule, NavComponent, FooterComponent, FontAwesomeModule, ApplyComponent, FreeConsultaionComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  animations: [fadeIn, slideInFromLeft, fadeInUp, scaleUp, slideInFromRight, staggerFadeIn, zoomIn, slideUp, listAnimation, fadeInSequential]
+  animations: [fadeIn, slideInFromLeft, fadeInUp, scaleUp, slideInFromRight,
+    staggerFadeIn, zoomIn, slideUp, listAnimation, fadeInSequential, flipText]
 })
 
 export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
@@ -36,6 +37,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   headerVisible = false;
   rightImageVisible = false;
   leftContentVisible = false;
+  flipState: 'normal' | 'flipped' = 'normal';
   counterVisible: boolean[] = []; // Initialize as boolean array
   currentValues: number[] = [];
   opportunityVisible: boolean[] = [];
@@ -48,6 +50,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   leftVisible = false;
   rightVisible = false;
   journeyVisible = false;
+
 
   stats = [
     { value: 100, label: 'Partner Colleges', prefix: '+' },
@@ -91,12 +94,15 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       ).subscribe((event: NavigationEnd) => {
         this.showApplyComponent = event.urlAfterRedirects.split('?')[0] === '/apply';
       });
+      this.startFlipAnimation();
+
+      // Initialize counterVisible and currentValues arrays
+      this.counterVisible = new Array(this.stats.length).fill(false);
+      this.currentValues = new Array(this.stats.length).fill(0);
+      this.opportunityVisible = new Array(this.opportunities.length).fill(false);
     }
-    // Initialize counterVisible and currentValues arrays
-    this.counterVisible = new Array(this.stats.length).fill(false);
-    this.currentValues = new Array(this.stats.length).fill(0);
-    this.opportunityVisible = new Array(this.opportunities.length).fill(false);
   }
+
 
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {
@@ -136,6 +142,11 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       }, 500);
       this.startAutoSlide();
     }
+  }
+  startFlipAnimation(): void {
+    setInterval(() => {
+      this.flipState = this.flipState === 'normal' ? 'flipped' : 'normal';
+    }, 4000); // Change text every 4 seconds
   }
 
   setupIntersectionObserver(element: HTMLElement, animationState: string, index?: number): void { // animationState is now string

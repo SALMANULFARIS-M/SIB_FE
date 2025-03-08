@@ -91,4 +91,11 @@ export const scaleUp = trigger('scaleUp', [
     animate('600ms ease-out', style({ opacity: 1, transform: 'scale(1)' }))
   ])
 ]);
+export const flipText = trigger('flipText', [
+  state('normal', style({ transform: 'scaleY(1)', opacity: 1 })), // Normal state
+  state('flipped', style({ transform: 'scaleY(-1)', opacity: 1 })), // Flipped state
+  transition('normal <=> flipped', [
+    animate('0.6s ease-in-out') // Animation duration and easing
+  ])
+])
 
