@@ -1,0 +1,7 @@
+aside {
+  height: 100vh; /* Full height */
+  position: fixed;
+  left: 0;
+  top: 0;
+  overflow-y: auto; /* Enables scrolling if content overflows */
+}

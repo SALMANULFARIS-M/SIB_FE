@@ -1,0 +1,216 @@
+<!-- Sidebar -->
+<aside
+  class="fixed left-0 top-0 h-full bg-gradient-to-br from-[#2D1044] to-[#33154b] transition-all duration-300"
+  [ngClass]="{ 'w-64': !sidebarCollapsed && isLargeScreen, 'w-20': sidebarCollapsed || !isLargeScreen }"
+  >
+  <!-- Animated Border Effect -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <div
+      class="absolute top-0 left-0 h-[2px] w-16 bg-gradient-to-r from-transparent via-pink-500 to-transparent animate-border-light-horizontal"
+    ></div>
+    <div
+      class="absolute top-0 right-0 h-16 w-[2px] bg-gradient-to-b from-transparent via-pink-400 to-transparent animate-border-light-vertical"
+    ></div>
+    <div
+      class="absolute bottom-0 right-0 h-[2px] w-16 bg-gradient-to-l from-transparent via-pink-400 to-transparent animate-border-light-horizontal-reverse"
+    ></div>
+    <div
+      class="absolute bottom-0 left-0 h-16 w-[2px] bg-gradient-to-t from-transparent via-pink-500 to-transparent animate-border-light-vertical-reverse"
+    ></div>
+  </div>
+
+  <!-- Logo and Sidebar Toggle -->
+  <div
+    class="flex items-center justify-between p-4 bg-[#33154b] border-b border-purple-800/30"
+  >
+    <div
+      class="flex items-center"
+      [ngClass]="{ 'justify-center w-full': sidebarCollapsed }"
+    >
+      <img
+        src="/icon-w.png"
+        alt="Logo"
+        class="h-8 w-8 drop-shadow-lg"
+        (click)="toggleSidebar()"
+      />
+      <span
+        *ngIf="!sidebarCollapsed"
+        class="ml-3 text-xl font-semibold text-white font-montserrat hidden md:flex"
+        >SIB ADMIN
+      </span>
+    </div>
+    <button
+      *ngIf="!sidebarCollapsed"
+      (click)="toggleSidebar()"
+      class="text-gray-400 hover:text-white hidden md:flex"
+    >
+      <i class="bx bx-chevron-left text-xl"></i>
+    </button>
+
+  </div>
+
+  <!-- Navigation -->
+  <nav class="mt-5 px-2">
+    <div class="space-y-2">
+      <!-- Dashboard -->
+      <a
+        routerLink="/dashboard"
+        routerLinkActive="bg-[#2D1044] text-white"
+        class="flex items-center px-4 py-2.5 text-sm font-medium rounded-lg text-gray-300 hover:bg-purple-900/50 hover:text-white group transition-all duration-200"
+      >
+        <i
+          class="bx bxs-dashboard text-xl mr-3"
+          [ngClass]="{ 'mx-auto': sidebarCollapsed }"
+        ></i>
+        <span *ngIf="!sidebarCollapsed" class="hidden md:flex">Dashboard</span>
+      </a>
+
+      <!-- Analytics Dropdown -->
+      <div class="space-y-1">
+        <button
+          (click)="toggleMenu('analytics')"
+          class="w-full flex items-center justify-between px-4 py-2.5 text-sm font-medium rounded-lg text-gray-300 hover:bg-purple-900/50 hover:text-white focus:outline-none"
+          [ngClass]="{ 'flex-col': sidebarCollapsed }"
+        >
+          <div
+            class="flex items-center"
+            [ngClass]="{ 'mx-auto': sidebarCollapsed }"
+          >
+            <i
+              class="bx bx-bar-chart-alt text-xl mr-3"
+              [ngClass]="{ 'mx-auto mb-1': sidebarCollapsed }"
+            ></i>
+            <span *ngIf="!sidebarCollapsed">Analytics</span>
+          </div>
+          <i
+            *ngIf="!sidebarCollapsed"
+            class="bx"
+            [ngClass]="{
+              'bx-chevron-down': !openMenus.analytics,
+              'bx-chevron-up': openMenus.analytics
+            }"
+          ></i>
+        </button>
+        <div
+          class="space-y-1 pl-11"
+          *ngIf="openMenus.analytics && !sidebarCollapsed"
+        >
+          <a
+            routerLink="/analytics/overview"
+            routerLinkActive="text-white"
+            class="group flex items-center px-4 py-2 text-sm text-gray-300 rounded-md hover:bg-purple-900/30 hover:text-white"
+          >
+            Overview
+          </a>
+          <a
+            routerLink="/analytics/reports"
+            routerLinkActive="text-white"
+            class="group flex items-center px-4 py-2 text-sm text-gray-300 rounded-md hover:bg-purple-900/30 hover:text-white"
+          >
+            Reports
+          </a>
+          <a
+            routerLink="/analytics/statistics"
+            routerLinkActive="text-white"
+            class="group flex items-center px-4 py-2 text-sm text-gray-300 rounded-md hover:bg-purple-900/30 hover:text-white"
+          >
+            Statistics
+          </a>
+        </div>
+      </div>
+
+      <!-- Team Dropdown -->
+      <div class="space-y-1">
+        <button
+          (click)="toggleMenu('team')"
+          class="w-full flex items-center justify-between px-4 py-2.5 text-sm font-medium rounded-lg text-gray-300 hover:bg-purple-900/50 hover:text-white focus:outline-none"
+          [ngClass]="{ 'flex-col': sidebarCollapsed }"
+        >
+          <div
+            class="flex items-center"
+            [ngClass]="{ 'mx-auto': sidebarCollapsed }"
+          >
+            <i
+              class="bx bx-group text-xl mr-3"
+              [ngClass]="{ 'mx-auto mb-1': sidebarCollapsed }"
+            ></i>
+            <span *ngIf="!sidebarCollapsed">Team</span>
+          </div>
+          <i
+            *ngIf="!sidebarCollapsed"
+            class="bx"
+            [ngClass]="{
+              'bx-chevron-down': !openMenus.team,
+              'bx-chevron-up': openMenus.team
+            }"
+          ></i>
+        </button>
+        <div
+          class="space-y-1 pl-11"
+          *ngIf="openMenus.team && !sidebarCollapsed"
+        >
+          <a
+            routerLink="/team/members"
+            routerLinkActive="text-white"
+            class="group flex items-center px-4 py-2 text-sm text-gray-300 rounded-md hover:bg-purple-900/30 hover:text-white"
+          >
+            Members
+          </a>
+          <a
+            routerLink="/team/calendar"
+            routerLinkActive="text-white"
+            class="group flex items-center px-4 py-2 text-sm text-gray-300 rounded-md hover:bg-purple-900/30 hover:text-white"
+          >
+            Calendar
+          </a>
+          <a
+            routerLink="/team/settings"
+            routerLinkActive="text-white"
+            class="group flex items-center px-4 py-2 text-sm text-gray-300 rounded-md hover:bg-purple-900/30 hover:text-white"
+          >
+            Settings
+          </a>
+        </div>
+      </div>
+
+      <!-- Projects -->
+      <a
+        routerLink="/projects"
+        routerLinkActive="bg-[#2D1044] text-white"
+        class="flex items-center px-4 py-2.5 text-sm font-medium rounded-lg text-gray-300 hover:bg-purple-900/50 hover:text-white group transition-all duration-200"
+      >
+        <i
+          class="bx bx-folder text-xl mr-3"
+          [ngClass]="{ 'mx-auto': sidebarCollapsed }"
+        ></i>
+        <span *ngIf="!sidebarCollapsed">Projects</span>
+      </a>
+
+      <!-- Calendar -->
+      <a
+        routerLink="/calendar"
+        routerLinkActive="bg-[#2D1044] text-white"
+        class="flex items-center px-4 py-2.5 text-sm font-medium rounded-lg text-gray-300 hover:bg-purple-900/50 hover:text-white group transition-all duration-200"
+      >
+        <i
+          class="bx bx-calendar text-xl mr-3"
+          [ngClass]="{ 'mx-auto': sidebarCollapsed }"
+        ></i>
+        <span *ngIf="!sidebarCollapsed">Calendar</span>
+      </a>
+
+      <!-- Documents -->
+      <a
+        routerLink="/documents"
+        routerLinkActive="bg-[#2D1044] text-white"
+        class="flex items-center px-4 py-2.5 text-sm font-medium rounded-lg text-gray-300 hover:bg-purple-900/50 hover:text-white group transition-all duration-200"
+      >
+        <i
+          class="bx bx-file text-xl mr-3"
+          [ngClass]="{ 'mx-auto': sidebarCollapsed }"
+        ></i>
+        <span *ngIf="!sidebarCollapsed">Documents</span>
+      </a>
+    </div>
+  </nav>
+</aside>

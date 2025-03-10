@@ -1,251 +1,33 @@
-<!-- dashboard.component.html -->
 <div
   class="flex min-h-screen relative bg-gradient-to-b from-[#2D1044]/10 to-[#33154b]/5"
 >
-  <!-- Sidebar -->
-  <aside
-    class="sidebar bg-gradient-to-br from-[#2D1044] to-[#33154b]"
-    [ngClass]="{ 'w-64': !sidebarCollapsed, 'w-20': sidebarCollapsed }"
-  >
-    <!-- Animated Border Effect -->
-    <div class="absolute inset-0 overflow-hidden pointer-events-none">
-      <div
-        class="absolute top-0 left-0 h-[2px] w-16 bg-gradient-to-r from-transparent via-pink-500 to-transparent animate-border-light-horizontal"
-      ></div>
-      <div
-        class="absolute top-0 right-0 h-16 w-[2px] bg-gradient-to-b from-transparent via-pink-400 to-transparent animate-border-light-vertical"
-      ></div>
-      <div
-        class="absolute bottom-0 right-0 h-[2px] w-16 bg-gradient-to-l from-transparent via-pink-400 to-transparent animate-border-light-horizontal-reverse"
-      ></div>
-      <div
-        class="absolute bottom-0 left-0 h-16 w-[2px] bg-gradient-to-t from-transparent via-pink-500 to-transparent animate-border-light-vertical-reverse"
-      ></div>
-    </div>
-
-    <!-- Logo and Sidebar Toggle -->
-    <div
-      class="flex items-center justify-between p-4 bg-[#33154b] border-b border-purple-800/30"
-    >
-      <div
-        class="flex items-center"
-        [ngClass]="{ 'justify-center w-full': sidebarCollapsed }"
-      >
-        <img
-          src="/icon-w.png"
-          alt="Logo"
-          class="h-8 w-8 drop-shadow-lg"
-          (click)="toggleSidebar()"
-        />
-        <span
-          *ngIf="!sidebarCollapsed"
-          class="ml-3 text-xl font-semibold text-white font-montserrat"
-          >SIB ADMIN </span
-        >
-      </div>
-      <button
-        *ngIf="!sidebarCollapsed"
-        (click)="toggleSidebar()"
-        class="text-gray-400 hover:text-white"
-      >
-        <i class="bx bx-chevron-left text-xl"></i>
-      </button>
-      <button
-        *ngIf="sidebarCollapsed"
-        (click)="toggleSidebar()"
-        class="absolute -right-3 top-10 bg-purple-700 rounded-full p-1 text-white shadow-lg"
-      >
-        <i class="bx bx-chevron-right text-sm"></i>
-      </button>
-    </div>
-
-    <!-- Navigation -->
-    <nav class="mt-5 px-2">
-      <div class="space-y-2">
-        <!-- Dashboard -->
-        <a
-          routerLink="/dashboard"
-          routerLinkActive="bg-[#2D1044] text-white"
-          class="flex items-center px-4 py-2.5 text-sm font-medium rounded-lg text-gray-300 hover:bg-purple-900/50 hover:text-white group transition-all duration-200"
-        >
-          <i
-            class="bx bxs-dashboard text-xl mr-3"
-            [ngClass]="{ 'mx-auto': sidebarCollapsed }"
-          ></i>
-          <span *ngIf="!sidebarCollapsed">Dashboard</span>
-        </a>
-
-        <!-- Analytics Dropdown -->
-        <div class="space-y-1">
-          <button
-            (click)="toggleMenu('analytics')"
-            class="w-full flex items-center justify-between px-4 py-2.5 text-sm font-medium rounded-lg text-gray-300 hover:bg-purple-900/50 hover:text-white focus:outline-none"
-            [ngClass]="{ 'flex-col': sidebarCollapsed }"
-          >
-            <div
-              class="flex items-center"
-              [ngClass]="{ 'mx-auto': sidebarCollapsed }"
-            >
-              <i
-                class="bx bx-bar-chart-alt text-xl mr-3"
-                [ngClass]="{ 'mx-auto mb-1': sidebarCollapsed }"
-              ></i>
-              <span *ngIf="!sidebarCollapsed">Analytics</span>
-            </div>
-            <i
-              *ngIf="!sidebarCollapsed"
-              class="bx"
-              [ngClass]="{
-                'bx-chevron-down': !openMenus.analytics,
-                'bx-chevron-up': openMenus.analytics
-              }"
-            ></i>
-          </button>
-          <div
-            class="space-y-1 pl-11"
-            *ngIf="openMenus.analytics && !sidebarCollapsed"
-          >
-            <a
-              routerLink="/analytics/overview"
-              routerLinkActive="text-white"
-              class="group flex items-center px-4 py-2 text-sm text-gray-300 rounded-md hover:bg-purple-900/30 hover:text-white"
-            >
-              Overview
-            </a>
-            <a
-              routerLink="/analytics/reports"
-              routerLinkActive="text-white"
-              class="group flex items-center px-4 py-2 text-sm text-gray-300 rounded-md hover:bg-purple-900/30 hover:text-white"
-            >
-              Reports
-            </a>
-            <a
-              routerLink="/analytics/statistics"
-              routerLinkActive="text-white"
-              class="group flex items-center px-4 py-2 text-sm text-gray-300 rounded-md hover:bg-purple-900/30 hover:text-white"
-            >
-              Statistics
-            </a>
-          </div>
-        </div>
-
-        <!-- Team Dropdown -->
-        <div class="space-y-1">
-          <button
-            (click)="toggleMenu('team')"
-            class="w-full flex items-center justify-between px-4 py-2.5 text-sm font-medium rounded-lg text-gray-300 hover:bg-purple-900/50 hover:text-white focus:outline-none"
-            [ngClass]="{ 'flex-col': sidebarCollapsed }"
-          >
-            <div
-              class="flex items-center"
-              [ngClass]="{ 'mx-auto': sidebarCollapsed }"
-            >
-              <i
-                class="bx bx-group text-xl mr-3"
-                [ngClass]="{ 'mx-auto mb-1': sidebarCollapsed }"
-              ></i>
-              <span *ngIf="!sidebarCollapsed">Team</span>
-            </div>
-            <i
-              *ngIf="!sidebarCollapsed"
-              class="bx"
-              [ngClass]="{
-                'bx-chevron-down': !openMenus.team,
-                'bx-chevron-up': openMenus.team
-              }"
-            ></i>
-          </button>
-          <div
-            class="space-y-1 pl-11"
-            *ngIf="openMenus.team && !sidebarCollapsed"
-          >
-            <a
-              routerLink="/team/members"
-              routerLinkActive="text-white"
-              class="group flex items-center px-4 py-2 text-sm text-gray-300 rounded-md hover:bg-purple-900/30 hover:text-white"
-            >
-              Members
-            </a>
-            <a
-              routerLink="/team/calendar"
-              routerLinkActive="text-white"
-              class="group flex items-center px-4 py-2 text-sm text-gray-300 rounded-md hover:bg-purple-900/30 hover:text-white"
-            >
-              Calendar
-            </a>
-            <a
-              routerLink="/team/settings"
-              routerLinkActive="text-white"
-              class="group flex items-center px-4 py-2 text-sm text-gray-300 rounded-md hover:bg-purple-900/30 hover:text-white"
-            >
-              Settings
-            </a>
-          </div>
-        </div>
-
-        <!-- Projects -->
-        <a
-          routerLink="/projects"
-          routerLinkActive="bg-[#2D1044] text-white"
-          class="flex items-center px-4 py-2.5 text-sm font-medium rounded-lg text-gray-300 hover:bg-purple-900/50 hover:text-white group transition-all duration-200"
-        >
-          <i
-            class="bx bx-folder text-xl mr-3"
-            [ngClass]="{ 'mx-auto': sidebarCollapsed }"
-          ></i>
-          <span *ngIf="!sidebarCollapsed">Projects</span>
-        </a>
-
-        <!-- Calendar -->
-        <a
-          routerLink="/calendar"
-          routerLinkActive="bg-[#2D1044] text-white"
-          class="flex items-center px-4 py-2.5 text-sm font-medium rounded-lg text-gray-300 hover:bg-purple-900/50 hover:text-white group transition-all duration-200"
-        >
-          <i
-            class="bx bx-calendar text-xl mr-3"
-            [ngClass]="{ 'mx-auto': sidebarCollapsed }"
-          ></i>
-          <span *ngIf="!sidebarCollapsed">Calendar</span>
-        </a>
-
-        <!-- Documents -->
-        <a
-          routerLink="/documents"
-          routerLinkActive="bg-[#2D1044] text-white"
-          class="flex items-center px-4 py-2.5 text-sm font-medium rounded-lg text-gray-300 hover:bg-purple-900/50 hover:text-white group transition-all duration-200"
-        >
-          <i
-            class="bx bx-file text-xl mr-3"
-            [ngClass]="{ 'mx-auto': sidebarCollapsed }"
-          ></i>
-          <span *ngIf="!sidebarCollapsed">Documents</span>
-        </a>
-      </div>
-    </nav>
-  </aside>
+  <app-sidebar></app-sidebar>
 
   <!-- Main Content -->
-  <main class="flex-1 p-6">
-    <div
-      class="flex justify-between items-center mb-6 bg-[#33154b] px-4 py-2 rounded-lg"
-    >
-      <h1 class="text-2xl font-semibold text-pink-500 font-montserrat">
-        Dashboard
-      </h1>
-      <div class="flex ">
-        <!-- User Profile -->
-        <div
-          class="flex items-center"
-          [ngClass]="{ 'justify-center': sidebarCollapsed }"
-        >
-          <img class="h-8 w-8 rounded-full" src="/shefin.JPG" alt="" />
-        </div>
-      </div>
-    </div>
+  <main
+    class="flex-1 p-6 ml-64 transition-all duration-300"
+    [ngClass]="{ 'ml-64': !sidebarCollapsed, 'ml-20': sidebarCollapsed }"
+  >
+   <!-- Fixed Header -->
+<div
+class="fixed top-4  right-3 z-50 bg-[#33154b] px-6 py-4 rounded-lg shadow-lg"
+[ngClass]="{ 'left-68': !sidebarCollapsed, 'left-24': sidebarCollapsed }"
+>
+<div class="flex justify-between items-center">
+  <h1 class="text-2xl font-semibold text-pink-500 font-montserrat">
+    Dashboard
+  </h1>
+  <div class="flex items-center gap-4">
+    <!-- User Profile -->
+    <img class="h-10 w-10 rounded-full border-2 border-gray-200 p-1" src="/shefin.JPG" alt="User Profile" />
+  </div>
+</div>
+</div>
+
 
     <!-- Stats Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-20">
+      <!-- Repeat for each card -->
       <div
         class="rounded-2xl shadow-lg bg-gray-800/50 shadow-purple-500/20 backdrop-blur-md border border-purple-400/10 p-6 relative overflow-hidden"
       >
@@ -271,7 +53,7 @@
           </div>
         </div>
       </div>
-
+      <!-- Repeat for other cards -->
       <div
         class="rounded-2xl shadow-lg bg-gray-800/50 shadow-purple-500/20 backdrop-blur-md border border-purple-400/10 p-6 relative overflow-hidden"
       >
@@ -352,7 +134,7 @@
     </div>
 
     <!-- Main Content Sections -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
       <!-- Recent Activity -->
       <div
         class="lg:col-span-2 rounded-2xl shadow-lg bg-gray-800/50 shadow-purple-500/20 backdrop-blur-md border border-purple-400/10 p-6 relative overflow-hidden"
@@ -381,6 +163,7 @@
         </div>
 
         <div class="space-y-4">
+          <!-- Repeat for each activity -->
           <div class="flex items-start">
             <div class="flex-shrink-0 bg-purple-900/50 p-2 rounded-lg">
               <i class="bx bx-file text-xl text-purple-300"></i>
@@ -393,7 +176,6 @@
               <p class="text-gray-500 text-xs mt-1">2 hours ago</p>
             </div>
           </div>
-
           <div class="flex items-start">
             <div class="flex-shrink-0 bg-purple-900/50 p-2 rounded-lg">
               <i class="bx bx-user-plus text-xl text-purple-300"></i>
@@ -461,6 +243,7 @@
         </div>
 
         <div class="space-y-4">
+          <!-- Repeat for each task -->
           <div class="bg-gray-700/30 p-4 rounded-lg">
             <div class="flex justify-between">
               <h4 class="text-white font-medium">Update Documentation</h4>
@@ -483,7 +266,6 @@
               </div>
             </div>
           </div>
-
           <div class="bg-gray-700/30 p-4 rounded-lg">
             <div class="flex justify-between">
               <h4 class="text-white font-medium">Design System Updates</h4>
