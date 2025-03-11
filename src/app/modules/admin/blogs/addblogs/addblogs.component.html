@@ -1,0 +1,283 @@
+<!-- Blog Form Component Template -->
+<div
+  class="flex min-h-screen relative bg-gradient-to-b from-[#2D1044]/10 to-[#33154b]/5"
+>
+  <app-sidebar></app-sidebar>
+  <main
+    class="flex-1 p-6 transition-all duration-300"
+    [ngClass]="{ 'ml-64': !sidebarCollapsed, 'ml-20': sidebarCollapsed }"
+  >
+    <!-- Fixed Header -->
+    <div
+      class="fixed top-4 right-3 z-50 bg-[#33154b] px-6 py-4 rounded-lg shadow-lg"
+      [ngClass]="{
+        'left-68 w-[calc(100%-280px)]': !sidebarCollapsed,
+        'left-24 w-[calc(100%-100px)]': sidebarCollapsed
+      }"
+    >
+      <div class="flex justify-between items-center">
+        <h1 class="text-2xl font-semibold text-pink-500 font-montserrat">
+          Add Blog
+        </h1>
+        <div class="flex items-center gap-4">
+          <div class="relative">
+            <button class="text-gray-300 hover:text-white">
+              <i class="bx bx-bell text-xl"></i>
+              <span
+                class="absolute -top-1 -right-1 bg-pink-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center"
+                >3</span
+              >
+            </button>
+          </div>
+          <img
+            class="h-10 w-10 rounded-full border-2 border-pink-500/30 p-1"
+            src="/shefin.JPG"
+            alt="User Profile"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- Blog Form -->
+    <div class="mt-24 max-w-3xl mx-auto">
+      <!-- Form Card -->
+      <div
+        class="bg-[#2D1044]/20 backdrop-blur-sm rounded-lg shadow-lg border border-purple-800/30 overflow-hidden"
+      >
+        <!-- Card Header -->
+        <div class="bg-[#33154b] px-6 py-4 border-b border-purple-800/30">
+          <h2 class="text-lg font-medium text-white">Create New Blog</h2>
+        </div>
+
+        <!-- Form Content -->
+        <div class="p-6">
+          <form
+            [formGroup]="blogForm"
+            (ngSubmit)="onSubmit()"
+            enctype="multipart/form-data"
+          >
+            <!-- Basic Info Section -->
+            <div class="space-y-4 mb-8">
+              <div>
+                <label class="block text-gray-300 text-sm font-medium mb-2"
+                  >Title</label
+                >
+                <input
+                  type="text"
+                  formControlName="title"
+                  class="w-full px-4 py-2 rounded-md bg-purple-900/30 border border-purple-800/50 text-white focus:outline-none focus:ring-2 focus:ring-pink-500/50"
+                  placeholder="Enter blog title"
+                />
+                <div
+                  *ngIf="
+                    blogForm.get('title')?.invalid &&
+                    blogForm.get('title')?.touched
+                  "
+                  class="text-pink-500 text-xs mt-1"
+                >
+                  Title is required
+                </div>
+              </div>
+              <div>
+                <label class="block text-gray-300 text-sm font-medium mb-2"
+                  >Author</label
+                >
+                <input
+                  type="text"
+                  formControlName="author"
+                  class="w-full px-4 py-2 rounded-md bg-purple-900/30 border border-purple-800/50 text-white focus:outline-none focus:ring-2 focus:ring-pink-500/50"
+                  placeholder="Enter author name"
+                />
+              </div>
+
+              <div>
+                <label class="block text-gray-300 text-sm font-medium mb-2"
+                  >Featured Image</label
+                >
+                <div class="flex items-center justify-center w-full">
+                  <label
+                    class="flex flex-col w-full h-32 border-2 border-dashed border-purple-800/50 rounded-lg hover:bg-purple-900/20 hover:border-pink-500/50 transition-all cursor-pointer relative"
+                  >
+                    <div
+                      class="flex flex-col items-center justify-center pt-7"
+                      *ngIf="!previewUrl"
+                    >
+                      <i class="bx bx-upload text-3xl text-gray-400"></i>
+                      <p
+                        class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-300"
+                      >
+                        Upload an image
+                      </p>
+                    </div>
+
+                    <!-- Image preview -->
+                    <img
+                      *ngIf="previewUrl"
+                      [src]="previewUrl"
+                      class="absolute inset-0 w-full h-full object-cover rounded-lg"
+                    />
+
+                    <input
+                      type="file"
+                      (change)="onFileChange($event)"
+                      class="opacity-0 absolute inset-0 w-full h-full cursor-pointer"
+                    />
+                  </label>
+                </div>
+
+                <div *ngIf="selectedFile" class="mt-2 text-sm text-gray-400">
+                  Selected: {{ selectedFile.name }}
+                </div>
+
+                <!-- Show validation error if no image is selected -->
+                <div
+                  *ngIf="!selectedFile && blogForm.touched"
+                  class="text-pink-500 text-xs mt-1"
+                >
+                  Featured image is required
+                </div>
+              </div>
+            </div>
+
+            <!-- Content Blocks -->
+            <div class="mb-6">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-gray-300 font-medium">Content Blocks</h3>
+                <button
+                  type="button"
+                  (click)="addContentBlock()"
+                  class="flex items-center text-sm bg-purple-900/50 hover:bg-purple-900/80 text-white px-3 py-1.5 rounded-md transition-colors"
+                >
+                  <i class="bx bx-plus mr-1"></i> Add Block
+                </button>
+              </div>
+
+              <div formArrayName="content" class="space-y-4">
+                <div
+                  *ngFor="
+                    let section of contentControls.controls;
+                    let i = index
+                  "
+                  [formGroupName]="i"
+                >
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
+                    <div>
+                      <label
+                        class="block text-gray-400 text-xs font-medium mb-1"
+                        >Content Type</label
+                      >
+                      <select
+                        formControlName="type"
+                        class="w-full px-3 py-1.5 rounded-md bg-purple-900/30 border border-purple-800/50 text-purple-200 text-sm"
+                      >
+                        <option value="">Select Type</option>
+                        <option value="paragraph">Paragraph</option>
+                        <option value="heading">Heading</option>
+                        <option value="list">List</option>
+                        <option value="image">Image</option>
+                      </select>
+                      <div
+                        *ngIf="
+                          section.get('type')?.invalid &&
+                          section.get('type')?.touched
+                        "
+                        class="text-pink-500 text-xs mt-1"
+                      >
+                        Content type is required
+                      </div>
+                    </div>
+
+                    <div *ngIf="section.get('type')?.value === 'heading'">
+                      <label
+                        class="block text-gray-400 text-xs font-medium mb-1"
+                        >Heading Level</label
+                      >
+                      <input
+                        type="number"
+                        formControlName="level"
+                        min="2"
+                        max="6"
+                        class="w-full px-3 py-1.5 rounded-md bg-purple-900/30 border border-purple-800/50 text-white text-sm"
+                      />
+                    </div>
+                  </div>
+
+                  <div *ngIf="section.get('type')?.value === 'image'">
+                    <label class="block text-gray-400 text-xs font-medium mb-1"
+                      >Image URL</label
+                    >
+                    <input
+                      type="text"
+                      formControlName="data"
+                      class="w-full px-3 py-1.5 rounded-md bg-purple-900/30 border border-purple-800/50 text-white text-sm"
+                    />
+                    <div
+                      *ngIf="
+                        section.get('data')?.invalid &&
+                        section.get('data')?.touched
+                      "
+                      class="text-pink-500 text-xs mt-1"
+                    >
+                      Image URL is required
+                    </div>
+                  </div>
+
+                  <div *ngIf="section.get('type')?.value !== 'image'">
+                    <label class="block text-gray-400 text-xs font-medium mb-1"
+                      >Content</label
+                    >
+                    <textarea
+                      formControlName="data"
+                      class="w-full px-3 py-1.5 rounded-md bg-purple-900/30 border border-purple-800/50 text-white text-sm h-24"
+                    ></textarea>
+                    <div
+                      *ngIf="
+                        section.get('data')?.invalid &&
+                        section.get('data')?.touched
+                      "
+                      class="text-pink-500 text-xs mt-1"
+                    >
+                      Content is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                *ngIf="contentControls.controls.length === 0"
+                class="text-center py-8 border border-dashed border-purple-800/30 rounded-lg"
+              >
+                <i class="bx bx-file text-3xl text-gray-500 mb-2"></i>
+                <p class="text-gray-500">No content blocks added yet</p>
+                <button
+                  type="button"
+                  (click)="addContentBlock()"
+                  class="mt-3 text-sm text-pink-500 hover:text-pink-400"
+                >
+                  Add your first content block
+                </button>
+              </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="flex justify-end space-x-3 mt-8">
+              <button
+                type="button"
+                (click)="cancel()"
+                class="px-4 py-2 bg-transparent border border-purple-800/50 text-gray-300 rounded-md hover:bg-purple-900/20 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                class="px-6 py-2 bg-gradient-to-r from-pink-500 to-pink-600 text-white rounded-md hover:from-pink-600 hover:to-pink-700 focus:ring-2 focus:ring-pink-500/50 transition-all shadow-lg"
+              >
+                Publish Blog
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

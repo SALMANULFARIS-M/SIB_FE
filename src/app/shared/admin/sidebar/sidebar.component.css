@@ -5,3 +5,9 @@ aside {
   top: 0;
   overflow-y: auto; /* Enables scrolling if content overflows */
 }
+
+.active {
+  background-color: #3a0963; /* Your sidebar active color */
+  color: #ec4899 !important; /* Ensure text color changes */
+}
+

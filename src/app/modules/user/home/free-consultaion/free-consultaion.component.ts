@@ -38,29 +38,9 @@ export class FreeConsultaionComponent implements OnInit, AfterViewInit {
 
   }
   ngAfterViewInit(): void {
-    // if (isPlatformBrowser(this.platformId)) {
-    //   this.setupIntersectionObserver();
-    // }
-  }
-  // setupIntersectionObserver(): void {
-  //   const observer = new IntersectionObserver(
-  //     (entries) => {
-  //       entries.forEach((entry) => {
-  //         if (entry.isIntersecting) {
-  //           this.isVisible = true;
-  //           observer.unobserve(entry.target);
-  //         }
-  //       });
-  //     },
-  //     {
-  //       root: null,
-  //       threshold: 0.4,
-  //       rootMargin: '0px 0px -100px 0px',
-  //     }
-  //   );
 
-  //   observer.observe(this.consultationContainer.nativeElement);
-  // }
+  }
+
   openForm(): void {
     this.showForm = true;
   }

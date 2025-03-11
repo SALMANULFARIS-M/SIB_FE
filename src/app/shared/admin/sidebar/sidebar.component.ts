@@ -1,11 +1,12 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Component, HostListener, Inject, PLATFORM_ID } from '@angular/core';
 import { AdminService } from '../../../core/services/admin.service';
+import { Router, RouterModule } from '@angular/router';
 
 
 @Component({
   selector: 'app-sidebar',
-  imports: [CommonModule],
+  imports: [CommonModule,RouterModule],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
 })
@@ -18,7 +19,7 @@ export class SidebarComponent {
   };
   isMobile = false;
   constructor(private service: AdminService, @Inject(PLATFORM_ID) private platformId: object,
-  ) {
+  private router:Router) {
     // Listen for sidebar collapse changes
     if (isPlatformBrowser(this.platformId)) {
       this.checkScreenSize(); // Initial check
@@ -27,6 +28,7 @@ export class SidebarComponent {
       });
     }
   }
+
   @HostListener('window:resize', ['$event'])
   onResize() {
     this.checkScreenSize();
@@ -39,9 +41,6 @@ export class SidebarComponent {
       this.isMobile = screenWidth < 640;
       if (this.isMobile&& !this.sidebarCollapsed) {
         this.service.setSidebarState(true); // Use service to update state
-      }else{
-        this.service.setSidebarState(false);
-
       }
     }
   }
@@ -64,4 +63,5 @@ export class SidebarComponent {
     // Toggle the specified menu
     this.openMenus[menu as keyof typeof this.openMenus] = !this.openMenus[menu as keyof typeof this.openMenus];
   }
+
 }

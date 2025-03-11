@@ -1,0 +1,105 @@
+<div class="flex min-h-screen relative bg-gradient-to-b from-[#2D1044]/10 to-[#33154b]/5">
+  <app-sidebar></app-sidebar>
+
+  <main
+    class="flex-1 p-6 transition-all duration-300"
+    [ngClass]="{ 'ml-64': !sidebarCollapsed, 'ml-20': sidebarCollapsed }"
+  >
+    <!-- Fixed Header -->
+    <div
+      class="fixed top-4 right-3 z-50 bg-[#33154b] px-6 py-4 rounded-lg shadow-lg w-[calc(100%-280px)]"
+      [ngClass]="{ 'left-68': !sidebarCollapsed, 'left-24': sidebarCollapsed }"
+    >
+      <div class="flex justify-between items-center">
+        <h1 class="text-2xl font-semibold text-pink-500 font-montserrat">Blogs</h1>
+        <div class="flex items-center gap-4">
+          <img class="h-10 w-10 rounded-full border-2 border-gray-200 p-1" src="/shefin.JPG" alt="User Profile" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Blog List Section -->
+    <div class="bg-[#33154b]/20 backdrop-blur-sm rounded-xl p-6 border border-purple-800/20 mt-20 relative">
+      <!-- Animated Border Effect -->
+      <div class="absolute inset-0 rounded-xl overflow-hidden pointer-events-none">
+        <div class="absolute top-0 left-0 h-[2px] w-16 bg-gradient-to-r from-transparent via-pink-500 to-transparent animate-border-light-horizontal"></div>
+        <div class="absolute top-0 right-0 h-16 w-[2px] bg-gradient-to-b from-transparent via-pink-400 to-transparent animate-border-light-vertical"></div>
+        <div class="absolute bottom-0 right-0 h-[2px] w-16 bg-gradient-to-l from-transparent via-pink-400 to-transparent animate-border-light-horizontal-reverse"></div>
+        <div class="absolute bottom-0 left-0 h-16 w-[2px] bg-gradient-to-t from-transparent via-pink-500 to-transparent animate-border-light-vertical-reverse"></div>
+      </div>
+
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-xl font-semibold text-pink-500 font-montserrat">All Blogs</h2>
+        <div class="flex space-x-2">
+          <select class="bg-purple-900/30 text-white border border-purple-800/30 px-3 py-2 rounded-lg focus:ring-2 focus:ring-pink-500/50 text-sm">
+            <option> Newest</option>
+            <option> Oldest</option>
+          </select>
+        </div>
+      </div>
+
+      <div *ngIf="blogs.length === 0" class="text-center py-12">
+        <i class="bx bx-edit-alt text-6xl text-gray-400 mb-3"></i>
+        <h3 class="text-xl font-medium text-gray-300 mb-2">No blogs available</h3>
+        <p class="text-gray-400 max-w-md mx-auto mb-4">Start creating your first blog post to see it appear here.</p>
+        <button
+          (click)="addNewBlog()"
+          class="bg-pink-500 hover:bg-pink-600 text-white px-6 py-2 rounded-lg shadow-lg hover:shadow-pink-500/30 transition-all duration-300"
+        >
+          Create New Blog
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Blog Cards -->
+        <div
+          *ngFor="let blog of blogs"
+          class="bg-gradient-to-br from-[#2D1044]/60 to-[#33154b]/60 rounded-xl shadow-lg overflow-hidden group hover:shadow-pink-500/20 hover:shadow-lg transition-all duration-300 border border-purple-800/20 relative"
+        >
+          <!-- Animated Border on Hover -->
+          <div class="absolute inset-0 overflow-hidden pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+            <div class="absolute top-0 left-0 h-[2px] w-12 bg-gradient-to-r from-transparent via-pink-500 to-transparent animate-border-light-horizontal"></div>
+            <div class="absolute top-0 right-0 h-12 w-[2px] bg-gradient-to-b from-transparent via-pink-400 to-transparent animate-border-light-vertical"></div>
+            <div class="absolute bottom-0 right-0 h-[2px] w-12 bg-gradient-to-l from-transparent via-pink-400 to-transparent animate-border-light-horizontal-reverse"></div>
+            <div class="absolute bottom-0 left-0 h-12 w-[2px] bg-gradient-to-t from-transparent via-pink-500 to-transparent animate-border-light-vertical-reverse"></div>
+          </div>
+
+          <!-- Blog Image -->
+          <div class="relative h-48">
+            <img [src]="blog.featuredImage" alt="Blog Image" class="w-full h-full object-cover" />
+            <div class="absolute top-3 right-3 bg-pink-500 text-white text-xs px-2 py-1 rounded">{{ blog.category }}</div>
+          </div>
+
+          <!-- Blog Content -->
+          <div class="p-4">
+            <h3 class="text-lg font-semibold text-white mb-2 line-clamp-1">{{ blog.title }}</h3>
+            <div class="flex justify-between items-center">
+              <span class="text-xs text-gray-400">{{ blog.date }}</span>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex justify-between items-center mt-4 pt-4 border-t border-purple-800/30">
+              <button (click)="editBlog(blog._id)" class="bg-purple-900/50 text-white text-xs px-3 py-1.5 rounded hover:bg-purple-900/70 transition">
+                <i class="bx bx-edit text-sm mr-1"></i> Edit
+              </button>
+              <button (click)="deleteBlog(blog._id)" class="bg-pink-500/10 text-pink-500 text-xs px-3 py-1.5 rounded hover:bg-pink-500/20 transition">
+                <i class="bx bx-trash text-sm mr-1"></i> Delete
+              </button>
+              <button (click)="viewBlog(blog._id)" class="bg-blue-500/10 text-blue-400 text-xs px-3 py-1.5 rounded hover:bg-blue-500/20 transition">
+                <i class="bx bx-show text-sm mr-1"></i> View
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating Add Blog Button -->
+    <button
+      (click)="addNewBlog()"
+      class="fixed bottom-8 right-8 bg-pink-500 text-white px-6 py-3 rounded-full shadow-lg hover:bg-pink-600 transition"
+    >
+      + Add Blog
+    </button>
+  </main>
+</div>

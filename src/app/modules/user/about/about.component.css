@@ -1,1 +1,22 @@
 
+ /* Custom CSS for circular layout */
+ .card-circle {
+  background: linear-gradient(to bottom right, #2D1044, #431f60);
+  padding: 1rem;
+  width: 15rem; /* Adjust as needed */
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.card-circle:hover {
+  transform: scale(1.05);
+}
+
+@media (min-width: 768px) {
+  .card-circle {
+    position: absolute;
+  }
+}

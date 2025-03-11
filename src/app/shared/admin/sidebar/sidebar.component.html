@@ -1,8 +1,11 @@
 <!-- Sidebar -->
 <aside
   class="fixed left-0 top-0 h-full bg-gradient-to-br from-[#2D1044] to-[#33154b] transition-all duration-300"
-  [ngClass]="{ 'w-64': !sidebarCollapsed && isLargeScreen, 'w-20': sidebarCollapsed || !isLargeScreen }"
-  >
+  [ngClass]="{
+    'w-64': !sidebarCollapsed && isLargeScreen,
+    'w-20': sidebarCollapsed || !isLargeScreen
+  }"
+>
   <!-- Animated Border Effect -->
   <div class="absolute inset-0 overflow-hidden pointer-events-none">
     <div
@@ -46,7 +49,6 @@
     >
       <i class="bx bx-chevron-left text-xl"></i>
     </button>
-
   </div>
 
   <!-- Navigation -->
@@ -54,8 +56,8 @@
     <div class="space-y-2">
       <!-- Dashboard -->
       <a
-        routerLink="/dashboard"
-        routerLinkActive="bg-[#2D1044] text-white"
+
+      routerLink="/admin/dashboard" routerLinkActive="active"
         class="flex items-center px-4 py-2.5 text-sm font-medium rounded-lg text-gray-300 hover:bg-purple-900/50 hover:text-white group transition-all duration-200"
       >
         <i
@@ -186,18 +188,17 @@
         <span *ngIf="!sidebarCollapsed">Projects</span>
       </a>
 
-      <!-- Calendar -->
+      <!-- Blogs-->
       <a
-        routerLink="/calendar"
-        routerLinkActive="bg-[#2D1044] text-white"
-        class="flex items-center px-4 py-2.5 text-sm font-medium rounded-lg text-gray-300 hover:bg-purple-900/50 hover:text-white group transition-all duration-200"
-      >
-        <i
-          class="bx bx-calendar text-xl mr-3"
-          [ngClass]="{ 'mx-auto': sidebarCollapsed }"
-        ></i>
-        <span *ngIf="!sidebarCollapsed">Calendar</span>
-      </a>
+
+      routerLink="/admin/blogs-list" routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: false }"
+      class="flex items-center px-4 py-2.5 text-sm font-medium rounded-lg text-gray-300 hover:bg-purple-900/50 hover:text-white group transition-all duration-200"
+    >
+      <i class="bx bx-edit text-xl mr-3" [ngClass]="{ 'mx-auto': sidebarCollapsed }"></i>
+      <span *ngIf="!sidebarCollapsed">Blogs</span>
+    </a>
+
 
       <!-- Documents -->
       <a

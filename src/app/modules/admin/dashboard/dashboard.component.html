@@ -8,22 +8,25 @@
     class="flex-1 p-6 ml-64 transition-all duration-300"
     [ngClass]="{ 'ml-64': !sidebarCollapsed, 'ml-20': sidebarCollapsed }"
   >
-   <!-- Fixed Header -->
-<div
-class="fixed top-4  right-3 z-50 bg-[#33154b] px-6 py-4 rounded-lg shadow-lg"
-[ngClass]="{ 'left-68': !sidebarCollapsed, 'left-24': sidebarCollapsed }"
->
-<div class="flex justify-between items-center">
-  <h1 class="text-2xl font-semibold text-pink-500 font-montserrat">
-    Dashboard
-  </h1>
-  <div class="flex items-center gap-4">
-    <!-- User Profile -->
-    <img class="h-10 w-10 rounded-full border-2 border-gray-200 p-1" src="/shefin.JPG" alt="User Profile" />
-  </div>
-</div>
-</div>
-
+    <!-- Fixed Header -->
+    <div
+      class="fixed top-4 right-3 z-50 bg-[#33154b] px-6 py-4 rounded-lg shadow-lg"
+      [ngClass]="{ 'left-68': !sidebarCollapsed, 'left-24': sidebarCollapsed }"
+    >
+      <div class="flex justify-between items-center">
+        <h1 class="text-2xl font-semibold text-pink-500 font-montserrat">
+          Dashboard
+        </h1>
+        <div class="flex items-center gap-4">
+          <!-- User Profile -->
+          <img
+            class="h-10 w-10 rounded-full border-2 border-gray-200 p-1"
+            src="/shefin.JPG"
+            alt="User Profile"
+          />
+        </div>
+      </div>
+    </div>
 
     <!-- Stats Cards -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-20">
