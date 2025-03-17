@@ -76,10 +76,10 @@
     <!-- Blog cards grid -->
     <section class="py-16">
       <div class="max-w-6xl mx-auto">
-        <div class="space-y-16 px-4 sm:px-6">
+        <div class=" px-4 sm:px-6">
           <article
             *ngFor="let blog of blogs"
-            class="bg-[#2D1044]/70 backdrop-blur-md hover:bg-[#2D1044]/90 p-6 rounded-2xl shadow-sm shadow-[#8E4CCB]/20 transition-all duration-300 group max-w-sm mx-auto md:max-w-none grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 xl:gap-16 items-center relative overflow-hidden"
+            class="bg-[#2D1044]/70 mb-8 backdrop-blur-md hover:bg-[#2D1044]/90 p-6 rounded-2xl shadow-sm shadow-[#8E4CCB]/20 transition-all duration-300 group max-w-sm mx-auto md:max-w-none grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 xl:gap-16 items-center relative overflow-hidden"
           >
             <!-- Image -->
             <a class="relative block group" [routerLink]="['/blog', blog.slug]">
