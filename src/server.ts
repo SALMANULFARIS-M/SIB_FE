@@ -7,6 +7,7 @@ import {
 import express from 'express';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { getPrerenderParams } from './slug.config'; // Adjust the import path
 
 const serverDistFolder = dirname(fileURLToPath(import.meta.url));
 const browserDistFolder = resolve(serverDistFolder, '../browser');
@@ -40,13 +41,23 @@ app.use(
 /**
  * Handle all other requests by rendering the Angular application.
  */
-app.use('/**', (req, res, next) => {
-  angularApp
-    .handle(req)
-    .then((response) =>
-      response ? writeResponseToNodeResponse(response, res) : next(),
-    )
-    .catch(next);
+app.use('/**', async (req, res, next) => {
+  // Check if the request is for a prerendered route
+  const slugs = await getPrerenderParams();
+  const isPrerenderedRoute = slugs.some((param: { slug: string; }) => req.url.includes(param.slug));
+
+  if (isPrerenderedRoute) {
+    // Serve the prerendered page
+    angularApp
+      .handle(req)
+      .then((response) =>
+        response ? writeResponseToNodeResponse(response, res) : next(),
+      )
+      .catch(next);
+  } else {
+    // Handle dynamic routes
+    next();
+  }
 });
 
 /**
@@ -63,4 +74,7 @@ if (isMainModule(import.meta.url)) {
 /**
  * The request handler used by the Angular CLI (dev-server and during build).
  */
+
+
+
 export const reqHandler = createNodeRequestHandler(app);
