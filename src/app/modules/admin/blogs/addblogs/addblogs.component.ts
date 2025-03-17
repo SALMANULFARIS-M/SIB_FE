@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { AdminService } from '../../../../core/services/admin.service';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { SidebarComponent } from '../../../../shared/admin/sidebar/sidebar.component';
-import { FormBuilder, FormGroup, FormArray, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { FormBuilder, FormGroup, FormArray, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -18,10 +17,11 @@ export class AddblogsComponent {
   blogForm: FormGroup;
   selectedFile: File | null = null;
   previewUrl: string | null = null;
-
+  isLoading: boolean = false; // Add this variable to track loading state
+  categories: string[] = ["Technology", "Lifestyle", "Education"];
 
   constructor(private service: AdminService, private router: Router,
-    private fb: FormBuilder, private toastr: ToastrService
+    private fb: FormBuilder, private toastr: ToastrService, private location: Location
   ) {
     this.service.collapsedState.subscribe((state) => {
       this.sidebarCollapsed = state;
@@ -29,6 +29,7 @@ export class AddblogsComponent {
     this.blogForm = this.fb.group({
       title: ['', Validators.required],
       author: ['', Validators.required],
+      category: ['', Validators.required],
       featuredImage: [null, Validators.required],
       content: this.fb.array([]), // Initialize as an empty array
     });
@@ -44,7 +45,7 @@ export class AddblogsComponent {
       this.fb.group({
         type: ['', Validators.required],
         data: ['', Validators.required],
-        level: [null],
+        headingLevel: ['1'],
       })
     );
   }
@@ -52,6 +53,7 @@ export class AddblogsComponent {
   removeContentBlock(index: number) {
     this.contentControls.removeAt(index);
   }
+
 
   // Handle File Upload & Preview
   onFileChange(event: any) {
@@ -78,6 +80,7 @@ export class AddblogsComponent {
     this.addContentBlock();
     this.selectedFile = null;
     this.previewUrl = null;
+    this.location.back();
   }
 
   // Submit Form
@@ -87,10 +90,11 @@ export class AddblogsComponent {
       this.toastr.error('Please fill all fields', 'Validation Error');
       return;
     }
-
+    this.isLoading = true; // Add this variable to track loading state
     const formData = new FormData();
     formData.append('title', this.blogForm.value.title);
     formData.append('author', this.blogForm.value.author);
+    formData.append('category', this.blogForm.value.category);
     formData.append('featuredImage', this.selectedFile!);
     formData.append('content', JSON.stringify(this.blogForm.value.content));
 
@@ -98,16 +102,16 @@ export class AddblogsComponent {
     this.service.addBlog(formData).subscribe({
       next: (response) => {
         if (response.success) {
+          this.isLoading = false;
           this.toastr.success('Blog added successfully!', 'Success');
           this.blogForm.reset();
           this.cancel()
         }
       },
       error: (error) => {
-        console.error('Error adding blog', error);
+        this.isLoading = false;
         this.toastr.error('Failed to add blog. Try again later.', 'Error');
       }
     });
   }
-
 }

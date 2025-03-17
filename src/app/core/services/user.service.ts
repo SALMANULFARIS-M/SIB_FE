@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
+import { Blog } from '../../modules/user/user.interface';
 // import { environment } from '../../../environments/environment';
 
 
@@ -11,7 +12,8 @@ import { environment } from '../../../environments/environment.development';
 export class UserService {
 
   constructor(private http: HttpClient) { }
-  private apiUrl =environment.apiUrl;
+  // private apiUrl =environment.apiUrl;
+  private apiUrl ='http://localhost:5000';
 
   apply(formData: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/user/apply`, JSON.stringify(formData), {
@@ -28,10 +30,14 @@ export class UserService {
       headers: { 'Content-Type': 'application/json' }
     });
   }
-  getBlogs(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/user/getBlogs` );
+  latestBlogs(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/user/latestBlogs` );
   }
-  getBlogById(id:any): Observable<any> {
-    return this.http.get(`${this.apiUrl}/user/blogs-${id}` );
+  getBlogBySlug(slug: string): Observable<Blog> {
+    return this.http.get<Blog>(`${this.apiUrl}/user/blog/${slug}`); // Correct API URL format
   }
+  getBlogsWithQuery(page: number, limit: number, search: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/user/blogs?page=${page}&limit=${limit}&search=${search}`);
+   }
+
 }

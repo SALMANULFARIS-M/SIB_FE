@@ -1,160 +1,169 @@
 <app-nav></app-nav>
 
-<!-- Snippet -->
+<!-- Blog Header Section -->
 <section
-  class="flex flex-col justify-center antialiased bg-[#2D1044] text-gray-200 min-h-screen py-40"
+  class="relative flex flex-col justify-center items-center text-gray-200 py-28 bg-gradient-to-br from-[#2D1044] to-[#1A0A2E]"
 >
-<div class="text-center">
-  <h2
-    class="text-5xl text-[#d5a1ff] mb-8 font-bold relative inline-block playfair w-fit"
-  >
-   Our Blogs
+  <!-- Animated particles effect -->
+  <div class="absolute inset-0 overflow-hidden">
+    <div
+      class="absolute top-1/4 left-1/4 h-2 w-2 rounded-full bg-[#6D3A9E]/40 animate-float"
+    ></div>
+    <div
+      class="absolute top-3/4 left-1/2 h-3 w-3 rounded-full bg-[#8E4CCB]/30 animate-float-delay"
+    ></div>
+    <div
+      class="absolute top-1/3 right-1/4 h-2 w-2 rounded-full bg-[#5A2D8C]/40 animate-float-reverse"
+    ></div>
+    <div
+      class="absolute bottom-1/4 right-1/3 h-4 w-4 rounded-full bg-[#7B3FAF]/20 animate-pulse"
+    ></div>
+  </div>
+
+  <!-- Main title with animated underline -->
+  <h2 class="text-5xl text-[#C79AFF] font-bold playfair relative w-fit z-10">
+    Our Blogs
     <span
-      class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full"
+      class="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-[#8E4CCB] to-[#6D3A9E] rounded-full animate-expand-width"
     ></span>
   </h2>
-</div>
-  <div class="max-w-6xl mx-auto p-4 sm:px-6 h-full mb-5">
-    <!-- Blog post -->
-    <article
-      class="bg-black/60 backdrop-blur-lg hover:bg-black/30 p-6 rounded-2xl shadow-lg shadow-purple-500/20 transition-all duration-300 group transform hover:scale-105 max-w-sm mx-auto md:max-w-none grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 xl:gap-16 items-center"
-    >
-      <a class="relative block group" href="#0">
-        <div
-          class="absolute inset-0 bg-gray-500 hidden md:block transform md:translate-y-2 md:translate-x-4 xl:translate-y-4 xl:translate-x-8 group-hover:translate-x-0 group-hover:translate-y-0 transition duration-700 ease-out pointer-events-none"
-          aria-hidden="true"
-        ></div>
-        <figure
-          class="relative h-0 pb-[56.25%] md:pb-[75%] lg:pb-[56.25%] overflow-hidden transform md:-translate-y-2 xl:-translate-y-4 group-hover:translate-x-0 group-hover:translate-y-0 transition duration-700 ease-out"
-        >
-          <img
-            class="absolute inset-0 w-full h-full object-cover transform hover:scale-105 transition duration-700 ease-out"
-            src="https://growthists.com/wp-content/uploads/2025/01/importance-of-distance-education.webp"
-            width="540"
-            height="303"
-            alt="Blog post"
-          />
-        </figure>
-      </a>
-      <div>
-        <header>
-          <h3 class="text-2xl lg:text-3xl font-bold leading-tight mb-2">
-            <a
-              class="hover:text-gray-100 transition duration-150 ease-in-out"
-              href="#0"
-              >Designing a functional workflow at home.</a
-            >
-          </h3>
-        </header>
-        <p class="text-lg text-gray-400 flex-grow">
-          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-          dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat.
-        </p>
-        <footer class="flex flex-col items-start mt-4">
-          <div>
-            <span class="text-gray-700"> - </span>
-            <span class="text-gray-500">Mar 1, 2025</span>
-          </div>
 
-          <a href="#" class="inline-flex items-center text-pink-400 hover:text-white transition-colors">
-            Read More
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-            </svg>
-          </a>
-        </footer>
-      </div>
-    </article>
-  </div>
-  <div class="max-w-6xl mx-auto p-4 sm:px-6 h-full mb-5">
-    <!-- Blog post -->
-    <article
-      class="bg-black/60 backdrop-blur-lg hover:bg-black/30 p-6 rounded-2xl shadow-lg shadow-purple-500/20 transition-all duration-300 group transform hover:scale-105 max-w-sm mx-auto md:max-w-none grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 xl:gap-16 items-center"
-    >
-      <a class="relative block group" href="#0">
-        <div
-          class="absolute inset-0 bg-gray-500 hidden md:block transform md:translate-y-2 md:translate-x-4 xl:translate-y-4 xl:translate-x-8 group-hover:translate-x-0 group-hover:translate-y-0 transition duration-700 ease-out pointer-events-none"
-          aria-hidden="true"
-        ></div>
-        <figure
-          class="relative h-0 pb-[56.25%] md:pb-[75%] lg:pb-[56.25%] overflow-hidden transform md:-translate-y-2 xl:-translate-y-4 group-hover:translate-x-0 group-hover:translate-y-0 transition duration-700 ease-out"
+  <!-- Optional subtitle -->
+  <p class="mt-4 text-[#C79AFF]/80 text-center max-w-2xl montserrat">
+    Explore the latest insights, guides, and stories about studying in Bengaluru
+  </p>
+</section>
+
+<!-- Blog Posts Section -->
+<section class="py-20 min-h-screen bg-[url('/bg-img.png')] bg-cover bg-fixed">
+  <div class="max-w-7xl mx-auto px-6">
+    <!-- Category/Filter tabs -->
+    <div class="flex flex-wrap justify-center gap-4 mb-5">
+      <button
+        class="px-6 py-2 rounded-full bg-[#2D1044] text-[#C79AFF] hover:bg-[#6D3A9E] transition-all duration-300 focus:ring-2 focus:ring-[#8E4CCB]/50 active"
+      >
+        All
+      </button>
+    </div>
+
+    <!-- Search bar -->
+    <div class="relative max-w-md mx-auto">
+      <input
+        type="text"
+        (input)="updateSearch($event)"
+        class="w-full py-3 px-5 pr-12 bg-gray-200 backdrop-blur-md border border-[#8E4CCB]/30 rounded-full text-[#2D1044] placeholder-[#2D1044] focus:outline-none focus:ring-2 focus:ring-[#8E4CCB]/50"
+      />
+      <button
+        class="absolute right-4 top-1/2 transform -translate-y-1/2 text-[#2D1044] hover:text-black transition-colors"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
         >
-          <img
-            class="absolute inset-0 w-full h-full object-cover transform hover:scale-105 transition duration-700 ease-out"
-            src="https://growthists.com/wp-content/uploads/2025/01/importance-of-distance-education.webp"
-            width="540"
-            height="303"
-            alt="Blog post"
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
           />
-        </figure>
-      </a>
-      <div>
-        <header>
-          <h3 class="text-2xl lg:text-3xl font-bold leading-tight mb-2">
-            <a
-              class="hover:text-gray-100 transition duration-150 ease-in-out"
-              href="#0"
-              >Designing a functional workflow at home.</a
-            >
-          </h3>
-        </header>
-        <p class="text-lg text-gray-400 flex-grow">
-          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-          dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat.
-        </p>
-        <footer class="flex items-center mt-4">
-          <div>
-            <span class="text-gray-700"> - </span>
-            <span class="text-gray-500">Mar 1, 2025</span>
-          </div>
-        </footer>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Blog cards grid -->
+    <section class="py-16">
+      <div class="max-w-6xl mx-auto">
+        <div class="space-y-16 px-4 sm:px-6">
+          <article
+            *ngFor="let blog of blogs"
+            class="bg-black/60 backdrop-blur-md hover:bg-black/80 p-6 rounded-2xl shadow-sm shadow-[#8E4CCB]/20 transition-all duration-300 group max-w-sm mx-auto md:max-w-none grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 xl:gap-16 items-center relative overflow-hidden"
+          >
+            <!-- Image -->
+            <a class="relative block group" [routerLink]="['/blog', blog.slug]">
+              <figure
+                class="relative h-0 pb-[56.25%] md:pb-[75%] lg:pb-[56.25%] overflow-hidden transform md:-translate-y-2 xl:-translate-y-4 group-hover:translate-x-0 group-hover:translate-y-0 transition duration-700 ease-out rounded-xl"
+              >
+                <img
+                  class="absolute inset-0 w-full h-full object-cover transform hover:scale-105 transition duration-700 ease-out"
+                  [src]="blog.featuredImage"
+                  [alt]="blog.title"
+                />
+              </figure>
+            </a>
+
+            <!-- Content -->
+            <div>
+              <header>
+                <h3 class="text-2xl lg:text-3xl font-bold leading-tight mb-2">
+                  <a
+                    class="poppins-regular transition duration-150 ease-in-out text-white hover:text-purple-500 hover:underline"
+                    [routerLink]="['/blog', blog.slug]"
+                  >
+                    {{ blog.title }}
+                  </a>
+                </h3>
+              </header>
+              <p class="text-lg text-gray-300 flex-grow">
+                {{ blog.content[0].data | slice : 0 : 80 }}...
+              </p>
+              <footer class="flex flex-col items-start mt-4">
+                <div>
+                  <span class="text-gray-700"> - </span>
+                  <span class="text-gray-300">{{
+                    blog.publishedDate | date : "MMM d, y"
+                  }}</span>
+                </div>
+
+                <a
+                  [routerLink]="['/blog', blog.slug]"
+                  class="inline-flex items-center text-[#8E4CCB] hover:text-purple-400 transition-colors mt-2 group"
+                >
+                  Read More
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-4 w-4 ml-1 transform transition-transform duration-300 group-hover:translate-x-1"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M14 5l7 7m0 0l-7 7m7-7H3"
+                    />
+                  </svg>
+                </a>
+              </footer>
+            </div>
+          </article>
+        </div>
       </div>
-    </article>
-  </div>
-  <div class="max-w-6xl mx-auto p-4 sm:px-6 h-full mb-5">
-    <!-- Blog post -->
-    <article
-      class="bg-black/60 backdrop-blur-lg hover:bg-black/30 p-6 rounded-2xl shadow-lg shadow-purple-500/20 transition-all duration-300 group transform hover:scale-105 max-w-sm mx-auto md:max-w-none grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 xl:gap-16 items-center"
-    >
-      <a class="relative block group" href="#0">
-        <div
-          class="absolute inset-0 bg-gray-500 hidden md:block transform md:translate-y-2 md:translate-x-4 xl:translate-y-4 xl:translate-x-8 group-hover:translate-x-0 group-hover:translate-y-0 transition duration-700 ease-out pointer-events-none"
-          aria-hidden="true"
-        ></div>
-        <figure
-          class="relative h-0 pb-[56.25%] md:pb-[75%] lg:pb-[56.25%] overflow-hidden transform md:-translate-y-2 xl:-translate-y-4 group-hover:translate-x-0 group-hover:translate-y-0 transition duration-700 ease-out"
-        >
-          <img
-            class="absolute inset-0 w-full h-full object-cover transform hover:scale-105 transition duration-700 ease-out"
-            src="https://growthists.com/wp-content/uploads/2025/01/importance-of-distance-education.webp"
-            width="540"
-            height="303"
-            alt="Blog post"
-          />
-        </figure>
-      </a>
-      <div>
-        <header>
-          <h3 class="text-2xl lg:text-3xl font-bold leading-tight mb-2">
-            <a
-              class="hover:text-gray-100 transition duration-150 ease-in-out"
-              href="#0"
-              >Designing a functional workflow at home.</a
-            >
-          </h3>
-        </header>
-        <p class="text-lg text-gray-400 flex-grow">
-          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-          dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat.
-        </p>
-        <footer class="flex items-center mt-4">
-          <div>
-            <span class="text-gray-700"> - </span>
-            <span class="text-gray-500">Mar 1, 2025</span>
-          </div>
-        </footer>
-      </div>
-    </article>
+    </section>
+    <!-- Pagination -->
+    <div class="flex justify-center mt-16">
+      <nav class="flex space-x-2">
+        <button (click)="setPage(currentPage - 1)" [disabled]="currentPage === 1"
+          class="w-10 h-10 flex items-center justify-center rounded-full bg-[#2D1044] text-[#C79AFF] hover:bg-[#6D3A9E] transition">
+          «
+        </button>
+
+        <button *ngFor="let page of [].constructor(totalPages); let i = index"
+          (click)="setPage(i + 1)" [class.bg-[#6D3A9E]]="currentPage === i + 1"
+          class="w-10 h-10 flex items-center justify-center rounded-full bg-[#2D1044] text-[#C79AFF] hover:bg-[#6D3A9E] transition">
+          {{ i + 1 }}
+        </button>
+
+        <button (click)="setPage(currentPage + 1)" [disabled]="currentPage === totalPages"
+          class="w-10 h-10 flex items-center justify-center rounded-full bg-[#2D1044] text-[#C79AFF] hover:bg-[#6D3A9E] transition">
+          »
+        </button>
+      </nav>
+    </div>
   </div>
 </section>
+
 <app-footer></app-footer>

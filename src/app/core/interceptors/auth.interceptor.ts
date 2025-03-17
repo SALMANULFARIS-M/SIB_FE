@@ -9,8 +9,5 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
       ? {} // Don't set Content-Type for multipart requests
       : { 'Content-Type': 'application/json' },
   });
-
-  console.log('HTTP Request:', clonedRequest);
-
   return next(clonedRequest);
 };

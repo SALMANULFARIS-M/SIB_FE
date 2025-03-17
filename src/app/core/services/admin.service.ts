@@ -12,9 +12,9 @@ export class AdminService {
   private collapsed = new BehaviorSubject<boolean>(false);
   collapsedState = this.collapsed.asObservable();
 
- constructor(private http: HttpClient,@Inject(PLATFORM_ID) private platformId: Object) { }
+  constructor(private http: HttpClient, @Inject(PLATFORM_ID) private platformId: Object) { }
   // private apiUrl =environment.apiUrl;
-  private apiUrl ='http://localhost:5000';
+  private apiUrl = 'http://localhost:5000';
   toggleSidebar() {
     this.collapsed.next(!this.collapsed.value);
   }
@@ -29,5 +29,12 @@ export class AdminService {
       return of({ error: 'File upload is not supported in SSR mode' });
     }
   }
+  getBlogs(page: number, limit: number, search: string = ''): Observable<any> {
+    return this.http.get(`${this.apiUrl}/admin/sib/blogs?page=${page}&limit=${limit}&search=${search}`);
+  }
+  deleteBlog(blogId: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/admin/sib/deleteblog/${blogId}`);
+  }
+
 
 }

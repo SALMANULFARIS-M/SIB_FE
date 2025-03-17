@@ -30,14 +30,14 @@
       <!-- Blog Header Content -->
       <div class="relative z-10">
         <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold montserrat mb-6">
-          The Future of Education in Bengaluru: Trends and Innovations
+          {{ blog?.title }}
         </h1>
 
         <!-- Featured Image -->
         <div class="w-full h-96 overflow-hidden rounded-xl mb-8">
           <img
-            src="https://growthists.com/wp-content/uploads/2025/01/importance-of-distance-education.webp"
-            alt="Future of Education in Bengaluru"
+            [src]="blog?.featuredImage"
+            [alt]="blog?.title"
             class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
           />
         </div>
@@ -52,276 +52,105 @@
       <article
         class="lg:col-span-2 bg-black/60 backdrop-blur-lg rounded-2xl shadow-lg shadow-purple-500/20 p-8 hover:bg-black/30 transition-all duration-300"
       >
-        <!-- Animated Border Effect -->
-        <div
-          class="absolute inset-0 rounded-2xl overflow-hidden pointer-events-none border-2 border-purple-400/10"
-        >
-          <!-- Animated light particles that travel around the entire border -->
-          <div
-            class="absolute top-0 left-0 h-[2px] w-16 bg-gradient-to-r from-transparent via-pink-400 to-transparent animate-border-light-horizontal"
-          ></div>
-          <div
-            class="absolute top-0 right-0 h-16 w-[2px] bg-gradient-to-b from-transparent via-pink-400 to-transparent animate-border-light-vertical"
-          ></div>
-          <div
-            class="absolute bottom-0 right-0 h-[2px] w-16 bg-gradient-to-l from-transparent via-pink-400 to-transparent animate-border-light-horizontal-reverse"
-          ></div>
-          <div
-            class="absolute bottom-0 left-0 h-16 w-[2px] bg-gradient-to-t from-transparent via-pink-400 to-transparent animate-border-light-vertical-reverse"
-          ></div>
-        </div>
         <div class="prose prose-lg prose-invert max-w-none">
-          <p class="text-xl leading-relaxed">
-            Bengaluru, known as India's Silicon Valley, has been at the
-            forefront of technological innovation for decades. Now, the city's
-            educational institutions are embracing cutting-edge approaches to
-            prepare students for the rapidly evolving workforce.
-          </p>
+          <ng-container *ngIf="blog">
+            <ng-container *ngFor="let item of blog.content">
+              <!-- Render Heading -->
+              <h1
+                *ngIf="item.type === 'heading' && item.headingLevel === 1"
+                class="text-3xl md:text-4xl playfair-regular font-bold"
+              >
+                {{ item.data }}
+              </h1>
+              <h2
+                *ngIf="item.type === 'heading' && item.headingLevel === 2"
+                class="ms-2 text-lg md:text-xl montserrat-normal text-gray-200"
+              >
+                {{ item.data }}
+              </h2>
+              <!-- Render Paragraph -->
+              <p
+                *ngIf="item.type === 'paragraph'"
+                class="text-lg leading-relaxed poppins-light text-gray-200 text-justify mb-5"
+              >
+                {{ item.data }}
+              </p>
 
-          <h2>The Rise of Tech-Integrated Learning</h2>
-          <p>
-            With the concentration of tech giants and startups, Bengaluru's
-            educational landscape is uniquely positioned to bridge the gap
-            between academia and industry. Universities and colleges across the
-            city are incorporating technologies like artificial intelligence,
-            virtual reality, and data science into their curricula.
-          </p>
-          <blockquote>
-            "The future of education in Bengaluru is not just about learning new
-            technologies, but learning through technology. Our classrooms are
-            evolving into collaborative spaces where students engage with
-            real-world problems using cutting-edge tools."
-            <cite
-              >— Dr. Rajesh Kumar, Dean of Engineering at a leading Bengaluru
-              university</cite
-            >
-          </blockquote>
-
-          <h2>Industry-Academia Partnerships</h2>
-          <p>
-            What sets Bengaluru apart is the seamless collaboration between
-            educational institutions and the tech industry. Companies like
-            Infosys, Wipro, and IBM have established innovation centers within
-            university campuses, allowing students to work on real-world
-            projects while completing their degrees.
-          </p>
-          <p>
-            These partnerships have led to the development of specialized
-            programs tailored to industry needs:
-          </p>
-          <ul>
-            <li>
-              AI and Machine Learning bootcamps co-designed with leading tech
-              companies
-            </li>
-            <li>
-              Internship-integrated degree programs where students spend
-              alternate semesters in classrooms and workplaces
-            </li>
-            <li>
-              Research incubators funded by industry partners to solve real
-              business challenges
-            </li>
-            <li>
-              Entrepreneurship programs with mentorship from successful startup
-              founders
-            </li>
-          </ul>
-
-          <h2>Global Collaborations and International Exposure</h2>
-          <p>
-            Bengaluru's top institutions have established partnerships with
-            universities around the world, offering students international
-            exposure without leaving the city. Exchange programs, virtual
-            collaborative projects, and dual-degree options with universities in
-            the US, Europe, and Australia have become increasingly common.
-          </p>
-
-          <div class="my-8 p-6 bg-purple-900/30 rounded-xl">
-            <h3 class="text-xl font-bold mb-4">
-              Key Statistics: Education in Bengaluru
-            </h3>
-            <ul class="space-y-2">
-              <li><strong>80+</strong> Engineering colleges</li>
-              <li><strong>350+</strong> International academic partnerships</li>
-              <li>
-                <strong>₹2,500 Crore</strong> invested in EdTech startups in
-                2024
-              </li>
-              <li><strong>92%</strong> placement rate at top institutions</li>
-              <li>
-                <strong>40%</strong> increase in research output over the last 5
-                years
-              </li>
-            </ul>
-          </div>
-
-          <h2>The Role of EdTech Startups</h2>
-          <p>
-            The city's booming EdTech sector is revolutionizing how education is
-            delivered. From personalized learning platforms to assessment tools
-            powered by AI, Bengaluru's startups are creating solutions that
-            enhance the educational experience both inside and outside
-            traditional classrooms.
-          </p>
-          <p>
-            Students in Bengaluru have the unique advantage of being early
-            adopters of these innovative tools, often getting opportunities to
-            beta-test new educational technologies before they reach the global
-            market.
-          </p>
-
-          <h2>Challenges and Opportunities</h2>
-          <p>
-            Despite the rapid advancements, the education sector in Bengaluru
-            faces challenges:
-          </p>
-          <ul>
-            <li>
-              Bridging the digital divide to ensure all students have access to
-              technology
-            </li>
-            <li>
-              Balancing traditional pedagogical methods with tech-driven
-              approaches
-            </li>
-            <li>
-              Ensuring faculty members are equipped to teach using the latest
-              technologies
-            </li>
-            <li>
-              Addressing the infrastructure needs of growing student populations
-            </li>
-          </ul>
-          <p>
-            These challenges, however, present opportunities for innovation.
-            Community initiatives, government programs, and corporate social
-            responsibility projects are working to address these gaps, making
-            quality education more accessible across the city.
-          </p>
-
-          <h2>Looking Ahead: What Students Can Expect</h2>
-          <p>
-            For students considering Bengaluru for their higher education
-            journey, the future looks promising. The city's educational
-            ecosystem is evolving to offer:
-          </p>
-          <ul>
-            <li>
-              Hyper-personalized learning experiences tailored to individual
-              strengths and weaknesses
-            </li>
-            <li>
-              Flexible degree programs that allow students to customize their
-              learning pathways
-            </li>
-            <li>
-              Seamless transitions between education and employment through
-              industry-integrated curricula
-            </li>
-            <li>
-              Access to global knowledge networks and international
-              collaborations
-            </li>
-            <li>
-              Opportunities to contribute to cutting-edge research with
-              real-world applications
-            </li>
-          </ul>
-
-          <h2>Conclusion</h2>
-          <p>
-            Bengaluru's educational landscape is a microcosm of the future of
-            learning. By blending technological innovation with academic rigor,
-            the city's institutions are creating an ecosystem where students
-            don't just prepare for the future—they help shape it.
-          </p>
-          <p>
-            For aspiring students, choosing Bengaluru means more than just
-            earning a degree; it means becoming part of a dynamic community at
-            the intersection of education, technology, and innovation.
-          </p>
+              <!-- Render List -->
+              <div  *ngIf="item.type === 'list'" class="my-8 p-6 bg-purple-900/30 rounded-xl">
+                <ul
+                  *ngIf="isArray(item.data) && item.data.length"
+                  class="list-disc pl-5"
+                >
+                  <li
+                    *ngFor="let listItem of item.data"
+                    class="text-lg poppins-light text-gray-200 mb-2"
+                  >
+                    {{ listItem }}
+                  </li>
+                </ul>
+              </div>
+              <!-- Render Image -->
+              <div *ngIf="item.type === 'image'" class="my-6">
+                <img
+                  [src]="item.data"
+                  [alt]="'Blog image'"
+                  class="rounded-lg shadow-md w-full"
+                />
+              </div>
+            </ng-container>
+          </ng-container>
         </div>
 
-        <!-- Share and Comments -->
+        <!-- Back Button -->
         <div class="mt-12 pt-8 border-t border-purple-500/20">
           <div class="flex flex-wrap items-end justify-end">
             <button
               class="mt-4 sm:mt-0 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 px-6 py-3 rounded-full text-white font-medium transition-all transform hover:scale-105 flex items-center"
+              (click)="goBack()"
             >
               <i class="bx bx-arrow-back me-2"></i> Go Back
             </button>
           </div>
         </div>
       </article>
-
       <!-- Sidebar -->
       <aside class="space-y-8">
         <!-- Related Articles -->
         <div
           class="bg-white/10 backdrop-blur-lg hover:bg-white/20 transition-all duration-300 rounded-2xl shadow-lg shadow-purple-500/20 p-6"
         >
-          <h3 class="text-xl font-bold montserrat mb-4">Related Articles</h3>
+          <h3 class="text-xl font-bold montserrat mb-4">Our Articles</h3>
           <div class="space-y-4">
-            <a href="#" class="block group">
-              <div class="flex gap-3">
-                <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
-                  <img
-                    src="https://growthists.com/wp-content/uploads/2025/01/tech-campus-thumbnail.webp"
-                    alt="Tech Campus"
-                    class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <div>
-                  <h4
-                    class="font-medium group-hover:text-pink-400 transition-colors"
+            <div *ngIf="latestBlogs?.length">
+              <a
+                *ngFor="let blog of latestBlogs"
+                [routerLink]="['/blog', blog.slug]"
+                class="block group"
+              >
+                <div class="flex gap-3 mt-5">
+                  <div
+                    class="w-20 h-14 rounded-lg overflow-hidden flex-shrink-0"
                   >
-                    Top 10 Engineering Colleges in Bengaluru
-                  </h4>
-                  <p class="text-sm text-violet-300 mt-1">February 15, 2025</p>
+                    <img
+                      [src]="blog.featuredImage"
+                      [alt]="blog.title"
+                      class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                    />
+                  </div>
+                  <div>
+                    <h4
+                      class="font-medium group-hover:text-pink-400 transition-colors"
+                    >
+                      {{ blog.title }}
+                    </h4>
+                    <p class="text-sm text-violet-300 mt-1">
+                      {{ blog.publishedDate | date : "MMMM d, y" }}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </a>
-
-            <a href="#" class="block group">
-              <div class="flex gap-3">
-                <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
-                  <img
-                    src="https://growthists.com/wp-content/uploads/2025/01/student-housing-thumbnail.webp"
-                    alt="Student Housing"
-                    class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <div>
-                  <h4
-                    class="font-medium group-hover:text-pink-400 transition-colors"
-                  >
-                    Student Housing Guide: Best Areas to Stay in Bengaluru
-                  </h4>
-                  <p class="text-sm text-violet-300 mt-1">January 28, 2025</p>
-                </div>
-              </div>
-            </a>
-
-            <a href="#" class="block group">
-              <div class="flex gap-3">
-                <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
-                  <img
-                    src="https://growthists.com/wp-content/uploads/2025/01/scholarship-thumbnail.webp"
-                    alt="Scholarships"
-                    class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <div>
-                  <h4
-                    class="font-medium group-hover:text-pink-400 transition-colors"
-                  >
-                    Complete Guide to Scholarships for International Students
-                  </h4>
-                  <p class="text-sm text-violet-300 mt-1">January 12, 2025</p>
-                </div>
-              </div>
-            </a>
+              </a>
+            </div>
           </div>
         </div>
 

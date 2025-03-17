@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, OnInit, PLATFORM_ID, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { NavComponent } from "../../../shared/user/nav/nav.component";
 import { FooterComponent } from "../../../shared/user/footer/footer.component";
 import { CommonModule, isPlatformBrowser } from '@angular/common';
@@ -7,13 +7,15 @@ import { ApplyComponent } from '../../../shared/user/apply/apply.component';
 import { FreeConsultaionComponent } from './free-consultaion/free-consultaion.component';
 import { fadeIn, fadeInSequential, fadeInUp, flipText, listAnimation, scaleUp, slideInFromLeft, slideInFromRight, slideUp, staggerFadeIn, zoomIn } from '../../../shared/constants/animation';
 import { faUniversity, faSchool, faBookOpen, faGlobe, faBriefcase, faLaptop, faHome, faBuilding, faCalendarAlt, faComments } from '@fortawesome/free-solid-svg-icons';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
+import { UserService } from '../../../core/services/user.service';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, NavComponent, FooterComponent, FontAwesomeModule, ApplyComponent, FreeConsultaionComponent],
+  imports: [CommonModule, NavComponent, FooterComponent, FontAwesomeModule, ApplyComponent, FreeConsultaionComponent, RouterModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   animations: [fadeIn, slideInFromLeft, fadeInUp, scaleUp, slideInFromRight,
@@ -27,30 +29,30 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('rightImage', { static: false }) rightImage!: ElementRef;
   @ViewChild('countUp', { static: false }) countUp!: ElementRef;
   @ViewChild('opportunitySection', { static: false }) opportunitySection!: ElementRef;
-  @ViewChild('vissionAndMiissson') vissionAndMiissson!: ElementRef;
+  @ViewChild('visionAndMission') visionAndMission!: ElementRef;
   @ViewChild('rightCarousel') rightCarousel!: ElementRef;
   @ViewChild('journey') journey!: ElementRef;
 
-
+  // UI Control Properties
+  flipState: 'normal' | 'flipped' = 'normal';
+  showApplyComponent = false;
+  isVisionFlipped = false;
+  isMissionFlipped = false;
 
   // Animation state properties
   headerVisible = false;
   rightImageVisible = false;
   leftContentVisible = false;
-  flipState: 'normal' | 'flipped' = 'normal';
   counterVisible: boolean[] = []; // Initialize as boolean array
   currentValues: number[] = [];
   opportunityVisible: boolean[] = [];
   intervalId: any;
   currentSlide = 0;
-  showApplyComponent = false;
-  isVisionFlipped = false;
-  isMissionFlipped = false;
   cardVisible = false
   leftVisible = false;
   rightVisible = false;
   journeyVisible = false;
-
+  blogs: any[] = [];
 
   stats = [
     { value: 100, label: 'Partner Colleges', prefix: '+' },
@@ -79,11 +81,11 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     { image: '/img_3.JPG', text: 'Receiving Award for best admission consultants', alt: 'Slide 3' },
   ];
 
-  constructor(@Inject(PLATFORM_ID) private platformId: any, private router: Router) { }
+  constructor(@Inject(PLATFORM_ID) private platformId: any, private router: Router, private service: UserService,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
-
       // ✅ Step 1: Check URL on initial load
       const currentUrl = this.router.url.split('?')[0]; // Normalize URL (Remove query params)
       this.showApplyComponent = currentUrl === '/apply';
@@ -100,6 +102,15 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       this.counterVisible = new Array(this.stats.length).fill(false);
       this.currentValues = new Array(this.stats.length).fill(0);
       this.opportunityVisible = new Array(this.opportunities.length).fill(false);
+      this.service.latestBlogs().subscribe({
+        next: (response) => {
+          if (response.success) {
+            this.blogs = response.blogs.slice(0, 3);
+          }
+        },
+        error: () => {
+        }
+      });
     }
   }
 
@@ -130,8 +141,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         if (this.rightImage?.nativeElement) {
           this.setupIntersectionObserver(this.rightImage.nativeElement, 'rightImageVisible');
         }
-        if (this.vissionAndMiissson?.nativeElement) {
-          this.setupIntersectionObserver(this.vissionAndMiissson.nativeElement, 'leftVisible');
+        if (this.visionAndMission?.nativeElement) {
+          this.setupIntersectionObserver(this.visionAndMission.nativeElement, 'leftVisible');
         }
         if (this.rightCarousel?.nativeElement) {
           this.setupIntersectionObserver(this.rightCarousel?.nativeElement, 'rightVisible');

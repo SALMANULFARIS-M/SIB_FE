@@ -6,13 +6,15 @@
   width: 15rem; /* Adjust as needed */
   border-radius: 1rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 3px solid rgba(165, 98, 243, 0.1);
   text-align: center;
   transition: transform 0.3s ease;
 }
 
 .card-circle:hover {
   transform: scale(1.05);
+  background: linear-gradient(to bottom right, #AC94D2, #431f60);
+
 }
 
 @media (min-width: 768px) {

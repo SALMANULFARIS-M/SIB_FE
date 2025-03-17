@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { SidebarComponent } from '../../../shared/admin/sidebar/sidebar.component';
 import { AdminService } from '../../../core/services/admin.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
-
+import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
+import { Blog } from "../../user/user.interface";
 @Component({
   selector: 'app-blogs',
   imports: [SidebarComponent, CommonModule],
@@ -11,50 +13,121 @@ import { Router } from '@angular/router';
   styleUrl: './blogs.component.css'
 })
 
-export class BlogsComponent {
-  sidebarCollapsed = false;
+export class BlogsComponent implements OnInit {
+  sidebarCollapsed: boolean = false;
+  blogs: Blog[] = [];
+  currentPage = 1;
+  totalPages = 1;
+  searchQuery = '';
+  isLoading: boolean = true;
+  constructor(
+    private readonly service: AdminService,
+    private readonly router: Router,
+    private readonly toastr: ToastrService,
+    @Inject(PLATFORM_ID) private readonly platformId: object
+  ) {
+    this.subscribeToSidebarState();
+  }
 
-  constructor(private service: AdminService, private router: Router) {
-    this.service.collapsedState.subscribe((state) => {
+  ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.loadBlogs();
+    }
+  }
+
+  /** Subscribe to sidebar collapse state */
+  private subscribeToSidebarState(): void {
+    this.service.collapsedState.subscribe((state: boolean) => {
       this.sidebarCollapsed = state;
     });
   }
 
-
-
-  blogs = [
-    {
-      _id: "1",
-      title: "Sample Blog",
-      featuredImage: "https://via.placeholder.com/300",
-      content: [{ type: "paragraph", data: "This is a sample blog post." }],
-      author: "salman",
-      date: "asdf",
-      category: "super"
-    },
-  ];
-
-  // Function to navigate to add new blog page
-  addNewBlog() {
-    this.router.navigate(["/admin/blogs-list/blog-add"]);
+  /** Fetches blogs from the API */
+  private loadBlogs(): void {
+    this.service.getBlogs(this.currentPage, 6, this.searchQuery).subscribe({
+      next: (response) => {
+        if (response?.success) {
+          this.blogs = response.blogs;
+          this.totalPages = response.totalPages;
+                } else {
+          this.toastr.error('Unexpected response format.', 'Error');
+        }
+      },
+      error: (error) => {
+        this.toastr.error('Failed to fetch blogs. Please try again.', 'Error');
+      },
+      complete: () => {
+        this.isLoading = false; // Data fetching completed
+      }
+    });
   }
 
-  // Function to navigate to edit page
-  editBlog(blogId: string) {
-    this.router.navigate(["/admin/edit-blog", blogId]);
-  }
-  // Function to navigate to edit page
-  viewBlog(blogId: string) {
-    this.router.navigate(["/admin/edit-blog", blogId]);
+  /** Navigates to the Add Blog page */
+  addNewBlog(): void {
+    this.router.navigate(['/admin/blogs-list/blog-add']);
   }
 
-  // Function to delete a blog
-  deleteBlog(blogId: string) {
-    if (confirm("Are you sure you want to delete this blog?")) {
-      // Call API to delete blog (implement backend call here)
-      console.log("Deleted blog with ID:", blogId);
+  /** Navigates to the Edit Blog page */
+  editBlog(blogId: any): void {
+    this.router.navigate(['/admin/edit-blog', blogId]);
+  }
+
+  /** Navigates to the View Blog page */
+  viewBlog(blogId: any): void {
+    this.router.navigate(['/admin/view-blog', blogId]);
+  }
+
+  /** Deletes a blog with confirmation */
+  deleteBlog(blogId: any): void {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You won’t be able to revert this!',
+      icon: 'warning',
+      showCancelButton: true,
+      background: '#2D1044',
+      color: '#d5a1ff',
+      confirmButtonColor: 'rgb(204, 30, 30)',
+      cancelButtonColor: '#0f66b8',
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.performDeleteBlog(blogId);
+      }
+    });
+  }
+
+  /** Performs blog deletion */
+  private performDeleteBlog(blogId: string): void {
+    this.service.deleteBlog(blogId).subscribe({
+      next: () => {
+        this.blogs = this.blogs.filter(blog => blog._id !== blogId);
+        this.toastr.success('Blog deleted successfully!', 'Success');
+      },
+      error: (error) => {
+        console.error('Error deleting blog:', error);
+        this.toastr.error('Failed to delete blog. Please try again.', 'Error');
+      }
+    });
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.loadBlogs();
     }
   }
 
+  prevPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.loadBlogs();
+    }
+  }
+
+  searchBlogs() {
+    this.currentPage = 1;
+    this.loadBlogs();
+  }
 
 }
