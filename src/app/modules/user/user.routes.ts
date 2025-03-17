@@ -12,5 +12,5 @@ export const USER_ROUTES: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'apply', component: HomeComponent },
   { path: 'blogs', component: BlogComponent },
-  { path: 'blog/:slug', component: BlogDetailsComponent,data: { renderMode: 'dynamic' } }
+  { path: 'blog/:slug', component: BlogDetailsComponent, }
 ];
