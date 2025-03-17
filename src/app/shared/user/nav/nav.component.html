@@ -34,11 +34,10 @@
       <!-- Desktop Menu -->
       <div class="hidden md:flex items-center gap-6">
         <a
-          *ngFor="let item of ['Home', 'About', 'Contact','blogs']"
+          *ngFor="let item of ['Home', 'About', 'Contact', 'Blogs']"
           class="text-violet-100 hover:text-white px-4 py-2 montserrat rounded-full text-base font-medium relative group transform transition-all duration-300 hover:scale-105 hover:bg-purple-700/40"
           [routerLink]="item === 'Home' ? '/' : '/' + item.toLowerCase()"
-          routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
+          [ngClass]="{'active': isBlogActive() && item === 'Blogs'}"
         >
           {{ item }}
           <span
@@ -46,6 +45,8 @@
           ></span>
         </a>
       </div>
+
+
 
       <!-- Mobile Menu Button -->
       <div class="md:hidden">

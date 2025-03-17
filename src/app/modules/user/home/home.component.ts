@@ -104,11 +104,9 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       this.opportunityVisible = new Array(this.opportunities.length).fill(false);
       this.service.latestBlogs().subscribe({
         next: (response) => {
-          if (response.success) {
-            this.blogs = response.blogs.slice(0, 3);
-          }
+            this.blogs = response;
         },
-        error: () => {
+        error: (err) => {
         }
       });
     }

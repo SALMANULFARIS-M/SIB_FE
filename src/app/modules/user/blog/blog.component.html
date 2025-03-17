@@ -51,7 +51,7 @@
       <input
         type="text"
         (input)="updateSearch($event)"
-        class="w-full py-3 px-5 pr-12 bg-gray-200 backdrop-blur-md border border-[#8E4CCB]/30 rounded-full text-[#2D1044] placeholder-[#2D1044] focus:outline-none focus:ring-2 focus:ring-[#8E4CCB]/50"
+        class="w-full py-3 px-5 pr-12 bg-gray-200 backdrop-blur-md border-4 border-[#2D1044]/60 rounded-full text-[#2D1044] placeholder-[#2D1044] focus:outline-none focus:ring-2 focus:ring-[#8E4CCB]/50"
       />
       <button
         class="absolute right-4 top-1/2 transform -translate-y-1/2 text-[#2D1044] hover:text-black transition-colors"
@@ -79,7 +79,7 @@
         <div class="space-y-16 px-4 sm:px-6">
           <article
             *ngFor="let blog of blogs"
-            class="bg-black/60 backdrop-blur-md hover:bg-black/80 p-6 rounded-2xl shadow-sm shadow-[#8E4CCB]/20 transition-all duration-300 group max-w-sm mx-auto md:max-w-none grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 xl:gap-16 items-center relative overflow-hidden"
+            class="bg-[#2D1044]/70 backdrop-blur-md hover:bg-[#2D1044]/90 p-6 rounded-2xl shadow-sm shadow-[#8E4CCB]/20 transition-all duration-300 group max-w-sm mx-auto md:max-w-none grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 xl:gap-16 items-center relative overflow-hidden"
           >
             <!-- Image -->
             <a class="relative block group" [routerLink]="['/blog', blog.slug]">
@@ -99,7 +99,7 @@
               <header>
                 <h3 class="text-2xl lg:text-3xl font-bold leading-tight mb-2">
                   <a
-                    class="poppins-regular transition duration-150 ease-in-out text-white hover:text-purple-500 hover:underline"
+                    class="poppins-regular transition duration-150 ease-in-out text-white hover:text-purple-400 hover:underline"
                     [routerLink]="['/blog', blog.slug]"
                   >
                     {{ blog.title }}
@@ -119,7 +119,7 @@
 
                 <a
                   [routerLink]="['/blog', blog.slug]"
-                  class="inline-flex items-center text-[#8E4CCB] hover:text-purple-400 transition-colors mt-2 group"
+                  class="inline-flex text-lg items-center text-purple-300 hover:text-purple-500 transition-colors merriweather-regular mt-2 group"
                 >
                   Read More
                   <svg
@@ -146,19 +146,28 @@
     <!-- Pagination -->
     <div class="flex justify-center mt-16">
       <nav class="flex space-x-2">
-        <button (click)="setPage(currentPage - 1)" [disabled]="currentPage === 1"
-          class="w-10 h-10 flex items-center justify-center rounded-full bg-[#2D1044] text-[#C79AFF] hover:bg-[#6D3A9E] transition">
+        <button
+          (click)="setPage(currentPage - 1)"
+          [disabled]="currentPage === 1"
+          class="w-10 h-10 flex items-center justify-center rounded-full bg-[#2D1044] text-[#C79AFF] hover:bg-[#6D3A9E] transition"
+        >
           «
         </button>
 
-        <button *ngFor="let page of [].constructor(totalPages); let i = index"
-          (click)="setPage(i + 1)" [class.bg-[#6D3A9E]]="currentPage === i + 1"
-          class="w-10 h-10 flex items-center justify-center rounded-full bg-[#2D1044] text-[#C79AFF] hover:bg-[#6D3A9E] transition">
+        <button
+          *ngFor="let page of [].constructor(totalPages); let i = index"
+          (click)="setPage(i + 1)"
+          [class.bg-[#6D3A9E]]="currentPage === i + 1"
+          class="w-10 h-10 flex items-center justify-center rounded-full bg-purple-400 text-black hover:bg-[#6D3A9E] transition"
+        >
           {{ i + 1 }}
         </button>
 
-        <button (click)="setPage(currentPage + 1)" [disabled]="currentPage === totalPages"
-          class="w-10 h-10 flex items-center justify-center rounded-full bg-[#2D1044] text-[#C79AFF] hover:bg-[#6D3A9E] transition">
+        <button
+          (click)="setPage(currentPage + 1)"
+          [disabled]="currentPage === totalPages"
+          class="w-10 h-10 flex items-center justify-center rounded-full bg-[#2D1044] text-[#C79AFF] hover:bg-[#6D3A9E] transition"
+        >
           »
         </button>
       </nav>

@@ -53,9 +53,7 @@ export class BlogDetailsComponent implements OnInit {
   fetchLatestBlogs() {
     this.service.latestBlogs().subscribe({
       next: (response) => {
-        if (response.success) {
-          this.latestBlogs = response.blogs.slice(0, 3);
-        }
+          this.latestBlogs = response;
       },
       error: (err) => {
         console.error('Error fetching blogs:', err);

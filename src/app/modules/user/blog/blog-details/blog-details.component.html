@@ -7,7 +7,7 @@
   <!-- Blog Header with animated border effect (matching the navbar style) -->
   <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative">
     <div
-      class="bg-black/60 backdrop-blur-lg rounded-2xl shadow-lg shadow-purple-500/20 p-8 relative overflow-hidden"
+      class="bg-black/60 backdrop-blur-lg rounded-2xl shadow-md shadow-purple-500/20 p-8 relative overflow-hidden"
     >
       <!-- Animated Border Effect -->
       <div
@@ -50,7 +50,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
       <!-- Main Content -->
       <article
-        class="lg:col-span-2 bg-black/60 backdrop-blur-lg rounded-2xl shadow-lg shadow-purple-500/20 p-8 hover:bg-black/30 transition-all duration-300"
+        class="lg:col-span-2 bg-black/60 backdrop-blur-lg rounded-2xl shadow-md shadow-purple-500/20 p-8 hover:bg-black/80 transition-all duration-300"
       >
         <div class="prose prose-lg prose-invert max-w-none">
           <ng-container *ngIf="blog">
@@ -77,7 +77,7 @@
               </p>
 
               <!-- Render List -->
-              <div  *ngIf="item.type === 'list'" class="my-8 p-6 bg-purple-900/30 rounded-xl">
+              <div  *ngIf="item.type === 'list'" class="my-2 p-4 bg-purple-900/30 rounded-xl mb-4">
                 <ul
                   *ngIf="isArray(item.data) && item.data.length"
                   class="list-disc pl-5"
@@ -118,7 +118,7 @@
       <aside class="space-y-8">
         <!-- Related Articles -->
         <div
-          class="bg-white/10 backdrop-blur-lg hover:bg-white/20 transition-all duration-300 rounded-2xl shadow-lg shadow-purple-500/20 p-6"
+          class="bg-black/60 backdrop-blur-lg hover:bg-black/80 transition-all duration-300 rounded-2xl shadow-md shadow-purple-500/20 p-6"
         >
           <h3 class="text-xl font-bold montserrat mb-4">Our Articles</h3>
           <div class="space-y-4">
@@ -156,7 +156,7 @@
 
         <!-- Popular Tags -->
         <div
-          class="bg-white/10 backdrop-blur-lg hover:bg-white/20 transition-all duration-300 rounded-2xl shadow-lg shadow-purple-500/20 p-6"
+          class="bg-black/60 backdrop-blur-lg hover:bg-black/80 transition-all duration-300 rounded-2xl shadow-sm shadow-purple-500/20 p-6"
         >
           <h3 class="text-xl font-bold montserrat mb-4">
             Popular Instagram Tags

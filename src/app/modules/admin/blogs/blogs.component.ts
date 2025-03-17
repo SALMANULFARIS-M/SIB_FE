@@ -48,7 +48,7 @@ export class BlogsComponent implements OnInit {
       next: (response) => {
         if (response?.success) {
           this.blogs = response.blogs;
-          this.totalPages = response.totalPages;
+          this.totalPages = response.pagination.totalPages;
                 } else {
           this.toastr.error('Unexpected response format.', 'Error');
         }
