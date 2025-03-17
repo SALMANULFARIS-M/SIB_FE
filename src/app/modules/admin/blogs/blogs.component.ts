@@ -129,5 +129,17 @@ export class BlogsComponent implements OnInit {
     this.currentPage = 1;
     this.loadBlogs();
   }
+  sortBlogs(event: any) {
+    const sortBy = event.target.value;
+
+    this.blogs.sort((a, b) => {
+      const dateA = a.publishedDate ? new Date(a.publishedDate).getTime() : 0;
+      const dateB = b.publishedDate ? new Date(b.publishedDate).getTime() : 0;
+
+      if (!dateA || !dateB) return 0; // Prevent sorting issues if date is missing
+
+      return sortBy === 'newest' ? dateB - dateA : dateA - dateB;
+    });
+  }
 
 }

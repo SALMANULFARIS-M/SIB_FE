@@ -56,8 +56,8 @@
     <div class="space-y-2">
       <!-- Dashboard -->
       <a
-
-      routerLink="/admin/dashboard" routerLinkActive="active"
+        routerLink="/admin/dashboard"
+        routerLinkActive="active"
         class="flex items-center px-4 py-2.5 text-sm font-medium rounded-lg text-gray-300 hover:bg-purple-900/50 hover:text-white group transition-all duration-200"
       >
         <i
@@ -190,15 +190,17 @@
 
       <!-- Blogs-->
       <a
-
-      routerLink="/admin/blogs-list" routerLinkActive="active"
-      [routerLinkActiveOptions]="{ exact: false }"
-      class="flex items-center px-4 py-2.5 text-sm font-medium rounded-lg text-gray-300 hover:bg-purple-900/50 hover:text-white group transition-all duration-200"
-    >
-      <i class="bx bx-edit text-xl mr-3" [ngClass]="{ 'mx-auto': sidebarCollapsed }"></i>
-      <span *ngIf="!sidebarCollapsed">Blogs</span>
-    </a>
-
+        routerLink="/admin/blogs-list"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: false }"
+        class="flex items-center px-4 py-2.5 text-sm font-medium rounded-lg text-gray-300 hover:bg-purple-900/50 hover:text-white group transition-all duration-200"
+      >
+        <i
+          class="bx bx-edit text-xl mr-3"
+          [ngClass]="{ 'mx-auto': sidebarCollapsed }"
+        ></i>
+        <span *ngIf="!sidebarCollapsed">Blogs</span>
+      </a>
 
       <!-- Documents -->
       <a
@@ -212,6 +214,19 @@
         ></i>
         <span *ngIf="!sidebarCollapsed">Documents</span>
       </a>
+      <!-- Logout Button -->
+      <div class="absolute bottom-5 left-0 w-full px-2">
+        <button
+          (click)="logout()"
+          class="w-full flex items-center px-4 py-2.5 text-sm font-medium rounded-lg text-gray-300 hover:bg-red-600 hover:text-white transition-all duration-200"
+        >
+          <i
+            class="bx bx-log-out text-xl mr-3"
+            [ngClass]="{ 'mx-auto': sidebarCollapsed }"
+          ></i>
+          <span *ngIf="!sidebarCollapsed">Logout</span>
+        </button>
+      </div>
     </div>
   </nav>
 </aside>

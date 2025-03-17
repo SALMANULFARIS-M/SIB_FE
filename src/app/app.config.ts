@@ -1,5 +1,5 @@
-import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection} from '@angular/core';
+import { provideRouter, withPreloading } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
@@ -9,6 +9,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { provideToastr } from 'ngx-toastr';
+import { CustomPreloadingStrategy } from './custom-preloading.strategy';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -37,7 +38,8 @@ export const appConfig: ApplicationConfig = {
       enableHtml: true, // Allow HTML in toast messages
     }),
     // Router
-    provideRouter(routes),
+    provideRouter(routes, withPreloading(CustomPreloadingStrategy)),
+    CustomPreloadingStrategy,
     // Client Hydration (SSR)
     provideClientHydration(withEventReplay()),
     // Animations

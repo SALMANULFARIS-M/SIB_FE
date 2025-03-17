@@ -63,5 +63,13 @@ export class SidebarComponent {
     // Toggle the specified menu
     this.openMenus[menu as keyof typeof this.openMenus] = !this.openMenus[menu as keyof typeof this.openMenus];
   }
+  logout() {
+    // Clear user session (Adjust based on your auth implementation)
+    localStorage.removeItem('adminToken'); // Example: Clearing auth token
+    sessionStorage.clear();
+
+    // Navigate to login page
+    this.router.navigate(['/admin']);
+  }
 
 }

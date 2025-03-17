@@ -1,15 +1,16 @@
-import { Routes } from '@angular/router';
-import { adminGuard } from './core/guards/admin.guard';
+import { RouterModule, Routes } from '@angular/router';
+import { CustomPreloadingStrategy } from './custom-preloading.strategy';
 
 export const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./modules/user/user.routes').then(m => m.USER_ROUTES),
+    data: { preload: true } // ✅ Preload only User Module
   },
   {
     path: 'admin',
     loadChildren: () => import('./modules/admin/admin.routes').then(m => m.ADMIN_ROUTES),
-    canActivate: [adminGuard]
+    data: { preload: false } // ❌ No preloading for Admin
   },
   { path: '**', redirectTo: '/404' } // Fallback route
 ];

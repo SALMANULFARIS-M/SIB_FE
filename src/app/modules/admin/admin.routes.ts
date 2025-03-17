@@ -10,7 +10,6 @@ export const ADMIN_ROUTES: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },
   { path: 'blogs-list', component: BlogsComponent, canActivate: [authGuard] },
   { path: 'blogs-list/blog-add', component: AddblogsComponent, canActivate: [authGuard] },
-
   { path: '**', redirectTo: 'dashboard' } // Handle invalid admin routes
 ];
 

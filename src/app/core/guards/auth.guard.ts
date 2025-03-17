@@ -15,7 +15,7 @@ export const authGuard: CanActivateFn = (route, state) => {
 
     if (!token) {
       toastr.error('You need to login first', 'Access Denied');
-      router.navigate(['/admin/login']); // Redirect unauthorized users
+      router.navigate(['/admin']); // Redirect unauthorized users
       return false;
     }
 
@@ -27,7 +27,7 @@ export const authGuard: CanActivateFn = (route, state) => {
       if (isExpired) {
         localStorage.removeItem('adminToken');
         toastr.warning('Session expired, please login again', 'Token Expired');
-        router.navigate(['/admin/login']); // Redirect expired users
+        router.navigate(['/admin']); // Redirect expired users
 
         return false;
       }
@@ -37,7 +37,7 @@ export const authGuard: CanActivateFn = (route, state) => {
       console.error('Invalid token:', error);
       localStorage.removeItem('adminToken');
       toastr.error('Invalid session, please login again', 'Authentication Error');
-      router.navigate(['/admin/login']); // Redirect if token is invalid
+      router.navigate(['/admin']); // Redirect if token is invalid
       return false;
     }
   }
