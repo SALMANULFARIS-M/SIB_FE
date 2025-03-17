@@ -145,11 +145,11 @@
     </section>
     <!-- Pagination -->
     <div class="flex justify-center mt-16">
-      <nav class="flex space-x-2">
+      <nav class="flex ">
         <button
           (click)="setPage(currentPage - 1)"
           [disabled]="currentPage === 1"
-          class="w-10 h-10 flex items-center justify-center rounded-full bg-[#2D1044] text-[#C79AFF] hover:bg-[#6D3A9E] transition"
+          class="w-10 h-10 flex items-center justify-center rounded-full bg-[#2D1044] text-[#C79AFF] hover:bg-[#6D3A9E] transition me-2"
         >
           «
         </button>
@@ -158,7 +158,7 @@
           *ngFor="let page of [].constructor(totalPages); let i = index"
           (click)="setPage(i + 1)"
           [class.bg-[#6D3A9E]]="currentPage === i + 1"
-          class="w-10 h-10 flex items-center justify-center rounded-full bg-purple-400 text-black hover:bg-[#6D3A9E] transition"
+          class="w-10 h-10 flex items-center justify-center rounded-full bg-purple-400 text-black hover:bg-[#6D3A9E] transition me-2"
         >
           {{ i + 1 }}
         </button>
@@ -166,7 +166,7 @@
         <button
           (click)="setPage(currentPage + 1)"
           [disabled]="currentPage === totalPages"
-          class="w-10 h-10 flex items-center justify-center rounded-full bg-[#2D1044] text-[#C79AFF] hover:bg-[#6D3A9E] transition"
+          class="w-10 h-10 flex items-center justify-center rounded-full bg-[#2D1044] text-[#C79AFF] hover:bg-[#6D3A9E] transition me-2"
         >
           »
         </button>

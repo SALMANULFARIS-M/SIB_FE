@@ -58,8 +58,8 @@
             enctype="multipart/form-data"
           >
             <!-- Basic Info Section -->
-            <div class="space-y-4 mb-8">
-              <div>
+            <div class=" mb-8">
+              <div class="mb-4">
                 <label class="block text-gray-300 text-sm font-medium mb-2"
                   >Title</label
                 >
@@ -79,7 +79,7 @@
                   Title is required
                 </div>
               </div>
-              <div>
+              <div class="mb-4">
                 <label class="block text-gray-300 text-sm font-medium mb-2"
                   >Author</label
                 >
@@ -99,7 +99,7 @@
                   Author is required
                 </div>
               </div>
-              <div>
+              <div class="mb-4">
                 <label class="block text-gray-300 text-sm font-medium mb-2">Category</label>
                 <select
                   formControlName="category"
@@ -118,7 +118,7 @@
               </div>
 
 
-              <div>
+              <div class="mb-4">
                 <label class="block text-gray-300 text-sm font-medium mb-2"
                   >Featured Image</label
                 >
@@ -173,14 +173,14 @@
                 <h3 class="text-gray-300 font-medium">Content Blocks</h3>
               </div>
 
-              <div formArrayName="content" class="space-y-4">
+              <div formArrayName="content" class="">
                 <div
                   *ngFor="
                     let section of contentControls.controls;
                     let i = index
                   "
                   [formGroupName]="i"
-                  class="relative border border-purple-800/50 p-4 rounded-lg"
+                  class="relative border border-purple-800/50 p-4 rounded-lg mb-4"
                 >
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
                     <!-- Content Type Dropdown -->
@@ -314,18 +314,18 @@
                 Cancel
               </button>
 
-              <div class="flex space-x-3">
+              <div class="flex ">
                 <button
                   type="button"
                   (click)="addContentBlock()"
-                  class="flex items-center text-sm poppins-medium bg-purple-900/50 hover:bg-purple-900/80 text-white px-3 py-1.5 rounded-md transition-colors"
+                  class="flex ms-3 items-center text-sm poppins-medium bg-purple-900/50 hover:bg-purple-900/80 text-white px-3 py-1.5 rounded-md transition-colors"
                 >
                    Add Block<i class="bx bx-plus mr-1"></i>
                 </button>
 
                 <button
                   type="submit"
-                  class="px-6 py-2 bg-gradient-to-r from-pink-500 to-pink-600 text-white rounded-md hover:from-pink-600 hover:to-pink-700 focus:ring-2 focus:ring-pink-500/50 transition-all shadow-lg"
+                  class="px-6 py-2 ms-3 bg-gradient-to-r from-pink-500 to-pink-600 text-white rounded-md hover:from-pink-600 hover:to-pink-700 focus:ring-2 focus:ring-pink-500/50 transition-all shadow-lg"
                 >
                   Publish Blog
                 </button>

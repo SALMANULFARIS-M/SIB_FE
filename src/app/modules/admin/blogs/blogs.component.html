@@ -52,10 +52,10 @@
         <h2 class="text-xl font-semibold text-pink-500 montserrat-normal">
           All Blogs
         </h2>
-        <div class="flex space-x-2">
+        <div class="flex ">
           <select
           (change)="sortBlogs($event)"
-            class="bg-purple-900/85 border border-purple-800/50 text-pink-200 px-3 py-2 rounded-lg focus:ring-2 focus:ring-pink-500/50 text-sm"
+            class="bg-purple-900/85 border ms-2 border-purple-800/50 text-pink-200 px-3 py-2 rounded-lg focus:ring-2 focus:ring-pink-500/50 text-sm"
           >
           <option value="newest">Newest</option>
           <option value="oldest">Oldest</option>
@@ -153,21 +153,21 @@
         </div>
       </div>
       <!-- Pagination -->
-      <div class="flex justify-center space-x-4 mt-6">
+      <div class="flex justify-center  mt-6">
         <button
           (click)="prevPage()"
           [disabled]="currentPage === 1"
-          class="bg-pink-700 text-white px-4 py-2 rounded-lg hover:bg-gray-600"
+          class="bg-pink-700 text-white px-4 py-2 rounded-lg hover:bg-gray-600 ms-4"
         >
           Previous
         </button>
-        <span class="text-white px-4 py-2"
+        <span class="text-white px-4 py-2 ms-4"
           >{{ currentPage }} / {{ totalPages }}</span
         >
         <button
           (click)="nextPage()"
           [disabled]="currentPage === totalPages"
-          class="bg-pink-700 text-white px-4 py-2 rounded-lg hover:bg-gray-600"
+          class="bg-pink-700 text-white px-4 py-2 rounded-lg hover:bg-gray-600 ms-4"
         >
           Next
         </button>

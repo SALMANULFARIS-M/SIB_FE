@@ -115,18 +115,18 @@
         </div>
       </article>
       <!-- Sidebar -->
-      <aside class="space-y-8">
+      <aside class="">
         <!-- Related Articles -->
         <div
-          class="bg-black/60 backdrop-blur-lg hover:bg-black/80 transition-all duration-300 rounded-2xl shadow-md shadow-purple-500/20 p-6"
+          class="mb-8 bg-black/60 backdrop-blur-lg hover:bg-black/80 transition-all duration-300 rounded-2xl shadow-md shadow-purple-500/20 p-6"
         >
           <h3 class="text-xl font-bold montserrat mb-4">Our Articles</h3>
-          <div class="space-y-4">
+          <div class="">
             <div *ngIf="latestBlogs?.length">
               <a
                 *ngFor="let blog of latestBlogs"
                 [routerLink]="['/blog', blog.slug]"
-                class="block group"
+                class="block group mb-4"
               >
                 <div class="flex gap-3 mt-5">
                   <div

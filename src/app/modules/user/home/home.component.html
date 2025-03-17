@@ -283,7 +283,7 @@
         </div>
         <!-- Indicators -->
         <div
-          class="absolute left-1/2 transform -translate-x-1/2 space-x-2 mt-4"
+          class="absolute left-1/2 transform -translate-x-1/2  mt-4"
         >
           <button
             *ngFor="let slide of slides; let i = index"
@@ -291,7 +291,7 @@
               'bg-black': i === currentSlide,
               'bg-gray-500': i !== currentSlide
             }"
-            class="w-3 h-3 rounded-full"
+            class="w-3 h-3 rounded-full ms-2"
           ></button>
         </div>
         <!-- Controls -->
@@ -386,10 +386,10 @@
 >
   <div class="max-w-4xl mx-auto text-center px-4">
     <div
-      class="bg-[#E6D6E8] backdrop-blur-md border border-purple-500/20 shadow-lg rounded-2xl p-8 space-y-6"
+      class="bg-[#E6D6E8] backdrop-blur-md border border-purple-500/20 shadow-lg rounded-2xl p-8 "
     >
       <h2
-        class="text-[#2D1044] text-4xl merriweather-bold mb-4 drop-shadow-lg"
+        class="text-[#2D1044] text-4xl merriweather-bold mb-5 drop-shadow-lg "
         [@staggerFadeIn]="journeyVisible ? 'in' : 'out'"
       >
         Start Your Educational Journey Today!
