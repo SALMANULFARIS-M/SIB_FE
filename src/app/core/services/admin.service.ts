@@ -13,8 +13,8 @@ export class AdminService {
   collapsedState = this.collapsed.asObservable();
 
   constructor(private http: HttpClient, @Inject(PLATFORM_ID) private platformId: Object) { }
-  // private apiUrl =environment.apiUrl;
-  private apiUrl = 'http://localhost:5000';
+  private apiUrl =environment.apiUrl;
+  // private apiUrl = 'http://localhost:5000';
   toggleSidebar() {
     this.collapsed.next(!this.collapsed.value);
   }

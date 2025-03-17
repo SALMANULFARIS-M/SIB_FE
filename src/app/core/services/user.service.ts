@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
 import { Blog } from '../../modules/user/user.interface';
-// import { environment } from '../../../environments/environment';
 
 
 @Injectable({
@@ -12,8 +11,8 @@ import { Blog } from '../../modules/user/user.interface';
 export class UserService {
 
   constructor(private http: HttpClient) { }
-  // private apiUrl =environment.apiUrl;
-  private apiUrl ='http://localhost:5000';
+  private apiUrl =environment.apiUrl;
+  // private apiUrl ='http://localhost:5000';
 
   apply(formData: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/user/apply`, JSON.stringify(formData), {
