@@ -1,10 +1,11 @@
 import { trigger, state, style, transition, animate, query, stagger } from '@angular/animations';
 
 export const slideInFromLeft = trigger('slideInFromLeft', [
-  state('out', style({ opacity: 0, transform: 'translateX(-100%)' })),
+  state('out', style({ opacity: 0, transform: 'translateX(-50vw)' })),
   state('in', style({ opacity: 1, transform: 'translateX(0)' })),
   transition('out => in', animate('0.8s ease-out')),
 ]);
+
 
 
 export const slideInFromRight = trigger('slideInFromRight', [
