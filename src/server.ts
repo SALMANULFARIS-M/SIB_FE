@@ -37,7 +37,6 @@ app.use(
   }),
 );
 
-
 /**
  * Handle all other requests by rendering the Angular application.
  */

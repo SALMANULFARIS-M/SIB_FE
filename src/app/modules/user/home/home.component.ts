@@ -9,7 +9,6 @@ import { fadeIn, fadeInSequential, fadeInUp, flipText, listAnimation, scaleUp, s
 import { faUniversity, faSchool, faBookOpen, faGlobe, faBriefcase, faLaptop, faHome, faBuilding, faCalendarAlt, faComments } from '@fortawesome/free-solid-svg-icons';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../../../core/services/user.service';
 
 @Component({
@@ -82,7 +81,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   ];
 
   constructor(@Inject(PLATFORM_ID) private platformId: any, private router: Router, private service: UserService,
-    private toastr: ToastrService) { }
+    ) { }
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {

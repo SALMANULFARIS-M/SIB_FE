@@ -38,6 +38,7 @@
           <!-- Featured Image -->
           <div class="w-full h-96 overflow-hidden rounded-xl mb-8">
             <img
+            loading="lazy"
               [src]="blog.featuredImage"
               [alt]="blog.title"
               class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
@@ -114,6 +115,7 @@
               <!-- Render Image -->
               <div *ngIf="item.type === 'image'" class="my-6">
                 <img
+                loading="lazy"
                   [src]="item.data"
                   [alt]="'Blog image'"
                   class="rounded-lg shadow-md w-full"
@@ -186,6 +188,7 @@
                     class="w-20 h-14 rounded-lg overflow-hidden flex-shrink-0"
                   >
                     <img
+                    loading="lazy"
                       [src]="blog.featuredImage"
                       [alt]="blog.title"
                       class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
