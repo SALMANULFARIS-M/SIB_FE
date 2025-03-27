@@ -1,21 +1,28 @@
 import { Inject, Injectable, makeStateKey, PLATFORM_ID, TransferState } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, of, tap } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, of, tap } from 'rxjs';
 import { isPlatformBrowser, isPlatformServer } from '@angular/common';
+import { BaseService } from './base.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AdminService {
+export class AdminService extends BaseService {
 
+
+  private readonly BLOG_KEY_PREFIX = 'blogs';
   private collapsed = new BehaviorSubject<boolean>(false);
   collapsedState = this.collapsed.asObservable();
-  private apiUrl = environment.apiUrl;
-  constructor(private http: HttpClient, @Inject(PLATFORM_ID) private platformId: Object,
-  private transferState: TransferState) { }
 
-  // private apiUrl = 'http://localhost:5000';
+  constructor(protected override http: HttpClient, @Inject(PLATFORM_ID) protected override platformId: object, protected override transferState: TransferState) {
+    super(http, platformId, transferState);
+  }
+
+
+  /**
+   * 🔹 Sidebar State Management
+   */
   toggleSidebar() {
     this.collapsed.next(!this.collapsed.value);
   }
@@ -24,39 +31,19 @@ export class AdminService {
     this.collapsed.next(state);
   }
 
+  /**
+    * 🔹 Generic GET request with optional TransferState caching
+    */
+
   addBlog(formData: FormData): Observable<any> {
-    if (isPlatformBrowser(this.platformId)) {
-      return this.http.post(`${this.apiUrl}/admin/sib/addblog`, formData);
-    } else {
-      // Return an empty observable or handle differently in SSR mode
-      return of({ error: 'File upload is not supported in SSR mode' });
-    }
+    return this.postRequest('/admin/sib/addblog', formData);
   }
 
   getBlogs(page: number, limit: number, search: string = ''): Observable<any> {
-    const BLOG_KEY = makeStateKey<any>(`blogs-${page}-${limit}-${search}`);
-    const storedData = this.transferState.get(BLOG_KEY, null);
-
-    if (storedData) {
-      // ✅ Use cached data during browser boot
-      this.transferState.remove(BLOG_KEY); // Optional: remove after using
-      return of(storedData);
-    } else {
-      return this.http.get(`${this.apiUrl}/admin/sib/blogs?page=${page}&limit=${limit}&search=${search}`)
-        .pipe(
-          tap(data => {
-            if (isPlatformServer(this.platformId)) {
-              // ✅ Store data during SSR for browser reuse
-              this.transferState.set(BLOG_KEY, data);
-            }
-          })
-        );
-    }
+    return this.getRequest(`/admin/sib/blogs?page=${page}&limit=${limit}&search=${search}`, `${this.BLOG_KEY_PREFIX}-${page}-${limit}-${search}`);
   }
 
   deleteBlog(blogId: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/admin/sib/deleteblog/${blogId}`);
+    return this.getRequest(`/admin/sib/deleteblog/${blogId}`);
   }
-
-
 }

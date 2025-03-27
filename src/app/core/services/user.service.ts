@@ -1,80 +1,47 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable, makeStateKey, PLATFORM_ID, TransferState } from '@angular/core';
-import { Observable, of, tap } from 'rxjs';
+import { catchError, Observable, of, tap } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
 import { Blog } from '../../modules/user/user.interface';
 import { isPlatformServer } from '@angular/common';
+import { BaseService } from './base.service';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class UserService extends BaseService {
 
-  constructor(private http: HttpClient, private transferState: TransferState, @Inject(PLATFORM_ID) private platformId: Object) { }
-  private apiUrl = environment.apiUrl;
-  // private apiUrl ='http://localhost:5000';
+  constructor(protected override http: HttpClient, @Inject(PLATFORM_ID) protected override platformId: object, protected override transferState: TransferState) {
+    super(http, platformId, transferState);
+  }
 
+
+  /**
+   * ✅ API Calls using reusable methods
+   */
   apply(formData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/user/apply`, JSON.stringify(formData), {
-      headers: { 'Content-Type': 'application/json' }
-    });
+    return this.postRequest('/user/apply', formData);
   }
 
   freeCounsiling(formData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/user/counceling`, JSON.stringify(formData), {
-      headers: { 'Content-Type': 'application/json' }
-    });
+    return this.postRequest('/user/counceling', formData);
   }
 
   sendContactForm(formData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/user/contact`, JSON.stringify(formData), {
-      headers: { 'Content-Type': 'application/json' }
-    });
+    return this.postRequest('/user/contact', formData);
   }
 
-  // ✅ Optimized with TransferState
   latestBlogs(): Observable<any> {
-    const BLOG_KEY = makeStateKey<any>('latestBlogs');
-    const storedData = this.transferState.get(BLOG_KEY, null);
-
-    if (storedData) {
-      this.transferState.remove(BLOG_KEY);
-      return of(storedData);
-    } else {
-      return this.http.get(`${this.apiUrl}/user/latestBlogs`).pipe(
-        tap(data => {
-          if (isPlatformServer(this.platformId)) {
-            this.transferState.set(BLOG_KEY, data);
-          }
-        })
-      );
-    }
+    return this.getRequest('/user/latestBlogs', 'latestBlogs');
   }
 
   getBlogBySlug(slug: string): Observable<Blog> {
-    return this.http.get<Blog>(`${this.apiUrl}/user/blog/${slug}`); // Correct API URL format
+    return this.getRequest<Blog>(`/user/blog/${slug}`);
   }
 
-
-  // ✅ Optimized with TransferState
   getBlogsWithQuery(page: number, limit: number, search: string): Observable<any> {
-    const QUERY_KEY = makeStateKey<any>(`blogs-${page}-${limit}-${search}`);
-    const storedData = this.transferState.get(QUERY_KEY, null);
-
-    if (storedData) {
-      this.transferState.remove(QUERY_KEY);
-      return of(storedData);
-    } else {
-      return this.http.get<any>(`${this.apiUrl}/user/blogs?page=${page}&limit=${limit}&search=${search}`).pipe(
-        tap(data => {
-          if (isPlatformServer(this.platformId)) {
-            this.transferState.set(QUERY_KEY, data);
-          }
-        })
-      );
-    }
+    return this.getRequest(`/user/blogs?page=${page}&limit=${limit}&search=${search}`, `blogs-${page}-${limit}-${search}`);
   }
-
-
 }
+
