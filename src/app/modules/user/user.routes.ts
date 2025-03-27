@@ -11,6 +11,7 @@ export const USER_ROUTES: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'apply', component: HomeComponent },
+  { path: 'counselling', component: HomeComponent },
   { path: 'blogs', component: BlogComponent },
   { path: 'blog/:slug', component: BlogDetailsComponent, }
 ];

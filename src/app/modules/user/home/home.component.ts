@@ -34,6 +34,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // UI Control Properties
   flipState: 'normal' | 'flipped' = 'normal';
+  showCouncilingComponent = false;
   showApplyComponent = false;
   isVisionFlipped = false;
   isMissionFlipped = false;
@@ -81,20 +82,20 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   ];
 
   constructor(@Inject(PLATFORM_ID) private platformId: any, private router: Router, private service: UserService,
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       // ✅ Step 1: Check URL on initial load
-      const currentUrl = this.router.url.split('?')[0]; // Normalize URL (Remove query params)
-      this.showApplyComponent = currentUrl === '/apply';
+      this.updateComponentVisibility(this.router.url);
 
       // ✅ Step 2: Detect URL changes
-      this.router.events.pipe(
-        filter(event => event instanceof NavigationEnd)
-      ).subscribe((event: NavigationEnd) => {
-        this.showApplyComponent = event.urlAfterRedirects.split('?')[0] === '/apply';
-      });
+      this.router.events
+        .pipe(filter(event => event instanceof NavigationEnd))
+        .subscribe((event: NavigationEnd) => {
+          this.updateComponentVisibility(event.urlAfterRedirects);
+        });
+
       this.startFlipAnimation();
 
       // Initialize counterVisible and currentValues arrays
@@ -103,14 +104,18 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       this.opportunityVisible = new Array(this.opportunities.length).fill(false);
       this.service.latestBlogs().subscribe({
         next: (response) => {
-            this.blogs = response;
+          this.blogs = response;
         },
         error: (err) => {
         }
       });
     }
   }
-
+  updateComponentVisibility(url: string): void {
+    const currentUrl = url.split('?')[0]; // Normalize URL (Remove query params)
+    this.showApplyComponent = currentUrl === '/apply';
+    this.showCouncilingComponent = currentUrl === '/counselling';
+  }
 
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {

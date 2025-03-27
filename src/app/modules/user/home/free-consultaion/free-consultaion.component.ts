@@ -19,6 +19,8 @@ export class FreeConsultaionComponent implements OnInit, AfterViewInit {
   states = STATES;
   districts: string[] = [];
  @Input() visible = false; // Control animation from parent
+ @Input() showCouncilingForm: boolean = false; // Receive visibility status
+
   constructor(@Inject(PLATFORM_ID) private platformId: Object, private fb: FormBuilder, private service: UserService, private toastr: ToastrService, private el: ElementRef) { }
 
   ngOnInit(): void {
@@ -35,7 +37,9 @@ export class FreeConsultaionComponent implements OnInit, AfterViewInit {
    setTimeout(() => {
     this.visible = true;
   }, 200);
-
+  if (this.showCouncilingForm) {
+    this.showForm = true;
+  }
   }
   ngAfterViewInit(): void {
 
