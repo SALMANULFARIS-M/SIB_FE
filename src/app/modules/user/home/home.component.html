@@ -21,34 +21,30 @@
     </div>
   </div>
   <div
-    class=" z-10 py-8 px-4 sm:px-6 lg:px-8 rounded-2xl w-[90vw] sm:w-[70vw] md:w-[60vw] max-w-4xl mx-auto bg-[#33154b]/30 border border-purple-500/20 shadow-lg"
+    class="z-10 py-8 px-4 sm:px-6 lg:px-8 rounded-2xl w-[90vw] sm:w-[70vw] md:w-[60vw] max-w-4xl mx-auto bg-[#33154b]/30 border border-purple-500/20 shadow-lg"
   >
-  <h3
-  #secondHeading
-  class="text-[#efdbff] text-2xl md:text-5xl merriweather-light mb-5 drop-shadow-lg inline-block overflow-hidden perspective-distant w-full"
-  [@slideInFromLeft]="headerVisible ? 'in' : 'out'"
->
-  Study in
-  <div [@flipText]="flipState" class="flip-container">
-    <div *ngIf="flipState === 'normal'" class="flip-text">
-      India's Silicon Valley
-    </div>
-    <div *ngIf="flipState === 'flipped'" class="flip-text flipped">
-      Bengaluru
-    </div>
-  </div>
-</h3>
+    <h3
+      #secondHeading
+      class="text-[#efdbff] text-2xl md:text-5xl merriweather-light mb-5 drop-shadow-lg inline-block overflow-hidden perspective-distant w-full"
+      [@slideInFromLeft]="headerVisible ? 'in' : 'out'"
+    >
+      Study in
+      <div [@flipText]="flipState" class="flip-container">
+        <div *ngIf="flipState === 'normal'" class="flip-text">
+          India's Silicon Valley
+        </div>
+        <div *ngIf="flipState === 'flipped'" class="flip-text flipped">
+          Bengaluru
+        </div>
+      </div>
+    </h3>
 
     <app-free-consultaion [visible]="headerVisible"></app-free-consultaion>
   </div>
 </section>
 
 <!-- Explore Opportunities -->
-<section
-  #opportunitySection
-  class="relative bg-[url('/bg-img.png')] bg-cover "
->
-
+<section #opportunitySection class="relative bg-[url('/bg-img.png')] bg-cover">
   <div class="text-center p-10 overflow-hidden relative">
     <h2
       class="text-3xl md:text-4xl text--[#2D1044] mb-8 font-bold relative inline-block playfair"
@@ -62,8 +58,7 @@
       class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 w-full max-w-full px-4"
     >
       <div
-        class="opportinity text-white w-full rounded-2xl flex flex-col items-center justify-center min-h-[120px] p-4 bg-[#2D1044]/60 backdrop-blur-sm overflow-hidden border border-purple-300/20 shadow-lg shadow-purple-900/10 transition-all duration-500 hover:border-2
-         hover:border-purple-500/50 hover:shadow-md hover:shadow-purple-500/20 hover:translate-y-[-5px] hover:bg-[#2D1044]/90 hover:text-white"
+        class="opportinity text-white w-full rounded-2xl flex flex-col items-center justify-center min-h-[120px] p-4 bg-[#2D1044]/60 backdrop-blur-sm overflow-hidden border border-purple-300/20 shadow-lg shadow-purple-900/10 transition-all duration-500 hover:border-2 hover:border-purple-500/50 hover:shadow-md hover:shadow-purple-500/20 hover:translate-y-[-5px] hover:bg-[#2D1044]/90 hover:text-white"
         *ngFor="let item of opportunities; let i = index"
         [@fadeInSequential]="opportunityVisible[i] ? 'in' : 'out'"
       >
@@ -72,7 +67,7 @@
         >
           <fa-icon [icon]="item.icon" class="w-8 h-8"></fa-icon>
         </div>
-        <p class="poppins-bold text-sm md:text-base  ">
+        <p class="poppins-bold text-sm md:text-base">
           {{ item.label }}
         </p>
       </div>
@@ -118,7 +113,7 @@
       <div
         #leftContent
         [@staggerFadeIn]="leftContentVisible ? 'in' : 'out'"
-        class="md:w-1/2 bg-[#E6D6E8]  p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 border border-purple-300/20"
+        class="md:w-1/2 bg-[#E6D6E8] p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 border border-purple-300/20"
       >
         <p
           class="text-[#2D1044] poppins-regular text-xl mb-6 leading-relaxed whitespace-normal text-justify"
@@ -145,7 +140,7 @@
         class="md:w-1/2 relative overflow-hidden rounded-2xl shadow-xl group"
       >
         <img
-        loading="lazy"
+          loading="lazy"
           src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
           alt="Bengaluru Education Hub"
           class="w-full h-auto rounded-2xl transform group-hover:scale-110 transition-transform duration-500"
@@ -165,21 +160,17 @@
   </div>
 </section>
 
-
-
 <!-- Vision and Mission Section -->
-<section class="container mx-auto px-6 md:px-10 py-20 relative z-10 bg-[url('/bg-img.png')] bg-cover " >
-  <div
-  class="absolute inset-0 bg-black/10"
-></div>
+<section
+  class="container mx-auto px-6 md:px-10 py-20 relative z-10 bg-[url('/bg-img.png')] bg-cover"
+>
+  <div class="absolute inset-0 bg-black/10"></div>
   <div class="flex flex-col lg:flex-row gap-12 items-center">
     <!-- Vision and Mission Section (Left Side) -->
     <div class="flex-1" #visionAndMission>
       <!-- Vision Section -->
       <div
-        class="group p-8 bg-[#2D1044]/80 backdrop-blur-sm
-        rounded-3xl shadow-xl transition-all duration-300 transform hover:scale-105
-        hover:bg-[#2D1044]/50"
+        class="group p-8 bg-[#2D1044]/80 backdrop-blur-sm rounded-3xl shadow-xl transition-all duration-300 transform hover:scale-105 hover:bg-[#2D1044]/50"
         [@scaleUp]="leftVisible ? 'in' : 'out'"
       >
         <div class="flex justify-center items-center mb-6">
@@ -216,8 +207,7 @@
 
       <!-- Mission Section -->
       <div
-        class="group p-8 mt-5 bg-[#2D1044]/80 backdrop-blur-sm rounded-3xl shadow-xl
-        hover:bg-[#2D1044]/50 transition-all duration-300 transform hover:scale-105"
+        class="group p-8 mt-5 bg-[#2D1044]/80 backdrop-blur-sm rounded-3xl shadow-xl hover:bg-[#2D1044]/50 transition-all duration-300 transform hover:scale-105"
         [@scaleUp]="leftVisible ? 'in' : 'out'"
       >
         <div class="flex justify-center items-center mb-6">
@@ -285,9 +275,7 @@
           </div>
         </div>
         <!-- Indicators -->
-        <div
-          class="absolute left-1/2 transform -translate-x-1/2  mt-4"
-        >
+        <div class="absolute left-1/2 transform -translate-x-1/2 mt-4">
           <button
             *ngFor="let slide of slides; let i = index"
             [ngClass]="{
@@ -326,26 +314,115 @@
             class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full"
           ></span>
         </h2>
-        <p class="mt-2 text-lg leading-8 text-gray-600 dark:text-gray-300 merriweather-regular">
+        <p
+          class="mt-2 text-lg leading-8 text-gray-600 dark:text-gray-300 merriweather-regular"
+        >
           Dive into the latest in Education with our insightful blog posts.
         </p>
       </div>
+      <!-- Grid Layout for Blog Cards -->
+      <div
+        class="mx-auto mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+      >
+        <!-- Blog Posts -->
+        <ng-container *ngIf="blogs.length; else shimmer">
+          <article
+            *ngFor="let blog of blogs"
+            class="relative h-[380px] sm:h-[400px] bg-[#ddc9df] hover:bg-[#E6D6E8]/50 rounded-xl border border-purple-500/20 overflow-hidden transition-all duration-300 group hover:translate-y-[-5px] hover:shadow-md hover:shadow-purple-500/50 cursor-pointer"
+            [routerLink]="['/blog', blog.slug]"
+          >
+            <!-- Background Image -->
+            <div class="absolute inset-0">
+              <div
+                class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                [style.backgroundImage]="'url(' + blog.featuredImage + ')'"
+              ></div>
+            </div>
 
+            <!-- Content -->
+            <div
+              class="relative flex flex-col justify-end h-full p-6 sm:p-8 rounded-xl shadow-md text-white bg-gradient-to-t from-black/60 to-transparent"
+            >
+              <!-- Category -->
+              <div
+                class="absolute top-6 right-6 bg-purple-600/90 text-white text-sm font-semibold px-4 py-2 rounded-full poppins-medium"
+              >
+                {{ blog.category }}
+              </div>
+
+              <!-- Date & Title -->
+              <div class="bg-black/50 backdrop-blur-md px-4 py-4 rounded-lg">
+                <div
+                  class="flex items-center text-lg font-semibold text-gray-200"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 mr-2"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  <time [attr.datetime]="blog.publishedDate">
+                    {{ blog.publishedDate | date : "MMM d, y" }}
+                  </time>
+                </div>
+
+                <h3 class="mt-2 text-xl font-bold text-white pt-serif-regular">
+                  {{ blog.title }}
+                </h3>
+              </div>
+            </div>
+          </article>
+        </ng-container>
+
+        <!-- Shimmer UI -->
+        <ng-template #shimmer>
+          <div
+            *ngFor="let i of [1, 2, 3]"
+            class="relative h-[380px] sm:h-[400px] bg-gray-300/30 rounded-xl border border-purple-500/10 overflow-hidden animate-pulse"
+          >
+            <!-- Shimmer Background -->
+            <div class="absolute inset-0 bg-gray-400/40"></div>
+
+            <!-- Content -->
+            <div
+              class="relative flex flex-col justify-end h-full p-6 sm:p-8 bg-gradient-to-t from-gray-500/60 to-transparent rounded-xl"
+            >
+              <!-- Category Badge -->
+              <div
+                class="absolute top-6 right-6 bg-gray-400 h-6 w-20 rounded-full"
+              ></div>
+
+              <!-- Date & Title -->
+              <div class="bg-gray-600/50 backdrop-blur-md px-4 py-4 rounded-lg">
+                <div class="flex items-center space-x-2">
+                  <div class="bg-gray-500 h-5 w-5 rounded-full"></div>
+                  <div class="bg-gray-500 h-4 w-24 rounded-md"></div>
+                </div>
+
+                <div class="mt-2 bg-gray-500 h-6 w-3/4 rounded-md"></div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- CTA Section -->
-<div
-  class="relative py-16 bg-[url('/bg-img.png')] bg-cover "
-  #journey
->
+<div class="relative py-16 bg-[url('/bg-img.png')] bg-cover" #journey>
   <div class="max-w-4xl mx-auto text-center px-4">
     <div
-      class="bg-[#E6D6E8] backdrop-blur-md border border-purple-500/20 shadow-lg rounded-2xl p-8 "
+      class="bg-[#E6D6E8] backdrop-blur-md border border-purple-500/20 shadow-lg rounded-2xl p-8"
     >
       <h2
-        class="text-[#2D1044] text-4xl merriweather-bold mb-5 drop-shadow-lg "
+        class="text-[#2D1044] text-4xl merriweather-bold mb-5 drop-shadow-lg"
         [@staggerFadeIn]="journeyVisible ? 'in' : 'out'"
       >
         Start Your Educational Journey Today!
