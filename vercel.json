@@ -1,19 +1,8 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": { "distDir": "dist/sib-fe/browser" }
-    },
-    {
-      "src": "dist/sib-fe/server/server.mjs",
-      "use": "@vercel/node"
-    }
-  ],
   "routes": [
     {
-      "src": "/(.*)",
+      "src": "/.*",
       "dest": "dist/sib-fe/server/server.mjs"
     }
   ]
