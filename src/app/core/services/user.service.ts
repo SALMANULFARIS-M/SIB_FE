@@ -15,8 +15,6 @@ export class UserService extends BaseService {
   constructor(protected override http: HttpClient, @Inject(PLATFORM_ID) protected override platformId: object, protected override transferState: TransferState) {
     super(http, platformId, transferState);
   }
-
-
   /**
    * ✅ API Calls using reusable methods
    */
