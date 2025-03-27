@@ -76,76 +76,110 @@
     <!-- Blog cards grid -->
     <section class="py-16">
       <div class="max-w-6xl mx-auto">
-        <div class=" px-4 sm:px-6">
-          <article
-            *ngFor="let blog of blogs"
-            class="bg-[#2D1044]/70 mb-8 backdrop-blur-md hover:bg-[#2D1044]/90 p-6 rounded-2xl shadow-sm shadow-[#8E4CCB]/20 transition-all duration-300 group max-w-sm mx-auto md:max-w-none grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 xl:gap-16 items-center relative overflow-hidden"
-          >
-            <!-- Image -->
-            <a class="relative block group" [routerLink]="['/blog', blog.slug]">
-              <figure
-                class="relative h-0 pb-[56.25%] md:pb-[75%] lg:pb-[56.25%] overflow-hidden transform md:-translate-y-2 xl:-translate-y-4 group-hover:translate-x-0 group-hover:translate-y-0 transition duration-700 ease-out rounded-xl"
+        <div class="px-4 sm:px-6">
+          <!-- Show blogs when available -->
+          <ng-container *ngIf="blogs.length; else shimmer">
+            <article
+              *ngFor="let blog of blogs"
+              class="bg-[#2D1044]/70 mb-8 backdrop-blur-md hover:bg-[#2D1044]/90 p-6 rounded-2xl shadow-sm shadow-[#8E4CCB]/20 transition-all duration-300 group max-w-sm mx-auto md:max-w-none grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 xl:gap-16 items-center relative overflow-hidden"
+            >
+              <!-- Image -->
+              <a
+                class="relative block group"
+                [routerLink]="['/blog', blog.slug]"
               >
-                <img
-                  class="absolute inset-0 w-full h-full object-cover transform hover:scale-105 transition duration-700 ease-out"
-                  [src]="blog.featuredImage"
-                  [alt]="blog.title"
-                />
-              </figure>
-            </a>
+                <figure
+                  class="relative h-0 pb-[56.25%] md:pb-[75%] lg:pb-[56.25%] overflow-hidden transform md:-translate-y-2 xl:-translate-y-4 group-hover:translate-x-0 group-hover:translate-y-0 transition duration-700 ease-out rounded-xl"
+                >
+                  <img
+                    class="absolute inset-0 w-full h-full object-cover transform hover:scale-105 transition duration-700 ease-out"
+                    [src]="blog.featuredImage"
+                    [alt]="blog.title"
+                  />
+                </figure>
+              </a>
 
-            <!-- Content -->
-            <div>
-              <header>
-                <h3 class="text-2xl lg:text-3xl font-bold leading-tight mb-2">
+              <!-- Content -->
+              <div>
+                <header>
+                  <h3 class="text-2xl lg:text-3xl font-bold leading-tight mb-2">
+                    <a
+                      class="poppins-regular transition duration-150 ease-in-out text-white hover:text-purple-400 hover:underline"
+                      [routerLink]="['/blog', blog.slug]"
+                    >
+                      {{ blog.title }}
+                    </a>
+                  </h3>
+                </header>
+                <p class="text-lg text-gray-300 flex-grow">
+                  {{ blog.content[0].data | slice : 0 : 80 }}...
+                </p>
+                <footer class="flex flex-col items-start mt-4">
+                  <div>
+                    <span class="text-gray-700"> - </span>
+                    <span class="text-gray-300">{{
+                      blog.publishedDate | date : "MMM d, y"
+                    }}</span>
+                  </div>
+
                   <a
-                    class="poppins-regular transition duration-150 ease-in-out text-white hover:text-purple-400 hover:underline"
                     [routerLink]="['/blog', blog.slug]"
+                    class="inline-flex text-lg items-center text-purple-300 hover:text-purple-500 transition-colors merriweather-regular mt-2 group"
                   >
-                    {{ blog.title }}
+                    Read More
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-4 w-4 ml-1 transform transition-transform duration-300 group-hover:translate-x-1"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M14 5l7 7m0 0l-7 7m7-7H3"
+                      />
+                    </svg>
                   </a>
-                </h3>
-              </header>
-              <p class="text-lg text-gray-300 flex-grow">
-                {{ blog.content[0].data | slice : 0 : 80 }}...
-              </p>
-              <footer class="flex flex-col items-start mt-4">
-                <div>
-                  <span class="text-gray-700"> - </span>
-                  <span class="text-gray-300">{{
-                    blog.publishedDate | date : "MMM d, y"
-                  }}</span>
+                </footer>
+              </div>
+            </article>
+          </ng-container>
+
+          <!-- Shimmer Loader -->
+          <ng-template #shimmer>
+            <div
+              *ngFor="let i of [1, 2, 3]"
+              class="bg-[#2D1044]/50 mb-8 p-6 rounded-2xl shadow-sm shadow-[#8E4CCB]/10 transition-all duration-300 group max-w-sm mx-auto md:max-w-none grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 xl:gap-16 items-center relative overflow-hidden animate-pulse"
+            >
+              <!-- Image Shimmer -->
+              <div class="bg-gray-700/40 rounded-xl w-full h-56"></div>
+
+              <!-- Text Shimmer -->
+              <div>
+                <div class="bg-gray-700/50 rounded-lg h-6 w-3/4 mb-4"></div>
+                <div class="bg-gray-700/30 rounded-lg h-4 w-full mb-2"></div>
+                <div class="bg-gray-700/30 rounded-lg h-4 w-5/6 mb-2"></div>
+                <div class="bg-gray-700/30 rounded-lg h-4 w-2/3 mb-2"></div>
+
+                <div class="mt-4">
+                  <div class="bg-gray-700/30 h-4 w-1/4 rounded-md"></div>
                 </div>
 
-                <a
-                  [routerLink]="['/blog', blog.slug]"
-                  class="inline-flex text-lg items-center text-purple-300 hover:text-purple-500 transition-colors merriweather-regular mt-2 group"
-                >
-                  Read More
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-4 w-4 ml-1 transform transition-transform duration-300 group-hover:translate-x-1"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M14 5l7 7m0 0l-7 7m7-7H3"
-                    />
-                  </svg>
-                </a>
-              </footer>
+                <div class="mt-2 flex items-center">
+                  <div class="bg-gray-700/30 h-4 w-20 rounded-md"></div>
+                  <div class="ml-2 bg-gray-700/30 h-4 w-4 rounded-full"></div>
+                </div>
+              </div>
             </div>
-          </article>
+          </ng-template>
         </div>
       </div>
     </section>
     <!-- Pagination -->
     <div class="flex justify-center mt-16">
-      <nav class="flex ">
+      <nav class="flex">
         <button
           (click)="setPage(currentPage - 1)"
           [disabled]="currentPage === 1"

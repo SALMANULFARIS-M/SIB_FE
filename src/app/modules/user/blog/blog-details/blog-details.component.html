@@ -29,19 +29,34 @@
       </div>
       <!-- Blog Header Content -->
       <div class="relative z-10">
-        <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold montserrat mb-6">
-          {{ blog?.title }}
-        </h1>
+        <ng-container *ngIf="blog; else shimmer">
+          <!-- Blog Title -->
+          <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold montserrat mb-6">
+            {{ blog.title }}
+          </h1>
 
-        <!-- Featured Image -->
-        <div class="w-full h-96 overflow-hidden rounded-xl mb-8">
-          <img
-            [src]="blog?.featuredImage"
-            [alt]="blog?.title"
-            class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
-          />
-        </div>
+          <!-- Featured Image -->
+          <div class="w-full h-96 overflow-hidden rounded-xl mb-8">
+            <img
+              [src]="blog.featuredImage"
+              [alt]="blog.title"
+              class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+            />
+          </div>
+        </ng-container>
+
+        <!-- Shimmer UI Placeholder -->
+        <ng-template #shimmer>
+          <div class="animate-pulse">
+            <!-- Shimmer for Blog Title -->
+            <div class="h-10 w-3/4 bg-gray-500/40 rounded-md mb-6"></div>
+
+            <!-- Shimmer for Featured Image -->
+            <div class="w-full h-96 bg-gray-500/30 rounded-xl mb-8"></div>
+          </div>
+        </ng-template>
       </div>
+
     </div>
   </div>
 
@@ -53,7 +68,8 @@
         class="lg:col-span-2 bg-black/60 backdrop-blur-lg rounded-2xl shadow-md shadow-purple-500/20 p-8 hover:bg-black/80 transition-all duration-300"
       >
         <div class="prose prose-lg prose-invert max-w-none">
-          <ng-container *ngIf="blog">
+          <!-- Show Blog Content If Available -->
+          <ng-container *ngIf="blog; else shimmer">
             <ng-container *ngFor="let item of blog.content">
               <!-- Render Heading -->
               <h1
@@ -68,6 +84,7 @@
               >
                 {{ item.data }}
               </h2>
+
               <!-- Render Paragraph -->
               <p
                 *ngIf="item.type === 'paragraph'"
@@ -77,7 +94,10 @@
               </p>
 
               <!-- Render List -->
-              <div  *ngIf="item.type === 'list'" class="my-2 p-4 bg-purple-900/30 rounded-xl mb-4">
+              <div
+                *ngIf="item.type === 'list'"
+                class="my-2 p-4 bg-purple-900/30 rounded-xl mb-4"
+              >
                 <ul
                   *ngIf="isArray(item.data) && item.data.length"
                   class="list-disc pl-5"
@@ -90,6 +110,7 @@
                   </li>
                 </ul>
               </div>
+
               <!-- Render Image -->
               <div *ngIf="item.type === 'image'" class="my-6">
                 <img
@@ -100,6 +121,35 @@
               </div>
             </ng-container>
           </ng-container>
+
+          <!-- Shimmer UI Placeholder -->
+          <ng-template #shimmer>
+            <div class="animate-pulse">
+              <!-- Shimmer for Main Heading -->
+              <div class="h-8 w-3/4 bg-gray-500/40 rounded-md mb-4"></div>
+              <!-- Shimmer for Subheading -->
+              <div class="h-6 w-1/2 bg-gray-500/30 rounded-md mb-6"></div>
+
+              <!-- Shimmer for Paragraphs -->
+              <div *ngFor="let i of [1, 2, 3]" class="mb-4">
+                <div class="h-4 w-full bg-gray-500/30 rounded-md mb-2"></div>
+                <div class="h-4 w-5/6 bg-gray-500/30 rounded-md"></div>
+              </div>
+
+              <!-- Shimmer for List -->
+              <div class="my-2 p-4 bg-gray-600/20 rounded-xl mb-4">
+                <ul class="list-disc pl-5">
+                  <li
+                    *ngFor="let i of [1, 2, 3]"
+                    class="h-4 w-3/4 bg-gray-500/30 rounded-md mb-2"
+                  ></li>
+                </ul>
+              </div>
+
+              <!-- Shimmer for Image -->
+              <div class="w-full h-52 bg-gray-500/40 rounded-lg my-6"></div>
+            </div>
+          </ng-template>
         </div>
 
         <!-- Back Button -->
@@ -114,6 +164,7 @@
           </div>
         </div>
       </article>
+
       <!-- Sidebar -->
       <aside class="">
         <!-- Related Articles -->
@@ -121,8 +172,10 @@
           class="mb-8 bg-black/60 backdrop-blur-lg hover:bg-black/80 transition-all duration-300 rounded-2xl shadow-md shadow-purple-500/20 p-6"
         >
           <h3 class="text-xl font-bold montserrat mb-4">Our Articles</h3>
-          <div class="">
-            <div *ngIf="latestBlogs?.length">
+
+          <div>
+            <!-- Show Blogs if Data is Available -->
+            <ng-container *ngIf="latestBlogs?.length; else shimmer">
               <a
                 *ngFor="let blog of latestBlogs"
                 [routerLink]="['/blog', blog.slug]"
@@ -150,7 +203,26 @@
                   </div>
                 </div>
               </a>
-            </div>
+            </ng-container>
+
+            <!-- Shimmer UI Placeholder -->
+            <ng-template #shimmer>
+              <div
+                *ngFor="let i of [1, 2, 3, 4]"
+                class="block mb-4 animate-pulse"
+              >
+                <div class="flex gap-3 mt-5">
+                  <!-- Shimmer Image Placeholder -->
+                  <div class="w-20 h-14 bg-gray-500/40 rounded-lg"></div>
+                  <div class="flex-1">
+                    <!-- Shimmer Title -->
+                    <div class="h-4 bg-gray-500/50 rounded-md w-3/4 mb-2"></div>
+                    <!-- Shimmer Date -->
+                    <div class="h-3 bg-gray-500/40 rounded-md w-1/2"></div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
           </div>
         </div>
 

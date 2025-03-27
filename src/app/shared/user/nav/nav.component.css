@@ -17,9 +17,10 @@ nav {
 .active {
   color: #d5a1ff;
 }
-/* Custom CSS for active state */
-a.active span {
-  width: 100%;
+
+
+.active-mobile {
+  color: #390266;
 }
 
 
