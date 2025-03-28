@@ -16,7 +16,7 @@
   (click)="closeForm()">
   <div
     class="bg-black/70 p-6 sm:p-8 rounded-xl shadow-2xl w-full max-w-md md:max-w-2xl"
-  >
+    (click)="$event.stopPropagation()">
     <h2 class="text-2xl font-bold text-center mb-6 merriweather-bold">Free consultations</h2>
     <form
       [formGroup]="applyForm"
