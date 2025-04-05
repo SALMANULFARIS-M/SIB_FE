@@ -15,12 +15,12 @@ export class AppComponent implements OnInit, OnDestroy {
   private mediaQueryListener!: (event: MediaQueryListEvent) => void; // Define the listener type
   showWhatsAppButton = true; // Default: show the button
 
-  constructor(public spinner: NgxSpinnerService, @Inject(PLATFORM_ID) private platformId: Object, private router: Router,private meta: Meta, private title: Title) {
+  constructor(public spinner: NgxSpinnerService, @Inject(PLATFORM_ID) private platformId: Object, private router: Router, private meta: Meta, private title: Title) {
     this.router.events.subscribe(() => {
       // Hide the button if the URL contains 'admin'
       this.showWhatsAppButton = !this.router.url.includes('/admin');
     });
-   }
+  }
 
   ngOnInit(): void {
     this.title.setTitle('Study in Bengaluru - Top Colleges & Courses');
