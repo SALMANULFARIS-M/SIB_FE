@@ -1,5 +1,6 @@
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
 import { Router, RouterOutlet, NavigationStart, NavigationEnd } from '@angular/router';
 import { NgxSpinnerComponent, NgxSpinnerService } from 'ngx-spinner';
 
@@ -14,7 +15,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private mediaQueryListener!: (event: MediaQueryListEvent) => void; // Define the listener type
   showWhatsAppButton = true; // Default: show the button
 
-  constructor(public spinner: NgxSpinnerService, @Inject(PLATFORM_ID) private platformId: Object, private router: Router) {
+  constructor(public spinner: NgxSpinnerService, @Inject(PLATFORM_ID) private platformId: Object, private router: Router,private meta: Meta, private title: Title) {
     this.router.events.subscribe(() => {
       // Hide the button if the URL contains 'admin'
       this.showWhatsAppButton = !this.router.url.includes('/admin');
@@ -22,6 +23,22 @@ export class AppComponent implements OnInit, OnDestroy {
    }
 
   ngOnInit(): void {
+    this.title.setTitle('Study in Bengaluru - Top Colleges & Courses');
+
+    this.meta.updateTag({
+      name: 'description',
+      content: `Discover admissions, career guidance, and top educational opportunities in Bengaluru's best colleges and universities. Your trusted platform for building a successful future in Asia's leading educational hub.`
+    });
+
+    this.meta.updateTag({
+      name: 'robots',
+      content: 'index, follow'
+    });
+
+    this.meta.updateTag({
+      name: 'keywords',
+      content: 'Study in Bengaluru, Study in Bangalore, Bangalore Colleges, Bengaluru Colleges, Admissions in Bengaluru, Career Guidance, Top Universities in Bangalore, Bengaluru Education, Apply Now, Education Consultants'
+    });
     if (isPlatformBrowser(this.platformId)) {
       const initialSpinner = document.getElementById('initial-spinner');
       if (initialSpinner) {
