@@ -1,0 +1,85 @@
+<div class="flex min-h-screen relative bg-gradient-to-b from-[#2D1044]/10 to-[#33154b]/5">
+  <app-sidebar></app-sidebar>
+
+  <main
+    class="flex-1 p-6 transition-all duration-300"
+    [ngClass]="{ 'ml-64': !sidebarCollapsed, 'ml-20': sidebarCollapsed }"
+  >
+    <!-- Fixed Header -->
+    <div
+      class="fixed top-4 right-3 z-50 bg-[#33154b] px-6 py-4 rounded-lg shadow-lg w-[calc(100%-280px)]"
+      [ngClass]="{ 'left-68': !sidebarCollapsed, 'left-24': sidebarCollapsed }"
+    >
+      <div class="flex justify-between items-center">
+        <h1 class="text-2xl font-semibold text-pink-500 font-montserrat">Colleges</h1>
+        <img
+          class="h-10 w-10 rounded-full border-2 border-gray-200 p-1"
+          src="/shefin.JPG"
+          alt="User Profile"
+        />
+      </div>
+    </div>
+
+    <!-- College List Section -->
+    <div class="bg-[#33154b]/20 backdrop-blur-sm rounded-xl p-6 border border-purple-800/20 mt-20 relative">
+      <div class="absolute inset-0 rounded-xl overflow-hidden pointer-events-none">
+        <div class="absolute top-0 left-0 h-[2px] w-16 bg-gradient-to-r from-transparent via-pink-500 to-transparent animate-border-light-horizontal"></div>
+        <div class="absolute top-0 right-0 h-16 w-[2px] bg-gradient-to-b from-transparent via-pink-400 to-transparent animate-border-light-vertical"></div>
+        <div class="absolute bottom-0 right-0 h-[2px] w-16 bg-gradient-to-l from-transparent via-pink-400 to-transparent animate-border-light-horizontal-reverse"></div>
+        <div class="absolute bottom-0 left-0 h-16 w-[2px] bg-gradient-to-t from-transparent via-pink-500 to-transparent animate-border-light-vertical-reverse"></div>
+      </div>
+
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-xl font-semibold text-pink-500 montserrat-normal">All Colleges</h2>
+        <button
+          (click)="addCollege()"
+          class="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-lg shadow-md transition-all duration-300"
+        >
+          + Add College
+        </button>
+      </div>
+
+      <div *ngIf="colleges.length === 0" class="text-center py-12">
+        <i class="bx bxs-school text-6xl text-gray-400 mb-3"></i>
+        <h3 class="text-xl font-medium text-gray-300 mb-2">No Colleges found</h3>
+        <p class="text-gray-400 max-w-md mx-auto mb-4">Start by adding colleges to manage their courses and info.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div
+          *ngFor="let college of colleges"
+          class="bg-gradient-to-br from-[#2D1044]/60 to-[#33154b]/60 rounded-xl shadow-lg border border-purple-800/20 p-4 hover:shadow-pink-500/20 transition"
+        >
+          <div class="flex items-center gap-4 mb-4">
+            <img [src]="college.photo" class="w-12 h-12 object-contain rounded-md" alt="College Photo" />
+            <h3 class="text-lg font-semibold text-white line-clamp-1">{{ college.name }}</h3>
+          </div>
+          <p class="text-gray-400 text-sm">Location: {{ college.location || 'N/A' }}</p>
+
+          <div class="flex justify-between mt-4 pt-4 border-t border-purple-800/30">
+            <button (click)="editCollege(college._id)" class="text-xs text-white bg-purple-900/50 px-3 py-1.5 rounded hover:bg-purple-900/70">
+              <i class="bx bx-edit text-sm mr-1"></i> Edit
+            </button>
+            <button (click)="deleteCollege(college._id)" class="text-xs text-pink-500 bg-pink-500/10 px-3 py-1.5 rounded hover:bg-pink-500/20">
+              <i class="bx bx-trash text-sm mr-1"></i> Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating Add Button -->
+    <button
+      (click)="addCollege()"
+      class="fixed bottom-8 right-8 bg-pink-500 text-white px-6 py-3 rounded-full shadow-lg hover:bg-pink-600 transition"
+    >
+      + Add College
+    </button>
+  </main>
+</div>
+
+<!-- Loader -->
+<div *ngIf="isLoading" class="loading-overlay fixed inset-0 flex flex-col items-center justify-center bg-black bg-opacity-60 z-50">
+  <div class="lds-hourglass"></div>
+  <p class="text-pink-600 text-2xl font-montserrat mt-4">Loading...</p>
+</div>
