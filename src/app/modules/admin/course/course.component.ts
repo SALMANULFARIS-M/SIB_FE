@@ -5,6 +5,7 @@ import { EducationService } from '../../../core/services/education.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
+import { Course } from '../../../shared/models/course';
 
 @Component({
   selector: 'app-course',

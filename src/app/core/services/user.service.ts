@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable,PLATFORM_ID, TransferState } from '@angular/core';
 import { Observable} from 'rxjs';
-import { Blog } from '../../modules/user/user.interface';
+import { Blog } from '../../shared/models/user.interface';
 import { BaseService } from './base.service';
 
 

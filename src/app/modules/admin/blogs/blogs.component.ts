@@ -5,7 +5,7 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
-import { Blog } from "../../user/user.interface";
+import { Blog } from "../../../shared/models/user.interface";
 @Component({
   selector: 'app-blogs',
   imports: [SidebarComponent, CommonModule],

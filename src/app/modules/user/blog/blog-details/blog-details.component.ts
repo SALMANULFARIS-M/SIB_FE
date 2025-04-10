@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { Blog } from '../../user.interface';
+import { Blog } from '../../../../shared/models/user.interface';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { UserService } from '../../../../core/services/user.service';
 import { NavComponent } from '../../../../shared/user/nav/nav.component';

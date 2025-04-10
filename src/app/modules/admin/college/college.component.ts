@@ -5,6 +5,7 @@ import { EducationService } from '../../../core/services/education.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
+import { College } from '../../../shared/models/college';
 
 @Component({
   selector: 'app-college',
@@ -13,7 +14,7 @@ import Swal from 'sweetalert2';
   styleUrl: './college.component.css'
 })
 export class CollegeComponent {
-  colleges: any[] = [];
+  colleges: College[] = [];
   isLoading: boolean = false;
   sidebarCollapsed: boolean = false;
 
