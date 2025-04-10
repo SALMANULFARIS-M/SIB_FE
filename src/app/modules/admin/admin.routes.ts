@@ -10,13 +10,13 @@ import { CourseComponent } from './course/course.component';
 
 export const ADMIN_ROUTES: Routes = [
   { path: '', component: AdminLoginComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'university', component: UniversityComponent },
-  { path: 'college', component: CollegeComponent },
-  { path: 'course', component: CourseComponent },
-  { path: 'blogs-list', component: BlogsComponent },
-  { path: 'blogs-list/blog-add', component: AddblogsComponent },
+  { path: 'dashboard', component: DashboardComponent  , canActivate: [authGuard]},
+  { path: 'university', component: UniversityComponent  , canActivate: [authGuard]},
+  { path: 'college', component: CollegeComponent  , canActivate: [authGuard]},
+  { path: 'course', component: CourseComponent  , canActivate: [authGuard]},
+  { path: 'blogs-list', component: BlogsComponent  , canActivate: [authGuard]},
+  { path: 'blogs-list/blog-add', component: AddblogsComponent  , canActivate: [authGuard]},
   { path: '**', redirectTo: 'dashboard' } // Handle invalid admin routes
 ];
 
-// , canActivate: [authGuard]
+//
