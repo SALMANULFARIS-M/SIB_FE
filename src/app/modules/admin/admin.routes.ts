@@ -19,4 +19,3 @@ export const ADMIN_ROUTES: Routes = [
   { path: '**', redirectTo: 'dashboard' } // Handle invalid admin routes
 ];
 
-//

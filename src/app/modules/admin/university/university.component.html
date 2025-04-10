@@ -56,13 +56,13 @@
             <img [src]="university.logo" class="w-12 h-12 object-contain" alt="University Logo" />
             <h3 class="text-lg font-semibold text-white line-clamp-1">{{ university.name }}</h3>
           </div>
-          <p class="text-gray-400 text-sm">Total Colleges: {{ university.colleges?.length || 0 }}</p>
+          <p class="text-gray-400 text-sm">Total Colleges: {{ university.colleges.length || 0 }}</p>
 
           <div class="flex justify-between mt-4 pt-4 border-t border-purple-800/30">
-            <button (click)="editUniversity(university._id)" class="text-xs text-white bg-purple-900/50 px-3 py-1.5 rounded hover:bg-purple-900/70">
+            <button *ngIf="university._id" (click)="editUniversity(university._id)" class="text-xs text-white bg-purple-900/50 px-3 py-1.5 rounded hover:bg-purple-900/70">
               <i class="bx bx-edit text-sm mr-1"></i> Edit
             </button>
-            <button (click)="deleteUniversity(university._id)" class="text-xs text-pink-500 bg-pink-500/10 px-3 py-1.5 rounded hover:bg-pink-500/20">
+            <button (click)="deleteUniversity(university._id ?? '')" class="text-xs text-pink-500 bg-pink-500/10 px-3 py-1.5 rounded hover:bg-pink-500/20">
               <i class="bx bx-trash text-sm mr-1"></i> Delete
             </button>
           </div>
