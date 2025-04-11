@@ -32,8 +32,6 @@ export class CourseComponent {
     this.fetchCourses();
   }
 
-
-
   fetchCourses(): void {
     this.isLoading = true;
     this.educationService.getCourses().subscribe({
@@ -49,7 +47,7 @@ export class CourseComponent {
   }
 
   addCourse(): void {
-    this.router.navigate(['/admin/add-course']);
+    this.router.navigate(['/admin/course/add-course']);
   }
 
   editCourse(courseId: string): void {

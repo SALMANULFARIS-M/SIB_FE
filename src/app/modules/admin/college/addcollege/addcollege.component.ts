@@ -27,7 +27,6 @@ export class AddcollegeComponent {
   constructor(
     private fb: FormBuilder,
     private educationService: EducationService,
-    private http: HttpClient,
     private router: Router,
     private toastr: ToastrService,
     private service: AdminService

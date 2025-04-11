@@ -1,1 +1,263 @@
-<p>addcourse works!</p>
+<div
+  class="flex min-h-screen relative bg-gradient-to-b from-[#2D1044]/10 to-[#33154b]/5"
+>
+  <app-sidebar></app-sidebar>
+
+  <main
+    class="flex-1 p-6 transition-all duration-300"
+    [ngClass]="{ 'ml-64': !sidebarCollapsed, 'ml-20': sidebarCollapsed }"
+  >
+    <!-- Header -->
+    <div
+      class="fixed top-4 right-3 z-50 bg-[#33154b] px-6 py-4 rounded-lg shadow-lg"
+      [ngClass]="{
+        'left-68 w-[calc(100%-280px)]': !sidebarCollapsed,
+        'left-24 w-[calc(100%-100px)]': sidebarCollapsed
+      }"
+    >
+      <div class="flex justify-between items-center">
+        <h1 class="text-2xl font-semibold text-pink-500 montserrat-normal">
+          Add Course
+        </h1>
+        <img
+          class="h-10 w-10 rounded-full border-2 border-pink-500/30 p-1"
+          src="/shefin.JPG"
+          alt="User Profile"
+        />
+      </div>
+    </div>
+
+    <!-- Form Section -->
+    <div class="mt-24 max-w-7xl mx-auto">
+      <div
+        class="bg-[#2D1044]/20 backdrop-blur-sm rounded-lg border border-purple-800/30 shadow-lg"
+      >
+        <div class="bg-[#33154b] px-6 py-4 border-b border-purple-800/30">
+          <h2 class="text-lg font-medium text-white poppins-medium">
+            Create New College
+          </h2>
+        </div>
+
+        <div class="p-6">
+          <form
+            [formGroup]="courseForm"
+            (ngSubmit)="onSubmit()"
+            class="grid grid-cols-1 md:grid-cols-2 gap-6"
+          >
+            <!-- Title -->
+            <div>
+              <label class="block text-sm text-gray-300 mb-1">Title</label>
+              <input
+                type="text"
+                formControlName="title"
+                placeholder="Course Title"
+                class="bg-purple-900/85 border border-purple-800/50 text-white rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-pink-500/50"
+              />
+            </div>
+
+            <!-- Degree -->
+            <div>
+              <label class="block text-sm text-gray-300 mb-1">Degree</label>
+              <input
+                type="text"
+                formControlName="degree"
+                placeholder="e.g., B.Tech / MBA / Diploma"
+                class="bg-purple-900/85 border border-purple-800/50 text-white rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-pink-500/50"
+              />
+            </div>
+
+            <!-- Level -->
+            <div>
+              <label class="block text-sm text-gray-300 mb-1">Level</label>
+              <select
+                formControlName="level"
+                class="bg-purple-900/85 border border-purple-800/50 text-white rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-pink-500/50"
+              >
+                <option value="" disabled selected>Select Level</option>
+                <option value="UG">UG</option>
+                <option value="PG">PG</option>
+                <option value="Course">Skill-Based Course</option>
+              </select>
+            </div>
+
+            <!-- Category -->
+            <div>
+              <label class="block text-sm text-gray-300 mb-1">Category</label>
+              <select
+                formControlName="category"
+                class="bg-purple-900/85 border border-purple-800/50 text-white rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-pink-500/50"
+              >
+                <option value="" disabled selected>Select Category</option>
+                <option *ngFor="let cat of categories" [value]="cat">
+                  {{ cat }}
+                </option>
+              </select>
+            </div>
+
+            <!-- Fees -->
+            <div>
+              <label class="block text-sm text-gray-300 mb-1">Fees (INR)</label>
+              <input
+                type="number"
+                formControlName="fees"
+                placeholder="e.g., 50000"
+                class="bg-purple-900/85 border border-purple-800/50 text-white rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-pink-500/50"
+              />
+            </div>
+
+            <!-- Duration -->
+            <div class="flex gap-2">
+              <div class="flex-1">
+                <label class="block text-sm text-gray-300 mb-1">Duration</label>
+                <input
+                  type="number"
+                  formControlName="durationValue"
+                  placeholder="e.g., 2"
+                  class="bg-purple-900/85 border border-purple-800/50 text-white rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-pink-500/50"
+                />
+              </div>
+              <div class="flex-1">
+                <label class="block text-sm text-gray-300 mb-1">Unit</label>
+                <select
+                  formControlName="durationUnit"
+                  class="bg-purple-900/85 border border-purple-800/50 text-white rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-pink-500/50"
+                >
+                  <option value="month">Months</option>
+                  <option value="year">Years</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Median LPA -->
+            <div>
+              <label class="block text-sm text-gray-300 mb-1"
+                >Median LPA (₹)</label
+              >
+              <input
+                type="number"
+                formControlName="medianLPA"
+                placeholder="e.g., 4.5"
+                class="bg-purple-900/85 border border-purple-800/50 text-white rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-pink-500/50"
+              />
+            </div>
+
+            <!-- Affiliation -->
+            <div>
+              <label class="block text-sm text-gray-300 mb-1"
+                >Affiliation</label
+              >
+              <input
+                type="text"
+                formControlName="affiliation"
+                placeholder="e.g., VTU / UGC"
+                class="bg-purple-900/85 border border-purple-800/50 text-white rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-pink-500/50"
+              />
+            </div>
+
+            <!-- College Dropdown -->
+            <div>
+              <label class="block text-sm text-gray-300 mb-1">College</label>
+              <select
+                formControlName="collegeId"
+                class="bg-purple-900/85 border border-purple-800/50 text-white rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-pink-500/50"
+              >
+                <option value="">-- Select College (Optional) --</option>
+                <option *ngFor="let college of colleges" [value]="college._id">
+                  {{ college.name }}
+                </option>
+              </select>
+            </div>
+
+            <!-- Provider Type -->
+            <div>
+              <label class="block text-sm text-gray-300 mb-1"
+                >Provider Type</label
+              >
+              <select
+                formControlName="providerType"
+                class="bg-purple-900/85 border border-purple-800/50 text-white rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-pink-500/50"
+              >
+                <option value="College">College</option>
+                <option value="Institute">Institute</option>
+                <option value="OnlinePlatform">Online Platform</option>
+              </select>
+            </div>
+
+            <!-- Provider Name -->
+            <div>
+              <label class="block text-sm text-gray-300 mb-1"
+                >Provider Name</label
+              >
+              <input
+                type="text"
+                formControlName="providerName"
+                placeholder="e.g., NIIT / Coursera"
+                class="bg-purple-900/85 border border-purple-800/50 text-white rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-pink-500/50"
+              />
+            </div>
+
+            <!-- Online/Offline -->
+            <div class="flex gap-4 items-center">
+              <!-- Mode & Short-Term Options -->
+              <div class="md:col-span-2 grid md:grid-cols-2 gap-6">
+                <!-- Online/Offline Mode -->
+                <div>
+                  <label class="block text-sm text-gray-300 mb-2">Mode</label>
+                  <div class="flex gap-4">
+                    <label class="flex items-center text-white gap-2">
+                      <input
+                        type="checkbox"
+                        formControlName="isOnline"
+                        class="accent-pink-500"
+                      />
+                      Online
+                    </label>
+                    <label class="flex items-center text-white gap-2">
+                      <input
+                        type="checkbox"
+                        formControlName="isOffline"
+                        class="accent-pink-500"
+                      />
+                      Offline
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Short Term Checkbox -->
+                <div>
+                  <label class="block text-sm text-gray-300 mb-2"
+                    >Short-Term</label
+                  >
+                  <label class="flex items-center text-white gap-2">
+                    <input
+                      type="checkbox"
+                      formControlName="isShortTerm"
+                      class="accent-pink-500"
+                    />
+                    Is this a short-term course?
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="md:col-span-2">
+              <button
+                type="submit"
+                class="w-full bg-pink-600 hover:bg-pink-700 text-white font-medium py-2 rounded-lg transition"
+              >
+                ➕ Add Course
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Loading Overlay -->
+<div *ngIf="isLoading" class="loading-overlay">
+  <div class="lds-hourglass"></div>
+  <p class="text-pink-600 text-2xl montserrat">Uploading...</p>
+</div>

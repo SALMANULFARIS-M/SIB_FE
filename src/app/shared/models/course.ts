@@ -12,6 +12,7 @@ export interface Course {
   collegeId?: string | null;
   providerType: 'College' | 'Institute' | 'OnlinePlatform';
   providerName?: string | null;
+  isShortTerm: boolean;
   isOnline: boolean;
   isOffline: boolean;
 }
