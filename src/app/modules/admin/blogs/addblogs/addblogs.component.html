@@ -46,8 +46,9 @@
       >
         <!-- Card Header -->
         <div class="bg-[#33154b] px-6 py-4 border-b border-purple-800/30">
-
-  <h2 class="text-lg font-medium text-white poppins-medium">Create New Blog</h2>
+          <h2 class="text-lg font-medium text-white poppins-medium">
+            Create New Blog
+          </h2>
         </div>
 
         <!-- Form Content -->
@@ -58,7 +59,7 @@
             enctype="multipart/form-data"
           >
             <!-- Basic Info Section -->
-            <div class=" mb-8">
+            <div class="mb-8">
               <div class="mb-4">
                 <label class="block text-gray-300 text-sm font-medium mb-2"
                   >Title</label
@@ -100,23 +101,32 @@
                 </div>
               </div>
               <div class="mb-4">
-                <label class="block text-gray-300 text-sm font-medium mb-2">Category</label>
+                <label class="block text-gray-300 text-sm font-medium mb-2"
+                  >Category</label
+                >
                 <select
                   formControlName="category"
                   class="w-full px-4 py-2 rounded-md poppins-medium bg-purple-900/85 border border-purple-800/50 text-pink-200 text-md focus:outline-none focus:ring-2 focus:ring-pink-500/50"
                 >
                   <option value="" disabled selected>Select Category</option>
-                  <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+                  <option
+                    *ngFor="let category of categories"
+                    [value]="category"
+                  >
+                    {{ category }}
+                  </option>
                 </select>
 
                 <div
-                  *ngIf="blogForm.get('category')?.invalid && blogForm.get('category')?.touched"
+                  *ngIf="
+                    blogForm.get('category')?.invalid &&
+                    blogForm.get('category')?.touched
+                  "
                   class="text-pink-500 text-xs mt-1"
                 >
                   Category is required
                 </div>
               </div>
-
 
               <div class="mb-4">
                 <label class="block text-gray-300 text-sm font-medium mb-2"
@@ -314,13 +324,13 @@
                 Cancel
               </button>
 
-              <div class="flex ">
+              <div class="flex">
                 <button
                   type="button"
                   (click)="addContentBlock()"
                   class="flex ms-3 items-center text-sm poppins-medium bg-purple-900/50 hover:bg-purple-900/80 text-white px-3 py-1.5 rounded-md transition-colors"
                 >
-                   Add Block<i class="bx bx-plus mr-1"></i>
+                  Add Block<i class="bx bx-plus mr-1"></i>
                 </button>
 
                 <button
@@ -341,3 +351,4 @@
   <div class="lds-hourglass"></div>
   <p class="text-pink-600 text-2xl montserrat">updating....</p>
 </div>
+<!-- End of Blog Form Component Template -->

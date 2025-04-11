@@ -1,11 +1,14 @@
 export interface College {
   _id?: string; // Optional, used when fetched from the DB
   name: string;
-  universityId?: string; // ObjectId as string
+  universityId?: string; // ObjectId as string or undefined for autonomous
   rating?: number;
   location?: string;
   isAutonomous?: boolean;
-  photos?: string[]; // Google image URLs
+  photos?: {
+    url: string;
+    public_id: string;
+  }[]; // Match Mongoose schema
   courseLevels?: string[]; // ['UG', 'PG']
   availableCourses?: string[]; // ObjectId as string
   description: string;

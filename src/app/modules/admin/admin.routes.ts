@@ -7,15 +7,22 @@ import { AddblogsComponent } from './blogs/addblogs/addblogs.component';
 import { UniversityComponent } from './university/university.component';
 import { CollegeComponent } from './college/college.component';
 import { CourseComponent } from './course/course.component';
+import { AdduniversityComponent } from './university/adduniversity/adduniversity.component';
+import { AddcollegeComponent } from './college/addcollege/addcollege.component';
+import { AddcourseComponent } from './course/addcourse/addcourse.component';
 
 export const ADMIN_ROUTES: Routes = [
   { path: '', component: AdminLoginComponent },
-  { path: 'dashboard', component: DashboardComponent  , canActivate: [authGuard]},
-  { path: 'university', component: UniversityComponent  , canActivate: [authGuard]},
-  { path: 'college', component: CollegeComponent  , canActivate: [authGuard]},
-  { path: 'course', component: CourseComponent  , canActivate: [authGuard]},
-  { path: 'blogs-list', component: BlogsComponent  , canActivate: [authGuard]},
-  { path: 'blogs-list/blog-add', component: AddblogsComponent  , canActivate: [authGuard]},
+  { path: 'dashboard', component: DashboardComponent  },
+  { path: 'university', component: UniversityComponent  },
+  { path: 'university/add-university', component: AdduniversityComponent  },
+  { path: 'college', component: CollegeComponent  },
+  { path: 'college/add-college', component: AddcollegeComponent  },
+  { path: 'course', component: CourseComponent  },
+  { path: 'course/add-course', component: AddcourseComponent  },
+  { path: 'blogs-list', component: BlogsComponent  },
+  { path: 'blogs-list/blog-add', component: AddblogsComponent  },
   { path: '**', redirectTo: 'dashboard' } // Handle invalid admin routes
 ];
 
+// canActivate: [authGuard]

@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 import { College } from '../../../shared/models/college';
+import { AdminService } from '../../../core/services/admin.service';
 
 @Component({
   selector: 'app-college',
@@ -19,10 +20,15 @@ export class CollegeComponent {
   sidebarCollapsed: boolean = false;
 
   constructor(
+    private service: AdminService,
     private educationService: EducationService,
     private router: Router,
     private toastr: ToastrService
-  ) { }
+  ) {
+    this.service.collapsedState.subscribe((state) => {
+      this.sidebarCollapsed = state;
+    });
+  }
 
   ngOnInit(): void {
     this.fetchColleges();
@@ -32,7 +38,7 @@ export class CollegeComponent {
     this.isLoading = true;
     this.educationService.getColleges().subscribe({
       next: (res) => {
-        this.colleges = res?.data || [];
+        this.colleges = res || [];
         this.isLoading = false;
       },
       error: (err) => {
@@ -44,7 +50,7 @@ export class CollegeComponent {
   }
 
   addCollege(): void {
-    this.router.navigate(['/admin/colleges/add']);
+    this.router.navigate(['/admin/college/add-college']);
   }
 
   editCollege(id: string): void {

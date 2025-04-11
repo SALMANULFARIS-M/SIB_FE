@@ -75,11 +75,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     { label: 'Internships', icon: faBuilding }
   ];
 
-  slides = [
-    { image: '/img_1.JPG', text: 'With Chairman of Ique Ventures', alt: 'Slide 1' },
-    { image: '/img_2.JPG', text: 'Founder of Study In Bengaluru', alt: 'Slide 2' },
-    { image: '/img_3.JPG', text: 'Receiving Award for best admission consultants', alt: 'Slide 3' },
-  ];
 
   constructor(@Inject(PLATFORM_ID) private platformId: any, private router: Router, private service: UserService,
   ) { }
@@ -153,7 +148,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
           this.setupIntersectionObserver(this.journey?.nativeElement, 'journeyVisible');
         }
       }, 500);
-      this.startAutoSlide();
     }
   }
   startFlipAnimation(): void {
@@ -220,19 +214,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     clearInterval(this.intervalId);
   }
 
-  startAutoSlide(): void {
-    this.intervalId = setInterval(() => {
-      this.nextSlide();
-    }, 2000);
-  }
 
-  nextSlide(): void {
-    this.currentSlide = (this.currentSlide + 1) % this.slides.length;
-  }
-
-  prevSlide(): void {
-    this.currentSlide = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
-  }
 
   goToSlide(index: number): void {
     this.currentSlide = index;

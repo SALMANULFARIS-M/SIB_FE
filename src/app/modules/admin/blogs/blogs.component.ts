@@ -26,20 +26,15 @@ export class BlogsComponent implements OnInit {
     private readonly toastr: ToastrService,
     @Inject(PLATFORM_ID) private readonly platformId: object
   ) {
-    this.subscribeToSidebarState();
+    this.service.collapsedState.subscribe((state) => {
+      this.sidebarCollapsed = state;
+    });
   }
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       this.loadBlogs();
     }
-  }
-
-  /** Subscribe to sidebar collapse state */
-  private subscribeToSidebarState(): void {
-    this.service.collapsedState.subscribe((state: boolean) => {
-      this.sidebarCollapsed = state;
-    });
   }
 
   /** Fetches blogs from the API */

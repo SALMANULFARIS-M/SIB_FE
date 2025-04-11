@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 import { Course } from '../../../shared/models/course';
+import { AdminService } from '../../../core/services/admin.service';
 
 @Component({
   selector: 'app-course',
@@ -18,19 +19,26 @@ export class CourseComponent {
   isLoading = false;
   sidebarCollapsed = false;
 
-  constructor(private service: EducationService, private router: Router,
-    private toastr: ToastrService
-  ) { }
+  constructor(private educationService: EducationService, private router: Router,
+    private toastr: ToastrService,
+    private service: AdminService
+  ) {
+    this.service.collapsedState.subscribe((state) => {
+      this.sidebarCollapsed = state;
+    });
+  }
 
   ngOnInit(): void {
     this.fetchCourses();
   }
 
+
+
   fetchCourses(): void {
     this.isLoading = true;
-    this.service.getCourses().subscribe({
+    this.educationService.getCourses().subscribe({
       next: (res) => {
-        this.courses = res;
+        this.courses = res || [];
         this.isLoading = false;
       },
       error: (err) => {
@@ -63,7 +71,7 @@ export class CourseComponent {
     }).then((result) => {
       if (result.isConfirmed) {
         this.isLoading = true;
-        this.service.deleteCourse(courseId).subscribe({
+        this.educationService.deleteCourse(courseId).subscribe({
           next: () => {
             this.courses = this.courses.filter(c => c._id !== courseId);
             this.toastr.success('Course deleted successfully');

@@ -8,7 +8,9 @@ import { isPlatformServer } from '@angular/common';
   providedIn: 'root'
 })
 export class BaseService {
-  protected apiUrl = environment.apiUrl;
+  // protected apiUrl = environment.apiUrl;
+  protected apiUrl = "http://localhost:5000";
+
   constructor(
     protected http: HttpClient,
     @Inject(PLATFORM_ID) protected platformId: object,

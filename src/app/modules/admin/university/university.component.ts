@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 import { University } from '../../../shared/models/university';
+import { AdminService } from '../../../core/services/admin.service';
 
 @Component({
   selector: 'app-university',
@@ -19,10 +20,16 @@ export class UniversityComponent {
   sidebarCollapsed = false;
 
   constructor(
-    private service: EducationService,
+    private educationService: EducationService,
     private router: Router,
-    private toastr: ToastrService
-  ) { }
+    private toastr: ToastrService,
+    private service: AdminService
+  ) {
+    this.service.collapsedState.subscribe((state) => {
+      this.sidebarCollapsed = state;
+    });
+  }
+
 
   ngOnInit(): void {
     this.fetchUniversities();
@@ -30,9 +37,9 @@ export class UniversityComponent {
 
   fetchUniversities(): void {
     this.isLoading = true;
-    this.service.getUniversities().subscribe({
+    this.educationService.getUniversities().subscribe({
       next: (res) => {
-        this.universities = res; // adjust based on your API response
+        this.universities = res || []; // adjust based on your API response
         this.isLoading = false;
       },
       error: (err) => {
@@ -43,7 +50,7 @@ export class UniversityComponent {
   }
 
   addUniversity(): void {
-    this.router.navigate(['/admin/university/add']);
+    this.router.navigate(['/admin/university/add-university']);
   }
 
   editUniversity(id: string): void {
@@ -65,7 +72,7 @@ export class UniversityComponent {
     }).then((result) => {
       if (result.isConfirmed) {
         this.isLoading = true;
-        this.service.deleteUniversity(id).subscribe({
+        this.educationService.deleteUniversity(id).subscribe({
           next: () => {
             this.universities = this.universities.filter(u => u._id !== id);
             this.toastr.success('University deleted successfully');

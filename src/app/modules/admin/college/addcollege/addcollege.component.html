@@ -1,0 +1,263 @@
+<div
+  class="flex min-h-screen relative bg-gradient-to-b from-[#2D1044]/10 to-[#33154b]/5"
+>
+  <app-sidebar></app-sidebar>
+
+  <main
+    class="flex-1 p-6 transition-all duration-300"
+    [ngClass]="{ 'ml-64': !sidebarCollapsed, 'ml-20': sidebarCollapsed }"
+  >
+    <!-- Header -->
+    <div
+      class="fixed top-4 right-3 z-50 bg-[#33154b] px-6 py-4 rounded-lg shadow-lg"
+      [ngClass]="{
+        'left-68 w-[calc(100%-280px)]': !sidebarCollapsed,
+        'left-24 w-[calc(100%-100px)]': sidebarCollapsed
+      }"
+    >
+      <div class="flex justify-between items-center">
+        <h1 class="text-2xl font-semibold text-pink-500 montserrat-normal">
+          Add College
+        </h1>
+        <img
+          class="h-10 w-10 rounded-full border-2 border-pink-500/30 p-1"
+          src="/shefin.JPG"
+          alt="User Profile"
+        />
+      </div>
+    </div>
+
+    <!-- Form Section -->
+    <div class="mt-24 max-w-4xl mx-auto">
+      <div
+        class="bg-[#2D1044]/20 backdrop-blur-sm rounded-lg shadow-lg border border-purple-800/30 overflow-hidden"
+      >
+        <div class="bg-[#33154b] px-6 py-4 border-b border-purple-800/30">
+          <h2 class="text-lg font-medium text-white poppins-medium">
+            Create New College
+          </h2>
+        </div>
+
+        <div class="p-6">
+          <form
+            [formGroup]="collegeForm"
+            (ngSubmit)="onSubmit()"
+            enctype="multipart/form-data"
+            class="space-y-6"
+          >
+            <!-- College Name -->
+            <div>
+              <label class="block text-gray-300 text-sm font-medium mb-2"
+                >College Name</label
+              >
+              <input
+                type="text"
+                formControlName="name"
+                class="w-full px-4 py-2 rounded-md bg-purple-900/30 border border-purple-800/50 text-white focus:outline-none focus:ring-2 focus:ring-pink-500/50"
+                placeholder="Enter college name"
+              />
+            </div>
+
+            <!-- University -->
+            <div>
+              <label class="block text-gray-300 text-sm font-medium mb-2"
+                >University</label
+              >
+              <select
+                formControlName="universityId"
+                class="w-full px-4 py-2 rounded-md poppins-medium bg-purple-900/85 border border-purple-800/50 text-white focus:outline-none focus:ring-2 focus:ring-pink-500/50 appearance-none"
+                (change)="onUniversityChange($event)"
+              >
+                <option value="" disabled selected>Select University</option>
+                <option *ngFor="let uni of universities" [value]="uni._id" class="text-white">
+                  {{ uni.name }}
+                </option>
+                <option value="autonomous" class="text-white">
+                  🔓 Autonomous (No University)
+                </option>
+                <option value="add-new">➕ Add New University</option>
+              </select>
+            </div>
+
+            <!-- Rating -->
+            <div>
+              <label class="block text-gray-300 text-sm font-medium mb-2"
+                >Rating (0-5)</label
+              >
+              <input
+                type="number"
+                formControlName="rating"
+                min="0"
+                max="5"
+                class="w-full px-4 py-2 rounded-md bg-purple-900/30 border border-purple-800/50 text-white focus:outline-none focus:ring-2 focus:ring-pink-500/50"
+              />
+            </div>
+
+            <!-- Location -->
+            <div>
+              <label class="block text-gray-300 text-sm font-medium mb-2"
+                >Location</label
+              >
+              <input
+                type="text"
+                formControlName="location"
+                class="w-full px-4 py-2 rounded-md bg-purple-900/30 border border-purple-800/50 text-white focus:outline-none focus:ring-2 focus:ring-pink-500/50"
+                placeholder="City, State"
+              />
+            </div>
+
+            <!-- Autonomous + Course Levels -->
+            <div
+              class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6"
+            >
+              <!-- Course Levels -->
+              <div class="sm:w-1/2">
+                <label class="block text-gray-300 text-sm font-medium mb-2"
+                  >Course Levels</label
+                >
+                <div class="flex gap-6">
+                  <label class="text-gray-300 flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      value="UG"
+                      (change)="onLevelChange($event)"
+                    />
+                    UG
+                  </label>
+                  <label class="text-gray-300 flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      value="PG"
+                      (change)="onLevelChange($event)"
+                    />
+                    PG
+                  </label>
+                </div>
+              </div>
+              <!-- Autonomous -->
+              <div class="sm:w-1/2">
+                <label class="block text-gray-300 text-sm font-medium mb-2"
+                  >Autonomous</label
+                >
+                <div class="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    formControlName="isAutonomous"
+                    class="accent-pink-500 w-4 h-4"
+                  />
+                  <span class="text-gray-300 text-sm">Mark as Autonomous</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Description -->
+            <div>
+              <label class="block text-gray-300 text-sm font-medium mb-2"
+                >Description</label
+              >
+              <textarea
+                rows="3"
+                formControlName="description"
+                class="w-full px-4 py-2 rounded-md bg-purple-900/30 border border-purple-800/50 text-white focus:outline-none focus:ring-2 focus:ring-pink-500/50"
+                placeholder="College details"
+              ></textarea>
+            </div>
+
+            <!-- Fee Range -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-gray-300 text-sm font-medium mb-2"
+                  >Fee From (₹)</label
+                >
+                <input
+                  type="number"
+                  formControlName="feeFrom"
+                  class="w-full px-4 py-2 rounded-md bg-purple-900/30 border border-purple-800/50 text-white focus:outline-none focus:ring-2 focus:ring-pink-500/50"
+                />
+              </div>
+              <div>
+                <label class="block text-gray-300 text-sm font-medium mb-2"
+                  >Fee Upto (₹)</label
+                >
+                <input
+                  type="number"
+                  formControlName="feeUpto"
+                  class="w-full px-4 py-2 rounded-md bg-purple-900/30 border border-purple-800/50 text-white focus:outline-none focus:ring-2 focus:ring-pink-500/50"
+                />
+              </div>
+            </div>
+
+            <!-- Image Upload -->
+            <div>
+              <label class="block text-gray-300 text-sm font-medium mb-2"
+                >College Photos (up to 3)</label
+              >
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div
+                  *ngFor="let preview of previewUrls; let i = index"
+                  class="relative group h-40"
+                >
+                  <div class="rounded-lg overflow-hidden w-full h-full">
+                    <img
+                      [src]="preview"
+                      class="w-full h-full object-cover rounded-lg"
+                    />
+                    <button
+                      type="button"
+                      (click)="removeImage(i)"
+                      class="absolute top-1 right-1 bg-black bg-opacity-60 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                  <div
+                    *ngIf="uploadProgress[i] !== null"
+                    class="h-1 bg-gray-200 rounded mt-1"
+                  >
+                    <div
+                      class="h-full bg-yellow-400 rounded transition-all duration-300"
+                      [style.width.%]="uploadProgress[i]"
+                    ></div>
+                  </div>
+                </div>
+
+                <!-- Upload area -->
+                <label
+                  *ngIf="selectedFiles.length < 3"
+                  class="upload-box relative cursor-pointer border-2 border-dashed border-gray-500 rounded-lg flex flex-col items-center justify-center h-40 hover:border-yellow-400 transition"
+                >
+                  <i class="bx bx-upload text-3xl text-gray-400"></i>
+                  <p class="pt-1 text-sm text-gray-400">Click to Upload</p>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    (change)="onFileChange($event)"
+                    class="absolute inset-0 opacity-0 cursor-pointer"
+                    [multiple]="true"
+                  />
+                </label>
+              </div>
+            </div>
+
+            <!-- Submit -->
+            <div class="flex justify-end">
+              <button
+                type="submit"
+                [disabled]="isLoading"
+                class="px-6 py-2 bg-gradient-to-r from-pink-500 to-pink-600 text-white rounded-md hover:from-pink-600 hover:to-pink-700 focus:ring-2 focus:ring-pink-500/50 transition-all shadow-lg"
+              >
+                {{ isLoading ? "Adding..." : "Add College" }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Loading Overlay -->
+<div *ngIf="isLoading" class="loading-overlay">
+  <div class="lds-hourglass"></div>
+  <p class="text-pink-600 text-2xl montserrat">Uploading...</p>
+</div>
