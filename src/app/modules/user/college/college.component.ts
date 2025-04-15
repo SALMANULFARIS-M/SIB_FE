@@ -5,11 +5,11 @@ import { StarRatingComponent } from '../../../shared/user/star-rating/star-ratin
 import { CommonModule } from '@angular/common';
 import { EducationService } from '../../../core/services/education.service';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { College } from '../../../shared/models/college';
 
 @Component({
-  imports: [NavComponent, FooterComponent, StarRatingComponent, CommonModule, FormsModule],
+  imports: [NavComponent, FooterComponent, StarRatingComponent, CommonModule, FormsModule,RouterModule],
   templateUrl: './college.component.html',
   styleUrl: './college.component.css'
 })

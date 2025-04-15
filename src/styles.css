@@ -52,6 +52,12 @@
   font-weight: 300;
   font-style: normal;
 }
+.montserrat-medium {
+  font-family: "Montserrat", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
 .montserrat-normal{
   font-family: "Montserrat", serif;
   font-optical-sizing: auto;
@@ -110,7 +116,11 @@
   font-weight: 400;
   font-style: normal;
 }
-
+.pt-serif-medium {
+  font-family: "PT Serif", serif;
+  font-weight: 600;
+  font-style: normal;
+}
 .pt-serif-bold {
   font-family: "PT Serif", serif;
   font-weight: 700;

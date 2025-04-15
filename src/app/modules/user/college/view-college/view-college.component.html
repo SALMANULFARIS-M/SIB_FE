@@ -56,7 +56,7 @@
               class="flex flex-col md:flex-row md:items-start md:justify-between gap-4"
             >
               <div>
-                <h1 class="text-3xl md:text-4xl font-bold mb-2">
+                <h1 class="text-3xl md:text-4xl font-bold mb-2 montserrat-medium">
                   {{ college.name }}
                 </h1>
                 <div class="flex flex-wrap items-center gap-4 mb-4">
@@ -70,54 +70,52 @@
                     <span class="text-sm"></span>
                   </div>
 
-                  <!-- Location -->
-                  <div class="flex items-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="h-5 w-5 mr-1"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                      />
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                      />
-                    </svg>
-                    {{ college.location }}
-                  </div>
-
                   <!-- Autonomous Badge -->
                   <span
-                    *ngIf="college.isAutonomous"
-                    class="bg-purple-600/30 text-purple-300 px-3 py-1 rounded-full text-sm font-medium"
+                  *ngIf="college.isAutonomous; else affiliated"
+                  class="bg-purple-600/30 text-purple-300 px-3 py-1 rounded-full playfair-regular"
+                >
+                  Autonomous
+                </span>
+                <ng-template #affiliated>
+                  <span
+                    class="bg-blue-600/30 text-blue-300 px-3 py-1 rounded-full playfair-regular"
                   >
-                    Autonomous
+                    Affiliated
                   </span>
+                </ng-template>
                 </div>
               </div>
-
-              <!-- Apply Button -->
-              <!-- <button
-              class="bg-white text-purple-800 hover:bg-gray-100 px-6 py-3 rounded-lg font-semibold transition-colors shadow-md"
-            >
-              Apply Now
-            </button> -->
             </div>
-
+            <!-- Location -->
+            <div class="flex items-center merriweather-regular">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 mr-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                />
+              </svg>
+              {{ college.location }}
+            </div>
             <!-- Categories -->
             <div class="flex flex-wrap gap-2 my-4">
               <span
                 *ngFor="let cat of college.category"
-                class="bg-white/20 text-white px-3 py-1 rounded-full text-sm"
+                class="bg-white/20 text-white px-3 py-1 rounded-full text-sm montserrat-medium"
               >
                 {{ cat }}
               </span>
@@ -127,18 +125,18 @@
             <div
               class="bg-white/10 border border-white/20 rounded-lg p-4 mt-4 backdrop-blur-sm"
             >
-              <h3 class="text-lg font-semibold mb-2">Annual Fee Range</h3>
+              <h3 class="text-lg font-semibold mb-2 playfair-regular">Annual Fee Range</h3>
               <div class="flex items-center gap-6">
                 <div>
-                  <p class="text-sm text-white/80">Starting from</p>
-                  <p class="text-2xl font-bold">
+                  <p class="text-sm text-white/80 playfair-regular">Starting from</p>
+                  <p class="text-2xl font-bold merriweather-regular">
                     ₹{{ college.feeFrom.toLocaleString("en-IN") || "N/A" }}
                   </p>
                 </div>
                 <div class="h-8 w-px bg-white/30"></div>
                 <div>
-                  <p class="text-sm text-white/80">Up to</p>
-                  <p class="text-2xl font-bold">
+                  <p class="text-sm text-white/80 playfair-regular">Up to</p>
+                  <p class="text-2xl font-bold merriweather-regular">
                     ₹{{ college.feeUpto.toLocaleString("en-IN") || "N/A" }}
                   </p>
                 </div>
@@ -158,11 +156,11 @@
           <section
             class="rounded-2xl shadow-md shadow-purple-500/20 bg-black/60 backdrop-blur-lg hover:bg-black/80 transition-all duration-300 p-6 mb-8"
           >
-            <h2 class="text-2xl font-bold mb-4 text-white border-b pb-2">
+            <h2 class="text-2xl font-bold mb-4 text-white border-b pb-2 pt-serif-medium">
               About the College
             </h2>
             <div class="prose max-w-none text-white">
-              <p class="whitespace-pre-line">{{ college.description }}</p>
+              <p class="whitespace-pre-line poppins-regular">{{ college.description }}</p>
             </div>
           </section>
 
@@ -171,7 +169,7 @@
             *ngIf="(college?.photos ?? []).length > 1"
             class="rounded-2xl shadow-md shadow-purple-500/20 bg-black/60 backdrop-blur-lg hover:bg-black/80 transition-all duration-300 p-6 mb-8"
           >
-            <h2 class="text-2xl font-bold mb-6 text-white border-b pb-2">
+            <h2 class="text-2xl font-bold mb-6 text-white border-b pb-2 pt-serif-medium">
               Campus Gallery
             </h2>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -197,7 +195,7 @@
           <section
             class="rounded-2xl shadow-md shadow-purple-500/20 bg-black/60 backdrop-blur-lg hover:bg-black/80 transition-all duration-300 p-6 mb-8"
           >
-            <h2 class="text-2xl font-bold mb-6 text-white border-b pb-2">
+            <h2 class="text-2xl font-bold mb-6 text-white border-b pb-2 pt-serif-medium">
               Available Courses
             </h2>
             <div
@@ -210,18 +208,18 @@
               >
                 <div class="flex justify-between items-start">
                   <div>
-                    <h3 class="font-bold text-lg text-gray-800">
+                    <h3 class="font-bold text-lg text-gray-800 playfair-regular">
                       {{ course.title }}
                     </h3>
                     <div class="flex flex-wrap gap-2 mt-2">
-                      <span class="text-sm bg-gray-100 px-2 py-1 rounded">{{
+                      <span class="text-sm bg-gray-100 px-2 py-1 rounded pt-serif-medium">{{
                         course.level
                       }}</span>
-                      <span class="text-sm bg-gray-100 px-2 py-1 rounded"
+                      <span class="text-sm bg-gray-100 px-2 py-1 rounded poppins-medium"
                         >{{ course.durationValue }}
                         {{ course.durationUnit }}</span
                       >
-                      <span class="text-sm bg-gray-100 px-2 py-1 rounded"
+                      <span class="text-sm bg-gray-100 px-2 py-1 rounded poppins-medium"
                         >₹{{ course.fees.toLocaleString("en-IN") }}/year</span
                       >
                     </div>
@@ -261,7 +259,7 @@
           <section
             class="rounded-2xl shadow-md shadow-purple-500/20 bg-black/60 backdrop-blur-lg hover:bg-black/80 transition-all duration-300 p-6 mb-6 top-4"
           >
-            <h3 class="text-xl font-bold mb-4 text-white border-b pb-2">
+            <h3 class="text-xl font-bold mb-4 text-white border-b pb-2 pt-serif-medium">
               Quick Facts
             </h3>
             <ul class="flex flex-col gap-4">
@@ -283,8 +281,8 @@
                   </svg>
                 </div>
                 <div>
-                  <p class="font-medium text-purple-300">Institution Type</p>
-                  <p class="text-white text-sm">
+                  <p class="font-medium text-purple-300 playfair-regular">Institution Type</p>
+                  <p class="text-white text-sm merriweather-regular">
                     {{
                       college.isAutonomous
                         ? "Autonomous College"
@@ -312,8 +310,8 @@
                   </svg>
                 </div>
                 <div>
-                  <p class="font-medium text-purple-300">Course Levels</p>
-                  <p class="text-100 text-sm">
+                  <p class="font-medium text-purple-300 playfair-regular">Course Levels</p>
+                  <p class="text-100 text-sm merriweather-regular">
                     {{ college.courseLevels?.join(", ") || "Not specified" }}
                   </p>
                 </div>
@@ -325,7 +323,7 @@
           <section
             class="rounded-2xl shadow-md shadow-purple-500/20 bg-black/60 backdrop-blur-lg hover:bg-black/80 transition-all duration-300 p-6"
           >
-            <h3 class="text-xl font-bold mb-4 text-white border-b pb-2">
+            <h3 class="text-xl font-bold mb-4 text-white border-b pb-2 pt-serif-medium">
               Contact Information
             </h3>
             <div class="flex flex-col gap-4">
@@ -350,8 +348,8 @@
                   </svg>
                 </div>
                 <div>
-                  <p class="font-medium text-purple-300">Phone</p>
-                  <p class="text-white text-sm">+91 9946953953</p>
+                  <p class="font-medium text-purple-300 playfair-regular">Phone</p>
+                  <p class="text-white text-sm montserrat-medium">+91 9946953953</p>
                 </div>
               </a>
 
@@ -376,8 +374,8 @@
                   </svg>
                 </div>
                 <div>
-                  <p class="font-medium text-purple-300">Email</p>
-                  <p class="text-white text-sm">
+                  <p class="font-medium text-purple-300 playfair-regular">Email</p>
+                  <p class="text-white text-sm montserrat-medium">
                     info&#64;studyinbengaluru.com
                   </p>
                 </div>
@@ -411,8 +409,8 @@
                   </svg>
                 </div>
                 <div>
-                  <p class="font-medium text-purple-300">Address</p>
-                  <p class="text-white text-sm mt-1">
+                  <p class="font-medium text-purple-300 playfair-regular">Address</p>
+                  <p class="text-white text-sm mt-1 montserrat-medium">
                     Studyinbengaluru, door no. 84, 3rd Cross Rd, 5th Block,
                     Koramangala, Bengaluru, Karnataka 560095
                   </p>

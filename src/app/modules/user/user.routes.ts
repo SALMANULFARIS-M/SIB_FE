@@ -19,7 +19,7 @@ export const USER_ROUTES: Routes = [
   { path: 'counselling', component: HomeComponent },
   { path: 'universities', component: UniversityComponent },
   { path: 'colleges', component: CollegeComponent },
-  { path: 'colleges/id', component: ViewCollegeComponent },
+  { path: 'colleges/:id', component: ViewCollegeComponent },
   { path: 'courses', component: CourseComponent },
   { path: 'courses/:id', component: ViewCourseComponent },
   { path: 'blogs', component: BlogComponent },
