@@ -1,3 +1,5 @@
+import { Course } from "./course";
+
 export interface College {
   _id?: string; // Optional, used when fetched from the DB
   name: string;
@@ -10,9 +12,10 @@ export interface College {
     public_id: string;
   }[]; // Match Mongoose schema
   courseLevels?: string[]; // ['UG', 'PG']
-  availableCourses?: string[]; // ObjectId as string
+  availableCourses?: Course[]; // ObjectId as string
   categories?: string[];
   description: string;
   feeFrom: number;
   feeUpto: number;
+  category?: string[];
 }

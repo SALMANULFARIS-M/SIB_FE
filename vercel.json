@@ -18,5 +18,17 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "https://studyinbangalore.in",
+      "destination": "https://studyinbengaluru.com",
+      "permanent": true
+    },
+    {
+      "source": "https://www.studyinbangalore.in",
+      "destination": "https://studyinbengaluru.com",
+      "permanent": true
+    }
   ]
 }

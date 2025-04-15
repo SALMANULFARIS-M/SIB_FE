@@ -1,7 +1,7 @@
 <app-nav></app-nav>
 <!--courses Header Section -->
 <section
-  class="relative flex flex-col justify-center items-center text-gray-200 py-28 bg-gradient-to-br from-[#1A0A2E] to-[#2D1044]"
+  class="relative flex flex-col justify-center items-center py-14 text-gray-200 bg-gradient-to-br from-[#1A0A2E] to-[#2D1044]"
 >
   <div class="absolute inset-0 overflow-hidden">
     <div
@@ -16,6 +16,413 @@
     <div
       class="absolute bottom-1/4 right-1/3 h-4 w-4 rounded-full bg-[#7B3FAF]/20 animate-pulse"
     ></div>
+  </div>
+
+  <div class="min-h-screen mt-16">
+    <!-- Header Section -->
+    <header
+      class="relative bg-black/60 backdrop-blur-lg hover:bg-black/80 transition-all duration-300 text-white mx-5 rounded-2xl shadow-md shadow-purple-500/20"
+    >
+      <div class="absolute inset-0 overflow-hidden opacity-20">
+        <div
+          class="absolute top-1/4 left-1/4 h-2 w-2 rounded-full bg-white animate-pulse"
+        ></div>
+        <div
+          class="absolute top-3/4 left-1/2 h-3 w-3 rounded-full bg-white animate-pulse delay-300"
+        ></div>
+        <div
+          class="absolute top-1/3 right-1/4 h-2 w-2 rounded-full bg-white animate-pulse delay-700"
+        ></div>
+      </div>
+
+      <div class="container mx-auto px-4 py-12 relative z-10">
+        <div class="flex flex-col md:flex-row gap-8 items-start">
+          <!-- College Image -->
+          <div class="w-full md:w-1/3 lg:w-1/4">
+            <div
+              class="bg-white/10 rounded-xl overflow-hidden border border-white/20 backdrop-blur-sm shadow-lg"
+            >
+              <img
+                [src]="college.photos?.[0]?.url || 'assets/default-college.jpg'"
+                alt="{{ college.name }}"
+                class="w-full h-64 object-cover"
+              />
+            </div>
+          </div>
+
+          <!-- College Info -->
+          <div class="flex-1">
+            <div
+              class="flex flex-col md:flex-row md:items-start md:justify-between gap-4"
+            >
+              <div>
+                <h1 class="text-3xl md:text-4xl font-bold mb-2">
+                  {{ college.name }}
+                </h1>
+                <div class="flex flex-wrap items-center gap-4 mb-4">
+                  <!-- Rating -->
+                  <div
+                    class="flex items-center bg-white/10 px-3 py-1 rounded-full text-sm"
+                  >
+                    <app-star-rating
+                      [rating]="college.rating || 0"
+                    ></app-star-rating>
+                    <span class="text-sm"></span>
+                  </div>
+
+                  <!-- Location -->
+                  <div class="flex items-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5 mr-1"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                      />
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                    </svg>
+                    {{ college.location }}
+                  </div>
+
+                  <!-- Autonomous Badge -->
+                  <span
+                    *ngIf="college.isAutonomous"
+                    class="bg-purple-600/30 text-purple-300 px-3 py-1 rounded-full text-sm font-medium"
+                  >
+                    Autonomous
+                  </span>
+                </div>
+              </div>
+
+              <!-- Apply Button -->
+              <!-- <button
+              class="bg-white text-purple-800 hover:bg-gray-100 px-6 py-3 rounded-lg font-semibold transition-colors shadow-md"
+            >
+              Apply Now
+            </button> -->
+            </div>
+
+            <!-- Categories -->
+            <div class="flex flex-wrap gap-2 my-4">
+              <span
+                *ngFor="let cat of college.category"
+                class="bg-white/20 text-white px-3 py-1 rounded-full text-sm"
+              >
+                {{ cat }}
+              </span>
+            </div>
+
+            <!-- Fee Range -->
+            <div
+              class="bg-white/10 border border-white/20 rounded-lg p-4 mt-4 backdrop-blur-sm"
+            >
+              <h3 class="text-lg font-semibold mb-2">Annual Fee Range</h3>
+              <div class="flex items-center gap-6">
+                <div>
+                  <p class="text-sm text-white/80">Starting from</p>
+                  <p class="text-2xl font-bold">
+                    ₹{{ college.feeFrom.toLocaleString("en-IN") || "N/A" }}
+                  </p>
+                </div>
+                <div class="h-8 w-px bg-white/30"></div>
+                <div>
+                  <p class="text-sm text-white/80">Up to</p>
+                  <p class="text-2xl font-bold">
+                    ₹{{ college.feeUpto.toLocaleString("en-IN") || "N/A" }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+      <div class="flex flex-col lg:flex-row gap-8">
+        <!-- Left Column (Main Content) -->
+        <div class="w-full lg:w-2/3">
+          <!-- About College -->
+          <section
+            class="rounded-2xl shadow-md shadow-purple-500/20 bg-black/60 backdrop-blur-lg hover:bg-black/80 transition-all duration-300 p-6 mb-8"
+          >
+            <h2 class="text-2xl font-bold mb-4 text-white border-b pb-2">
+              About the College
+            </h2>
+            <div class="prose max-w-none text-white">
+              <p class="whitespace-pre-line">{{ college.description }}</p>
+            </div>
+          </section>
+
+          <!-- Gallery -->
+          <section
+            *ngIf="(college?.photos ?? []).length > 1"
+            class="rounded-2xl shadow-md shadow-purple-500/20 bg-black/60 backdrop-blur-lg hover:bg-black/80 transition-all duration-300 p-6 mb-8"
+          >
+            <h2 class="text-2xl font-bold mb-6 text-white border-b pb-2">
+              Campus Gallery
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+              <div
+                *ngFor="
+                  let photo of (college.photos ?? [])
+                    .slice()
+                    .reverse()
+                    .slice(0, 3)
+                "
+                class="aspect-video overflow-hidden rounded-lg bg-gray-100"
+              >
+                <img
+                  [src]="photo.url"
+                  [alt]="college.name + ' campus'"
+                  class="w-full h-full object-cover hover:scale-105 transition-transform cursor-pointer"
+                />
+              </div>
+            </div>
+          </section>
+
+          <!-- Available Courses -->
+          <section
+            class="rounded-2xl shadow-md shadow-purple-500/20 bg-black/60 backdrop-blur-lg hover:bg-black/80 transition-all duration-300 p-6 mb-8"
+          >
+            <h2 class="text-2xl font-bold mb-6 text-white border-b pb-2">
+              Available Courses
+            </h2>
+            <div
+              class="flex flex-col gap-4"
+              *ngIf="college.availableCourses?.length; else noCourses"
+            >
+              <div
+                *ngFor="let course of college.availableCourses"
+                class="border border-gray-200 rounded-lg p-4 hover:border-purple-200 hover:bg-purple-50 transition-colors"
+              >
+                <div class="flex justify-between items-start">
+                  <div>
+                    <h3 class="font-bold text-lg text-gray-800">
+                      {{ course.title }}
+                    </h3>
+                    <div class="flex flex-wrap gap-2 mt-2">
+                      <span class="text-sm bg-gray-100 px-2 py-1 rounded">{{
+                        course.level
+                      }}</span>
+                      <span class="text-sm bg-gray-100 px-2 py-1 rounded"
+                        >{{ course.durationValue }}
+                        {{ course.durationUnit }}</span
+                      >
+                      <span class="text-sm bg-gray-100 px-2 py-1 rounded"
+                        >₹{{ course.fees.toLocaleString("en-IN") }}/year</span
+                      >
+                    </div>
+                  </div>
+                  <a
+                    [routerLink]="['/course', course._id]"
+                    class="text-purple-600 hover:text-purple-800 text-sm font-medium flex items-center"
+                  >
+                    Details
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-4 w-4 ml-1"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <ng-template #noCourses>
+              <p class="text-gray-500 italic">courses are updating....</p>
+            </ng-template>
+          </section>
+        </div>
+
+        <!-- Right Column (Sidebar) -->
+        <div class="w-full lg:w-1/3">
+          <!-- Quick Facts -->
+          <section
+            class="rounded-2xl shadow-md shadow-purple-500/20 bg-black/60 backdrop-blur-lg hover:bg-black/80 transition-all duration-300 p-6 mb-6 top-4"
+          >
+            <h3 class="text-xl font-bold mb-4 text-white border-b pb-2">
+              Quick Facts
+            </h3>
+            <ul class="flex flex-col gap-4">
+              <li class="flex items-start">
+                <div class="bg-purple-100 p-2 rounded-full mr-3 mt-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 text-purple-600"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <p class="font-medium text-purple-300">Institution Type</p>
+                  <p class="text-white text-sm">
+                    {{
+                      college.isAutonomous
+                        ? "Autonomous College"
+                        : "Affiliated College"
+                    }}
+                  </p>
+                </div>
+              </li>
+
+              <li class="flex items-start">
+                <div class="bg-purple-100 p-2 rounded-full mr-3 mt-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 text-purple-600"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <p class="font-medium text-purple-300">Course Levels</p>
+                  <p class="text-100 text-sm">
+                    {{ college.courseLevels?.join(", ") || "Not specified" }}
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </section>
+
+          <!-- Contact Information -->
+          <section
+            class="rounded-2xl shadow-md shadow-purple-500/20 bg-black/60 backdrop-blur-lg hover:bg-black/80 transition-all duration-300 p-6"
+          >
+            <h3 class="text-xl font-bold mb-4 text-white border-b pb-2">
+              Contact Information
+            </h3>
+            <div class="flex flex-col gap-4">
+              <a
+                href="tel:+919946953953"
+                class="flex items-start hover:opacity-90 transition"
+              >
+                <div class="bg-purple-100 p-2 rounded-full mr-3 mt-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 text-purple-600"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <p class="font-medium text-purple-300">Phone</p>
+                  <p class="text-white text-sm">+91 9946953953</p>
+                </div>
+              </a>
+
+              <a
+                href="mailto:info@studyinbengaluru.com"
+                class="flex items-start hover:opacity-90 transition"
+              >
+                <div class="bg-purple-100 p-2 rounded-full mr-3 mt-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 text-purple-600"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <p class="font-medium text-purple-300">Email</p>
+                  <p class="text-white text-sm">
+                    info&#64;studyinbengaluru.com
+                  </p>
+                </div>
+              </a>
+
+              <a
+                href="https://maps.google.com/?q=Studyinbengaluru , door no. 84, 3rd Cross Rd, 5th Block, Koramangala, Bengaluru, Karnataka 560095"
+                target="_blank"
+                class="flex items-start hover:opacity-90 transition"
+              >
+                <div class="bg-purple-100 p-2 rounded-full mr-3 mt-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 text-purple-600"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                    />
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <p class="font-medium text-purple-300">Address</p>
+                  <p class="text-white text-sm mt-1">
+                    Studyinbengaluru, door no. 84, 3rd Cross Rd, 5th Block,
+                    Koramangala, Bengaluru, Karnataka 560095
+                  </p>
+                </div>
+              </a>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
   </div>
 </section>
 

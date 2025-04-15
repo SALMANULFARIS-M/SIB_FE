@@ -19,9 +19,9 @@ export const USER_ROUTES: Routes = [
   { path: 'counselling', component: HomeComponent },
   { path: 'universities', component: UniversityComponent },
   { path: 'colleges', component: CollegeComponent },
-  { path: 'college-details', component: ViewCollegeComponent },
+  { path: 'colleges/id', component: ViewCollegeComponent },
   { path: 'courses', component: CourseComponent },
-  { path: 'course-details', component: ViewCourseComponent },
+  { path: 'courses/:id', component: ViewCourseComponent },
   { path: 'blogs', component: BlogComponent },
   { path: 'blog/:slug', component: BlogDetailsComponent, }
 ];
