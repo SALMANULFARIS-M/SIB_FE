@@ -56,7 +56,6 @@ export class EducationService extends BaseService {
     return this.getRequest(`/education/colleges${queryString}`, 'colleges');
   }
 
-
   getCollegeById(id: string): Observable<any> {
     return this.getRequest(`/education/college/${id}`, `college-${id}`);
   }

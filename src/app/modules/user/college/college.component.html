@@ -109,12 +109,12 @@
             >
               <div class="relative">
                 <img
-                  [src]="college.photos?.[0] "
+                  [src]="college.photos?.[0]?.url "
                   alt="{{ college.name }}"
                   class="w-full h-52 object-cover transition-transform duration-300 group-hover:scale-105"
                 />
                 <div
-                  class="absolute mt-5 right-3 bg-white/10 px-3 py-1 rounded-full text-sm text-white backdrop-blur-md shadow"
+                  class="absolute mt-5 right-3 top-3 bg-white/10 px-3 py-1 rounded-full text-sm text-white backdrop-blur-md shadow"
                 >
                   <app-star-rating [rating]="college.rating || 0"></app-star-rating>
                 </div>

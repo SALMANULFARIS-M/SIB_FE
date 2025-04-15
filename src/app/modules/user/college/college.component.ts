@@ -48,6 +48,8 @@ export class CollegeComponent implements OnInit {
     }).subscribe({
       next: (response) => {
         this.colleges = response.colleges;
+console.log(response.colleges);
+
         this.totalPages = response.pagination.totalPages;
         this.isLoading = false;
       },
