@@ -18,7 +18,22 @@ export class AddcourseComponent implements OnInit {
   sidebarCollapsed: boolean = false;
   isLoading = false;
   courseForm!: FormGroup;
-  categories = ["Engineering", "Science", "Management", "Commerce", "Medical", "IT", "Arts", "Law", "Other"];
+  categories: string[] = [
+    'Engineering',
+    'Science',
+    'Management',
+    'Commerce',
+    'Medical',
+    'IT',
+    'Arts',
+    'Law',
+    'Design',
+    'Education',
+    'Nursing',
+    'Pharmacy',
+    'Hotel Management',
+    'Other'
+  ];
   colleges: College[] = []; // Make sure you load colleges from backend
 
   constructor(

@@ -11,6 +11,7 @@ export interface College {
   }[]; // Match Mongoose schema
   courseLevels?: string[]; // ['UG', 'PG']
   availableCourses?: string[]; // ObjectId as string
+  categories?: string[];
   description: string;
   feeFrom: number;
   feeUpto: number;

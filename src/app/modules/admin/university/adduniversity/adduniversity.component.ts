@@ -30,7 +30,12 @@ export class AdduniversityComponent implements OnInit {
 
   ngOnInit(): void {
     this.universityForm = this.fb.group({
-      name: ['', Validators.required]
+      name: ['', Validators.required],
+      description: ['', [
+        Validators.required,
+        Validators.minLength(20),  // adjust as needed
+        Validators.maxLength(500)  // adjust as needed
+      ]]
     });
   }
 
@@ -52,6 +57,7 @@ export class AdduniversityComponent implements OnInit {
 
     const formData = new FormData();
     formData.append('name', this.universityForm.get('name')?.value);
+    formData.append('description', this.universityForm.get('description')?.value);
     formData.append('logo', this.selectedFile);
 
     this.isLoading = true;

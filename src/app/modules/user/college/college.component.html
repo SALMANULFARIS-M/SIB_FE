@@ -1,0 +1,228 @@
+<app-nav></app-nav>
+
+<!--colleges Header Section -->
+<section
+  class="relative flex flex-col justify-center items-center text-gray-200 pt-28 pb-10 bg-gradient-to-br from-[#2D1044] to-[#1A0A2E]"
+>
+  <div class="absolute inset-0 overflow-hidden">
+    <div
+      class="absolute top-1/4 left-1/4 h-2 w-2 rounded-full bg-[#6D3A9E]/40 animate-float"
+    ></div>
+    <div
+      class="absolute top-3/4 left-1/2 h-3 w-3 rounded-full bg-[#8E4CCB]/30 animate-float-delay"
+    ></div>
+    <div
+      class="absolute top-1/3 right-1/4 h-2 w-2 rounded-full bg-[#5A2D8C]/40 animate-float-reverse"
+    ></div>
+    <div
+      class="absolute bottom-1/4 right-1/3 h-4 w-4 rounded-full bg-[#7B3FAF]/20 animate-pulse"
+    ></div>
+  </div>
+
+  <h2 class="text-5xl text-[#C79AFF] font-bold playfair relative w-fit z-10">
+    Best Colleges
+    <span
+      class="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-[#8E4CCB] to-[#6D3A9E] rounded-full animate-expand-width"
+    ></span>
+  </h2>
+
+  <p class="mt-4 text-[#C79AFF]/80 text-center max-w-2xl montserrat">
+    Explore top-rated colleges offering diverse programs across Bengaluru
+  </p>
+</section>
+
+<!-- colleges lists Section -->
+<section class="py-10 min-h-screen bg-[url('/bg-img.png')] bg-cover bg-fixed">
+  <div class="max-w-7xl mx-auto px-6">
+    <!-- Search and Filters -->
+    <div
+      class="flex flex-col md:flex-row items-center justify-between gap-4 mb-8"
+    >
+      <!-- Category Buttons -->
+      <div class="flex flex-wrap gap-3">
+        <button
+          *ngFor="let category of ['All', 'Top Rated', 'Autonomous']"
+          (click)="setCategory(category)"
+          [ngClass]="{
+            'bg-[#2D1044] text-[#C79AFF]': selectedCategory === category,
+            'bg-white/10 text-white hover:bg-[#8E4CCB]/80': selectedCategory !== category
+          }"
+          class="px-6 py-2 rounded-full transition-all duration-300 focus:ring-2 focus:ring-[#8E4CCB]/50"
+        >
+          {{ category }}
+        </button>
+      </div>
+
+      <!-- Search Box -->
+      <div class="relative w-full max-w-md">
+        <input
+          type="text"
+          [(ngModel)]="searchQuery"
+          (input)="onSearchChange()"
+          placeholder="Search courses..."
+          class="w-full py-3 px-5 pr-12 bg-gray-200 backdrop-blur-md border-4 border-[#2D1044]/60 rounded-full text-[#2D1044] placeholder-[#2D1044] focus:outline-none focus:ring-2 focus:ring-[#8E4CCB]/50"
+        />
+        <button
+          class="absolute right-4 top-1/2 transform -translate-y-1/2 text-[#2D1044] hover:text-black transition-colors"
+        >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- college cards grid -->
+    <section>
+      <div class="py-16">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- ✨ Shimmer UI for loading -->
+          <ng-container *ngIf="isLoading; else collegeList">
+            <div
+              *ngFor="let shimmer of [1, 2, 3, 4, 5, 6]"
+              class="bg-[#2D1044]/60 backdrop-blur-lg rounded-2xl overflow-hidden relative animate-pulse shadow-lg shadow-[#8E4CCB]/10"
+            >
+              <div class="w-full h-52 bg-[#8E4CCB]/20"></div>
+              <div class="p-5 space-y-4">
+                <div class="h-6 w-3/4 bg-[#8E4CCB]/20 rounded"></div>
+                <div class="h-4 w-1/2 bg-[#8E4CCB]/10 rounded"></div>
+                <div class="flex gap-2">
+                  <div class="h-6 w-20 bg-violet-300/40 rounded-full"></div>
+                  <div class="h-6 w-16 bg-green-300/30 rounded-full"></div>
+                  <div class="h-6 w-16 bg-yellow-300/30 rounded-full"></div>
+                </div>
+                <div
+                  class="flex justify-between items-center pt-2 border-t border-white/10"
+                >
+                  <div class="h-4 w-24 bg-[#8E4CCB]/10 rounded"></div>
+                  <div class="h-4 w-16 bg-[#8E4CCB]/20 rounded"></div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+
+          <!-- ✅ Actual college cards -->
+          <ng-template #collegeList>
+            <div
+              *ngFor="let college of colleges"
+              class="bg-[#2D1044]/80 backdrop-blur-lg hover:shadow-lg shadow-[#8E4CCB]/30 transition-all duration-300 rounded-2xl overflow-hidden relative group"
+            >
+              <div class="relative">
+                <img
+                  [src]="college.photos?.[0] "
+                  alt="{{ college.name }}"
+                  class="w-full h-52 object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <div
+                  class="absolute mt-5 right-3 bg-white/10 px-3 py-1 rounded-full text-sm text-white backdrop-blur-md shadow"
+                >
+                  <app-star-rating [rating]="college.rating || 0"></app-star-rating>
+                </div>
+              </div>
+              <div class="p-5 space-y-3">
+                <div>
+                  <h3 class="text-xl font-semibold text-white tracking-tight">
+                    {{ college.name }}
+                  </h3>
+                  <p class="text-sm text-gray-300 flex items-center mt-1">
+                    <svg
+                      class="w-4 h-4 mr-1 text-gray-400"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                      ></path>
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                      ></path>
+                    </svg>
+                    {{ college.location }}
+                  </p>
+                </div>
+
+                <div class="flex flex-wrap gap-2">
+                  <span
+                  *ngFor="let tag of college.categories | slice:0:3; let i = index"
+                  [ngClass]="getRotatedCategoryColor(i)"
+                  class="text-xs font-medium px-3 py-1 rounded-full"
+                >
+                  {{ tag }}
+                </span>
+
+                </div>
+
+                <div
+                  class="flex justify-between items-center pt-3 border-t border-white/10"
+                >
+                  <div>
+                    <p class="text-xs text-gray-400">Annual Fees From</p>
+                    <p class="text-lg text-white font-bold">
+                      ₹{{ college.feeFrom }}
+                    </p>
+                  </div>
+                  <a
+                    href="#"
+                    class="text-sm text-purple-300 hover:text-purple-100 inline-flex items-center gap-1 font-medium"
+                  >
+                    View Details
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M14 5l7 7m0 0l-7 7m7-7H3"
+                      ></path>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pagination -->
+    <div class="flex justify-center mt-16">
+      <nav class="flex">
+        <button
+          (click)="setPage(currentPage - 1)"
+          [disabled]="currentPage === 1"
+          class="w-10 h-10 flex items-center justify-center rounded-full bg-[#2D1044] text-[#C79AFF] hover:bg-[#6D3A9E] transition me-2"
+        >
+          «
+        </button>
+        <button
+          *ngFor="let page of [].constructor(totalPages); let i = index"
+          (click)="setPage(i + 1)"
+          [class.bg-[#6D3A9E]]="currentPage === i + 1"
+          class="w-10 h-10 flex items-center justify-center rounded-full bg-purple-400 text-black hover:bg-[#6D3A9E] transition me-2"
+        >
+          {{ i + 1 }}
+        </button>
+
+        <button
+          (click)="setPage(currentPage + 1)"
+          [disabled]="currentPage === totalPages"
+          class="w-10 h-10 flex items-center justify-center rounded-full bg-[#2D1044] text-[#C79AFF] hover:bg-[#6D3A9E] transition me-2"
+        >
+          »
+        </button>
+      </nav>
+    </div>
+  </div>
+</section>
+<app-footer></app-footer>

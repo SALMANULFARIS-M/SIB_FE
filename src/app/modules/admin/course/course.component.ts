@@ -36,7 +36,7 @@ export class CourseComponent {
     this.isLoading = true;
     this.educationService.getCourses().subscribe({
       next: (res) => {
-        this.courses = res || [];
+        this.courses = res.courses || [];
         this.isLoading = false;
       },
       error: (err) => {

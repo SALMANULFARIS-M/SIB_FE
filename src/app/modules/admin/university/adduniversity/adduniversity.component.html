@@ -56,6 +56,27 @@
                 Name is required
               </div>
             </div>
+<!-- Description -->
+<div class="mb-6">
+  <label class="block text-gray-300 text-sm font-medium mb-2">Description</label>
+  <textarea
+    formControlName="description"
+    rows="4"
+    class="w-full px-4 py-2 rounded-md bg-purple-900/30 border border-purple-800/50 text-white focus:outline-none focus:ring-2 focus:ring-pink-500/50"
+    placeholder="Enter university description"
+  ></textarea>
+  <div *ngIf="universityForm.get('description')?.invalid && universityForm.get('description')?.touched" class="text-pink-500 text-xs mt-1">
+    <span *ngIf="universityForm.get('description')?.errors?.['required']">
+      Description is required
+    </span>
+    <span *ngIf="universityForm.get('description')?.errors?.['minlength']">
+      Description must be at least {{universityForm.get('description')?.errors?.['minlength'].requiredLength}} characters
+    </span>
+    <span *ngIf="universityForm.get('description')?.errors?.['maxlength']">
+      Description cannot exceed {{universityForm.get('description')?.errors?.['maxlength'].requiredLength}} characters
+    </span>
+  </div>
+</div>
 
             <!-- Logo Upload -->
             <div class="mb-6">

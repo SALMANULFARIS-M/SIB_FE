@@ -3,7 +3,8 @@ export interface Course {
   title: string;
   degree: string;
   level: 'UG' | 'PG' | 'Course';
-  category: 'Engineering' | 'Science' | 'Management' | 'Commerce' | 'Medical' | 'Arts' | 'Law' | 'Other';
+  category: 'Engineering' | 'Science' | 'Management' | 'Commerce' | 'Medical' | 'Arts' | 'Law' |
+    'Design' | 'Education' | 'Nursing' | 'Pharmacy' | 'Hotel Management' | 'Other';
   fees: number;
   durationValue: number;
   durationUnit: 'month' | 'year';

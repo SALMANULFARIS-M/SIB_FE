@@ -63,17 +63,18 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   ];
 
   opportunities = [
-    { label: 'Universities', icon: faUniversity },
-    { label: 'Colleges', icon: faSchool },
-    { label: 'Online Courses', icon: faGlobe },
-    { label: 'Offline Courses', icon: faBookOpen },
-    { label: 'Short-term Programs', icon: faLaptop },
-    { label: 'Part-time Jobs', icon: faBriefcase },
-    { label: 'Accommodation Near Me', icon: faHome },
-    { label: 'Events', icon: faCalendarAlt },
-    { label: '1-on-1 Free Counselling', icon: faComments },
-    { label: 'Internships', icon: faBuilding }
+    { label: 'Universities', icon: faUniversity, route: '/universities' },
+    { label: 'Colleges', icon: faSchool, route: '/colleges' },
+    { label: 'Courses', icon: faGlobe, route: '/courses' },
+    { label: 'online Courses', icon: faBookOpen, route: '/courses' },
+    { label: 'Short-term Programs', icon: faLaptop, route: '/' },
+    { label: 'Part-time Jobs', icon: faBriefcase, route: '/' },
+    { label: 'Accommodation Near Me', icon: faHome, route: '/' },
+    { label: 'Events', icon: faCalendarAlt, route: '/' },
+    { label: '1-on-1 Free Counselling', icon: faComments, route: '/counselling' },
+    { label: 'Internships', icon: faBuilding, route: '/' }
   ];
+
 
 
   constructor(@Inject(PLATFORM_ID) private platformId: any, private router: Router, private service: UserService,
@@ -106,6 +107,12 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
       });
     }
   }
+
+  navigateTo(route: string) {
+    this.router.navigate([route]);
+  }
+
+
   updateComponentVisibility(url: string): void {
     const currentUrl = url.split('?')[0]; // Normalize URL (Remove query params)
     this.showApplyComponent = currentUrl === '/apply';

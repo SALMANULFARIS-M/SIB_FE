@@ -38,7 +38,7 @@ export class CollegeComponent {
     this.isLoading = true;
     this.educationService.getColleges().subscribe({
       next: (res) => {
-        this.colleges = res || [];
+        this.colleges = res.colleges || [];
         this.isLoading = false;
       },
       error: (err) => {

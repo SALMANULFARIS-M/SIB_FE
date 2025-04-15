@@ -23,6 +23,23 @@ export class AddcollegeComponent {
   uploadProgress: number[] = [];
   isLoading = false;
   sidebarCollapsed: boolean = false;
+  categories: string[] = [
+    'Engineering',
+    'Science',
+    'Management',
+    'Commerce',
+    'Medical',
+    'IT',
+    'Arts',
+    'Law',
+    'Design',
+    'Education',
+    'Nursing',
+    'Pharmacy',
+    'Hotel Management',
+    'Other'
+  ];
+  selectedCategories: string[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -57,7 +74,7 @@ export class AddcollegeComponent {
 
   fetchUniversities(): void {
     this.educationService.getUniversities().subscribe({
-      next: (res) => (this.universities = res || []),
+        next: (res) => (this.universities = res.universities || []),
       error: () => this.toastr.error('Failed to load universities'),
     });
   }
@@ -79,6 +96,19 @@ export class AddcollegeComponent {
     }
   }
 
+  onCategoryChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const value = input.value;
+
+    if (input.checked) {
+      if (!this.selectedCategories.includes(value)) {
+        this.selectedCategories.push(value);
+      }
+    } else {
+      this.selectedCategories = this.selectedCategories.filter(cat => cat !== value);
+    }
+  }
+
 
   onLevelChange(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -92,11 +122,17 @@ export class AddcollegeComponent {
     const input = event.target as HTMLInputElement;
     if (input.files) {
       const files = Array.from(input.files).slice(0, 3 - this.selectedFiles.length);
-      if (files.length < input.files.length) {
-        this.toastr.warning('Only up to 3 images allowed');
-      }
-
       files.forEach(file => {
+        if (!file.type.startsWith('image/')) {
+          this.toastr.warning('Only image files are allowed');
+          return;
+        }
+
+        if (file.size > 5 * 1024 * 1024) {
+          this.toastr.warning('Max image size is 5MB');
+          return;
+        }
+
         this.selectedFiles.push(file);
         this.previewUrls.push(URL.createObjectURL(file));
         this.uploadProgress.push(0);
@@ -126,21 +162,28 @@ export class AddcollegeComponent {
       value.universityId = '';
     }
     const formData = new FormData();
-    Object.entries(this.collegeForm.value).forEach(([key, value]) => {
-      if (Array.isArray(value)) {
-        value.forEach(v => formData.append(`${key}[]`, v));
+    Object.entries(value).forEach(([key, val]) => {
+      if (Array.isArray(val)) {
+        val.forEach((item) => formData.append(key, item));
       } else {
-        formData.append(key, value as string);
+        formData.append(key, val as string);
       }
     });
 
-    this.selectedFiles.forEach(file => {
+
+    // Append selected categories
+    this.selectedCategories.forEach((category) => {
+      formData.append('categories[]', category);
+    });
+
+    // Append selected images
+    this.selectedFiles.forEach((file) => {
       formData.append('photos', file);
     });
     for (let pair of formData.entries()) {
       console.log(`${pair[0]}:`, pair[1]);
     }
-        this.educationService.addCollege(formData).subscribe({
+    this.educationService.addCollege(formData).subscribe({
       next: (response) => {
         console.log('college added:', response);
         this.toastr.success('College added successfully!');

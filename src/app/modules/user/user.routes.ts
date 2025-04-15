@@ -4,6 +4,9 @@ import {AboutComponent } from './about/about.component';
 import {ContactComponent } from './contact/contact.component';
 import { BlogComponent } from './blog/blog.component';
 import { BlogDetailsComponent } from './blog/blog-details/blog-details.component';
+import { UniversityComponent } from './university/university.component';
+import { CollegeComponent } from './college/college.component';
+import { CourseComponent } from './course/course.component';
 
 
 export const USER_ROUTES: Routes = [
@@ -12,6 +15,9 @@ export const USER_ROUTES: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'apply', component: HomeComponent },
   { path: 'counselling', component: HomeComponent },
+  { path: 'universities', component: UniversityComponent },
+  { path: 'colleges', component: CollegeComponent },
+  { path: 'courses', component: CourseComponent },
   { path: 'blogs', component: BlogComponent },
   { path: 'blog/:slug', component: BlogDetailsComponent, }
 ];

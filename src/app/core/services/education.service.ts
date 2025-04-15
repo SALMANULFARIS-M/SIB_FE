@@ -8,12 +8,26 @@ import { Observable } from 'rxjs';
 export class EducationService extends BaseService {
 
   // -------- Universities --------
-  getUniversities(): Observable<any> {
-    return this.getRequest('/education/universities', 'universities');
+  getUniversities(params: { page?: number; limit?: number; search?: string } = {}): Observable<any> {
+    let queryString = '';
+
+    const queryArray = Object.entries(params)
+      .filter(([_, value]) => value !== undefined && value !== null && value !== '')
+      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`);
+
+    if (queryArray.length) {
+      queryString = '?' + queryArray.join('&');
+    }
+
+    return this.getRequest(`/education/universities${queryString}`, 'universities');
   }
 
   getUniversityById(id: string): Observable<any> {
     return this.getRequest(`/education/university/${id}`, `university-${id}`);
+  }
+
+  getUniversityWithColleges(id: string): Observable<any> {
+    return this.getRequest(`/collegesUnderUniversites/${id}`, `colleges-under-${id}`);
   }
 
   addUniversity(data: any): Observable<any> {
@@ -29,9 +43,19 @@ export class EducationService extends BaseService {
   }
 
   // -------- Colleges --------
-  getColleges(): Observable<any> {
-    return this.getRequest('/education/colleges', 'colleges');
+  getColleges(params: { page?: number; limit?: number; search?: string; category?: string } = {}): Observable<any> {
+    let queryString = '';
+
+    const queryArray = Object.entries(params)
+      .filter(([_, value]) => value !== undefined && value !== null && value !== '')
+      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`);
+
+    if (queryArray.length) {
+      queryString = '?' + queryArray.join('&');
+    }
+    return this.getRequest(`/education/colleges${queryString}`, 'colleges');
   }
+
 
   getCollegeById(id: string): Observable<any> {
     return this.getRequest(`/education/college/${id}`, `college-${id}`);
@@ -50,9 +74,16 @@ export class EducationService extends BaseService {
   }
 
   // -------- Courses --------
-  getCourses(): Observable<any> {
-    return this.getRequest('/education/courses', 'courses');
+  getCourses(params: { search?: string; level?: string; page?: number; limit?: number; } = {}): Observable<any> {
+    const queryArray = Object.entries(params)
+      .filter(([_, value]) => value !== undefined && value !== null && value !== '')
+      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`);
+
+    const queryString = queryArray.length ? `?${queryArray.join('&')}` : '';
+    return this.getRequest(`/education/courses${queryString}`, 'courses');
   }
+
+
 
   getCourseById(id: string): Observable<any> {
     return this.getRequest(`/education/course/${id}`, `course-${id}`);

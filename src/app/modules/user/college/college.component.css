@@ -1,0 +1,34 @@
+.card-shadow {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.card-shadow:hover {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+  transform: translateY(-5px);
+}
+
+.gradient-overlay {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+}
+
+.college-card:hover .view-details {
+  transform: translateX(5px);
+}
+
+.star-filled {
+  color: #FFC107;
+}
+
+.star-empty {
+  color: #E0E0E0;
+}
+
+.badge {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+}
+
+.view-details {
+  transition: transform 0.3s ease;
+}
