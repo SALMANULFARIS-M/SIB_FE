@@ -5,6 +5,7 @@ import { EducationService } from '../../../core/services/education.service';
 import { Course } from '../../../shared/models/course';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-course',
@@ -23,34 +24,44 @@ export class CourseComponent implements OnInit {
   totalPages = 1;
   limit = 6; // items per page
 
-  constructor(private educationService: EducationService) {}
+  constructor(private educationService: EducationService,private route:ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.fetchCourses();
+
+    this.route.queryParamMap.subscribe(params => {
+      const type = params.get('type');
+      this.fetchCourses(type || undefined); // pass 'online', 'short-term', or undefined
+    });
   }
 
-  fetchCourses(): void {
+  fetchCourses(type?: string): void {
     this.isLoading = true;
 
-    const filters = {
+    const filters: any = {
       search: this.searchQuery,
       level: this.selectedLevel !== 'All' ? this.selectedLevel : '',
       page: this.currentPage,
       limit: this.limit,
     };
 
+    // Add type to filters if it's 'online' or 'short-term'
+    if (type === 'online' || type === 'short-term') {
+      filters.type = type;
+    }
+
     this.educationService.getCourses(filters).subscribe({
       next: (res) => {
-      this.courses = res.courses;
-      this.totalPages = Math.ceil(res.totalCount / this.limit); // Adjust based on backend response
-      this.isLoading = false;
+        this.courses = res.courses;
+        this.totalPages = Math.ceil(res.totalCount / this.limit); // Adjust based on backend response
+        this.isLoading = false;
       },
       error: (error) => {
-      console.error('Error fetching courses:', error);
-      this.isLoading = false;
+        console.error('Error fetching courses:', error);
+        this.isLoading = false;
       }
     });
   }
+
 
   onSearchChange(): void {
     this.currentPage = 1;

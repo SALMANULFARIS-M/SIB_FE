@@ -66,8 +66,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     { label: 'Universities', icon: faUniversity, route: '/universities' },
     { label: 'Colleges', icon: faSchool, route: '/colleges' },
     { label: 'Courses', icon: faGlobe, route: '/courses' },
-    { label: 'online Courses', icon: faBookOpen, route: '/courses' },
-    { label: 'Short-term Programs', icon: faLaptop, route: '/' },
+    { label: 'online Courses', icon: faBookOpen, route: '/online' },
+    { label: 'Short-term Programs', icon: faLaptop, route: '/Short-term' },
     { label: 'Part-time Jobs', icon: faBriefcase, route: '/' },
     { label: 'Accommodation Near Me', icon: faHome, route: '/' },
     { label: 'Events', icon: faCalendarAlt, route: '/' },
@@ -109,8 +109,15 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   navigateTo(route: string) {
-    this.router.navigate([route]);
+    if (route === 'online') {
+      this.router.navigate(['/courses'], { queryParams: { type: 'online' } });
+    } else if (route === 'short-term') {
+      this.router.navigate(['/courses'], { queryParams: { type: 'short-term' } });
+    } else {
+      this.router.navigate([route]);
+    }
   }
+
 
 
   updateComponentVisibility(url: string): void {

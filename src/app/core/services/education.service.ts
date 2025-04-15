@@ -74,7 +74,13 @@ export class EducationService extends BaseService {
   }
 
   // -------- Courses --------
-  getCourses(params: { search?: string; level?: string; page?: number; limit?: number; } = {}): Observable<any> {
+  getCourses(params: {
+    search?: string;
+    level?: string;
+    page?: number;
+    limit?: number;
+    type?: 'online' | 'short-term';
+  } = {}): Observable<any> {
     const queryArray = Object.entries(params)
       .filter(([_, value]) => value !== undefined && value !== null && value !== '')
       .map(([key, value]) => `${key}=${encodeURIComponent(value)}`);
