@@ -1,2 +1,216 @@
 <app-nav></app-nav>
+
+<section
+  class="relative flex flex-col justify-center items-center py-14 text-gray-200 bg-gradient-to-br from-[#1A0A2E] to-[#2D1044]"
+>
+  <div class="absolute inset-0 overflow-hidden">
+    <div
+      class="absolute top-1/4 left-1/4 h-2 w-2 rounded-full bg-[#6D3A9E]/40 animate-float"
+    ></div>
+    <div
+      class="absolute top-3/4 left-1/2 h-3 w-3 rounded-full bg-[#8E4CCB]/30 animate-float-delay"
+    ></div>
+    <div
+      class="absolute top-1/3 right-1/4 h-2 w-2 rounded-full bg-[#5A2D8C]/40 animate-float-reverse"
+    ></div>
+    <div
+      class="absolute bottom-1/4 right-1/3 h-4 w-4 rounded-full bg-[#7B3FAF]/20 animate-pulse"
+    ></div>
+  </div>
+  <div class="container mx-auto px-6 min-h-screen mt-16">
+    <!-- Main Card -->
+    <div class="rounded-lg shadow-md overflow-hidden">
+      <!-- Course Header -->
+      <div
+        class="m-6 rounded-2xl shadow-md shadow-purple-500/20 bg-black/60 backdrop-blur-lg hover:bg-black/80 transition-all duration-300 p-6 text-white"
+      >
+        <div class="flex justify-between items-start">
+          <div>
+            <h2 class="text-2xl font-bold montserrat-medium">
+              {{ course.title }}
+            </h2>
+            <p class="text-blue-100 mt-1 poppins-medium">
+              {{ course.degree }} <span class="ms-5">• {{ course.level }}</span>
+            </p>
+          </div>
+          <span
+            class="bg-white text-violet-900 px-3 py-1 rounded-full text-sm font-semibold my-auto"
+          >
+            {{ course.category }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Course Details -->
+      <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Left Column -->
+        <div class="space-y-6">
+          <!-- Basic Info -->
+          <div
+            class="rounded-2xl shadow-md shadow-purple-500/20 bg-black/60 backdrop-blur-lg hover:bg-black/80 transition-all duration-300 p-6 text-white"
+          >
+            <h3
+              class="text-lg font-semibold text-white border-b pb-2 mb-3 pt-serif-medium"
+            >
+              Basic Information
+            </h3>
+            <div class="space-y-3">
+              <div class="flex">
+                <span class="text-purple-300 w-40 playfair-regular"
+                  >Degree:</span
+                >
+                <span class="font-medium merriweather-regular">{{
+                  course.degree
+                }}</span>
+              </div>
+              <div class="flex">
+                <span class="text-purple-300 w-40 playfair-regular"
+                  >Level:</span
+                >
+                <span class="font-medium merriweather-regular">{{
+                  course.level
+                }}</span>
+              </div>
+              <div class="flex">
+                <span class="text-purple-300 w-40 playfair-regular"
+                  >Category:</span
+                >
+                <span class="font-medium merriweather-regular">{{
+                  course.category
+                }}</span>
+              </div>
+              <div class="flex">
+                <span class="text-purple-300 w-40 playfair-regular"
+                  >Duration:</span
+                >
+                <span class="font-medium merriweather-regular">
+                  {{ course.durationValue }} {{ course.durationUnit
+                  }}{{ course.durationValue > 1 ? "s" : "" }}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fees & Salary -->
+          <div
+            class="rounded-2xl shadow-md shadow-purple-500/20 bg-black/60 backdrop-blur-lg hover:bg-black/80 transition-all duration-300 p-6 text-white"
+          >
+            <h3
+              class="text-lg font-semibold text-white border-b pb-2 mb-3 pt-serif-medium"
+            >
+              Financial Information
+            </h3>
+            <div class="space-y-3">
+              <div class="flex">
+                <span class="text-purple-300 w-40 playfair-regular"
+                  >Course Fees:</span
+                >
+                <span class="font-medium merriweather-regular"
+                  >₹{{ course.fees.toLocaleString() }}</span
+                >
+              </div>
+              <div class="flex">
+                <span class="text-purple-300 w-40 playfair-regular"
+                  >Median Salary:</span
+                >
+                <span class="font-medium merriweather-regular"
+                  >₹{{ course.medianLPA.toLocaleString() }} LPA</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="space-y-6">
+          <!-- Provider Info -->
+          <div
+            class="rounded-2xl shadow-md shadow-purple-500/20 bg-black/60 backdrop-blur-lg hover:bg-black/80 transition-all duration-300 p-6 text-white"
+          >
+            <h3
+              class="text-lg font-semibold text-white border-b pb-2 mb-3 pt-serif-medium"
+            >
+              Provider Information
+            </h3>
+            <div class="space-y-3">
+              <div class="flex">
+                <span class="text-purple-300 w-40 playfair-regular"
+                  >Provider Type:</span
+                >
+                <span class="font-medium merriweather-regular">{{
+                  course.providerType
+                }}</span>
+              </div>
+              <div class="flex" *ngIf="course.providerName">
+                <span class="text-purple-300 w-40 playfair-regular"
+                  >Provider Name:</span
+                >
+                <span class="font-medium merriweather-regular">{{
+                  course.providerName
+                }}</span>
+              </div>
+              <div
+                class="flex"
+                *ngIf="course.collegeId && typeof course.collegeId !== 'string'"
+              >
+                <span class="text-purple-300 w-40 playfair-regular"
+                  >College:</span
+                >
+                <span
+                  class="font-bold text-yellow-400 font-merriweather-regular"
+                >
+                  <ng-container *ngIf="isObject(course.collegeId); else idOnly">
+                    {{ course.collegeId.name }}
+                  </ng-container>
+                  <ng-template #idOnly>N/A</ng-template>
+                </span>
+              </div>
+              <div class="flex">
+                <span class="text-purple-300 w-40 playfair-regular"
+                  >Affiliation:</span
+                >
+                <span class="font-medium merriweather-regular">{{
+                  course.affiliation || "N/A"
+                }}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Course Type -->
+          <div
+            class="rounded-2xl shadow-md shadow-purple-500/20 bg-black/60 backdrop-blur-lg hover:bg-black/80 transition-all duration-300 p-6 text-white"
+          >
+            <h3
+              class="text-lg font-semibold text-white border-b pb-2 mb-3 pt-serif-medium"
+            >
+              Course Type
+            </h3>
+            <div class="flex flex-wrap gap-2 playfair-regular">
+              <span
+                *ngIf="course.isShortTerm"
+                class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm"
+              >
+                Short-Term
+              </span>
+              <span
+                *ngIf="course.isOnline"
+                class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm"
+              >
+                Online
+              </span>
+              <span
+                *ngIf="course.isOffline"
+                class="px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-sm"
+              >
+                Offline
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Apply Component (Visible only when URL is '/apply') -->
+<app-apply ></app-apply>
 <app-footer></app-footer>

@@ -5,11 +5,11 @@ import { EducationService } from '../../../core/services/education.service';
 import { Course } from '../../../shared/models/course';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-course',
-  imports: [NavComponent, FooterComponent,CommonModule,FormsModule],
+  imports: [NavComponent, FooterComponent,CommonModule,FormsModule,RouterModule],
   templateUrl: './course.component.html',
   styleUrl: './course.component.css'
 })

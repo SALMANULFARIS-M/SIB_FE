@@ -7,10 +7,11 @@ import { StarRatingComponent } from '../../../../shared/user/star-rating/star-ra
 import { EducationService } from '../../../../core/services/education.service';
 import { College } from '../../../../shared/models/college';
 import { log } from 'util';
+import { ApplyComponent } from '../../../../shared/user/apply/apply.component';
 
 @Component({
   selector: 'app-view-college',
-  imports: [NavComponent, FooterComponent, CommonModule, RouterModule, StarRatingComponent],
+  imports: [NavComponent, FooterComponent, CommonModule, RouterModule, StarRatingComponent,ApplyComponent],
   templateUrl: './view-college.component.html',
   styleUrl: './view-college.component.css'
 })
@@ -27,18 +28,15 @@ export class ViewCollegeComponent {
         this.educationService.getCollegeById(id).subscribe(
           {
             next: (response) => {
-              console.log(response,"responseeeeeeeeeeeeee")
               this.college = response;;
               this.isLoading = false;
             },
             error: (error) => {
-              console.error('Error fetching colleges', error);
               this.isLoading = false;
             }
           }
         );
       } else {
-        console.warn('No ID provided in query params.');
         this.isLoading = false;
       }
     });
