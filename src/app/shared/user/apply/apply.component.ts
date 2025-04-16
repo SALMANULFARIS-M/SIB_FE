@@ -1,12 +1,11 @@
 // Apply Form Component (Angular TS)
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { STATES } from '../../constants/states';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { UserService } from '../../../core/services/user.service';
 import { ToastrService } from 'ngx-toastr';
-import { NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import {  Router } from '@angular/router';
 
 @Component({
   selector: 'app-apply',
@@ -22,7 +21,7 @@ export class ApplyComponent implements OnInit {
   states = STATES;
   districts: string[] = [];
 
-  constructor(private fb: FormBuilder, private service: UserService, private toastr: ToastrService) { }
+  constructor(@Inject(PLATFORM_ID) private platformId: any,private router:Router, private fb: FormBuilder, private service: UserService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.applyForm = this.fb.group({
@@ -37,6 +36,12 @@ export class ApplyComponent implements OnInit {
     if (this.showApply) {
       this.showForm = true;
     }
+    if (isPlatformBrowser(this.platformId)) {
+      // ✅ Show apply form after 15 seconds
+      setTimeout(() => {
+        this.showForm = true;
+      }, 10000);
+    }
   }
 
   openForm(): void {
@@ -46,6 +51,7 @@ export class ApplyComponent implements OnInit {
   closeForm(): void {
     this.showForm = false;
     this.applyForm.reset();
+    this.router.navigate(['/']);
   }
 
   onStateChange(): void {

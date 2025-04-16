@@ -84,7 +84,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     if (isPlatformBrowser(this.platformId)) {
       // ✅ Step 1: Check URL on initial load
       this.updateComponentVisibility(this.router.url);
-
       // ✅ Step 2: Detect URL changes
       this.router.events
         .pipe(filter(event => event instanceof NavigationEnd))
@@ -106,143 +105,139 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       });
     }
-    // ✅ Show apply form after 45 seconds
-    setTimeout(() => {
-      this.showApplyComponent = true;
-    }, 45000); // 45,000 ms = 45 seconds
-}
 
-navigateTo(route: string) {
-  if (route === 'online') {
-    this.router.navigate(['/courses'], { queryParams: { type: 'online' } });
-  } else if (route === 'short-term') {
-    this.router.navigate(['/courses'], { queryParams: { type: 'short-term' } });
-  } else {
-    this.router.navigate([route]);
-  }
-}
-
-
-
-updateComponentVisibility(url: string): void {
-  const currentUrl = url.split('?')[0]; // Normalize URL (Remove query params)
-  this.showApplyComponent = currentUrl === '/apply';
-  this.showCouncilingComponent = currentUrl === '/counselling';
-}
-
-ngAfterViewInit(): void {
-  if(isPlatformBrowser(this.platformId)) {
-  setTimeout(() => {
-    if (this.secondHeading?.nativeElement) {
-      this.setupIntersectionObserver(this.secondHeading.nativeElement, 'headerVisible');
-    }
-    if (this.freeConsultation?.nativeElement) {
-      this.setupIntersectionObserver(this.freeConsultation.nativeElement, 'headerVisible');
-    }
-    if (this.leftContent?.nativeElement) {
-      this.setupIntersectionObserver(this.leftContent.nativeElement, 'leftContentVisible');
-    }
-    if (this.rightImage?.nativeElement) {
-      this.setupIntersectionObserver(this.rightImage.nativeElement, 'rightImageVisible');
-    }
-    if (this.countUp?.nativeElement) {
-      this.setupIntersectionObserver(this.countUp.nativeElement, 'countupSectionVisible');
-    } if (this.opportunitySection?.nativeElement) {
-      this.setupIntersectionObserver(this.opportunitySection.nativeElement, 'opportunityVisible');
-    }
-    if (this.leftContent?.nativeElement) {
-      this.setupIntersectionObserver(this.leftContent.nativeElement, 'leftContentVisible');
-    }
-    if (this.rightImage?.nativeElement) {
-      this.setupIntersectionObserver(this.rightImage.nativeElement, 'rightImageVisible');
-    }
-    if (this.visionAndMission?.nativeElement) {
-      this.setupIntersectionObserver(this.visionAndMission.nativeElement, 'leftVisible');
-    }
-    if (this.rightCarousel?.nativeElement) {
-      this.setupIntersectionObserver(this.rightCarousel?.nativeElement, 'rightVisible');
-    }
-    if (this.journey?.nativeElement) {
-      this.setupIntersectionObserver(this.journey?.nativeElement, 'journeyVisible');
-    }
-  }, 500);
-}
-  }
-startFlipAnimation(): void {
-  setInterval(() => {
-  this.flipState = this.flipState === 'normal' ? 'flipped' : 'normal';
-}, 4000); // Change text every 4 seconds
   }
 
-setupIntersectionObserver(element: HTMLElement, animationState: string, index ?: number): void { // animationState is now string
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          if (animationState === 'countupSectionVisible') {
-            this.counterVisible.fill(true);
-            this.stats.forEach((_, statIndex) => this.animateCounter(statIndex));
-          } else if (animationState === 'opportunityVisible') {
-            this.animateOpportunities();
-          } else {
-            (this as any)[animationState] = true;
-          }
-          observer.unobserve(entry.target);
+  navigateTo(route: string) {
+    if (route === '/online') {
+      this.router.navigate(['/courses'], { queryParams: { type: 'online' } });
+    } else if (route === '/short-term') {
+      this.router.navigate(['/courses'], { queryParams: { type: 'short-term' } });
+    } else {
+      this.router.navigate([route]);
+    }
+  }
+
+
+  updateComponentVisibility(url: string): void {
+    const currentUrl = url.split('?')[0]; // Normalize URL (Remove query params)
+    this.showApplyComponent = currentUrl === '/apply';
+    this.showCouncilingComponent = currentUrl === '/counselling';
+  }
+
+  ngAfterViewInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      setTimeout(() => {
+        if (this.secondHeading?.nativeElement) {
+          this.setupIntersectionObserver(this.secondHeading.nativeElement, 'headerVisible');
         }
-      });
-    },
-    {
-      root: null,
-      threshold: 0.3, // Adjust threshold to control when animation triggers
-      rootMargin: '0px 0px -10% 0px',
+        if (this.freeConsultation?.nativeElement) {
+          this.setupIntersectionObserver(this.freeConsultation.nativeElement, 'headerVisible');
+        }
+        if (this.leftContent?.nativeElement) {
+          this.setupIntersectionObserver(this.leftContent.nativeElement, 'leftContentVisible');
+        }
+        if (this.rightImage?.nativeElement) {
+          this.setupIntersectionObserver(this.rightImage.nativeElement, 'rightImageVisible');
+        }
+        if (this.countUp?.nativeElement) {
+          this.setupIntersectionObserver(this.countUp.nativeElement, 'countupSectionVisible');
+        } if (this.opportunitySection?.nativeElement) {
+          this.setupIntersectionObserver(this.opportunitySection.nativeElement, 'opportunityVisible');
+        }
+        if (this.leftContent?.nativeElement) {
+          this.setupIntersectionObserver(this.leftContent.nativeElement, 'leftContentVisible');
+        }
+        if (this.rightImage?.nativeElement) {
+          this.setupIntersectionObserver(this.rightImage.nativeElement, 'rightImageVisible');
+        }
+        if (this.visionAndMission?.nativeElement) {
+          this.setupIntersectionObserver(this.visionAndMission.nativeElement, 'leftVisible');
+        }
+        if (this.rightCarousel?.nativeElement) {
+          this.setupIntersectionObserver(this.rightCarousel?.nativeElement, 'rightVisible');
+        }
+        if (this.journey?.nativeElement) {
+          this.setupIntersectionObserver(this.journey?.nativeElement, 'journeyVisible');
+        }
+      }, 500);
     }
-  );
+  }
+  startFlipAnimation(): void {
+    setInterval(() => {
+      this.flipState = this.flipState === 'normal' ? 'flipped' : 'normal';
+    }, 4000); // Change text every 4 seconds
+  }
 
-  observer.observe(element);
-}
+  setupIntersectionObserver(element: HTMLElement, animationState: string, index?: number): void { // animationState is now string
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            if (animationState === 'countupSectionVisible') {
+              this.counterVisible.fill(true);
+              this.stats.forEach((_, statIndex) => this.animateCounter(statIndex));
+            } else if (animationState === 'opportunityVisible') {
+              this.animateOpportunities();
+            } else {
+              (this as any)[animationState] = true;
+            }
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        root: null,
+        threshold: 0.3, // Adjust threshold to control when animation triggers
+        rootMargin: '0px 0px -10% 0px',
+      }
+    );
+
+    observer.observe(element);
+  }
 
   private animateCounter(index: number): void {
-  const targetValue = Number(this.stats[index].value);
-  if(!isNaN(targetValue)) {
-  const duration = 1500; // Animation duration in ms
-  const step = targetValue / (duration / 20);
-  let current = 0;
+    const targetValue = Number(this.stats[index].value);
+    if (!isNaN(targetValue)) {
+      const duration = 1500; // Animation duration in ms
+      const step = targetValue / (duration / 20);
+      let current = 0;
 
-  const interval = setInterval(() => {
-    current += step;
-    if (current >= targetValue) {
-      this.currentValues[index] = targetValue;
-      clearInterval(interval);
+      const interval = setInterval(() => {
+        current += step;
+        if (current >= targetValue) {
+          this.currentValues[index] = targetValue;
+          clearInterval(interval);
+        } else {
+          this.currentValues[index] = Math.floor(current);
+        }
+      }, 20);
     } else {
-      this.currentValues[index] = Math.floor(current);
+      this.currentValues[index] = this.stats[index].value as unknown as number;
     }
-  }, 20);
-} else {
-  this.currentValues[index] = this.stats[index].value as unknown as number;
-}
   }
-animateOpportunities(): void {
-  this.opportunities.forEach((_, index) => {
-    setTimeout(() => {
-      this.opportunityVisible[index] = true;
-    }, index * 200);
-  });
-}
-ngOnDestroy(): void {
-  clearInterval(this.intervalId);
-}
+  animateOpportunities(): void {
+    this.opportunities.forEach((_, index) => {
+      setTimeout(() => {
+        this.opportunityVisible[index] = true;
+      }, index * 200);
+    });
+  }
+  ngOnDestroy(): void {
+    clearInterval(this.intervalId);
+  }
 
 
 
-goToSlide(index: number): void {
-  this.currentSlide = index;
-}
-toggleFlip(section: string): void {
-  if(section === 'vision') {
-  this.isVisionFlipped = !this.isVisionFlipped;
-} else if (section === 'mission') {
-  this.isMissionFlipped = !this.isMissionFlipped;
-}
+  goToSlide(index: number): void {
+    this.currentSlide = index;
+  }
+  toggleFlip(section: string): void {
+    if (section === 'vision') {
+      this.isVisionFlipped = !this.isVisionFlipped;
+    } else if (section === 'mission') {
+      this.isMissionFlipped = !this.isMissionFlipped;
+    }
   }
 
 

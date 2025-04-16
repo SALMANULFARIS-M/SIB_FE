@@ -1,10 +1,11 @@
-import { AfterViewInit, Component, ElementRef, Inject, Input, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { STATES } from '../../../../shared/constants/states';
 import { UserService } from '../../../../core/services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { slideInFromRight } from '../../../../shared/constants/animation';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-free-consultaion',
@@ -18,10 +19,10 @@ export class FreeConsultaionComponent implements OnInit, AfterViewInit {
   showForm = false;
   states = STATES;
   districts: string[] = [];
- @Input() visible = false; // Control animation from parent
- @Input() showCouncilingForm: boolean = false; // Receive visibility status
+  @Input() visible = false; // Control animation from parent
+  @Input() showCouncilingForm: boolean = false; // Receive visibility status
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object, private fb: FormBuilder, private service: UserService, private toastr: ToastrService, private el: ElementRef) { }
+  constructor(private router:Router, private fb: FormBuilder, private service: UserService, private toastr: ToastrService, private el: ElementRef) { }
 
   ngOnInit(): void {
     this.applyForm = this.fb.group({
@@ -32,14 +33,13 @@ export class FreeConsultaionComponent implements OnInit, AfterViewInit {
       state: ['', Validators.required],
       district: ['', Validators.required],
     });
-  // Example: Trigger the animation after a delay
-   // Ensure animation runs when visible is true
-   setTimeout(() => {
-    this.visible = true;
-  }, 200);
-  if (this.showCouncilingForm) {
-    this.showForm = true;
-  }
+
+    setTimeout(() => {
+      this.visible = true;
+    }, 200);
+    if (this.showCouncilingForm) {
+      this.showForm = true;
+    }
   }
   ngAfterViewInit(): void {
 
@@ -52,6 +52,7 @@ export class FreeConsultaionComponent implements OnInit, AfterViewInit {
   closeForm(): void {
     this.showForm = false;
     this.applyForm.reset();
+    this.router.navigate(['/']);
   }
 
   onStateChange(): void {
