@@ -35,7 +35,6 @@ export class UniversityComponent {
   }
 
   fetchUniversities(): void {
-    this.isLoading = true;
     this.educationService.getUniversities().subscribe({
       next: (res) => {
         this.universities = res.universities || []; // adjust based on your API response
