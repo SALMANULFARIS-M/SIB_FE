@@ -21,13 +21,25 @@
   ],
   "redirects": [
     {
-      "source": "https://studyinbangalore.in",
-      "destination": "https://studyinbengaluru.com",
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "studyinbangalore.in"
+        }
+      ],
+      "destination": "https://studyinbengaluru.com/:path*",
       "permanent": true
     },
     {
-      "source": "https://www.studyinbangalore.in",
-      "destination": "https://studyinbengaluru.com",
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.studyinbangalore.in"
+        }
+      ],
+      "destination": "https://studyinbengaluru.com/:path*",
       "permanent": true
     }
   ]
