@@ -39,7 +39,7 @@ export class UniversityComponent {
     this.isLoading = true;
     this.educationService.getUniversities().subscribe({
       next: (res) => {
-        this.universities = res || []; // adjust based on your API response
+        this.universities = res.universities || []; // adjust based on your API response
         this.isLoading = false;
       },
       error: (err) => {
