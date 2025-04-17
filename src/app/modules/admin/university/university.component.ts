@@ -30,7 +30,6 @@ export class UniversityComponent {
     });
   }
 
-
   ngOnInit(): void {
     this.fetchUniversities();
   }
