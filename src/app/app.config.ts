@@ -1,5 +1,5 @@
 import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection} from '@angular/core';
-import { provideRouter, withPreloading } from '@angular/router';
+import { provideRouter, withInMemoryScrolling, withPreloading } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
@@ -38,7 +38,10 @@ export const appConfig: ApplicationConfig = {
       enableHtml: true, // Allow HTML in toast messages
     }),
     // Router
-    provideRouter(routes, withPreloading(CustomPreloadingStrategy)),
+    provideRouter(routes,withInMemoryScrolling({
+      scrollPositionRestoration: 'enabled', // ✅ Scrolls to top on route change
+      anchorScrolling: 'enabled',           // ✅ Enables #anchor navigation
+    }), withPreloading(CustomPreloadingStrategy)),
     CustomPreloadingStrategy,
     // Client Hydration (SSR)
     provideClientHydration(withEventReplay()),

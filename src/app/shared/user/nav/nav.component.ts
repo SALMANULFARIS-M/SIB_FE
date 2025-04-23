@@ -7,7 +7,7 @@ import { Router, RouterModule } from '@angular/router';
   selector: 'app-nav',
   imports: [CommonModule, RouterModule],
   templateUrl: './nav.component.html',
-  styleUrl: './nav.component.css'
+  styleUrl: './nav.component.css',
 })
 export class NavComponent implements OnInit {
   isMenuOpen: boolean = false;
