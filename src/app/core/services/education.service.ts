@@ -26,9 +26,24 @@ export class EducationService extends BaseService {
     return this.getRequest(`/education/university/${id}`, `university-${id}`);
   }
 
-  getUniversityWithColleges(id: string): Observable<any> {
-    return this.getRequest(`/collegesUnderUniversites/${id}`, `colleges-under-${id}`);
+  getUniversityWithColleges(
+    id: string,
+    params: { page?: number; limit?: number; search?: string; category?: string } = {}
+  ): Observable<any> {
+    let queryString = '';
+
+    const queryArray = Object.entries(params)
+      .filter(([_, value]) => value !== undefined && value !== null && value !== '')
+      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`);
+
+    if (queryArray.length) {
+      queryString = '?' + queryArray.join('&');
+    }
+
+    return this.getRequest(`/education/collegesUnderUniversites/${id}${queryString}`, `colleges-under-${id}`);
   }
+
+
 
   addUniversity(data: any): Observable<any> {
     return this.postRequest('/education/university', data);

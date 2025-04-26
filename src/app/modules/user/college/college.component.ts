@@ -30,7 +30,7 @@ export class CollegeComponent implements OnInit {
       this.universityId = params.get('universityId');
       if (this.universityId) {
         // fetch colleges under this university
-        this.fetchCollegesByUniversity(this.universityId);
+        this.fetchCollegesByUniversity(this.universityId, this.currentPage, this.limit, this.searchQuery, this.selectedCategory);
       } else {
         // fetch all colleges
         this.fetchColleges();
@@ -57,19 +57,21 @@ export class CollegeComponent implements OnInit {
       }
     });
   }
-  fetchCollegesByUniversity(id: string) {
+  fetchCollegesByUniversity(id: string, page: number, limit: number, search: string, category: string): void {
     this.isLoading = true;
-    this.educationService.getUniversityWithColleges(id).subscribe({
+
+    this.educationService.getUniversityWithColleges(id, { page, limit, search }).subscribe({
       next: (response) => {
         this.colleges = response.colleges;
-        this.totalPages = response.pagination.totalPages;
+        this.totalPages = response.pagination?.totalPages || 1;
         this.isLoading = false;
       },
-      error: (error) => {
+      error: () => {
         this.isLoading = false;
       }
     });
   }
+
 
 
   setPage(page: number): void {
