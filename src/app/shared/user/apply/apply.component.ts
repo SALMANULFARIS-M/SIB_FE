@@ -40,25 +40,45 @@ export class ApplyComponent implements OnInit {
       const formShown = localStorage.getItem('formTimerShown');
 
       if (!formShown) {
+        // Set a timeout to show the form after 12 seconds
         this.applyTimer = setTimeout(() => {
           this.showForm = true;
           localStorage.setItem('formTimerShown', 'true');
+
+          // Set another timeout to remove the formTimerShown after 5 hours
+          const formTimerExpiry = 5 * 60 * 60 * 1000; // 5 hours in milliseconds
+          setTimeout(() => {
+            localStorage.removeItem('formTimerShown');
+          }, formTimerExpiry);
+
         }, 12000); // Show after 12 seconds
       }
+
     }
   }
 
 
   openForm(): void {
+    const formTimerExpiry = 5 * 60 * 60 * 1000; // 5 hours in milliseconds
+
+    // If form was shown previously, cancel the timer to show the form early
     if (this.applyTimer) {
       clearTimeout(this.applyTimer); // cancel timer if user clicks early
-      this.showForm = true;
     }
 
+    // Show the form immediately
     this.showForm = true;
-    localStorage.setItem('formTimerShown', 'true'); // prevent future auto-show
+
+    // Store the form shown flag
+    localStorage.setItem('formTimerShown', 'true');
+
+    // Set the timer to automatically remove the formTimerShown after 5 hours
+    setTimeout(() => {
+      localStorage.removeItem('formTimerShown');
+    }, formTimerExpiry);
 
   }
+
 
   closeForm(): void {
     this.showForm = false;
