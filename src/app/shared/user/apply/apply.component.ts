@@ -2,7 +2,7 @@
 import { Component, Inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { STATES } from '../../constants/states';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser, Location } from '@angular/common';
 import { UserService } from '../../../core/services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import {  Router } from '@angular/router';
@@ -20,8 +20,8 @@ export class ApplyComponent implements OnInit {
   showForm = false;
   states = STATES;
   districts: string[] = [];
-
-  constructor(@Inject(PLATFORM_ID) private platformId: any,private router:Router, private fb: FormBuilder, private service: UserService, private toastr: ToastrService) { }
+  applyTimer: any = null; // Timer for auto-showing the form
+  constructor(@Inject(PLATFORM_ID) private platformId: any, private router:Router, private fb: FormBuilder, private service: UserService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.applyForm = this.fb.group({
@@ -37,15 +37,26 @@ export class ApplyComponent implements OnInit {
       this.showForm = true;
     }
     if (isPlatformBrowser(this.platformId)) {
-      // ✅ Show apply form after 15 seconds
-      setTimeout(() => {
-        this.showForm = true;
-      }, 10000);
+      const formShown = localStorage.getItem('formTimerShown');
+
+      if (!formShown) {
+        this.applyTimer = setTimeout(() => {
+          this.showForm = true;
+          localStorage.setItem('formTimerShown', 'true');
+        }, 12000); // Show after 12 seconds
+      }
     }
   }
 
+
   openForm(): void {
+    if (this.applyTimer) {
+      clearTimeout(this.applyTimer); // cancel timer if user clicks early
+      this.showForm = true;
+    }
+
     this.showForm = true;
+    localStorage.setItem('formTimerShown', 'true'); // prevent future auto-show
   }
 
   closeForm(): void {
