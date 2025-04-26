@@ -57,6 +57,7 @@ export class ApplyComponent implements OnInit {
 
     this.showForm = true;
     localStorage.setItem('formTimerShown', 'true'); // prevent future auto-show
+
   }
 
   closeForm(): void {
