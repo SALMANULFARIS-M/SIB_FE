@@ -34,7 +34,10 @@ export class AppComponent implements OnInit, OnDestroy {
       name: 'robots',
       content: 'index, follow'
     });
-
+    this.meta.updateTag({
+      name: 'p:domain_verify',
+      content: '22bee03ea438555c38d6e65739e32982'
+    });
     this.meta.updateTag({
       name: 'keywords',
       content: 'Study in Bengaluru, Study in Bangalore, Bangalore Colleges, Bengaluru Colleges, Admissions in Bengaluru, Career Guidance, Top Universities in Bangalore, Bengaluru Education, Apply Now, Education Consultants'
@@ -89,8 +92,5 @@ export class AppComponent implements OnInit, OnDestroy {
       favicon.href = '/logo-b.png'; // Path to your light mode favicon in the public directory
     }
   }
-
-
-
 
 }
