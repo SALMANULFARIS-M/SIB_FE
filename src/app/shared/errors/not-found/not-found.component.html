@@ -1,0 +1,94 @@
+<section
+  class="bg-gradient-to-b from-black/70 to-black/40 min-h-screen flex items-center justify-center p-4 overflow-hidden relative"
+>
+  <!-- Stars Background -->
+  <div
+    *ngIf="isBrowser"
+    id="stars"
+    class="fixed inset-0 z-50 pointer-events-none"
+  >
+    <div
+      *ngFor="let star of stars"
+      class="star"
+      [ngStyle]="{
+        top: star.top,
+        left: star.left,
+        width: star.size,
+        height: star.size,
+        '--duration': star.duration,
+        '--delay': star.animationDelay,
+        '--moveX': star.moveX,
+        '--moveY': star.moveY
+      }"
+    ></div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="error-container relative z-10 text-center">
+    <!-- UFO -->
+    <div class="relative space-animation mb-8">
+      <svg class="w-32 h-32 mx-auto" viewBox="0 0 100 100">
+        <ellipse cx="50" cy="40" rx="30" ry="10" fill="#4F46E5" />
+        <circle cx="50" cy="35" r="20" fill="#818CF8" />
+        <ellipse cx="50" cy="30" rx="10" ry="5" fill="#C7D2FE" />
+        <path
+          class="ufo-beam"
+          d="M40 40 L30 80 L70 80 L60 40"
+          fill="rgba(79, 70, 229, 0.2)"
+        />
+      </svg>
+    </div>
+
+    <!-- 404 Text -->
+    <h1 class="text-8xl font-bold text-white mb-4 space-animation">
+      4<span class="inline-block portal">0</span>4
+    </h1>
+    <p class="text-lg text-white mb-2">Page Not Found</p>
+    <p class="text-xl text-blue-300 mb-8">
+      Oops! Looks like you've wandered into space!
+    </p>
+
+    <!-- Hidden Link -->
+    <a
+      routerLink="/"
+      class="hidden-link text-blue-400 hover:text-blue-300 transition block"
+    >
+      ← Find your way back to safety
+    </a>
+
+    <!-- Astronaut -->
+    <div class="relative inline-block mt-8 space-animation">
+      <img
+        src="/icon-w.png"
+        alt="Astronaut"
+        class="w-24 h-24 rounded-full object-contain p-2 border-4 border-white mx-auto astronaut-wave"
+      />
+      <span
+        class="absolute -top-2 -right-2 w-6 h-6 bg-violet-500 rounded-full border-4 border-white"
+      ></span>
+    </div>
+
+    <!-- Buttons -->
+    <div class="flex justify-center space-x-4 mt-10">
+      <a
+        routerLink="/"
+        class="px-6 py-3 bg-blue-700 text-white rounded-full hover:bg-blue-900 transform hover:scale-105 transition"
+      >
+        Return Home
+      </a>
+      <button
+        onclick="window.history.back()"
+        class="px-6 py-3 bg-purple-700 text-white rounded-full hover:bg-purple-900 transform hover:scale-105 transition"
+      >
+        Go Back
+      </button>
+    </div>
+
+    <!-- Easter Egg -->
+    <div
+      class="mt-8 text-gray-500 cursor-pointer hover:text-gray-400 transition"
+    >
+      <p class="text-sm">Press 'Space' for a surprise!</p>
+    </div>
+  </div>
+</section>

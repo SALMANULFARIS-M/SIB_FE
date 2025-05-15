@@ -1,0 +1,90 @@
+.space-animation {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  opacity: 0;
+  animation: twinkleMove var(--duration) ease-in-out infinite;
+  animation-delay: var(--delay);
+}
+
+@keyframes twinkleMove {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translate(0, 0);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(var(--moveX), var(--moveY));
+  }
+}
+
+.ufo-beam {
+  animation: beam 2s ease-in-out infinite;
+  transform-origin: top;
+}
+
+@keyframes beam {
+  0%,
+  100% {
+    transform: scaleY(0.8);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scaleY(1.1);
+    opacity: 0.7;
+  }
+}
+
+.hidden-link {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.error-container:hover .hidden-link {
+  opacity: 1;
+}
+
+.astronaut-wave {
+  animation: wave 2s ease-in-out infinite;
+  transform-origin: 70% 70%;
+}
+
+@keyframes wave {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(20deg);
+  }
+}
+
+.portal {
+  animation: portal-spin 8s linear infinite;
+}
+
+@keyframes portal-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -1,25 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
-@import 'ngx-toastr/toastr';
-
+@import "ngx-toastr/toastr";
 
 .open-sans {
   font-family: "Open Sans", serif;
   font-optical-sizing: auto;
   font-weight: 500;
   font-style: normal;
-  font-variation-settings:
-    "wdth" 100;
+  font-variation-settings: "wdth" 100;
 }
-
 
 .roboto {
   font-family: "Roboto", serif;
   font-optical-sizing: auto;
   font-weight: 100;
   font-style: normal;
-  font-variation-settings:
-    "wdth" 100;
+  font-variation-settings: "wdth" 100;
 }
 
 .playfair {
@@ -27,8 +23,7 @@
   font-optical-sizing: auto;
   font-weight: 200;
   font-style: normal;
-  font-variation-settings:
-    "wdth" 100;
+  font-variation-settings: "wdth" 100;
 }
 
 .playfair-regular {
@@ -36,8 +31,7 @@
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
-  font-variation-settings:
-    "wdth" 100;
+  font-variation-settings: "wdth" 100;
 }
 
 .montserrat {
@@ -58,7 +52,7 @@
   font-weight: 400;
   font-style: normal;
 }
-.montserrat-normal{
+.montserrat-normal {
   font-family: "Montserrat", serif;
   font-optical-sizing: auto;
   font-weight: 500;
@@ -248,7 +242,7 @@
 
 /* Webkit Scrollbar */
 ::-webkit-scrollbar {
-  width: 16px;  /* Vertical scrollbar width */
+  width: 16px; /* Vertical scrollbar width */
   height: 16px; /* Horizontal scrollbar height */
 }
 
@@ -311,25 +305,25 @@
 
 /* Button Arrows (Optional) */
 ::-webkit-scrollbar-button:single-button:vertical:decrement::before {
-  content: '▲';
+  content: "▲";
   color: white;
   font-size: 10px;
 }
 
 ::-webkit-scrollbar-button:single-button:vertical:increment::before {
-  content: '▼';
+  content: "▼";
   color: white;
   font-size: 10px;
 }
 
 ::-webkit-scrollbar-button:single-button:horizontal:decrement::before {
-  content: '◀';
+  content: "◀";
   color: white;
   font-size: 10px;
 }
 
 ::-webkit-scrollbar-button:single-button:horizontal:increment::before {
-  content: '▶';
+  content: "▶";
   color: white;
   font-size: 10px;
 }
@@ -358,7 +352,6 @@
   }
 }
 
-
 /* src/styles.css */
 .lds-square-jelly-box {
   width: 80px;
@@ -369,7 +362,8 @@
 }
 
 @keyframes jelly {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
   }
   50% {
@@ -377,10 +371,6 @@
     opacity: 0.7;
   }
 }
-
-
-
-
 
 .lds-hourglass,
 .lds-hourglass:after {
@@ -402,8 +392,8 @@
   height: 0;
   margin: 8px;
   box-sizing: border-box;
-  border: 32px solid  #db2777; /* Change color to orange (#ff3e00) */
-  border-color:  #db2777 transparent  #db2777 transparent; /* Change color to orange (#ff3e00) */
+  border: 32px solid #db2777; /* Change color to orange (#ff3e00) */
+  border-color: #db2777 transparent #db2777 transparent; /* Change color to orange (#ff3e00) */
   animation: lds-hourglass 2.4s infinite; /* Slow down the animation (2.4s) */
 }
 
@@ -431,4 +421,53 @@
   justify-content: center;
   align-items: center;
   z-index: 1000; /* Ensure it's on top of other elements */
+}
+.meteor {
+  position: fixed;
+  width: 2px;
+  height: 80px;
+  background: linear-gradient(45deg, white, transparent);
+  animation: meteor-move 3s linear forwards; /* increased duration */
+  transform: rotate(45deg);
+  pointer-events: none;
+  z-index: 10000;
+}
+
+@keyframes meteor-move {
+  from {
+    transform: translateX(0) translateY(0) rotate(45deg);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-120vw) translateY(100vh) rotate(45deg);
+    opacity: 0;
+  }
+}
+@keyframes starburst {
+  0% {
+    opacity: 1;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(3);
+  }
+}
+
+.starburst-effect {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.8) 0%,
+    transparent 80%
+  );
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  animation: starburst 0.8s forwards;
+  z-index: 10000;
 }
