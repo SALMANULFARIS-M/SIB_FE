@@ -28,7 +28,7 @@ export const USER_ROUTES: Routes = [
   { path: 'blogs', component: BlogComponent },
   { path: 'blog/:slug', component: BlogDetailsComponent, },
   { path: 'privacy-policy', component: PrivacyComponent },
-  { path: 'terms&conditions', component: TermsComponent },
+  { path: 'terms-and-conditions', component: TermsComponent },
   { path: 'refund-policy', component: RefundComponent },
 
 ];
