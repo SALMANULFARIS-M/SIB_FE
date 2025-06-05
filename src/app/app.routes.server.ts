@@ -26,7 +26,7 @@ export const serverRoutes: ServerRoute[] = [
       }
     }
   },
-{
+  {
     path: 'colleges/:id',
     renderMode: RenderMode.Prerender,
     getPrerenderParams: async () => {
@@ -60,7 +60,7 @@ export const serverRoutes: ServerRoute[] = [
       }
     }
   },
-{
+  {
     path: 'admin/university/edit/:id',
     renderMode: RenderMode.Prerender,
     getPrerenderParams: async () => {

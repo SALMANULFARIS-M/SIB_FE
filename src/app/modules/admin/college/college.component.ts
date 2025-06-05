@@ -54,7 +54,7 @@ export class CollegeComponent {
   }
 
   editCollege(id: string): void {
-    this.router.navigate([`/admin/colleges/edit/${id}`]);
+    this.router.navigate([`/admin/college/edit/${id}`]);
   }
 
   deleteCollege(id: string): void {
