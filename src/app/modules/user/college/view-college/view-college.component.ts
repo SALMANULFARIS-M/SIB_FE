@@ -28,7 +28,7 @@ export class ViewCollegeComponent {
         this.educationService.getCollegeById(id).subscribe(
           {
             next: (response) => {
-              this.college = response;;
+              this.college = response.college;
               this.isLoading = false;
             },
             error: (error) => {

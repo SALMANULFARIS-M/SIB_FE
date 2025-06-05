@@ -26,7 +26,7 @@ export const serverRoutes: ServerRoute[] = [
       }
     }
   },
-  {
+{
     path: 'colleges/:id',
     renderMode: RenderMode.Prerender,
     getPrerenderParams: async () => {
@@ -45,6 +45,57 @@ export const serverRoutes: ServerRoute[] = [
   },
   {
     path: 'courses/:id',
+    renderMode: RenderMode.Prerender,
+    getPrerenderParams: async () => {
+      try {
+        const response = await fetch('https://sib-be.onrender.com/education/course-ids');
+        if (!response.ok) throw new Error('Failed to fetch course IDs');
+        const ids = await response.json();
+
+        if (!Array.isArray(ids)) throw new Error('Invalid response format');
+        return ids.map((id: string) => ({ id }));
+      } catch (error) {
+        console.error('Error fetching course IDs:', error);
+        return [];
+      }
+    }
+  },
+{
+    path: 'admin/university/edit/:id',
+    renderMode: RenderMode.Prerender,
+    getPrerenderParams: async () => {
+      try {
+        const response = await fetch('https://sib-be.onrender.com/education/universities-ids');
+        if (!response.ok) throw new Error('Failed to fetch college IDs');
+        const ids = await response.json();
+
+        if (!Array.isArray(ids)) throw new Error('Invalid response format');
+        return ids.map((id: string) => ({ id }));
+      } catch (error) {
+        console.error('Error fetching college IDs:', error);
+        return [];
+      }
+    }
+  },
+  {
+    path: 'admin/college/edit/:id',
+    renderMode: RenderMode.Prerender,
+    getPrerenderParams: async () => {
+      try {
+        const response = await fetch('https://sib-be.onrender.com/education/college-ids');
+        if (!response.ok) throw new Error('Failed to fetch college IDs');
+        const ids = await response.json();
+
+        if (!Array.isArray(ids)) throw new Error('Invalid response format');
+        return ids.map((id: string) => ({ id }));
+      } catch (error) {
+        console.error('Error fetching college IDs:', error);
+        return [];
+      }
+    }
+  },
+  {
+    path: 'admin/course/edit/:id',
     renderMode: RenderMode.Prerender,
     getPrerenderParams: async () => {
       try {

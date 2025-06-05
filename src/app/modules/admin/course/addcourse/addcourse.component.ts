@@ -52,6 +52,7 @@ export class AddcourseComponent implements OnInit {
       this.sidebarCollapsed = state;
     });
   }
+
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       const id = params.get('id');
@@ -124,7 +125,6 @@ export class AddcourseComponent implements OnInit {
       }
     });
   }
-
 
   onSubmit(): void {
     if (this.courseForm.invalid) {

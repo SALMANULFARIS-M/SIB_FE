@@ -3,11 +3,9 @@ import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angula
 import { SidebarComponent } from '../../../../shared/admin/sidebar/sidebar.component';
 import { CommonModule } from '@angular/common';
 import { EducationService } from '../../../../core/services/education.service';
-import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from '../../../../core/services/admin.service';
-import { log } from 'console';
 
 @Component({
   selector: 'app-addcollege',
@@ -16,6 +14,9 @@ import { log } from 'console';
   styleUrl: './addcollege.component.css'
 })
 export class AddcollegeComponent {
+
+  collegeId: string | null = null;
+  isEditMode: boolean = false;
   collegeForm!: FormGroup;
   universities: any[] = [];
   selectedFiles: File[] = [];
@@ -46,7 +47,8 @@ export class AddcollegeComponent {
     private educationService: EducationService,
     private router: Router,
     private toastr: ToastrService,
-    private service: AdminService
+    private service: AdminService,
+    private route: ActivatedRoute
   ) {
     this.service.collapsedState.subscribe((state) => {
       this.sidebarCollapsed = state;
@@ -54,6 +56,15 @@ export class AddcollegeComponent {
   }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      this.collegeId = params.get('id');
+      this.isEditMode = !!this.collegeId;
+
+      if (this.isEditMode && this.collegeId) {
+        this.isLoading = true;
+        this.loadCollegeDetails(this.collegeId);
+      }
+    });
     this.initForm();
     this.fetchUniversities();
   }
@@ -72,9 +83,37 @@ export class AddcollegeComponent {
     });
   }
 
+  loadCollegeDetails(id: string): void {
+    this.educationService.getCollegeById(id).subscribe({
+      next: (res) => {
+        const data = res.college;
+
+        this.collegeForm.patchValue({
+          name: data.name,
+          universityId: data.universityId || 'autonomous',
+          rating: data.rating,
+          location: data.location,
+          isAutonomous: data.isAutonomous,
+          courseLevels: data.courseLevels || [],
+          description: data.description,
+          feeFrom: data.feeFrom,
+          feeUpto: data.feeUpto
+        });
+
+        this.selectedCategories = data.categories || [];
+        this.previewUrls = data.photos || [];
+        this.isLoading = false;
+      },
+      error: (err) => {
+        console.error('Failed to load college:', err);
+        this.toastr.error('Failed to load college data.');
+      }
+    });
+  }
+
   fetchUniversities(): void {
     this.educationService.getUniversities().subscribe({
-        next: (res) => (this.universities = res.universities || []),
+      next: (res) => (this.universities = res.universities || []),
       error: () => this.toastr.error('Failed to load universities'),
     });
   }
@@ -108,7 +147,6 @@ export class AddcollegeComponent {
       this.selectedCategories = this.selectedCategories.filter(cat => cat !== value);
     }
   }
-
 
   onLevelChange(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -154,13 +192,12 @@ export class AddcollegeComponent {
     }
 
     this.isLoading = true;
-
     const value = { ...this.collegeForm.value };
 
-    // If it's autonomous, set universityId to empty string BEFORE appending
     if (value.universityId === 'autonomous') {
       value.universityId = '';
     }
+
     const formData = new FormData();
     Object.entries(value).forEach(([key, val]) => {
       if (Array.isArray(val)) {
@@ -170,36 +207,41 @@ export class AddcollegeComponent {
       }
     });
 
-
-    // Append selected categories
     this.selectedCategories.forEach((category) => {
       formData.append('categories[]', category);
     });
 
-    // Append selected images
     this.selectedFiles.forEach((file) => {
       formData.append('photos', file);
     });
-    for (let pair of formData.entries()) {
-      console.log(`${pair[0]}:`, pair[1]);
+
+    if (this.isEditMode && this.collegeId) {
+      this.educationService.updateCollege(this.collegeId, formData).subscribe({
+        next: () => {
+          this.toastr.success('College updated successfully!');
+          this.router.navigate(['/admin/college']);
+        },
+        error: () => {
+          this.toastr.error('Failed to update college.');
+        },
+        complete: () => {
+          this.isLoading = false;
+        }
+      });
+    } else {
+      this.educationService.addCollege(formData).subscribe({
+        next: () => {
+          this.toastr.success('College added successfully!');
+          this.router.navigate(['/admin/college']);
+        },
+        error: () => {
+          this.toastr.error('Failed to add college.');
+        },
+        complete: () => {
+          this.isLoading = false;
+        }
+      });
     }
-    this.educationService.addCollege(formData).subscribe({
-      next: (response) => {
-        console.log('college added:', response);
-        this.toastr.success('College added successfully!');
-        this.collegeForm.reset();
-        this.selectedFiles = [];
-        this.previewUrls = [];
-        this.uploadProgress = [];
-        this.router.navigate(['/admin/college']);
-      },
-      error: (error) => {
-        console.error('Error adding college:', error);
-        this.toastr.error('Failed to add College. Please try again.');
-      },
-      complete: () => {
-        this.isLoading = false;
-      }
-    });
   }
+
 }
