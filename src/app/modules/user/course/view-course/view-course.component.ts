@@ -27,7 +27,7 @@ export class ViewCourseComponent {
         this.educationService.getCourseById(id).subscribe(
           {
             next: (response) => {
-              this.course = response;;
+              this.course = response.course;
               this.isLoading = false;
             },
             error: (error) => {

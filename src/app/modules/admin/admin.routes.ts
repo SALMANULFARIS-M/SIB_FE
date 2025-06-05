@@ -21,6 +21,7 @@ export const ADMIN_ROUTES: Routes = [
   { path: 'college/add-college', component: AddcollegeComponent },
   { path: 'course', component: CourseComponent, canActivate: [authGuard] },
   { path: 'course/add-course', component: AddcourseComponent, canActivate: [authGuard] },
+  { path: 'course/edit/:id', component: AddcourseComponent, canActivate: [authGuard] },
   { path: 'blogs-list', component: BlogsComponent, canActivate: [authGuard] },
   { path: 'blogs-list/blog-add', component: AddblogsComponent, canActivate: [authGuard] },
   { path: '**', redirectTo: 'dashboard' } // Handle invalid admin routes

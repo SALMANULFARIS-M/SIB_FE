@@ -93,6 +93,38 @@ export class AddcourseComponent implements OnInit {
     });
   }
 
+  fetchCourseById(id: string): void {
+    this.educationService.getCourseById(id).subscribe({
+      next: (res) => {
+        const course = res.course;
+        if (course) {
+          this.courseForm.patchValue({
+            title: course.title,
+            degree: course.degree,
+            level: course.level,
+            category: course.category,
+            fees: course.fees,
+            durationValue: course.durationValue,
+            durationUnit: course.durationUnit,
+            medianLPA: course.medianLPA,
+            affiliation: course.affiliation,
+            collegeId: course.collegeId || '',
+            providerType: course.providerType,
+            providerName: course.providerName,
+            isOnline: course.isOnline,
+            isOffline: course.isOffline,
+            isShortTerm: course.isShortTerm
+          });
+        }
+        this.isLoading = false;
+      },
+      error: (err) => {
+        console.error('Error fetching course:', err);
+        this.toastr.error('Failed to load course for editing.');
+      }
+    });
+  }
+
 
   onSubmit(): void {
     if (this.courseForm.invalid) {
@@ -101,31 +133,47 @@ export class AddcourseComponent implements OnInit {
       return;
     }
 
-    const formValue = this.courseForm.value;
-
-    const payload = {
-      ...formValue,
-    };
-
+    const payload = { ...this.courseForm.value };
     this.isLoading = true;
-    this.educationService.addCourse(payload).subscribe({
-      next: () => {
-        this.toastr.success('Course added successfully!');
-        this.courseForm.reset();
-        this.courseForm.patchValue({
-          providerType: 'College',
-          isOffline: true,
-          isOnline: false,
-          isShortTerm: false
-        });
-        this.router.navigate(['/admin/course']);
-      }, error: (err) => {
-        console.error('Error adding course:', err)
-        this.toastr.error('Failed to add Course. Please try again.');
-      },
-      complete: () => {
-        this.isLoading = false;
-      }
-    });
+
+    if (this.isEditMode && this.courseId) {
+      // 🛠 UPDATE MODE
+      this.educationService.updateCourse(this.courseId, payload).subscribe({
+        next: () => {
+          this.toastr.success('Course updated successfully!');
+          this.router.navigate(['/admin/course']);
+        },
+        error: (err) => {
+          console.error('Error updating course:', err);
+          this.toastr.error('Failed to update course. Please try again.');
+        },
+        complete: () => {
+          this.isLoading = false;
+        }
+      });
+    } else {
+      // ➕ ADD MODE
+      this.educationService.addCourse(payload).subscribe({
+        next: () => {
+          this.toastr.success('Course added successfully!');
+          this.courseForm.reset();
+          this.courseForm.patchValue({
+            providerType: 'College',
+            isOffline: true,
+            isOnline: false,
+            isShortTerm: false
+          });
+          this.router.navigate(['/admin/course']);
+        },
+        error: (err) => {
+          console.error('Error adding course:', err);
+          this.toastr.error('Failed to add course. Please try again.');
+        },
+        complete: () => {
+          this.isLoading = false;
+        }
+      });
+    }
   }
+
 }
