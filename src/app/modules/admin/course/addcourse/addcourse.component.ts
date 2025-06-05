@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AdminService } from '../../../../core/services/admin.service';
 import { EducationService } from '../../../../core/services/education.service';
 import { College } from '../../../../shared/models/college';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-addcourse',
@@ -15,6 +15,9 @@ import { Router } from '@angular/router';
   styleUrl: './addcourse.component.css'
 })
 export class AddcourseComponent implements OnInit {
+
+  courseId: string | null = null;
+  isEditMode: boolean = false;
   sidebarCollapsed: boolean = false;
   isLoading = false;
   courseForm!: FormGroup;
@@ -41,13 +44,24 @@ export class AddcourseComponent implements OnInit {
     private educationService: EducationService,
     private router: Router,
     private toastr: ToastrService,
-    private service: AdminService
+    private service: AdminService,
+    private route: ActivatedRoute
+
   ) {
     this.service.collapsedState.subscribe((state) => {
       this.sidebarCollapsed = state;
     });
   }
   ngOnInit(): void {
+    this.route.paramMap.subscribe((params) => {
+      const id = params.get('id');
+      if (id) {
+        this.courseId = id;
+        this.isEditMode = true;
+        this.isLoading = true;
+        this.fetchCourseById(id);
+      }
+    });
     this.initializeForm();
     this.fetchColleges();
   }
@@ -68,13 +82,13 @@ export class AddcourseComponent implements OnInit {
       providerName: [''],
       isOnline: [false],
       isOffline: [true],
-      isShortTerm: [false] // ✅ New field here
+      isShortTerm: [false]
     });
   }
 
   fetchColleges(): void {
     this.educationService.getColleges().subscribe({
-      next: (data) => (this.colleges = data),
+      next: (data) => (this.colleges = data.colleges),
       error: (err) => console.error('Error fetching colleges:', err)
     });
   }

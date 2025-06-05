@@ -5,6 +5,7 @@ import { EducationService } from '../../../../core/services/education.service';
 import { SidebarComponent } from '../../../../shared/admin/sidebar/sidebar.component';
 import { AdminService } from '../../../../core/services/admin.service';
 import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-adduniversity',
@@ -13,6 +14,9 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './adduniversity.component.css'
 })
 export class AdduniversityComponent implements OnInit {
+
+  universityId: string | null = null;
+  isEditMode = false;
   universityForm!: FormGroup;
   selectedFile: File | null = null;
   previewUrl: string | null = null;
@@ -20,6 +24,7 @@ export class AdduniversityComponent implements OnInit {
   sidebarCollapsed = false;
 
   constructor(private fb: FormBuilder, private educationService: EducationService,
+    private route: ActivatedRoute,
     private service: AdminService,
     private toastr: ToastrService) {
     this.service.collapsedState.subscribe((state) => {
@@ -28,6 +33,15 @@ export class AdduniversityComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Get ID from route for edit mode
+    this.route.paramMap.subscribe(params => {
+      this.universityId = params.get('id');
+      if (this.universityId) {
+        this.isEditMode = true;
+        this.isLoading = true;
+        this.loadUniversityDetails(this.universityId);
+      }
+    });
     this.universityForm = this.fb.group({
       name: ['', Validators.required],
       description: ['', [
@@ -35,6 +49,23 @@ export class AdduniversityComponent implements OnInit {
         Validators.minLength(20),  // adjust as needed
         Validators.maxLength(500)  // adjust as needed
       ]]
+    });
+  }
+
+  loadUniversityDetails(id: string) {
+    this.educationService.getUniversityById(id).subscribe({
+      next: (data) => {
+        this.universityForm.patchValue({
+          name: data.name,
+          description: data.description
+        });
+        this.previewUrl = data.logo;
+        this.isLoading = false;
+      },
+      error: (err) => {
+        console.error('Error loading university:', err);
+        this.toastr.error('Failed to load university details');
+      }
     });
   }
 
@@ -51,31 +82,49 @@ export class AdduniversityComponent implements OnInit {
     }
   }
 
-  async onSubmit() {
-    if (!this.universityForm.valid || !this.selectedFile) return;
+  onSubmit() {
+    if (!this.universityForm.valid) return;
 
     const formData = new FormData();
     formData.append('name', this.universityForm.get('name')?.value);
     formData.append('description', this.universityForm.get('description')?.value);
-    formData.append('logo', this.selectedFile);
+
+    if (this.selectedFile) {
+      formData.append('logo', this.selectedFile);
+    }
 
     this.isLoading = true;
 
-    this.educationService.addUniversity(formData).subscribe({
-      next: (response) => {
-        console.log('University added:', response);
-        this.toastr.success('University added successfully!');
-        this.universityForm.reset();
-        this.selectedFile = null;
-        this.previewUrl = null;
-      },
-      error: (error) => {
-        console.error('Error adding university:', error);
-        this.toastr.error('Failed to add university. Please try again.');
-      },
-      complete: () => {
-        this.isLoading = false; // Data fetching completed
-      }
-    });
+    if (this.isEditMode && this.universityId) {
+      this.educationService.updateUniversity(this.universityId, formData).subscribe({
+        next: () => {
+          this.toastr.success('University updated successfully!');
+        },
+        error: (error) => {
+          this.toastr.error('Failed to update university.');
+          console.error(error);
+        },
+        complete: () => {
+          this.isLoading = false;
+        }
+      });
+    } else {
+      this.educationService.addUniversity(formData).subscribe({
+        next: () => {
+          this.toastr.success('University added successfully!');
+          this.universityForm.reset();
+          this.selectedFile = null;
+          this.previewUrl = null;
+        },
+        error: (error) => {
+          this.toastr.error('Failed to add university.');
+          console.error(error);
+        },
+        complete: () => {
+          this.isLoading = false;
+        }
+      });
+    }
   }
+
 }

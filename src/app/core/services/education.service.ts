@@ -43,8 +43,6 @@ export class EducationService extends BaseService {
     return this.getRequest(`/education/collegesUnderUniversites/${id}${queryString}`, `colleges-under-${id}`);
   }
 
-
-
   addUniversity(data: any): Observable<any> {
     return this.postRequest('/education/university', data);
   }
@@ -102,8 +100,6 @@ export class EducationService extends BaseService {
     const queryString = queryArray.length ? `?${queryArray.join('&')}` : '';
     return this.getRequest(`/education/courses${queryString}`, 'courses');
   }
-
-
 
   getCourseById(id: string): Observable<any> {
     return this.getRequest(`/education/course/${id}`, `course-${id}`);

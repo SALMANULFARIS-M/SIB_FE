@@ -16,6 +16,7 @@ export const ADMIN_ROUTES: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },
   { path: 'university', component: UniversityComponent, canActivate: [authGuard] },
   { path: 'university/add-university', component: AdduniversityComponent, canActivate: [authGuard] },
+  { path: 'university/edit/:id', component: AdduniversityComponent, canActivate: [authGuard] },
   { path: 'college', component: CollegeComponent, canActivate: [authGuard] },
   { path: 'college/add-college', component: AddcollegeComponent },
   { path: 'course', component: CourseComponent, canActivate: [authGuard] },
