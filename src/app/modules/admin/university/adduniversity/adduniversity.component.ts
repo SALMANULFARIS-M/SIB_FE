@@ -108,6 +108,8 @@ export class AdduniversityComponent implements OnInit {
         },
         complete: () => {
           this.isLoading = false;
+          this.router.navigate(['/admin/university']);
+          this.universityForm.reset();
         }
       });
     } else {

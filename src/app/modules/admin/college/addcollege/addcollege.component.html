@@ -65,18 +65,14 @@
               >
               <select
                 formControlName="universityId"
-                class="w-full px-4 py-2 rounded-md poppins-medium bg-purple-900/85 border border-purple-800/50 text-white focus:outline-none focus:ring-2 focus:ring-pink-500/50 appearance-none"
+                class="w-full px-4 py-2 rounded-md bg-purple-900/85 border border-purple-800/50 text-white focus:outline-none focus:ring-2 focus:ring-pink-500/50 appearance-none"
                 (change)="onUniversityChange($event)"
               >
-                <option value="" disabled selected>Select University</option>
-                <option
-                  *ngFor="let uni of universities"
-                  [value]="uni._id"
-                  class="text-white"
-                >
+                <option value="" disabled>Select University</option>
+                <option *ngFor="let uni of universities" [value]="uni._id">
                   {{ uni.name }}
                 </option>
-                <option value="autonomous" class="text-white">
+                <option value="autonomous">
                   🔓 Autonomous (No University)
                 </option>
                 <option value="add-new">➕ Add New University</option>
@@ -111,35 +107,29 @@
               />
             </div>
 
-            <!-- Autonomous + Course Levels -->
-            <div
-              class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6"
-            >
-              <!-- Course Levels -->
+            <!-- Course Levels & Autonomous -->
+            <div class="flex flex-col sm:flex-row gap-6">
               <div class="sm:w-1/2">
                 <label class="block text-gray-300 text-sm font-medium mb-2"
                   >Course Levels</label
                 >
                 <div class="flex gap-6 ms-4">
-                  <label class="text-gray-300 flex items-center gap-2">
+                  <label
+                    *ngFor="let level of ['UG', 'PG']"
+                    class="text-gray-300 flex items-center gap-2"
+                  >
                     <input
                       type="checkbox"
-                      value="UG"
+                      [value]="level"
                       (change)="onLevelChange($event)"
+                      [checked]="
+                        collegeForm.get('courseLevels')?.value.includes(level)
+                      "
                     />
-                    UG
-                  </label>
-                  <label class="text-gray-300 flex items-center gap-2">
-                    <input
-                      type="checkbox"
-                      value="PG"
-                      (change)="onLevelChange($event)"
-                    />
-                    PG
+                    {{ level }}
                   </label>
                 </div>
               </div>
-              <!-- Autonomous -->
               <div class="sm:w-1/2">
                 <label class="block text-gray-300 text-sm font-medium mb-2"
                   >Autonomous</label
@@ -154,6 +144,7 @@
                 </div>
               </div>
             </div>
+
             <!-- Categories -->
             <div>
               <label class="block text-gray-300 text-sm font-medium mb-2"
@@ -168,6 +159,9 @@
                     type="checkbox"
                     [value]="cat"
                     (change)="onCategoryChange($event)"
+                    [checked]="
+                      collegeForm.get('categories')?.value.includes(cat)
+                    "
                   />
                   {{ cat }}
                 </label>
@@ -234,17 +228,7 @@
                       ✕
                     </button>
                   </div>
-                  <div
-                    *ngIf="uploadProgress[i] !== null"
-                    class="h-1 bg-gray-200 rounded mt-1"
-                  >
-                    <div
-                      class="h-full bg-yellow-400 rounded transition-all duration-300"
-                      [style.width.%]="uploadProgress[i]"
-                    ></div>
-                  </div>
                 </div>
-
                 <!-- Upload area -->
                 <label
                   *ngIf="selectedFiles.length < 3"
@@ -270,7 +254,15 @@
                 [disabled]="isLoading"
                 class="px-6 py-2 bg-gradient-to-r from-pink-500 to-pink-600 text-white rounded-md hover:from-pink-600 hover:to-pink-700 focus:ring-2 focus:ring-pink-500/50 transition-all shadow-lg"
               >
-                {{ isLoading ? "Adding..." : "Add College" }}
+                {{
+                  isLoading
+                    ? isEditMode
+                      ? "Updating..."
+                      : "Adding..."
+                    : isEditMode
+                    ? "Update College"
+                    : "Add College"
+                }}
               </button>
             </div>
           </form>

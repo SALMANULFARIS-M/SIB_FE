@@ -40,6 +40,7 @@ export class AddcollegeComponent {
     'Hotel Management',
     'Other'
   ];
+  existingImages: { url: string; public_id?: string }[] = [];
   selectedCategories: string[] = [];
 
   constructor(
@@ -80,6 +81,7 @@ export class AddcollegeComponent {
       description: ['', Validators.required],
       feeFrom: [null, Validators.required],
       feeUpto: [null, Validators.required],
+      categories: [[]]
     });
   }
 
@@ -87,26 +89,30 @@ export class AddcollegeComponent {
     this.educationService.getCollegeById(id).subscribe({
       next: (res) => {
         const data = res.college;
+console.log("Data",data);
 
         this.collegeForm.patchValue({
           name: data.name,
-          universityId: data.universityId.name || 'autonomous',
+          universityId: data.universityId?._id || 'autonomous',
           rating: data.rating,
           location: data.location,
           isAutonomous: data.isAutonomous,
           courseLevels: data.courseLevels || [],
           description: data.description,
           feeFrom: data.feeFrom,
-          feeUpto: data.feeUpto
+          feeUpto: data.feeUpto,
+          categories: data.category || []
         });
 
-        this.selectedCategories = data.categories || [];
-        this.previewUrls = data.photos || [];
+        // this.selectedCategories = data.category || [];
+        this.existingImages = data.photos || [];
+        this.previewUrls = [...this.existingImages.map(img => img.url)];
         this.isLoading = false;
       },
       error: (err) => {
         console.error('Failed to load college:', err);
         this.toastr.error('Failed to load college data.');
+        this.isLoading = false;
       }
     });
   }
@@ -135,53 +141,58 @@ export class AddcollegeComponent {
     }
   }
 
-  onCategoryChange(event: Event) {
+  onCategoryChange(event: Event): void {
     const input = event.target as HTMLInputElement;
-    const value = input.value;
+    const categories = this.collegeForm.get('categories')?.value || [];
 
-    if (input.checked) {
-      if (!this.selectedCategories.includes(value)) {
-        this.selectedCategories.push(value);
-      }
-    } else {
-      this.selectedCategories = this.selectedCategories.filter(cat => cat !== value);
+    if (input.checked && !categories.includes(input.value)) {
+      categories.push(input.value);
+    } else if (!input.checked && categories.includes(input.value)) {
+      const index = categories.indexOf(input.value);
+      categories.splice(index, 1);
     }
+
+    this.collegeForm.get('categories')?.setValue(categories);
   }
 
   onLevelChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     const levels = this.collegeForm.get('courseLevels')?.value || [];
-    if (input.checked) levels.push(input.value);
-    else levels.splice(levels.indexOf(input.value), 1);
+    if (input.checked && !levels.includes(input.value)) {
+      levels.push(input.value);
+    } else {
+      const index = levels.indexOf(input.value);
+      if (index > -1) levels.splice(index, 1);
+    }
     this.collegeForm.get('courseLevels')?.setValue(levels);
   }
 
-  onFileChange(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files) {
-      const files = Array.from(input.files).slice(0, 3 - this.selectedFiles.length);
-      files.forEach(file => {
-        if (!file.type.startsWith('image/')) {
-          this.toastr.warning('Only image files are allowed');
-          return;
-        }
-
-        if (file.size > 5 * 1024 * 1024) {
-          this.toastr.warning('Max image size is 5MB');
-          return;
-        }
-
+  onFileChange(event: any): void {
+    const files = Array.from(event.target.files) as File[];
+    files.forEach(file => {
+      // Fix: Consider both existing images and new files
+      const totalImages = this.existingImages.length + this.selectedFiles.length;
+      if (totalImages < 3) {
         this.selectedFiles.push(file);
         this.previewUrls.push(URL.createObjectURL(file));
         this.uploadProgress.push(0);
-      });
-    }
+      }
+    });
   }
 
   removeImage(index: number): void {
-    this.selectedFiles.splice(index, 1);
-    this.previewUrls.splice(index, 1);
-    this.uploadProgress.splice(index, 1);
+    // Fix: Handle removal of both existing and new images
+    if (index < this.existingImages.length) {
+      // Removing existing image
+      this.existingImages.splice(index, 1);
+      this.previewUrls.splice(index, 1);
+    } else {
+      // Removing new file
+      const fileIndex = index - this.existingImages.length;
+      this.selectedFiles.splice(fileIndex, 1);
+      this.previewUrls.splice(index, 1);
+      this.uploadProgress.splice(fileIndex, 1);
+    }
   }
 
   onSubmit(): void {
@@ -194,12 +205,16 @@ export class AddcollegeComponent {
     this.isLoading = true;
     const value = { ...this.collegeForm.value };
 
+    // Fix: Handle autonomous university properly
     if (value.universityId === 'autonomous') {
       value.universityId = '';
     }
 
     const formData = new FormData();
+
+    // Add basic fields (excluding categories)
     Object.entries(value).forEach(([key, val]) => {
+      if (key === 'categories') return;
       if (Array.isArray(val)) {
         val.forEach((item) => formData.append(key, item));
       } else {
@@ -207,41 +222,43 @@ export class AddcollegeComponent {
       }
     });
 
-    this.selectedCategories.forEach((category) => {
-      formData.append('categories[]', category);
+    // ✅ Consistently append 'category' field
+    const categories = this.collegeForm.get('categories')?.value || [];
+    categories.forEach((cat: string) => {
+      formData.append('category', cat);
     });
 
+    // Add new files
     this.selectedFiles.forEach((file) => {
       formData.append('photos', file);
     });
 
-    if (this.isEditMode && this.collegeId) {
-      this.educationService.updateCollege(this.collegeId, formData).subscribe({
-        next: () => {
-          this.toastr.success('College updated successfully!');
-          this.router.navigate(['/admin/college']);
-        },
-        error: () => {
-          this.toastr.error('Failed to update college.');
-        },
-        complete: () => {
-          this.isLoading = false;
-        }
-      });
-    } else {
-      this.educationService.addCollege(formData).subscribe({
-        next: () => {
-          this.toastr.success('College added successfully!');
-          this.router.navigate(['/admin/college']);
-        },
-        error: () => {
-          this.toastr.error('Failed to add college.');
-        },
-        complete: () => {
-          this.isLoading = false;
-        }
-      });
+    // Fix: For edit mode, send existing images to preserve them
+    if (this.isEditMode) {
+      formData.append('existingImages', JSON.stringify(this.existingImages));
     }
+
+    const request$ = this.isEditMode
+      ? this.educationService.updateCollege(this.collegeId!, formData)
+      : this.educationService.addCollege(formData);
+
+    request$.subscribe({
+      next: () => {
+        this.toastr.success(
+          this.isEditMode ? 'College updated successfully!' : 'College added successfully!'
+        );
+        this.router.navigate(['/admin/college']);
+      },
+      error: (err) => {
+        console.error('Error:', err);
+        this.toastr.error(
+          this.isEditMode ? 'Failed to update college.' : 'Failed to add college.'
+        );
+      },
+      complete: () => {
+        this.isLoading = false;
+      }
+    });
   }
 
 }
