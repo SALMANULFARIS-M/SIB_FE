@@ -89,7 +89,6 @@ export class AddcollegeComponent {
     this.educationService.getCollegeById(id).subscribe({
       next: (res) => {
         const data = res.college;
-console.log("Data",data);
 
         this.collegeForm.patchValue({
           name: data.name,
