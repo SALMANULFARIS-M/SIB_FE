@@ -5,7 +5,7 @@ import { EducationService } from '../../../../core/services/education.service';
 import { SidebarComponent } from '../../../../shared/admin/sidebar/sidebar.component';
 import { AdminService } from '../../../../core/services/admin.service';
 import { ToastrService } from 'ngx-toastr';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-adduniversity',
@@ -24,6 +24,7 @@ export class AdduniversityComponent implements OnInit {
   sidebarCollapsed = false;
 
   constructor(private fb: FormBuilder, private educationService: EducationService,
+    private router: Router,
     private route: ActivatedRoute,
     private service: AdminService,
     private toastr: ToastrService) {
@@ -56,11 +57,12 @@ export class AdduniversityComponent implements OnInit {
     this.educationService.getUniversityById(id).subscribe({
       next: (data) => {
         this.universityForm.patchValue({
-          name: data.name,
-          description: data.description
+          name: data.university.name,
+          description: data.university.description
         });
-        this.previewUrl = data.logo;
+        this.previewUrl = data.university.logo;
         this.isLoading = false;
+
       },
       error: (err) => {
         console.error('Error loading university:', err);
@@ -122,6 +124,7 @@ export class AdduniversityComponent implements OnInit {
         },
         complete: () => {
           this.isLoading = false;
+          this.router.navigate(['/admin/university']);
         }
       });
     }

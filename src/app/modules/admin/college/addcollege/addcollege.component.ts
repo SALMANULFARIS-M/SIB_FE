@@ -90,7 +90,7 @@ export class AddcollegeComponent {
 
         this.collegeForm.patchValue({
           name: data.name,
-          universityId: data.universityId || 'autonomous',
+          universityId: data.universityId.name || 'autonomous',
           rating: data.rating,
           location: data.location,
           isAutonomous: data.isAutonomous,

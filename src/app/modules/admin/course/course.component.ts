@@ -51,7 +51,7 @@ export class CourseComponent {
   }
 
   editCourse(courseId: string): void {
-    this.router.navigate(['/admin/edit-course', courseId]);
+    this.router.navigate(['/admin/course/edit', courseId]);
   }
 
   deleteCourse(courseId: string): void {
