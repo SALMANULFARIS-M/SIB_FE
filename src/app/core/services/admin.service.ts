@@ -42,6 +42,6 @@ export class AdminService extends BaseService {
   }
 
   deleteBlog(blogId: string): Observable<any> {
-    return this.getRequest(`/admin/sib/deleteblog/${blogId}`);
+    return this.deleteRequest(`/admin/sib/deleteblog/${blogId}`);
   }
 }
